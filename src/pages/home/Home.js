@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Home.module.scss";
-import imgBack from "../../assets/images/home-slider-1.jpg";
+// import imgBack from "../../assets/images/home-slider-1.jpg";
 
 const Home = () => {
   return (

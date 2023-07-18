@@ -9,28 +9,33 @@ import logoImg from "../../assets/logo/logo-wb.png";
 import SideMenu from "../sideMenu/SideMenu";
 
 const HeaderMobile = () => {
-  const [showMenuSlide, setShowMenuSlide] = useState(false);
+  const [showMainMenu, setShowMainMenu] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
+  const [showLoginMenu, setShowLoginMenu] = useState(false);
 
-  const triggerMenuSlide = () => {
-    setShowMenuSlide(!showMenuSlide);
+  const triggerMainMenu = () => {
+    setShowMainMenu(!showMainMenu);
   };
 
-  const triggerSearch = () => {
+  const triggerSearchMenu = () => {
     setShowSearch(!showSearch);
+  };
+
+  const triggerLoginMenu = () => {
+    setShowLoginMenu(!showLoginMenu);
   };
   return (
     <>
       <div className={styles.headerMobile}>
         <div className={styles.iconGroup}>
-          <RxHamburgerMenu size={26} onClick={triggerMenuSlide} />
-          <GoSearch size={24} onClick={triggerSearch} />
+          <RxHamburgerMenu size={26} onClick={triggerMainMenu} />
+          <GoSearch size={24} onClick={triggerSearchMenu} />
         </div>
         <div>
           <img src={logoImg} alt="techshop" width={170} />
         </div>
         <div className={styles.iconGroup}>
-          <FaRegUserCircle size={24} />
+          <FaRegUserCircle size={24} onClick={triggerLoginMenu} />
           <div className={styles.cart}>
             <HiOutlineShoppingBag size={26} />
             <div className={styles.bubble}>
@@ -39,15 +44,26 @@ const HeaderMobile = () => {
           </div>
         </div>
       </div>
+
       <SideMenu
-        show={showMenuSlide}
-        onHide={triggerMenuSlide}
+        show={showMainMenu}
+        onHide={triggerMainMenu}
+        position={"left"}
         title={"Menu"}
       ></SideMenu>
+
       <SideMenu
         show={showSearch}
-        onHide={triggerSearch}
+        position={"left"}
+        onHide={triggerSearchMenu}
         title={"Search"}
+      ></SideMenu>
+
+      <SideMenu
+        show={showLoginMenu}
+        position={"right"}
+        onHide={triggerLoginMenu}
+        title={"Log In"}
       ></SideMenu>
     </>
   );

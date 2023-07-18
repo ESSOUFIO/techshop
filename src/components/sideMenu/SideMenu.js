@@ -2,14 +2,24 @@ import React from "react";
 import styles from "./SideMenu.module.scss";
 import { IoMdClose } from "react-icons/io";
 
-const SideMenu = ({ show, onHide, title, children }) => {
+const SideMenu = ({ show, onHide, title, position, children }) => {
   return (
     <div
       className={
-        show ? `${styles.sideMenu} ${styles["show-sideMenu"]}` : styles.sideMenu
+        show
+          ? `${styles.sideMenu} ${styles["show-sideMenu"]}`
+          : position === "left"
+          ? `${styles.sideMenu}  ${styles["sideMenu-left"]}`
+          : `${styles.sideMenu}  ${styles["sideMenu-right"]}`
       }
     >
-      <div className={styles.menu}>
+      <div
+        className={
+          position === "left"
+            ? `${styles.menu} ${styles["menu-left"]}`
+            : `${styles.menu} ${styles["menu-right"]}`
+        }
+      >
         <div className={styles.title}>
           <p>{title}</p>
           <div onClick={onHide}>
