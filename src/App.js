@@ -1,10 +1,34 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./pages/home/Home";
+import "./App.scss";
+import { AboutUs, Collections, Contact, Home, HotDeal } from "./pages";
+import { RootLayout } from "./components";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <RootLayout />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "/hot-deal",
+        element: <HotDeal />,
+      },
+      {
+        path: "/collections",
+        element: <Collections />,
+      },
+      {
+        path: "/about-us",
+        element: <AboutUs />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+    ],
   },
 ]);
 
