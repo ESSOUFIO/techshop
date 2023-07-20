@@ -7,6 +7,8 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 
 import logoImg from "../../assets/logo/logo-wb.png";
 import SideMenu from "../sideMenu/SideMenu";
+import MainMenu from "./mainMenu/MainMenu";
+import SearchMenu from "./searchMenu/SearchMenu";
 
 const HeaderMobile = () => {
   const [showMainMenu, setShowMainMenu] = useState(false);
@@ -45,19 +47,19 @@ const HeaderMobile = () => {
         </div>
       </div>
 
-      <SideMenu
+      <MainMenu
         show={showMainMenu}
         onHide={triggerMainMenu}
         position={"left"}
         title={"Menu"}
-      ></SideMenu>
+      ></MainMenu>
 
-      <SideMenu
+      <SearchMenu
         show={showSearch}
-        position={"left"}
         onHide={triggerSearchMenu}
+        position={"left"}
         title={"Search"}
-      ></SideMenu>
+      ></SearchMenu>
 
       <SideMenu
         show={showLoginMenu}

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Search.module.css";
+import styles from "./Search.module.scss";
 import { BiSearch } from "react-icons/bi";
 
 const Search = () => {

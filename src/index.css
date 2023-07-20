@@ -6,6 +6,7 @@
   --color-secondary: #161880;
   --color-blue: rgb(94, 94, 241);
   --color-lightblue: rgba(112, 112, 238, 0.708);
+  --color-lightgray: rgb(237, 237, 237);
 }
 
 p {
