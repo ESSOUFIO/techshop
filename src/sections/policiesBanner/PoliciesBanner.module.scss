@@ -1,0 +1,39 @@
+.policiesBanner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-darkblue);
+
+  .first-item {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .item {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      height: 40%;
+      width: 1px;
+      background: lightgray;
+    }
+  }
+
+  p {
+    font-size: 18px;
+  }
+}
