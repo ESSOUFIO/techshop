@@ -7,6 +7,9 @@
   --color-blue: rgb(94, 94, 241);
   --color-lightblue: rgba(112, 112, 238, 0.708);
   --color-lightgray: rgb(237, 237, 237);
+  --color-light-border: rgb(181, 179, 179);
+  --color-btn-blue: rgb(60, 60, 249);
+  --color-text: rgb(55, 55, 55);
 }
 
 p {
@@ -31,9 +34,50 @@ html {
 
 body {
   font-family: var(--font-family);
+  font-size: 14px;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.--btn {
+  width: 100%;
+  border-radius: 27px;
+  padding: 15px;
+  margin: 10px 0;
+  font-weight: 500;
+}
+
+.--rounded {
+  width: 100%;
+  border-radius: 27px;
+  padding: 13px 15px;
+  margin: 10px 0;
+}
+
+.--light-border {
+  border: 1px solid var(--color-light-border);
+}
+
+.--white-border {
+  border: 1px solid white;
+}
+
+.--input-theme {
+  background: none;
+  border: none;
+  outline: none;
+  padding-left: 5px;
+  color: var(--color-text);
+
+  &::placeholder {
+    color: gray;
+    transition: all 0.3s;
+  }
+
+  &:focus::placeholder {
+    color: transparent;
+  }
 }

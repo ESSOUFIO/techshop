@@ -1,0 +1,30 @@
+.loginMenu {
+  padding: 0 10px;
+
+  form {
+    padding: 10px;
+    label {
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    button {
+      background: var(--color-btn-blue);
+
+      color: white;
+      border: none;
+    }
+  }
+
+  a {
+    display: block;
+    text-align: center;
+    color: var(--color-text);
+    margin: 10px 0;
+  }
+
+  button {
+    border: 1px solid var(--color-light-border);
+    background: none;
+  }
+}
