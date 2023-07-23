@@ -87,3 +87,24 @@ $minus-vertical-position: -50%;
     }
   }
 }
+
+.affirm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-primary);
+  height: 50px;
+
+  p {
+    padding-top: 5px;
+    margin: 0 15px;
+  }
+
+  button {
+    background: none;
+    border: 1px solid var(--color-text);
+    border-radius: 5px;
+    padding: 5px 15px;
+    font-weight: 600;
+  }
+}
