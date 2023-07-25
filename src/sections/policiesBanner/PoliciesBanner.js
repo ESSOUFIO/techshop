@@ -18,11 +18,7 @@ const PoliciesBanner = () => {
         <div className={styles.container}>
           <div className={styles["first-item"]}>
             <div>
-              <img
-                src={shippingIcon}
-                alt="Free Shipping"
-                style={{ width: "40px" }}
-              />
+              <img src={shippingIcon} alt="Free Shipping" />
             </div>
             <p className={styles.text}>Free Shipping & Returns</p>
           </div>
@@ -53,9 +49,8 @@ const PoliciesBanner = () => {
               }}
               modules={[Autoplay, Navigation, Pagination]}
               pagination={{ clickable: true }}
-              // loop={true}
+              loop={true}
               navigation={true}
-              className="mySwiper"
               autoplay={{
                 delay: 2500,
                 disableOnInteraction: true,
@@ -64,11 +59,13 @@ const PoliciesBanner = () => {
                 480: {
                   slidesPerView: 1,
                   spaceBetween: 0,
+                  loop: true,
                 },
 
                 768: {
                   slidesPerView: 2,
                   spaceBetween: 0,
+                  loop: false,
                 },
               }}
             >
@@ -76,11 +73,7 @@ const PoliciesBanner = () => {
               <SwiperSlide>
                 <div className={styles.item}>
                   <div>
-                    <img
-                      src={shippingIcon}
-                      alt="Free Shipping"
-                      style={{ width: "40px" }}
-                    />
+                    <img src={shippingIcon} alt="Free Shipping" />
                   </div>
                   <p className={styles.text}>Free Shipping & Returns</p>
                 </div>
