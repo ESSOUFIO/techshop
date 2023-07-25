@@ -15,4 +15,14 @@
       width: 100%;
     }
   }
+
+  @media screen and (max-width: 767px) {
+    gap: 20px;
+
+    .firstRow,
+    .secondRow {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
 }
