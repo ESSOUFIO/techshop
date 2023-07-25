@@ -23,10 +23,10 @@ const SpotLight = () => {
         </div>
 
         <div className={styles.secondRow}>
-          <div>
+          <div className={styles.img}>
             <img src={ephoneImg} alt="ePhone" />
           </div>
-          <div>
+          <div className={styles.img}>
             <img src={laptopImg} alt="Laptopo" />
           </div>
         </div>
