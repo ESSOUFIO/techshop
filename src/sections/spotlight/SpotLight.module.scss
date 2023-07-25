@@ -1,0 +1,18 @@
+.spotlight {
+  background: var(--color-lightgray);
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  gap: 30px;
+
+  .firstRow,
+  .secondRow {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+
+    img {
+      width: 100%;
+    }
+  }
+}

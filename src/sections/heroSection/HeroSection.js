@@ -28,6 +28,7 @@ const HeroSection = () => {
           <img src={affirmImg} alt="Affirm" />
         </div>
         <p>BUY NOW, PAY LATER STARTING AT 0% APR</p>
+
         <button>LEARN MORE</button>
       </div>
     </>

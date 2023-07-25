@@ -93,11 +93,13 @@ $minus-vertical-position: -50%;
   justify-content: center;
   align-items: center;
   background: var(--color-primary);
-  height: 50px;
+  padding: 10px;
+  flex-wrap: wrap;
 
   p {
     padding-top: 5px;
     margin: 0 15px;
+    text-align: center;
   }
 
   button {
@@ -106,5 +108,10 @@ $minus-vertical-position: -50%;
     border-radius: 5px;
     padding: 5px 15px;
     font-weight: 600;
+    margin: 5px;
+  }
+
+  @media screen and (max-width: 767px) {
+    // flex-direction: column;
   }
 }

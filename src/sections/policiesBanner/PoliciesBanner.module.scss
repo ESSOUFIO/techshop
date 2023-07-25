@@ -1,39 +1,111 @@
 .policiesBanner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--color-darkblue);
-
-  .first-item {
-    width: 100%;
+  display: block;
+  .container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 20px;
-    padding: 20px;
-  }
+    color: var(--color-darkblue);
 
-  .item {
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    padding: 20px;
+    .first-item {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      padding: 18px;
+    }
 
-    &::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 20px;
-      height: 40%;
-      width: 1px;
-      background: lightgray;
+    .item {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      padding: 18px;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 20px;
+        height: 40%;
+        width: 1px;
+        background: lightgray;
+      }
+    }
+
+    p {
+      font-size: 17px;
+      font-weight: 500;
     }
   }
+}
 
-  p {
-    font-size: 18px;
+.policiesBanner__cardSlider {
+  display: none;
+
+  .wrapper {
+    max-width: 880px;
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+
+    .carousel {
+      margin-bottom: 10px;
+      .item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        padding: 18px;
+        background: #fff;
+        cursor: pointer;
+        flex-wrap: wrap;
+      }
+
+      p {
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      @media screen and (max-width: 767px) {
+        grid-auto-columns: 100%;
+      }
+
+      @media screen and (max-width: 360px) {
+        .item {
+          flex-direction: column;
+          gap: 5px;
+          padding: 10px;
+        }
+      }
+    }
+
+    .arrow-left {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 15px;
+      cursor: pointer;
+    }
+
+    .arrow-right {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 15px;
+      cursor: pointer;
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .policiesBanner {
+    display: none;
+  }
+
+  .policiesBanner__cardSlider {
+    display: block;
   }
 }
