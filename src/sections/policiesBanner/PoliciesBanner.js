@@ -5,7 +5,7 @@ import trophyIcon from "../../assets/icons/award.png";
 
 //Swiper -- Carousel
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, A11y } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
@@ -47,14 +47,25 @@ const PoliciesBanner = () => {
             className={`${styles.carousel} ${styles["swiper-button-next"]} `}
           >
             <Swiper
-              modules={[Navigation, Pagination, A11y]}
-              navigation
+              style={{
+                "--swiper-navigation-color": "#000",
+                "--swiper-pagination-color": "#000",
+              }}
+              modules={[Autoplay, Navigation, Pagination]}
               pagination={{ clickable: true }}
+              // loop={true}
+              navigation={true}
+              className="mySwiper"
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: true,
+              }}
               breakpoints={{
-                0: {
+                480: {
                   slidesPerView: 1,
                   spaceBetween: 0,
                 },
+
                 768: {
                   slidesPerView: 2,
                   spaceBetween: 0,
