@@ -17,20 +17,20 @@ const CardProduct = ({ img1, img2, title, offValue, lastPrice, price }) => {
 
         <button>Quick View</button>
       </div>
+      <div className={styles.desc}>
+        <div className={styles.title}>{title}</div>
 
-      <div className={styles.title}>{title}</div>
+        <div className={styles.deal}>
+          <div className={styles.off}>{offValue} off</div>
+          <span>Deal</span>
+        </div>
 
-      <div className={styles.deal}>
-        <div className={styles.off}>{offValue} off</div>
-        <span>Deal</span>
-      </div>
+        <div className={styles.price}>
+          <span>{price}</span>
+          <span>{lastPrice}</span>
+        </div>
 
-      <div className={styles.price}>
-        <span>{price}</span>
-        <span>{lastPrice}</span>
-      </div>
-
-      {/* <div className={styles.choices}>
+        {/* <div className={styles.choices}>
         <div className={styles.choice}>
           <div style={{ background: "#000" }}></div>
         </div>
@@ -41,6 +41,7 @@ const CardProduct = ({ img1, img2, title, offValue, lastPrice, price }) => {
           <div style={{ background: "#F4A460" }}></div>
         </div>
       </div> */}
+      </div>
 
       <div className={styles.buttons}>
         <button className="--rounded">Add to Cart</button>

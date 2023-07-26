@@ -1,0 +1,79 @@
+[
+  {
+    "id": "1",
+    "title": "PreSonus® Eris® E3.5 Studio Monitor",
+    "image_1": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F1%2F1.jpg?alt=media&token=850b01d4-b042-4ce9-bf75-97a79e71a100",
+    "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F1%2F2.jpg?alt=media&token=e03961aa-553f-487e-a1c2-c02dfd990c26",
+    "price": "$49.00",
+    "lastPrice": "$99.00",
+    "offValue": "50%",
+    "brand": "GENELEC",
+    "category": "Sound"
+  },
+  {
+    "id": "2",
+    "title": "Artisan Tilt-Head Stand Mixer with Pouring Shieldd",
+    "image_1": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F2%2F1.jpg?alt=media&token=8959c988-750e-4ca3-beac-30cdae0bd09d",
+    "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F2%2F2.jpg?alt=media&token=667d7fa6-43d5-448a-afb2-31aea9905e60",
+    "price": "$87.00",
+    "lastPrice": "$159.00",
+    "offValue": "45%",
+    "brand": "KitchenAid",
+    "category": "Kitchen"
+  },
+  {
+    "id": "3",
+    "title": "Bluetooth Module Wireless Earphones Bluetooth 5.2",
+    "image_1": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F3%2F1.jpg?alt=media&token=54ec392c-7880-417e-ba27-9008dac007b5",
+    "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F3%2F2.jpg?alt=media&token=fb616d47-8b30-4e86-9c67-ef05a4ec9913",
+    "price": "$33.60",
+    "lastPrice": "$56.00",
+    "offValue": "40%",
+    "brand": "HiFiGo",
+    "category": "Sound"
+  },
+  {
+    "id": "4",
+    "title": "UHD 4K Curved Smart TV RU7300 55",
+    "image_1": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F4%2F1.jpg?alt=media&token=a7f01084-a6da-4b94-b61b-5730e8397547",
+    "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F4%2F2.jpg?alt=media&token=07f80376-9de8-47c1-8887-36f6fc4bdf10",
+    "price": "$499.99",
+    "lastPrice": "$820.00",
+    "offValue": "40%",
+    "brand": "Samsung",
+    "category": "TV"
+  },
+  {
+    "id": "5",
+    "title": "OnePlus Nord N20 5G",
+    "image_1": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F5%2F1.jpg?alt=media&token=515bb244-7a90-4586-87b6-dd0151e6fa31",
+    "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F5%2F2.jpg?alt=media&token=b9947c17-7bf0-4168-ae85-35ac09f821d6",
+    "price": "$144.99",
+    "lastPrice": "$290.00",
+    "offValue": "50%",
+    "brand": "OnePlus",
+    "category": "Phone"
+  },
+  {
+    "id": "6",
+    "title": "HUAWEI Smartphone Nova Y70 (4/128Go)",
+    "image_1": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F6%2F1.jpg?alt=media&token=733ebdfe-c608-40e8-b4d3-267e427dab98",
+    "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F6%2F2.jpg?alt=media&token=42655eba-6556-471a-ac5b-5264743fe573",
+    "price": "$531.30",
+    "lastPrice": "$966.00",
+    "offValue": "45%",
+    "brand": "Huawei",
+    "category": "Phone"
+  },
+  {
+    "id": "7",
+    "title": "ASUS Laptop L510 Ultra Thin Laptop",
+    "image_1": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F7%2F1.jpg?alt=media&token=9a31a697-d909-4ba0-82bf-490c37d6f4a8",
+    "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F7%2F2.jpg?alt=media&token=4c7f271e-9b25-459f-9efd-8d172cb1f5e7",
+    "price": "$740.00",
+    "lastPrice": "$1850.00",
+    "offValue": "40%",
+    "brand": "ASUS",
+    "category": "Laptop"
+  }
+]

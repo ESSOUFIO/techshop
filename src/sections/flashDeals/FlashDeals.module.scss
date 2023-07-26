@@ -1,7 +1,46 @@
 .flashDeals {
   padding: 20px 15px;
   h1 {
+    margin: 20px 0;
     color: var(--color-red);
     font-weight: 600;
+  }
+}
+
+.mySwipe {
+  position: relative;
+
+  .navNext,
+  .navPrev {
+    opacity: 0.6;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 99;
+    //
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #222222;
+    background: #ffffff;
+    transition: all 0.5s;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    @media screen and (max-width: 900px) {
+      opacity: 0;
+    }
+  }
+
+  .navNext {
+    right: 10px;
+  }
+  .navPrev {
+    left: 10px;
   }
 }

@@ -1,22 +1,79 @@
 import React from "react";
 import styles from "./FlashDeals.module.scss";
 import CardProduct from "../../components/cardProduct/CardProduct";
+import productList from "../..//products.json";
 
-import prodImg1 from "../../assets/images/products/1/1.jpg";
-import prodImg2 from "../../assets/images/products/1/2.jpg";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import { useSwiper } from "swiper/react";
+import "swiper/scss";
+import "swiper/scss/navigation";
+import "swiper/scss/pagination";
+
+import { GrFormNext, GrFormPrevious } from "react-icons/gr";
+
+const NavigationButtons = () => {
+  const swiper = useSwiper();
+  return (
+    <div>
+      <button className={styles.navNext} onClick={() => swiper.slideNext()}>
+        <GrFormNext size={22} />
+      </button>
+      <button className={styles.navPrev} onClick={() => swiper.slidePrev()}>
+        <GrFormPrevious size={22} />
+      </button>
+    </div>
+  );
+};
+
+const MarginPagination = () => {
+  return <div style={{ height: "30px" }}></div>;
+};
 
 const FlashDeals = () => {
   return (
     <div className={styles.flashDeals}>
       <h1>Flash Deals</h1>
-      <CardProduct
-        img1={prodImg1}
-        img2={prodImg2}
-        title={"Computer & Accessories for Sale - Black"}
-        offValue={"50%"}
-        lastPrice={"$99.00"}
-        price={"$49.00"}
-      />
+
+      <Swiper
+        modules={[Navigation, Pagination]}
+        spaceBetween={0}
+        slidesPerView={1}
+        className={styles.mySwipe}
+        pagination={{ clickable: true }}
+        breakpoints={{
+          400: {
+            slidesPerView: 2,
+            spaceBetween: 25,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+          900: {
+            slidesPerView: 4,
+            spaceBetween: 30,
+          },
+        }}
+      >
+        {productList.map((prod) => {
+          return (
+            <SwiperSlide key={prod.id}>
+              <CardProduct
+                img1={prod.image_1}
+                img2={prod.image_2}
+                title={prod.title}
+                offValue={prod.offValue}
+                lastPrice={prod.lastPrice}
+                price={prod.price}
+              />
+            </SwiperSlide>
+          );
+        })}
+
+        <NavigationButtons />
+        <MarginPagination />
+      </Swiper>
     </div>
   );
 };

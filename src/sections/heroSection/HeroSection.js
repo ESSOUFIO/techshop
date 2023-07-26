@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./HeroSection.module.scss";
-import backLargeImg from "../../assets/images/home-slider-1.jpg";
-import backMobileImg from "../../assets/images/home-slider-1-mb.jpg";
+import backLargeImg from "../../assets/images/hero-section.jpg";
+import backMobileImg from "../../assets/images/hero-section-mb.jpg";
 import affirmImg from "../../assets/icons/affirm.png";
 const HeroSection = () => {
   return (
