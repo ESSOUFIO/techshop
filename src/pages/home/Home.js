@@ -6,6 +6,7 @@ import SpotLight from "../../sections/spotlight/SpotLight";
 import FlashDeals from "../../sections/flashDeals/FlashDeals";
 import cyberMondayImg from "../../assets/images/cyber-monday.jpg";
 import cyberMondayMBImg from "../../assets/images/cyber-monday-mb.jpg";
+import TopCategories from "../../sections/topCollection/TopCategories";
 
 const CyberMondayBanner = () => {
   return (
@@ -28,6 +29,7 @@ const Home = () => {
       <SpotLight />
       <FlashDeals />
       <CyberMondayBanner />
+      <TopCategories />
     </div>
   );
 };
