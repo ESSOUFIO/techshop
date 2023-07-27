@@ -14,7 +14,7 @@ const TopCategories = () => {
   console.log(secondRows);
   return (
     <div className={styles.TopCategories}>
-      <h2>Top Collection</h2>
+      <h2>Top Categories</h2>
 
       {/* for large screen */}
       {!isTabletOrMobile && (

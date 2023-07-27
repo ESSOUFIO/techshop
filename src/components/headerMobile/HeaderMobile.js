@@ -29,19 +29,21 @@ const HeaderMobile = () => {
   return (
     <>
       <div className={styles.headerMobile}>
-        <div className={styles.iconGroup}>
-          <RxHamburgerMenu size={26} onClick={triggerMainMenu} />
-          <GoSearch size={24} onClick={triggerSearchMenu} />
-        </div>
-        <div>
-          <img src={logoImg} alt="techshop" width={170} />
-        </div>
-        <div className={styles.iconGroup}>
-          <FaRegUserCircle size={24} onClick={triggerLoginMenu} />
-          <div className={styles.cart}>
-            <HiOutlineShoppingBag size={26} />
-            <div className={styles.bubble}>
-              <span>5</span>
+        <div className={styles.container}>
+          <div className={styles.iconGroup}>
+            <RxHamburgerMenu size={26} onClick={triggerMainMenu} />
+            <GoSearch size={24} onClick={triggerSearchMenu} />
+          </div>
+          <div className={styles.logo}>
+            <img src={logoImg} alt="techshop" />
+          </div>
+          <div className={styles.iconGroup}>
+            <FaRegUserCircle size={24} onClick={triggerLoginMenu} />
+            <div className={styles.cart}>
+              <HiOutlineShoppingBag size={26} />
+              <div className={styles.bubble}>
+                <span>5</span>
+              </div>
             </div>
           </div>
         </div>
