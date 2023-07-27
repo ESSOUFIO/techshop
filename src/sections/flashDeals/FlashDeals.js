@@ -4,7 +4,7 @@ import CardProduct from "../../components/cardProduct/CardProduct";
 import productList from "../..//products.json";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { useSwiper } from "swiper/react";
 import "swiper/scss";
 import "swiper/scss/navigation";
@@ -36,11 +36,15 @@ const FlashDeals = () => {
       <h1>Flash Deals</h1>
 
       <Swiper
-        modules={[Navigation, Pagination]}
+        modules={[Autoplay, Navigation, Pagination]}
         spaceBetween={0}
         slidesPerView={1}
         className={styles.mySwipe}
         pagination={{ clickable: true }}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: true,
+        }}
         breakpoints={{
           400: {
             slidesPerView: 2,

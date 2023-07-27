@@ -1,2 +1,22 @@
 .home {
+  .img,
+  .imgMobile {
+    margin: 25px 0;
+    img {
+      width: 100%;
+    }
+  }
+
+  .imgMobile {
+    display: none;
+  }
+
+  @media screen and (max-width: 767px) {
+    .img {
+      display: none;
+    }
+    .imgMobile {
+      display: block;
+    }
+  }
 }
