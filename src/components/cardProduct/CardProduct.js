@@ -20,10 +20,12 @@ const CardProduct = ({ img1, img2, title, offValue, lastPrice, price }) => {
       <div className={styles.desc}>
         <div className={styles.title}>{title}</div>
 
-        <div className={styles.deal}>
-          <div className={styles.off}>{offValue} off</div>
-          <span>Deal</span>
-        </div>
+        {offValue && (
+          <div className={styles.deal}>
+            <div className={styles.off}>{offValue} off</div>
+            <span>Deal</span>
+          </div>
+        )}
 
         <div className={styles.price}>
           <span>{price}</span>

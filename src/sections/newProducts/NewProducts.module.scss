@@ -1,0 +1,47 @@
+.newProducts {
+  padding: 15px;
+
+  h2 {
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-size: 25px;
+  }
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+
+    .carousel {
+      max-width: 700px;
+      width: 55%;
+      //   padding: 20px;
+    }
+
+    .banner {
+      width: 45%;
+      img {
+        width: 100%;
+        transition: all 1s;
+
+        &:hover {
+          transform: scale(1.05);
+          cursor: pointer;
+        }
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      flex-direction: column-reverse;
+      gap: 0;
+
+      .carousel {
+        max-width: 767px;
+        width: 100%;
+      }
+      .banner {
+        width: 100%;
+      }
+    }
+  }
+}

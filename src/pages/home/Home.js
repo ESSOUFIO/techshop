@@ -1,12 +1,15 @@
 import React from "react";
 import styles from "./Home.module.scss";
-import HeroSection from "../../sections/heroSection/HeroSection";
-import PoliciesBanner from "../../sections/policiesBanner/PoliciesBanner";
-import SpotLight from "../../sections/spotlight/SpotLight";
-import FlashDeals from "../../sections/flashDeals/FlashDeals";
-import cyberMondayImg from "../../assets/images/cyber-monday.jpg";
-import cyberMondayMBImg from "../../assets/images/cyber-monday-mb.jpg";
-import TopCategories from "../../sections/topCollection/TopCategories";
+import cyberMondayImg from "../../assets/images/banners/cyber-monday.jpg";
+import cyberMondayMBImg from "../../assets/images/banners/cyber-monday-mb.jpg";
+import {
+  FlashDeals,
+  HeroSection,
+  NewProducts,
+  PoliciesBanner,
+  SpotLight,
+  TopCategories,
+} from "../../sections";
 
 const CyberMondayBanner = () => {
   return (
@@ -30,6 +33,7 @@ const Home = () => {
       <FlashDeals />
       <CyberMondayBanner />
       <TopCategories />
+      <NewProducts />
     </div>
   );
 };
