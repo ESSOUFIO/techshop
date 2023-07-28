@@ -8,7 +8,8 @@
     "lastPrice": "$99.00",
     "offValue": "50%",
     "brand": "GENELEC",
-    "category": "Sound"
+    "category": "Sound",
+    "flashDeal": "true"
   },
   {
     "id": "2",
@@ -19,7 +20,8 @@
     "lastPrice": "$159.00",
     "offValue": "45%",
     "brand": "KitchenAid",
-    "category": "Kitchen"
+    "category": "Kitchen",
+    "flashDeal": "true"
   },
   {
     "id": "3",
@@ -30,7 +32,8 @@
     "lastPrice": "$56.00",
     "offValue": "40%",
     "brand": "HiFiGo",
-    "category": "Sound"
+    "category": "Sound",
+    "flashDeal": "true"
   },
   {
     "id": "4",
@@ -41,7 +44,8 @@
     "lastPrice": "$820.00",
     "offValue": "40%",
     "brand": "Samsung",
-    "category": "TV"
+    "category": "TV",
+    "flashDeal": "true"
   },
   {
     "id": "5",
@@ -52,7 +56,8 @@
     "lastPrice": "$290.00",
     "offValue": "50%",
     "brand": "OnePlus",
-    "category": "Phone"
+    "category": "Phone",
+    "flashDeal": "true"
   },
   {
     "id": "6",
@@ -63,7 +68,8 @@
     "lastPrice": "$966.00",
     "offValue": "45%",
     "brand": "Huawei",
-    "category": "Phone"
+    "category": "Phone",
+    "flashDeal": "true"
   },
   {
     "id": "7",
@@ -74,6 +80,55 @@
     "lastPrice": "$1850.00",
     "offValue": "40%",
     "brand": "ASUS",
-    "category": "Laptop"
+    "category": "Laptop",
+    "flashDeal": "true"
+  },
+  {
+    "id": "8",
+    "title": "TCL Smart TV 6-Series Roku TV LED",
+    "image_1": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F8%2F1.webp?alt=media&token=83ade0a9-4ec8-45e8-a9f6-3405d989b688",
+    "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F8%2F2.webp?alt=media&token=6e6eebc6-daef-405f-9fba-2fd432da6259",
+    "price": "$760.00",
+    "lastPrice": "$950.00",
+    "offValue": "20%",
+    "brand": "TCL",
+    "category": "TV",
+    "flashDeal": "false"
+  },
+  {
+    "id": "9",
+    "title": "LG Smart TV OLED C2 Resolution 4K",
+    "image_1": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F9%2F1.jpg?alt=media&token=36aa269a-179a-47ec-8032-4c59b9463c59",
+    "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F9%2F2.jpg?alt=media&token=57b367a9-953a-4796-880c-c06632c04cd8",
+    "price": "$679.99",
+    "lastPrice": "$820.00",
+    "offValue": "15%",
+    "brand": "LG",
+    "category": "TV",
+    "flashDeal": "false"
+  },
+  {
+    "id": "10",
+    "title": "Samsung Smart TV QN90B QLED with Mini-LED",
+    "image_1": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F10%2F1.jpg?alt=media&token=806a1a4f-b021-4e6c-b9df-014b0f8f0e7a",
+    "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F10%2F2.webp?alt=media&token=a0bb3fce-3854-4d17-a2a6-6b35904977c9",
+    "price": "$1170.00",
+    "lastPrice": "$1300.00",
+    "offValue": "10%",
+    "brand": "Samsung",
+    "category": "TV",
+    "flashDeal": "false"
+  },
+  {
+    "id": "11",
+    "title": "Roku Plus Series Smart TV LED with local dimming",
+    "image_1": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F11%2F1.webp?alt=media&token=77fc0563-0f6b-4a42-a7fb-652c9662b471",
+    "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F11%2F2.jpg?alt=media&token=9b81a575-b5cf-44b6-8b62-888257a97a27",
+    "price": "$828.00",
+    "lastPrice": "$920.00",
+    "offValue": "10%",
+    "brand": "Roku",
+    "category": "TV",
+    "flashDeal": "false"
   }
 ]

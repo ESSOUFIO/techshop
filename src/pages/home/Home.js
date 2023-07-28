@@ -2,15 +2,18 @@ import React from "react";
 import styles from "./Home.module.scss";
 import cyberMondayImg from "../../assets/images/banners/cyber-monday.jpg";
 import cyberMondayMBImg from "../../assets/images/banners/cyber-monday-mb.jpg";
+import tvImg from "../../assets/images/banners/televisions.webp";
+import tvMbImg from "../../assets/images/banners/televisions-mb.jpg";
 import {
   FlashDeals,
   HeroSection,
   NewProducts,
   PoliciesBanner,
+  PoliciesSection,
   SpotLight,
   TopCategories,
+  TopTelevision,
 } from "../../sections";
-import PoliciesSection from "../../sections/policiesSection/PoliciesSection";
 
 const CyberMondayBanner = () => {
   return (
@@ -20,6 +23,19 @@ const CyberMondayBanner = () => {
       </div>
       <div className={styles.imgMobile}>
         <img src={cyberMondayMBImg} alt="Cyber Monday" />
+      </div>
+    </>
+  );
+};
+
+const TelevisionBanner = () => {
+  return (
+    <>
+      <div className={styles.img}>
+        <img src={tvImg} alt="Televisions" />
+      </div>
+      <div className={styles.imgMobile}>
+        <img src={tvMbImg} alt="Televisions" />
       </div>
     </>
   );
@@ -36,6 +52,8 @@ const Home = () => {
       <TopCategories />
       <NewProducts />
       <PoliciesSection />
+      <TopTelevision />
+      <TelevisionBanner />
     </div>
   );
 };

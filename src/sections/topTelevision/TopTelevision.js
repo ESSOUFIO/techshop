@@ -2,20 +2,14 @@ import React, { useEffect, useState } from "react";
 import products from "../..//products.json";
 import CardSlider from "../../components/cardSlider/CardSlider";
 
-const FlashDeals = () => {
+const TopTelevision = () => {
   const [prods, setProds] = useState([]);
 
   useEffect(() => {
-    const array = products.filter((prod) => prod.flashDeal === "true");
+    const array = products.filter((prod) => prod.category === "TV");
     setProds(array);
   }, []);
-  return (
-    <CardSlider
-      title={"Flash Deal"}
-      titleColor={"var(--color-red)"}
-      productList={prods}
-    />
-  );
+  return <CardSlider title={"Top Television"} productList={prods} />;
 };
 
-export default FlashDeals;
+export default TopTelevision;
