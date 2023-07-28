@@ -10,6 +10,7 @@ import {
   SpotLight,
   TopCategories,
 } from "../../sections";
+import PoliciesSection from "../../sections/policiesSection/PoliciesSection";
 
 const CyberMondayBanner = () => {
   return (
@@ -34,6 +35,7 @@ const Home = () => {
       <CyberMondayBanner />
       <TopCategories />
       <NewProducts />
+      <PoliciesSection />
     </div>
   );
 };

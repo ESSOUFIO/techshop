@@ -26,10 +26,10 @@ const NewProducts = () => {
             slidesPerView={1}
             className={styles.mySwipe}
             pagination={{ clickable: true }}
-            // autoplay={{
-            //   delay: 2500,
-            //   disableOnInteraction: true,
-            // }}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: true,
+            }}
             breakpoints={{
               400: {
                 slidesPerView: 1,

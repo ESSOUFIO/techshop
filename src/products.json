@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "title": "PreSonus® Eris® E3.5 Studio Monitor",
+    "title": "GENELEC PreSonus® Eris® E3.5 Studio Monitor",
     "image_1": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F1%2F1.jpg?alt=media&token=850b01d4-b042-4ce9-bf75-97a79e71a100",
     "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F1%2F2.jpg?alt=media&token=e03961aa-553f-487e-a1c2-c02dfd990c26",
     "price": "$49.00",
@@ -23,7 +23,7 @@
   },
   {
     "id": "3",
-    "title": "Module Wireless Earphones Bluetooth 5.2",
+    "title": "HiFiGo Module Wireless Earphones Bluetooth 5.2",
     "image_1": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F3%2F1.jpg?alt=media&token=54ec392c-7880-417e-ba27-9008dac007b5",
     "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F3%2F2.jpg?alt=media&token=fb616d47-8b30-4e86-9c67-ef05a4ec9913",
     "price": "$33.60",
