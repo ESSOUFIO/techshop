@@ -3,6 +3,7 @@ import styles from "./PoliciesSection.module.scss";
 import { FaWarehouse, FaStarHalfAlt, FaShippingFast } from "react-icons/fa";
 import { IoMdHelpCircle } from "react-icons/io";
 import { IoShieldHalfOutline } from "react-icons/io5";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/scss";

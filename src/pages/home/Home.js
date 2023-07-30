@@ -17,6 +17,7 @@ import {
   TopHomeAppliance,
   TopTelevision,
 } from "../../sections";
+import FeaturedBrands from "../../sections/featuredBrands/FeaturedBrands";
 
 const CyberMondayBanner = () => {
   return (
@@ -72,6 +73,7 @@ const Home = () => {
       <TelevisionBanner />
       <TopHomeAppliance />
       <HomeApplianceBanner />
+      <FeaturedBrands />
     </div>
   );
 };
