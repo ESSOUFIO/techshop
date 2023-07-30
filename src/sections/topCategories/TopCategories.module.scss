@@ -24,10 +24,23 @@
       img {
         max-width: 170px;
         width: 100%;
+        transition: all 0.8s;
+
+        &:hover {
+          transform: scale(1.1);
+          cursor: pointer;
+        }
       }
 
       p {
         font-size: 16px;
+        transition: all 0.5s;
+
+        &:hover {
+          cursor: pointer;
+          text-decoration: underline;
+          color: var(--color-btn-blue);
+        }
       }
     }
 

@@ -9,7 +9,8 @@
     "offValue": "50%",
     "brand": "GENELEC",
     "category": "Sound",
-    "flashDeal": "true"
+    "flashDeal": "true",
+    "new": "false"
   },
   {
     "id": "2",
@@ -20,8 +21,9 @@
     "lastPrice": "$159.00",
     "offValue": "45%",
     "brand": "KitchenAid",
-    "category": "Kitchen",
-    "flashDeal": "true"
+    "category": "Home Appliance",
+    "flashDeal": "true",
+    "new": "false"
   },
   {
     "id": "3",
@@ -33,7 +35,8 @@
     "offValue": "40%",
     "brand": "HiFiGo",
     "category": "Sound",
-    "flashDeal": "true"
+    "flashDeal": "true",
+    "new": "false"
   },
   {
     "id": "4",
@@ -45,7 +48,8 @@
     "offValue": "40%",
     "brand": "Samsung",
     "category": "TV",
-    "flashDeal": "true"
+    "flashDeal": "true",
+    "new": "false"
   },
   {
     "id": "5",
@@ -57,7 +61,8 @@
     "offValue": "50%",
     "brand": "OnePlus",
     "category": "Phone",
-    "flashDeal": "true"
+    "flashDeal": "true",
+    "new": "false"
   },
   {
     "id": "6",
@@ -69,7 +74,8 @@
     "offValue": "45%",
     "brand": "Huawei",
     "category": "Phone",
-    "flashDeal": "true"
+    "flashDeal": "true",
+    "new": "false"
   },
   {
     "id": "7",
@@ -81,7 +87,8 @@
     "offValue": "40%",
     "brand": "ASUS",
     "category": "Laptop",
-    "flashDeal": "true"
+    "flashDeal": "true",
+    "new": "false"
   },
   {
     "id": "8",
@@ -93,7 +100,8 @@
     "offValue": "20%",
     "brand": "TCL",
     "category": "TV",
-    "flashDeal": "false"
+    "flashDeal": "false",
+    "new": "false"
   },
   {
     "id": "9",
@@ -105,7 +113,8 @@
     "offValue": "15%",
     "brand": "LG",
     "category": "TV",
-    "flashDeal": "false"
+    "flashDeal": "false",
+    "new": "false"
   },
   {
     "id": "10",
@@ -117,7 +126,8 @@
     "offValue": "10%",
     "brand": "Samsung",
     "category": "TV",
-    "flashDeal": "false"
+    "flashDeal": "false",
+    "new": "false"
   },
   {
     "id": "11",
@@ -129,6 +139,112 @@
     "offValue": "10%",
     "brand": "Roku",
     "category": "TV",
-    "flashDeal": "false"
+    "flashDeal": "false",
+    "new": "false"
+  },
+  {
+    "id": "12",
+    "title": "Cosmos Stand Mixer with 6 Speed Settings, Stainless Steel",
+    "image_1": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F12%2F1.webp?alt=media&token=248a5161-c7b8-4ed1-ad89-d38aa25df90d",
+    "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F12%2F2.webp?alt=media&token=4b75daa8-0f96-4f4a-b15d-38dfc8612efb",
+    "price": "$566.10",
+    "lastPrice": "$629.00",
+    "offValue": "10%",
+    "brand": "Cosmos",
+    "category": "Home Appliance",
+    "flashDeal": "false",
+    "new": "false"
+  },
+  {
+    "id": "13",
+    "title": "LG Side-by-Side Refrigerator/Freezer GWL207FLQA",
+    "image_1": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F13%2F1.webp?alt=media&token=ce125be9-633d-449d-a35b-6c5cdce28818",
+    "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F13%2F2.webp?alt=media&token=354206b4-a61b-4148-88e1-fbbb2c597c8d",
+    "price": "$1056.00",
+    "lastPrice": "$1200.00",
+    "offValue": "12%",
+    "brand": "LG",
+    "category": "Home Appliance",
+    "flashDeal": "false",
+    "new": "false"
+  },
+  {
+    "id": "14",
+    "title": "Xiaomi Mijia Robot Vacuum Cleaner 3C LDS",
+    "image_1": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F14%2F1.webp?alt=media&token=c29e71e4-6634-4233-a4fc-2067744832e5",
+    "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F14%2F2.webp?alt=media&token=621af4bf-5a94-4a33-9c55-56142e357c97",
+    "price": "$288.00",
+    "lastPrice": "$320.00",
+    "offValue": "10%",
+    "brand": "Xiaomi",
+    "category": "Home Appliance",
+    "flashDeal": "false",
+    "new": "false"
+  },
+  {
+    "id": "15",
+    "title": "Panasonic Heavy Duty 2L Multifunction Blender, 2000W",
+    "image_1": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F15%2F1.webp?alt=media&token=da2777e0-3c51-423a-92cb-ecc68f1ffd29",
+    "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F15%2F2.webp?alt=media&token=82a97352-14ad-4427-9957-ff49c58ee944",
+    "price": "$476.50",
+    "lastPrice": "$550.00",
+    "offValue": "15%",
+    "brand": "Panasonic",
+    "category": "Home Appliance",
+    "flashDeal": "false",
+    "new": "false"
+  },
+  {
+    "id": "16",
+    "title": "LG 8.0 Kg 5 Star Inverter Touch Control Fully-Automatic",
+    "image_1": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F16%2F1.jpg?alt=media&token=8b7205a8-2553-4f21-b20a-0311374de74a",
+    "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/products%2F16%2F2.jpg?alt=media&token=95ce35cd-00d6-478a-b477-cd123673dcea",
+    "price": "$675.00",
+    "lastPrice": "$750.00",
+    "offValue": "10%",
+    "brand": "LG",
+    "category": "Home Appliance",
+    "flashDeal": "false",
+    "new": "false"
+  },
+  {
+    "id": "17",
+    "title": "HP Spectre x360 14 Intel Core i5",
+    "image_1": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/new-products%2F1%2F1.webp?alt=media&token=32f6b128-ccb1-4758-ae09-69bf224a6732",
+    "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/new-products%2F1%2F2.webp?alt=media&token=d06a94b8-08b0-4729-a175-c5901c12efa7",
+    "price": "$1265.00",
+    "brand": "HP",
+    "category": "Laptop",
+    "new": "true"
+  },
+  {
+    "id": "18",
+    "title": "Zenbook Pro Duo 14 Intel Core i9",
+    "image_1": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/new-products%2F2%2F1.webp?alt=media&token=ce57bf45-05c4-473c-a065-0d94b6688efc",
+    "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/new-products%2F2%2F2.webp?alt=media&token=e8ee55ca-541c-49a2-9c98-482bf6b51d73",
+    "price": "$1100.00",
+    "brand": "ASUS",
+    "category": "Laptop",
+    "new": "true"
+  },
+  {
+    "id": "19",
+    "title": "Asus ROG Zephyrus G14 AMD Ryzen",
+    "image_1": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/new-products%2F3%2F1.webp?alt=media&token=9b51271c-7f5b-4cd4-a358-c8c5d8fec530",
+    "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/new-products%2F3%2F2.webp?alt=media&token=3cbce1ef-99e1-4191-a388-598d64b4853f",
+    "price": "$1415.00",
+    "brand": "ASUS",
+    "category": "Laptop",
+    "new": "true"
+  },
+  {
+    "id": "20",
+    "title": "DELL XPS 13 Intel Core i7-1250U Plus",
+    "image_1": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/new-products%2F4%2F1.webp?alt=media&token=4b3edd7d-193d-46c0-ba92-4cf44f5f673f",
+    "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/new-products%2F4%2F2.webp?alt=media&token=cd5d0b4f-b3c6-438f-ba13-2dc202393f14",
+    "price": "$1025.00",
+    "brand": "Dell",
+    "category": "Laptop",
+    "new": "true"
   }
 ]

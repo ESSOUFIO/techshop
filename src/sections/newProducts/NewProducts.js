@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./NewProducts.module.scss";
 import bannerImg from "../../assets/images/banners/we-have-vr.webp";
-import newProducts from "../../newProducts.json";
+import products from "../../products.json";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
@@ -15,6 +15,12 @@ const MarginPagination = () => {
 };
 
 const NewProducts = () => {
+  const [prods, setProds] = useState([]);
+
+  useEffect(() => {
+    const array = products.filter((prod) => prod.new === "true");
+    setProds(array);
+  }, []);
   return (
     <div className={styles.newProducts}>
       <h2>New Products</h2>
@@ -45,7 +51,7 @@ const NewProducts = () => {
               },
             }}
           >
-            {newProducts.map((prod) => {
+            {prods.map((prod) => {
               return (
                 <SwiperSlide key={prod.id}>
                   <CardProduct

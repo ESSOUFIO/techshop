@@ -6,3 +6,4 @@ export { default as TopCategories } from "./topCategories/TopCategories";
 export { default as NewProducts } from "./newProducts/NewProducts";
 export { default as PoliciesSection } from "./policiesSection/PoliciesSection";
 export { default as TopTelevision } from "./topTelevision/TopTelevision";
+export { default as TopHomeAppliance } from "./topHomeAppliance/TopHomeAppliance";

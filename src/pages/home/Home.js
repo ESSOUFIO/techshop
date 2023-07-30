@@ -4,6 +4,8 @@ import cyberMondayImg from "../../assets/images/banners/cyber-monday.jpg";
 import cyberMondayMBImg from "../../assets/images/banners/cyber-monday-mb.jpg";
 import tvImg from "../../assets/images/banners/televisions.webp";
 import tvMbImg from "../../assets/images/banners/televisions-mb.jpg";
+import homeAppImg from "../../assets/images/banners/home-appliance.webp";
+import homeAppMbImg from "../../assets/images/banners/home-appliance-mb.jpg";
 import {
   FlashDeals,
   HeroSection,
@@ -12,6 +14,7 @@ import {
   PoliciesSection,
   SpotLight,
   TopCategories,
+  TopHomeAppliance,
   TopTelevision,
 } from "../../sections";
 
@@ -41,6 +44,19 @@ const TelevisionBanner = () => {
   );
 };
 
+const HomeApplianceBanner = () => {
+  return (
+    <>
+      <div className={styles.img}>
+        <img src={homeAppImg} alt="Home Appliance" />
+      </div>
+      <div className={styles.imgMobile}>
+        <img src={homeAppMbImg} alt="Home Appliance" />
+      </div>
+    </>
+  );
+};
+
 const Home = () => {
   return (
     <div className={styles.home}>
@@ -54,6 +70,8 @@ const Home = () => {
       <PoliciesSection />
       <TopTelevision />
       <TelevisionBanner />
+      <TopHomeAppliance />
+      <HomeApplianceBanner />
     </div>
   );
 };
