@@ -2,12 +2,25 @@ import React from "react";
 import styles from "./Footer.module.scss";
 import NewsLetter from "../../components/newsLetter/NewsLetter";
 import { Link } from "react-router-dom";
-import logoImg from "../../assets/logo/logo-wb.png";
-import { FaLocationDot } from "react-icons/fa6";
-import { FaPhoneAlt } from "react-icons/fa";
-import { IoMail } from "react-icons/io5";
-import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 import { Accordion } from "react-bootstrap";
+
+/** Icons and Images */
+import { FaLocationDot } from "react-icons/fa6";
+import { IoMail } from "react-icons/io5";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaTwitter,
+  FaPhoneAlt,
+} from "react-icons/fa";
+import logoImg from "../../assets/logo/logo-wb.png";
+import trustImg from "../../assets/images/trust-payment.avif";
+import visaImg from "../../assets/icons/payment/visa.png";
+import masterImg from "../../assets/icons/payment/card.png";
+import amexImg from "../../assets/icons/payment/amex.png";
+import appleImg from "../../assets/icons/payment/apple-pay.png";
+import discoverImg from "../../assets/icons/payment/discover.png";
+import paypalImg from "../../assets/icons/payment/paypal.png";
 
 const SocialMedia = ({ icon }) => {
   return <div className={styles.socialMedia}>{icon}</div>;
@@ -107,55 +120,85 @@ const Customer_Service = (
 
 const Footer = () => {
   return (
-    <div className={styles.footer}>
-      <NewsLetter />
-      <div className={styles.LargeScreen}>
-        <div className={styles.navWrap}>
-          <ul>
-            <h5>SHOP</h5>
-            {SHOP_Links}
-          </ul>
+    <>
+      <div className={styles.footer}>
+        <NewsLetter />
+        <div className={styles.LargeScreen}>
+          <div className={styles.navWrap}>
+            <ul>
+              <h5>SHOP</h5>
+              {SHOP_Links}
+            </ul>
 
-          <ul>
-            <h5>FURTHER INFO.</h5>
-            {FURTHER_Info}
-          </ul>
+            <ul>
+              <h5>FURTHER INFO.</h5>
+              {FURTHER_Info}
+            </ul>
 
-          <ul>
-            <h5>CUSTOMER SERVICE</h5>
-            {Customer_Service}
-          </ul>
+            <ul>
+              <h5>CUSTOMER SERVICE</h5>
+              {Customer_Service}
+            </ul>
 
+            {companyInfo}
+          </div>
+        </div>
+
+        <div className={styles.mobile}>
+          <div className={styles.accordion}>
+            <Accordion>
+              <Accordion.Item eventKey="0">
+                <Accordion.Header>
+                  <b>SHOP</b>
+                </Accordion.Header>
+                <Accordion.Body>{SHOP_Links}</Accordion.Body>
+              </Accordion.Item>
+              <Accordion.Item eventKey="1">
+                <Accordion.Header>
+                  <b>FURTHER INFO</b>
+                </Accordion.Header>
+                <Accordion.Body>{FURTHER_Info}</Accordion.Body>
+              </Accordion.Item>
+              <Accordion.Item eventKey="2">
+                <Accordion.Header>
+                  <b>CUSTOMER SERVICE</b>
+                </Accordion.Header>
+                <Accordion.Body>{Customer_Service}</Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+          </div>
           {companyInfo}
         </div>
+
+        <div className={styles.trust}>
+          <img src={trustImg} alt="Trust Payment" />
+        </div>
       </div>
 
-      <div className={styles.mobile}>
-        <div className={styles.accordion}>
-          <Accordion>
-            <Accordion.Item eventKey="0">
-              <Accordion.Header>
-                <b>SHOP</b>
-              </Accordion.Header>
-              <Accordion.Body>{SHOP_Links}</Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="1">
-              <Accordion.Header>
-                <b>FURTHER INFO</b>
-              </Accordion.Header>
-              <Accordion.Body>{FURTHER_Info}</Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="2">
-              <Accordion.Header>
-                <b>CUSTOMER SERVICE</b>
-              </Accordion.Header>
-              <Accordion.Body>{Customer_Service}</Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
-        </div>
-        {companyInfo}
+      <div className={styles.footer_copyright}>
+        <p>© 2023 - Powered By Omar ESSOUFI.</p>
+        <ul>
+          <li>
+            <img src={visaImg} alt="Visa" style={{ width: "64px" }} />
+          </li>
+          <li>
+            <img src={masterImg} alt="Visa" style={{ width: "40px" }} />
+          </li>
+          <li style={{ border: "1px solid transparent" }}>
+            <img src={amexImg} alt="Visa" style={{ width: "72px" }} />
+          </li>
+          <li style={{ border: "1px solid #000" }}>
+            <img src={appleImg} alt="Visa" style={{ width: "56px" }} />
+          </li>
+          <li>
+            <img src={discoverImg} alt="Visa" style={{ width: "39px" }} />
+          </li>
+          <li>
+            <img src={paypalImg} alt="Visa" style={{ width: "27px" }} />
+          </li>
+        </ul>
       </div>
-    </div>
+    </>
   );
 };
 
