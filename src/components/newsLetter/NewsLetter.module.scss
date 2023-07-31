@@ -1,0 +1,51 @@
+.newsLetter {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  h4 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.1px;
+  }
+
+  form {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+
+    .input {
+      background: #fff;
+      max-width: 400px;
+      border: 1px solid lightgray;
+
+      input {
+        width: 100%;
+      }
+    }
+
+    button {
+      width: 160px;
+      border: 1px solid transparent;
+      background: var(--color-secondary);
+      color: white;
+      font-size: 15px;
+    }
+
+    @media screen and (max-width: 767px) {
+      flex-direction: column;
+      gap: 0;
+      width: 100%;
+
+      button {
+        width: 120px;
+        padding: 10px;
+      }
+    }
+  }
+}
