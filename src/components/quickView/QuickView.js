@@ -18,6 +18,15 @@ const MarginPagination = () => {
 
 const QuickView = ({ prodID, onHide }) => {
   const [mainPhoto, setMainPhoto] = useState(products[prodID].image_1);
+  const [quantity, setQuantity] = useState(1);
+
+  const incrementQty = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const decrementQty = () => {
+    if (quantity >= 2) setQuantity(quantity - 1);
+  };
 
   return ReactDOM.createPortal(
     <div className={styles.quickView}>
@@ -93,11 +102,12 @@ const QuickView = ({ prodID, onHide }) => {
           </div>
           <div className={styles.details}>
             <h3>{products[prodID].title}</h3>
+
+            {/* Reviews */}
             <div className={styles.review}>
               <div className={styles.stars}>
                 <StarsRating value={4.5} />
               </div>
-
               <div className={styles.nbrReview}>10 reviews</div>
             </div>
 
@@ -115,15 +125,24 @@ const QuickView = ({ prodID, onHide }) => {
               {products[prodID].price}
               <span>{products[prodID].lastPrice}</span>
             </div>
+
+            <div className={styles.quantityWrap}>
+              <p>Quantity:</p>
+              <div className={styles.quantity}>
+                <button onClick={incrementQty}>+</button>
+                <label>{quantity}</label>
+                <button onClick={decrementQty}>-</button>
+              </div>
+            </div>
           </div>
         </div>
 
+        {/* Close Btn */}
         <div className={styles.closeBtn} onClick={onHide}>
           <IoClose size={22} color="#fff" />
         </div>
       </div>
       <div className={styles.back} onClick={onHide}></div>
-      {/* Close Btn */}
     </div>,
     document.getElementById("modal")
   );

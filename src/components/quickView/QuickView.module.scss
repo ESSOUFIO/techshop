@@ -25,6 +25,7 @@
       padding: 20px;
       display: flex;
       gap: 20px;
+      height: 95%;
       overflow-y: scroll;
       overflow-x: hidden;
 
@@ -85,6 +86,42 @@
             text-decoration: line-through;
             font-weight: 300;
             margin-left: 10px;
+          }
+        }
+
+        .quantity {
+          width: 100px;
+          height: 50px;
+          border: 1px solid lightgray;
+          border-radius: 25px;
+          position: relative;
+          display: flex;
+          align-items: center;
+
+          button:first-of-type,
+          button:last-of-type {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: 1px solid transparent;
+            font-size: 17px;
+            font-weight: 500;
+          }
+
+          button:first-of-type {
+            right: 7px;
+          }
+
+          button:last-of-type {
+            left: 7px;
+          }
+
+          label {
+            width: 100%;
+            text-align: center;
+            font-size: 17px;
+            font-weight: 500;
           }
         }
       }
