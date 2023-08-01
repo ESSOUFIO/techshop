@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./QuickView.module.scss";
 import ReactDOM from "react-dom";
 import { IoClose } from "react-icons/io5";
@@ -11,6 +11,7 @@ import "swiper/scss/navigation";
 import "swiper/scss/pagination";
 
 import StarsRating from "react-star-rate";
+import { GoHeart } from "react-icons/go";
 
 const MarginPagination = () => {
   return <div style={{ height: "30px" }}></div>;
@@ -19,6 +20,7 @@ const MarginPagination = () => {
 const QuickView = ({ prodID, onHide }) => {
   const [mainPhoto, setMainPhoto] = useState(products[prodID].image_1);
   const [quantity, setQuantity] = useState(1);
+  const [subtotal, setSubtotal] = useState(Number(products[prodID].price));
 
   const incrementQty = () => {
     setQuantity(quantity + 1);
@@ -27,6 +29,10 @@ const QuickView = ({ prodID, onHide }) => {
   const decrementQty = () => {
     if (quantity >= 2) setQuantity(quantity - 1);
   };
+
+  useEffect(() => {
+    setSubtotal(products[prodID].price * quantity);
+  }, [quantity, prodID]);
 
   return ReactDOM.createPortal(
     <div className={styles.quickView}>
@@ -113,7 +119,9 @@ const QuickView = ({ prodID, onHide }) => {
 
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
             </p>
             <p>
               Brand: <b>{products[prodID].brand}</b>
@@ -122,16 +130,32 @@ const QuickView = ({ prodID, onHide }) => {
               Category: <b>{products[prodID].category}</b>
             </p>
             <div className={styles.price}>
-              {products[prodID].price}
-              <span>{products[prodID].lastPrice}</span>
+              ${products[prodID].price}
+              <span>${products[prodID].lastPrice}</span>
             </div>
 
+            {/* Quantity */}
             <div className={styles.quantityWrap}>
               <p>Quantity:</p>
               <div className={styles.quantity}>
                 <button onClick={incrementQty}>+</button>
                 <label>{quantity}</label>
                 <button onClick={decrementQty}>-</button>
+              </div>
+            </div>
+
+            {/* Subtotal */}
+            <div className={styles.subtotal}>
+              <p>
+                Subtotal: <span>${subtotal.toFixed(2)}</span>
+              </p>
+            </div>
+
+            {/* Add To Cart */}
+            <div className={styles.addToCart}>
+              <button className="--rounded">Add to Cart</button>
+              <div className={styles.wish}>
+                <GoHeart size={30} />
               </div>
             </div>
           </div>

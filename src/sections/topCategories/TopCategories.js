@@ -10,8 +10,6 @@ const TopCategories = () => {
   const firstRows = categories.filter((cat) => cat.id <= 6);
   const secondRows = categories.filter((cat) => cat.id >= 7);
 
-  console.log(firstRows);
-  console.log(secondRows);
   return (
     <div className={styles.TopCategories}>
       <h2>Top Categories</h2>

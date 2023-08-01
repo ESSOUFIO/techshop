@@ -31,8 +31,8 @@ const CardProduct = ({ img1, img2, title, offValue, lastPrice, price, id }) => {
           )}
 
           <div className={styles.price}>
-            <span>{price}</span>
-            <span>{lastPrice}</span>
+            <span>${price}</span>
+            <span>${lastPrice}</span>
           </div>
 
           {/* <div className={styles.choices}>

@@ -41,7 +41,7 @@ const CardSlider = ({ title, titleColor, productList }) => {
         className={styles.mySwipe}
         pagination={{ clickable: true }}
         autoplay={{
-          delay: 2500,
+          delay: 3000,
           disableOnInteraction: true,
         }}
         breakpoints={{
