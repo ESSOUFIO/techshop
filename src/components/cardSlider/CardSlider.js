@@ -69,6 +69,7 @@ const CardSlider = ({ title, titleColor, productList }) => {
                 offValue={prod.offValue}
                 lastPrice={prod.lastPrice}
                 price={prod.price}
+                id={prod.id}
               />
             </SwiperSlide>
           );

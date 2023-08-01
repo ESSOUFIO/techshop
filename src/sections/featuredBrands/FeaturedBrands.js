@@ -71,7 +71,7 @@ const FeaturedBrands = () => {
         </SwiperSlide>
 
         <SwiperSlide>
-          <Brand brandImg={lgImg} name={"LG"} width={"130px"} />
+          <Brand brandImg={lgImg} name={"LG"} width={"120px"} />
         </SwiperSlide>
 
         <SwiperSlide>
@@ -79,7 +79,7 @@ const FeaturedBrands = () => {
         </SwiperSlide>
 
         <SwiperSlide>
-          <Brand brandImg={huaweiImg} name={"TCL"} width={"130px"} />
+          <Brand brandImg={huaweiImg} name={"Huawei"} width={"130px"} />
         </SwiperSlide>
 
         <SwiperSlide>
@@ -91,7 +91,7 @@ const FeaturedBrands = () => {
         </SwiperSlide>
 
         <SwiperSlide>
-          <Brand brandImg={tclImg} name={"TCL"} width={"150px"} />
+          <Brand brandImg={tclImg} name={"TCL"} width={"130px"} />
         </SwiperSlide>
         <MarginPagination />
       </Swiper>
