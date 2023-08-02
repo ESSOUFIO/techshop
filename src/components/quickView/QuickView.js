@@ -12,6 +12,7 @@ import "swiper/scss/pagination";
 
 import StarsRating from "react-star-rate";
 import { GoHeart } from "react-icons/go";
+import trustImg from "../../assets/images/trust-banner.webp";
 
 const MarginPagination = () => {
   return <div style={{ height: "30px" }}></div>;
@@ -106,9 +107,12 @@ const QuickView = ({ prodID, onHide }) => {
               <MarginPagination />
             </Swiper>
           </div>
+
           <div className={styles.details}>
             <h3>{products[prodID].title}</h3>
-
+            <p>
+              Brand: <b>{products[prodID].brand}</b>
+            </p>
             {/* Reviews */}
             <div className={styles.review}>
               <div className={styles.stars}>
@@ -117,21 +121,24 @@ const QuickView = ({ prodID, onHide }) => {
               <div className={styles.nbrReview}>10 reviews</div>
             </div>
 
-            <p>
+            <div className={styles.desc}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
               nisi ut aliquip ex ea commodo consequat.
-            </p>
-            <p>
-              Brand: <b>{products[prodID].brand}</b>
-            </p>
-            <p>
-              Category: <b>{products[prodID].category}</b>
-            </p>
-            <div className={styles.price}>
-              ${products[prodID].price}
-              <span>${products[prodID].lastPrice}</span>
+            </div>
+
+            <div className={styles.priceWrap}>
+              <div className={styles.price}>
+                ${products[prodID].price}
+                <span>${products[prodID].lastPrice}</span>
+              </div>
+
+              {products[prodID].offValue && (
+                <div className={styles.save}>
+                  <p>{products[prodID].offValue} OFF</p>
+                </div>
+              )}
             </div>
 
             {/* Quantity */}
@@ -150,13 +157,22 @@ const QuickView = ({ prodID, onHide }) => {
                 Subtotal: <span>${subtotal.toFixed(2)}</span>
               </p>
             </div>
-
             {/* Add To Cart */}
             <div className={styles.addToCart}>
               <button className="--rounded">Add to Cart</button>
               <div className={styles.wish}>
                 <GoHeart size={30} />
               </div>
+            </div>
+
+            {/* Checkout*/}
+            <div className={styles.checkout}>
+              <button className="--rounded">Buy it Now</button>
+            </div>
+
+            {/* Trust */}
+            <div className={styles.trust}>
+              <img src={trustImg} alt="trust" />
             </div>
           </div>
         </div>
