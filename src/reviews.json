@@ -1,0 +1,42 @@
+[
+  {
+    "id": "0",
+    "userName": "omar.essoufi",
+    "address": "California, USA",
+    "rating": "4.5",
+    "title": "I really liked this product!",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+  },
+  {
+    "id": "1",
+    "userName": "sami.mriguel",
+    "address": "Tunis, TN",
+    "rating": "5",
+    "title": "Very useful",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+  },
+  {
+    "id": "2",
+    "userName": "didi.douda",
+    "address": "Paris, FR",
+    "rating": "4",
+    "title": "Good product",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+  },
+  {
+    "id": "3",
+    "userName": "john.rock",
+    "address": "Torento, CA",
+    "rating": "5",
+    "title": "Amazing product",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+  },
+  {
+    "id": "4",
+    "userName": "claudia.marina",
+    "address": "Brazilia, BR",
+    "rating": "3.5",
+    "title": "Long shipping time",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+  }
+]

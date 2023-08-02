@@ -1,0 +1,55 @@
+.reviewCard {
+  max-width: 350px;
+  padding: 15px;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  overflow-y: auto;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  .user {
+    display: flex;
+    gap: 10px;
+
+    .photo {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex: 0 0 30px;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .info {
+      .userName {
+        display: flex;
+        gap: 10px;
+      }
+      & > p {
+        font-size: 13px;
+        font-weight: 300;
+      }
+    }
+  }
+
+  .rating {
+    zoom: 0.5;
+  }
+
+  .text {
+    margin: 10px 0;
+    h6 {
+      font-size: 14px;
+    }
+    & > p {
+      font-size: 13px;
+    }
+  }
+}
