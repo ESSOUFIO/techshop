@@ -32,6 +32,11 @@ p {
   align-items: center;
 }
 
+.--container {
+  width: 80%;
+  margin: 0 auto;
+}
+
 html {
   font-size: 15px;
 }
@@ -45,6 +50,11 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-text);
 }
 
 .--btn {
@@ -84,5 +94,17 @@ code {
 
   &:focus::placeholder {
     color: transparent;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .--container {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .--container {
+    width: 100%;
   }
 }

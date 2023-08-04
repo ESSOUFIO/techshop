@@ -2,18 +2,27 @@ import React, { useState } from "react";
 import styles from "./CardProduct.module.scss";
 import { GoHeart } from "react-icons/go";
 import QuickView from "../quickView/QuickView";
+import { useNavigate } from "react-router-dom";
 
 const CardProduct = ({ img1, img2, title, offValue, lastPrice, price, id }) => {
   const [showQuickView, setShowQuickView] = useState(false);
+  const navigate = useNavigate();
+
   return (
     <>
       <div className={styles.card}>
         <div className={styles.images}>
-          <div className={styles.img1}>
+          <div
+            className={styles.img1}
+            onClick={() => navigate(`/product/${id}`)}
+          >
             <img src={img1} alt="product" />
           </div>
 
-          <div className={styles.img2}>
+          <div
+            className={styles.img2}
+            onClick={() => navigate(`/product/${id}`)}
+          >
             <img src={img2} alt="product" />
           </div>
 

@@ -1,3 +1,7 @@
 add reviews to Product Card
 
 add video to banner 
+
+bottom fixed bar for mobile device
+
+scoll to top when we open a product page

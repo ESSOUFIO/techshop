@@ -29,10 +29,12 @@ const MarginPagination = () => {
   return <div style={{ height: "30px" }}></div>;
 };
 
-const CardSlider = ({ title, titleColor, productList }) => {
+const CardSlider = ({ title, titleColor, textAlign, productList }) => {
   return (
     <div className={styles.cardSlider}>
-      <h1 style={{ color: `${titleColor}` }}>{title}</h1>
+      <h1 style={{ color: `${titleColor}`, textAlign: `${textAlign}` }}>
+        {title}
+      </h1>
 
       <Swiper
         modules={[Autoplay, Navigation, Pagination]}
@@ -40,10 +42,10 @@ const CardSlider = ({ title, titleColor, productList }) => {
         slidesPerView={1}
         className={styles.mySwipe}
         pagination={{ clickable: true }}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: true,
-        }}
+        // autoplay={{
+        //   delay: 3000,
+        //   disableOnInteraction: true,
+        // }}
         breakpoints={{
           400: {
             slidesPerView: 2,

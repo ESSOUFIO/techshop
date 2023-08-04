@@ -168,6 +168,7 @@
               font-weight: 500;
               font-size: 15px;
               margin-bottom: 3px;
+              transition: all 0.8s;
 
               &:hover {
                 background: none;
@@ -204,6 +205,12 @@
               font-weight: 500;
               color: #fff;
               border: 1px solid transparent;
+              cursor: pointer;
+              transition: all 0.5s;
+
+              &:hover {
+                background: rgb(1, 1, 181);
+              }
             }
           }
 
@@ -215,6 +222,17 @@
             img {
               width: 92%;
             }
+          }
+        }
+
+        @media screen and (max-width: 750px) {
+          display: block;
+          .photos {
+            width: 100%;
+          }
+
+          h3 {
+            margin-top: 20px;
           }
         }
       }

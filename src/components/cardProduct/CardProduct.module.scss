@@ -26,6 +26,10 @@
       //   transition: transform 1.5s;
     }
 
+    img:active {
+      cursor: grabbing;
+    }
+
     button {
       opacity: 0;
       position: absolute;
