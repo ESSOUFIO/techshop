@@ -8,7 +8,7 @@
     "lastPrice": "99.00",
     "offValue": "50%",
     "brand": "GENELEC",
-    "category": "Sound",
+    "category": "audio",
     "flashDeal": "true",
     "new": "false"
   },
@@ -21,7 +21,7 @@
     "lastPrice": "159.00",
     "offValue": "45%",
     "brand": "KitchenAid",
-    "category": "Home Appliance",
+    "category": "home",
     "flashDeal": "true",
     "new": "false"
   },
@@ -34,7 +34,7 @@
     "lastPrice": "56.00",
     "offValue": "40%",
     "brand": "HiFiGo",
-    "category": "Sound",
+    "category": "audio",
     "flashDeal": "true",
     "new": "false"
   },
@@ -47,7 +47,7 @@
     "lastPrice": "820.00",
     "offValue": "40%",
     "brand": "Samsung",
-    "category": "TV",
+    "category": "tv",
     "flashDeal": "true",
     "new": "false"
   },
@@ -60,7 +60,7 @@
     "lastPrice": "290.00",
     "offValue": "50%",
     "brand": "OnePlus",
-    "category": "Phone",
+    "category": "phones",
     "flashDeal": "true",
     "new": "false"
   },
@@ -73,7 +73,7 @@
     "lastPrice": "966.00",
     "offValue": "45%",
     "brand": "Huawei",
-    "category": "Phone",
+    "category": "phones",
     "flashDeal": "true",
     "new": "false"
   },
@@ -86,7 +86,7 @@
     "lastPrice": "1850.00",
     "offValue": "40%",
     "brand": "ASUS",
-    "category": "Laptop",
+    "category": "laptops",
     "flashDeal": "true",
     "new": "false"
   },
@@ -99,7 +99,7 @@
     "lastPrice": "950.00",
     "offValue": "20%",
     "brand": "TCL",
-    "category": "TV",
+    "category": "tv",
     "flashDeal": "false",
     "new": "false"
   },
@@ -112,7 +112,7 @@
     "lastPrice": "820.00",
     "offValue": "15%",
     "brand": "LG",
-    "category": "TV",
+    "category": "tv",
     "flashDeal": "false",
     "new": "false"
   },
@@ -125,7 +125,7 @@
     "lastPrice": "1300.00",
     "offValue": "10%",
     "brand": "Samsung",
-    "category": "TV",
+    "category": "tv",
     "flashDeal": "false",
     "new": "false"
   },
@@ -138,7 +138,7 @@
     "lastPrice": "920.00",
     "offValue": "10%",
     "brand": "Roku",
-    "category": "TV",
+    "category": "tv",
     "flashDeal": "false",
     "new": "false"
   },
@@ -151,7 +151,7 @@
     "lastPrice": "629.00",
     "offValue": "10%",
     "brand": "Cosmos",
-    "category": "Home Appliance",
+    "category": "home",
     "flashDeal": "false",
     "new": "false"
   },
@@ -164,7 +164,7 @@
     "lastPrice": "1200.00",
     "offValue": "12%",
     "brand": "LG",
-    "category": "Home Appliance",
+    "category": "home",
     "flashDeal": "false",
     "new": "false"
   },
@@ -177,7 +177,7 @@
     "lastPrice": "320.00",
     "offValue": "10%",
     "brand": "Xiaomi",
-    "category": "Home Appliance",
+    "category": "home",
     "flashDeal": "false",
     "new": "false"
   },
@@ -190,7 +190,7 @@
     "lastPrice": "550.00",
     "offValue": "15%",
     "brand": "Panasonic",
-    "category": "Home Appliance",
+    "category": "home",
     "flashDeal": "false",
     "new": "false"
   },
@@ -203,7 +203,7 @@
     "lastPrice": "750.00",
     "offValue": "10%",
     "brand": "LG",
-    "category": "Home Appliance",
+    "category": "home",
     "flashDeal": "false",
     "new": "false"
   },
@@ -214,7 +214,7 @@
     "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/new-products%2F1%2F2.webp?alt=media&token=d06a94b8-08b0-4729-a175-c5901c12efa7",
     "price": "1265.00",
     "brand": "HP",
-    "category": "Laptop",
+    "category": "laptops",
     "new": "true"
   },
   {
@@ -224,7 +224,7 @@
     "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/new-products%2F2%2F2.webp?alt=media&token=e8ee55ca-541c-49a2-9c98-482bf6b51d73",
     "price": "1100.00",
     "brand": "ASUS",
-    "category": "Laptop",
+    "category": "laptops",
     "new": "true"
   },
   {
@@ -234,7 +234,7 @@
     "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/new-products%2F3%2F2.webp?alt=media&token=3cbce1ef-99e1-4191-a388-598d64b4853f",
     "price": "1415.00",
     "brand": "ASUS",
-    "category": "Laptop",
+    "category": "laptops",
     "new": "true"
   },
   {
@@ -244,7 +244,7 @@
     "image_2": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/new-products%2F4%2F2.webp?alt=media&token=cd5d0b4f-b3c6-438f-ba13-2dc202393f14",
     "price": "1025.00",
     "brand": "Dell",
-    "category": "Laptop",
+    "category": "laptops",
     "new": "true"
   }
 ]

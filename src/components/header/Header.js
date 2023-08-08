@@ -11,7 +11,7 @@ import { Search } from "../index";
 import { BsCart3 } from "react-icons/bs";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { PiUserLight } from "react-icons/pi";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import LoginMenu from "./loginMenu/LoginMenu";
 
@@ -44,6 +44,7 @@ const Header = () => {
   const [langIcon, setLangIcon] = useState(engIcon);
   const [curr, setCurr] = useState("USD");
   const [showLogin, setShowLogin] = useState(false);
+  const navigate = useNavigate();
 
   const selectLang = (text, iconImg) => {
     setLang(text);
@@ -81,11 +82,14 @@ const Header = () => {
               <span onClick={triggerLoginMenu}>Sign In</span>
             </div>
 
-            <div className={styles.headerIcon}>
+            <div
+              className={styles.headerIcon}
+              onClick={() => navigate("/cart")}
+            >
               <div className={styles.icon}>
-                <BsCart3 size={30} color={"var(--color-primary)"} />
+                <BsCart3 size={31} color={"var(--color-primary)"} />
               </div>
-              <Link to="">Cart</Link>
+              <span>Cart</span>
               <div className={styles.bubble}>
                 <span>0</span>
               </div>

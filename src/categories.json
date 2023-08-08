@@ -1,61 +1,73 @@
 [
   {
-    "id": "1",
+    "index": "0",
+    "id": "phones",
     "title": "Mobile Phones",
     "image": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/categories%2Fmobile-phones.png?alt=media&token=693f8652-2945-44cf-a75e-1eefb4698da8"
   },
   {
-    "id": "2",
+    "index": "1",
+    "id": "laptops",
     "title": "Laptops & Tablets",
     "image": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/categories%2Flaptops-tablets.jpg?alt=media&token=dbbd05c4-99eb-427d-8e07-b688f4d35159"
   },
   {
-    "id": "3",
+    "index": "2",
+    "id": "tv",
     "title": "Televisions",
     "image": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/categories%2Ftelevisions.jpg?alt=media&token=53c94a7a-a949-4020-8f78-9d248dc8a078"
   },
   {
-    "id": "4",
+    "index": "3",
+    "id": "pcs",
     "title": "PCs & Accessories",
     "image": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/categories%2Fpcs-accessories.jpg?alt=media&token=150c6362-aa8f-478b-9c60-7a8771daa7b3"
   },
   {
-    "id": "5",
+    "index": "4",
+    "id": "audio",
     "title": "Audio & Video",
     "image": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/categories%2Faudio-video.png?alt=media&token=ee39f36b-fce5-40e2-873c-66eb562aaf07"
   },
   {
-    "id": "6",
+    "index": "5",
+    "id": "gaming",
     "title": "Gaming",
     "image": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/categories%2Fgaming-accessories.jpg?alt=media&token=9ad0a098-a830-427c-be7b-4067153f9f08"
   },
   {
-    "id": "7",
+    "index": "6",
+    "id": "home",
     "title": "Home Appliances",
     "image": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/categories%2Fhome-appliances.png?alt=media&token=890fcdd5-8cb2-4b24-b69b-59fd692af5a8"
   },
   {
-    "id": "8",
+    "index": "7",
+    "id": "kitchen",
     "title": "Kitchen Appliances",
     "image": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/categories%2Fkitchen-appliances.jpg?alt=media&token=50813777-7620-449f-b20a-bfc5fd5b0778"
   },
   {
-    "id": "9",
+    "index": "8",
+    "id": "cameras",
     "title": "Cameras",
     "image": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/categories%2Fcameras.jpg?alt=media&token=744ca2c5-3fc2-41c1-8f0b-3c05db3378d6"
   },
   {
-    "id": "10",
+    "index": "9",
+    "id": "consumables",
     "title": "Consumables",
     "image": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/categories%2Fconsumables.jpg?alt=media&token=4a266815-b6c9-44cf-ae4f-2874250d9c2e"
   },
   {
-    "id": "11",
+    "index": "10",
+    "id": "smart",
     "title": "Smart Homes",
     "image": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/categories%2Fsmart-homes.jpg?alt=media&token=7c9e0589-7170-48f1-80a5-ad94f48f5bab"
   },
   {
-    "id": "12",
+    "index": "11",
+    "id": "accessories",
     "title": "Accessories",
     "image": "https://firebasestorage.googleapis.com/v0/b/techshop-f6e4b.appspot.com/o/categories%2Faccessories.jpg?alt=media&token=45bc3826-823a-498b-a1de-ffb4c417cb5b"
   }

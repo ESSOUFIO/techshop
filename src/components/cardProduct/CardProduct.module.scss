@@ -1,5 +1,5 @@
 .card {
-  max-width: 400px;
+  max-width: 300px;
   width: 100%;
 
   .images {
@@ -204,5 +204,9 @@
         margin-right: 20px;
       }
     }
+  }
+
+  @media screen and (max-width: 400px) {
+    max-width: 400px;
   }
 }

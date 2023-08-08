@@ -29,15 +29,15 @@
     align-items: center;
     gap: 1rem;
 
-    p {
+    & > p {
       color: white;
       width: 8rem;
       font-size: 13px;
 
-      span {
-        font-weight: 600;
-        font-size: 14px;
-      }
+      // span {
+      //   font-weight: 600;
+      //   font-size: 14px;
+      // }
     }
 
     /*** Icons */

@@ -1,0 +1,11 @@
+.breadCrumb {
+  display: flex;
+  gap: 4px;
+  color: gray;
+  padding: 20px;
+}
+
+.--bread-crumb a:hover {
+  color: #000;
+  font-weight: 500;
+}
