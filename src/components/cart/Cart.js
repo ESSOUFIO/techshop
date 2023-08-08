@@ -1,10 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Cart.module.scss";
 import BreadCrumb from "../breadCrumb/BreadCrumb";
 import products from "../../products.json";
+import QuantityHandler from "../quantityHandler/QuantityHandler";
+
+const CartItem = ({ title, photo, price, brand }) => {
+  const [quantity, setQuantity] = useState(1);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    setTotal(quantity * price);
+  }, [quantity, price]);
+
+  return (
+    <div className={styles["cart-list"]}>
+      <div className={styles["cart-list-info"]}>
+        <img src={photo} alt={title} style={{ width: "100px" }} />
+        <div className={styles["product-info"]}>
+          <h6>{title}</h6>
+          <p>{brand}</p>
+        </div>
+      </div>
+      <div className={styles["cart-list-price"]}>${price}</div>
+      <div className={styles["cart-list-quantity"]}>
+        <QuantityHandler quantity={quantity} setQuantity={setQuantity} />
+      </div>
+      <div className={styles["cart-list-total"]}>${total.toFixed(2)}</div>
+      <div className={styles["cart-list-action"]}></div>
+    </div>
+  );
+};
 
 const Cart = () => {
-  const [quantity, setQuantity] = useState(1);
   return (
     <>
       <BreadCrumb page1={"Cart"} />
@@ -18,20 +45,12 @@ const Cart = () => {
           <div className={styles["cart-header-action"]}></div>
         </div>
 
-        <div className={styles["cart-list"]}>
-          <div className={styles["cart-list-info"]}>
-            <img
-              src={products[1].image_1}
-              alt={products[1].title}
-              style={{ width: "100px" }}
-            />
-            <div className={styles["product-info"]}>{products[1].title}</div>
-          </div>
-          <div className={styles["cart-list-price"]}>${products[1].price}</div>
-          <div className={styles["cart-list-quantity"]}>{quantity}</div>
-          <div className={styles["cart-list-total"]}>TOTAL</div>
-          <div className={styles["cart-list-action"]}></div>
-        </div>
+        <CartItem
+          title={products[1].title}
+          photo={products[1].image_1}
+          price={products[1].price}
+          brand={products[1].brand}
+        />
       </div>
     </>
   );

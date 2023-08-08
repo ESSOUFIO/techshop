@@ -15,6 +15,7 @@ import StarsRating from "react-star-rate";
 import { GoHeart } from "react-icons/go";
 import trustImg from "../../assets/images/trust-banner.webp";
 import ReviewCard from "../reviewCard/ReviewCard";
+import QuantityHandler from "../quantityHandler/QuantityHandler";
 
 const MarginPagination = () => {
   return <div style={{ height: "30px" }}></div>;
@@ -147,11 +148,10 @@ const QuickView = ({ prodID, onHide }) => {
               {/* Quantity */}
               <div className={styles.quantityWrap}>
                 <p>Quantity:</p>
-                <div className={styles.quantity}>
-                  <button onClick={incrementQty}>+</button>
-                  <label>{quantity}</label>
-                  <button onClick={decrementQty}>-</button>
-                </div>
+                <QuantityHandler
+                  quantity={quantity}
+                  setQuantity={setQuantity}
+                />
               </div>
 
               {/* Subtotal */}
