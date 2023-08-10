@@ -26,14 +26,6 @@ const QuickView = ({ prodID, onHide }) => {
   const [quantity, setQuantity] = useState(1);
   const [subtotal, setSubtotal] = useState(Number(products[prodID].price));
 
-  const incrementQty = () => {
-    setQuantity(quantity + 1);
-  };
-
-  const decrementQty = () => {
-    if (quantity >= 2) setQuantity(quantity - 1);
-  };
-
   useEffect(() => {
     setSubtotal(products[prodID].price * quantity);
   }, [quantity, prodID]);

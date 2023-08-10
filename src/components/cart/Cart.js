@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Cart.module.scss";
 import BreadCrumb from "../breadCrumb/BreadCrumb";
-import products from "../../products.json";
 import QuantityHandler from "../quantityHandler/QuantityHandler";
+import cartItems from "../../cartItems.json";
 
-const CartItem = ({ title, photo, price, brand }) => {
-  const [quantity, setQuantity] = useState(1);
-  const [total, setTotal] = useState(0);
+const CartItem = ({ title, photo, price, qty, brand }) => {
+  const [quantity, setQuantity] = useState(Number(qty));
+  const [total, setTotal] = useState(2);
 
   useEffect(() => {
     setTotal(quantity * price);
@@ -37,20 +37,38 @@ const Cart = () => {
       <BreadCrumb page1={"Cart"} />
       <div className={styles.cart}>
         <h2>Your Cart</h2>
-        <div className={styles["cart-header"]}>
-          <div className={styles["cart-header-info"]}>PRODUCT</div>
-          <div className={styles["cart-header-price"]}>PRICE</div>
-          <div className={styles["cart-header-quantity"]}>QUANTITY</div>
-          <div className={styles["cart-header-total"]}>TOTAL</div>
-          <div className={styles["cart-header-action"]}></div>
-        </div>
+        <div className={styles.cartItems}>
+          <div className={styles["cart-header"]}>
+            <div className={styles["cart-header-info"]}>PRODUCT</div>
+            <div className={styles["cart-header-price"]}>PRICE</div>
+            <div className={styles["cart-header-quantity"]}>QUANTITY</div>
+            <div className={styles["cart-header-total"]}>TOTAL</div>
+            <div className={styles["cart-header-action"]}></div>
+          </div>
 
-        <CartItem
-          title={products[1].title}
-          photo={products[1].image_1}
-          price={products[1].price}
-          brand={products[1].brand}
-        />
+          {cartItems.map((item) => {
+            return (
+              <CartItem
+                key={item.id}
+                title={item.title}
+                photo={item.image_1}
+                price={item.price}
+                qty={item.quantity}
+                brand={item.brand}
+              />
+            );
+          })}
+
+          {/* Additional comment */}
+          <div className={styles.addComment}>
+            <h6>Additional Comments</h6>
+            <textarea
+              //   cols="30"
+              rows="5"
+              placeholder="Special instruction for seller..."
+            ></textarea>
+          </div>
+        </div>
       </div>
     </>
   );
