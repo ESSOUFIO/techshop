@@ -3,6 +3,8 @@ import styles from "./Cart.module.scss";
 import BreadCrumb from "../breadCrumb/BreadCrumb";
 import QuantityHandler from "../quantityHandler/QuantityHandler";
 import cartItems from "../../cartItems.json";
+import { BiSolidCheckShield } from "react-icons/bi";
+import trustImg from "../../assets/images/trust-banner.webp";
 
 const CartItem = ({ title, photo, price, qty, brand }) => {
   const [quantity, setQuantity] = useState(Number(qty));
@@ -67,6 +69,15 @@ const Cart = () => {
               rows="5"
               placeholder="Special instruction for seller..."
             ></textarea>
+          </div>
+
+          {/* trust banner*/}
+          <div className={styles.trust}>
+            <div className={styles.secure}>
+              <BiSolidCheckShield size={23} />
+              <p>Secure Shopping Guarantee</p>
+            </div>
+            <img src={trustImg} alt="trust" />
           </div>
         </div>
       </div>

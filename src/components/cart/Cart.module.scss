@@ -86,4 +86,22 @@
       width: 100%;
     }
   }
+
+  .trust {
+    margin-top: 15px;
+    .secure {
+      display: flex;
+      align-items: center;
+      p {
+        margin-left: 10px;
+        font-size: 13px;
+        color: gray;
+      }
+    }
+
+    img {
+      width: 400px;
+      margin-top: 15px;
+    }
+  }
 }
