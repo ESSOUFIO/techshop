@@ -9,11 +9,13 @@ import logoImg from "../../assets/logo/logo-wb.png";
 import SideMenu from "../sideMenu/SideMenu";
 import MainMenu from "./mainMenu/MainMenu";
 import SearchMenu from "./searchMenu/SearchMenu";
+import { useNavigate } from "react-router-dom";
 
 const HeaderMobile = () => {
   const [showMainMenu, setShowMainMenu] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showLoginMenu, setShowLoginMenu] = useState(false);
+  const navigate = useNavigate();
 
   const triggerMainMenu = () => {
     setShowMainMenu(!showMainMenu);
@@ -39,7 +41,7 @@ const HeaderMobile = () => {
           </div>
           <div className={styles.iconGroup}>
             <FaRegUserCircle size={24} onClick={triggerLoginMenu} />
-            <div className={styles.cart}>
+            <div className={styles.cart} onClick={() => navigate("/cart")}>
               <HiOutlineShoppingBag size={26} />
               <div className={styles.bubble}>
                 <span>5</span>

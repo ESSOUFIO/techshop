@@ -51,8 +51,31 @@ $bubble-diameter: 22px;
   @media screen and (max-width: 767px) {
     display: block;
 
-    .container .logo img {
-      width: 150px;
+    .container {
+      padding: 0 1rem 0 0.7rem;
+
+      .logo img {
+        width: 100%;
+        max-width: 150px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    .container {
+      padding: 0 0.8rem 0 0.5rem;
+
+      .iconGroup {
+        gap: 1rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 300px) {
+    .container {
+      .iconGroup {
+        gap: 7px;
+      }
     }
   }
 }

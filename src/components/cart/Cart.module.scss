@@ -1,6 +1,7 @@
 .cart {
   margin-bottom: 30px;
   padding: 0 30px;
+
   h2 {
     font-size: 28px;
     font-weight: 600;
@@ -11,9 +12,15 @@
     display: flex;
     gap: 30px;
     margin-bottom: 40px;
+
+    @media screen and (max-width: 1150px) {
+      display: block;
+    }
   }
 
   .cartItems {
+    width: 100%;
+
     .cart-header {
       padding: 0 15px;
       margin-bottom: 15px;
@@ -33,15 +40,37 @@
     .cart-header-price,
     .cart-header-quantity,
     .cart-header-total {
-      width: 160px;
+      min-width: 100px;
       text-align: center;
       background: hsl(0, 0%, 97%);
       padding: 10px;
     }
 
+    .cart-header-quantity {
+      min-width: 120px;
+    }
+
     .cart-header-action {
       background: hsl(0, 0%, 97%);
-      width: 50px;
+      min-width: 50px;
+    }
+
+    @media screen and (max-width: 767px) {
+      .cart-header-quantity,
+      .cart-header-total,
+      .cart-header-action {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width: 430px) {
+      .cart-header-info {
+        padding-left: 10px;
+      }
+
+      .cart-header-price {
+        display: none;
+      }
     }
 
     .cart-list {
@@ -56,6 +85,49 @@
         align-items: center;
         width: 100%;
         padding: 10px 20px;
+        gap: 10px;
+
+        .img {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          img {
+            width: 100px;
+          }
+        }
+
+        .product-info-wrap {
+          .product-info-mobile {
+            display: none;
+          }
+          @media screen and (max-width: 550px) {
+            .product-info-mobile {
+              display: block;
+            }
+            .cart-list-price {
+              display: none;
+            }
+            .cart-list-quantity-wrap {
+              display: flex;
+              align-items: center;
+              gap: 5px;
+              margin-top: 10px;
+            }
+          }
+
+          @media screen and (max-width: 430px) {
+            .cart-list-price {
+              display: block;
+              font-size: 15px;
+              font-weight: 600;
+              margin-top: 10px;
+            }
+
+            .cart-list-quantity-wrap {
+              margin-top: 5px;
+            }
+          }
+        }
 
         .product-info {
           text-align: left;
@@ -65,18 +137,77 @@
         }
       }
 
-      .cart-list-price,
-      .cart-list-quantity,
-      .cart-list-total {
+      .cart-list-price-wrap {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 160px;
-        padding: 10px;
+
+        .cart-list-price,
+        .cart-list-quantity,
+        .cart-list-total,
+        .cart-list-action {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-width: 100px;
+          padding: 5px;
+          font-size: 15px;
+          font-weight: 500;
+        }
+
+        .cart-list-quantity {
+          min-width: 120px;
+        }
+
+        .cart-list-action {
+          min-width: 50px;
+          cursor: pointer;
+        }
+
+        @media screen and (max-width: 550px) {
+          .cart-list-quantity,
+          .cart-list-action {
+            display: none;
+          }
+
+          .cart-list-price {
+            min-width: auto;
+          }
+        }
       }
 
-      .cart-list-action {
-        width: 50px;
+      @media screen and (max-width: 767px) {
+        .cart-list-info {
+          padding-left: 5px;
+        }
+        .cart-list-price-wrap {
+          display: block;
+          .cart-list-total {
+            display: none;
+          }
+          .cart-list-price,
+          .cart-list-quantity,
+          .cart-list-action {
+            justify-content: right;
+          }
+        }
+      }
+
+      @media screen and (max-width: 430px) {
+        .cart-list-price-wrap {
+          .cart-list-price {
+            display: none;
+          }
+        }
+      }
+
+      @media screen and (max-width: 350px) {
+        .cart-list-info {
+          display: block;
+
+          .img img {
+            width: 100%;
+            max-width: 200px;
+          }
+        }
       }
     }
 
@@ -88,9 +219,10 @@
       }
       textarea {
         font-size: 13px;
-        padding: 3px 10px;
+        padding: 10px 10px;
         max-width: 700px;
         width: 100%;
+        border-radius: 15px;
       }
     }
 
@@ -107,20 +239,51 @@
       }
 
       img {
-        width: 400px;
+        width: 100%;
+        max-width: 400px;
         margin-top: 15px;
       }
     }
   }
 
   .orderSummary {
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
+
+    .orderWrap {
+      width: 100%;
+    }
+
+    p {
+      font-size: 13px;
+      color: gray;
+    }
+
     h6 {
       padding-bottom: 12px;
       font-weight: 600;
       font-size: 14px;
       border-bottom: 3px solid #000;
       margin-bottom: 25px;
+    }
+
+    @media screen and (max-width: 1150px) {
+      max-width: 100%;
+      margin-top: 40px;
+      display: flex;
+      gap: 30px;
+
+      .orderWrap {
+        width: 100%;
+      }
+
+      .checkout {
+        width: 100%;
+      }
+    }
+
+    @media screen and (max-width: 650px) {
+      display: block;
     }
   }
 
@@ -135,6 +298,7 @@
     p {
       font-size: 15px;
       font-weight: 600;
+      color: #000;
     }
   }
 
@@ -145,6 +309,7 @@
 
     p {
       font-size: 16px;
+      color: #000;
     }
   }
 
@@ -158,14 +323,24 @@
       display: block;
       margin-bottom: 10px;
     }
-    select {
+
+    .countries {
       width: 100%;
-      padding: 10px;
+      padding: 5px;
+      padding-left: 10px;
       border: 1px solid lightgray;
-      outline: 1px solid transparent;
-      cursor: pointer;
-      transition: all 0.5s;
+      border-radius: 35px;
       margin-bottom: 15px;
+      transition: all 0.5s;
+      outline: 1px solid transparent;
+
+      select {
+        border: none;
+        padding: 7px;
+        width: 97%;
+        outline: 1px solid transparent;
+        cursor: pointer;
+      }
 
       &:hover {
         outline: 1px solid lightgray;
@@ -173,9 +348,11 @@
     }
 
     input {
-      padding: 10px;
+      padding: 12px;
+      padding-left: 20px;
       border: 1px solid lightgray;
       outline: 1px solid transparent;
+      border-radius: 35px;
       transition: all 0.5s;
       margin-bottom: 15px;
       &:hover {
@@ -192,10 +369,6 @@
 
   .checkout {
     padding: 10px 0;
-    p {
-      font-size: 13px;
-      color: gray;
-    }
 
     form {
       padding: 15px 0;
@@ -212,20 +385,56 @@
     }
   }
 
-  button {
+  .button {
     width: 100%;
     padding: 10px;
-    background: #222222;
+    background: var(--color-btn-blue);
+    border-radius: 30px;
     color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    border: 1px solid var(--color-btn-blue);
+    transition: all 0.5s;
+    margin-bottom: 10px;
+
+    &:hover {
+      border: 1px solid #000;
+      background: #fff;
+      color: #000;
+    }
+
+    &:disabled {
+      background: rgb(154, 194, 246);
+      border: 1px solid rgb(154, 194, 246);
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+
+  .whiteBtn {
+    width: 100%;
+    padding: 10px;
+    background: #fff;
+    color: #000000;
     font-size: 15px;
     font-weight: 600;
     border: 1px solid #222222;
     transition: all 0.5s;
     margin-bottom: 10px;
+    border-radius: 30px;
 
     &:hover {
-      background: #fff;
-      color: #000;
+      background: #222222;
+      color: #ffffff;
     }
+  }
+
+  @media screen and (max-width: 767px) {
+    padding: 0 20px;
+  }
+
+  @media screen and (max-width: 500px) {
+    padding: 0 10px;
   }
 }

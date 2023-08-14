@@ -61,6 +61,7 @@ const HomeApplianceBanner = () => {
 
 const Home = () => {
   return (
+    // <div></div>
     <div className={styles.home}>
       <HeroSection />
       <PoliciesBanner />

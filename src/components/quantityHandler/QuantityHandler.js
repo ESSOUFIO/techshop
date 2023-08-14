@@ -10,7 +10,7 @@ const QuantityHandler = ({ quantity, setQuantity }) => {
     if (quantity >= 2) setQuantity(quantity - 1);
   };
   return (
-    <div className={styles.quantity}>
+    <div className={styles.quantityHandler}>
       <button onClick={incrementQty}>+</button>
       <label>{quantity}</label>
       <button onClick={decrementQty}>-</button>
