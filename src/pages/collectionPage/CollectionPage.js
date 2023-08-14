@@ -15,7 +15,7 @@ const CollectionPage = () => {
   }, [id]);
   return (
     <>
-      <BreadCrumb page1={"Collection"} page2={id} />
+      <BreadCrumb page1={"Collections"} page2={id} />
 
       <div className={styles.collectionPage}>
         {prods.map((prod, index) => {

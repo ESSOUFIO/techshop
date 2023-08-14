@@ -32,9 +32,9 @@ const DropDownItem = ({ iconImg, text, selectedItem, onClick }) => {
 };
 
 const logo = (
-  <div className={styles.logo}>
+  <Link to="/" className={styles.logo}>
     <img src={logoImg} alt="techshop" />
-  </div>
+  </Link>
 );
 
 const activeLink = ({ isActive }) => (isActive ? styles.active : "");

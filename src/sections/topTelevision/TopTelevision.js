@@ -6,7 +6,7 @@ const TopTelevision = () => {
   const [prods, setProds] = useState([]);
 
   useEffect(() => {
-    const array = products.filter((prod) => prod.category === "TV");
+    const array = products.filter((prod) => prod.category === "tv");
     setProds(array);
   }, []);
   return <CardSlider title={"Top Television"} productList={prods} />;
