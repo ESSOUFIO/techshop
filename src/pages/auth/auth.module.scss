@@ -18,11 +18,18 @@
   .card {
     width: 100%;
     max-width: 360px;
-    padding: 20px;
+    padding: 10px 20px;
     border-radius: 10px;
     background: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     animation: slide-up 0.5s ease;
+
+    a {
+      display: block;
+      text-align: center;
+      text-decoration: underline;
+      margin: 10px 0;
+    }
 
     h2 {
       text-align: center;
@@ -48,6 +55,20 @@
 
       button {
         margin-top: 15px;
+      }
+    }
+
+    .links {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      p {
+        font-size: 14px;
+        color: #000;
+      }
+      a {
+        text-decoration: underline;
       }
     }
   }

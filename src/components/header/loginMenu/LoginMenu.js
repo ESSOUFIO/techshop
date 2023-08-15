@@ -10,12 +10,12 @@ const LoginMenu = ({ show, onHide, position, title }) => {
   const navigate = useNavigate();
 
   const createAccountClicked = () => {
-    navigate("/account/register");
+    navigate("/auth/register");
     onHide();
   };
 
   const resetPassClicked = () => {
-    navigate("/account/reset");
+    navigate("/auth/reset");
     onHide();
   };
 

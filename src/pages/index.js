@@ -4,6 +4,7 @@ export { default as Collections } from "./collections/Collections";
 export { default as AboutUs } from "./aboutUs/AboutUs";
 export { default as Contact } from "./contact/Contact";
 export { default as CreateAccount } from "./auth/CreateAccount";
+export { default as Login } from "./auth/Login";
 export { default as ResetPassword } from "./auth/ResetPassword";
 export { default as ProductPage } from "./productPage/ProductPage";
 export { default as CollectionPage } from "./collectionPage/CollectionPage";

@@ -8,6 +8,7 @@ import {
   CreateAccount,
   Home,
   HotDeal,
+  Login,
   ProductPage,
   ResetPassword,
 } from "./pages";
@@ -52,11 +53,15 @@ const router = createBrowserRouter([
         element: <Cart />,
       },
       {
-        path: "/account/register",
+        path: "/auth/login",
+        element: <Login />,
+      },
+      {
+        path: "/auth/register",
         element: <CreateAccount />,
       },
       {
-        path: "/account/reset",
+        path: "/auth/reset",
         element: <ResetPassword />,
       },
     ],
