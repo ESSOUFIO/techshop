@@ -21,7 +21,7 @@ const MyAccountMenu = ({ show, onHide, userName }) => {
       show={show}
       onHide={onHide}
       position={"right"}
-      title={`Hi ${userName}`}
+      title={`Hi ${userName},`}
     >
       <div className={styles.myAccount}>
         <ul>

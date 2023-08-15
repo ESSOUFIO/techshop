@@ -33,11 +33,6 @@
       color: white;
       width: 8rem;
       font-size: 13px;
-
-      // span {
-      //   font-weight: 600;
-      //   font-size: 14px;
-      // }
     }
 
     /*** Icons */
@@ -63,6 +58,7 @@
       span {
         color: var(--color-primary);
         font-size: 14px;
+        font-weight: 400;
         text-decoration: none;
         cursor: pointer;
         text-wrap: nowrap;
