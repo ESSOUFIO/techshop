@@ -75,11 +75,11 @@ const Header = () => {
               <Link to="">Wish Lists</Link>
             </div>
 
-            <div className={styles.headerIcon}>
+            <div className={styles.headerIcon} onClick={triggerLoginMenu}>
               <div className={styles.icon}>
                 <PiUserLight size={34} color={"var(--color-primary)"} />
               </div>
-              <span onClick={triggerLoginMenu}>Sign In</span>
+              <span>Sign In</span>
             </div>
 
             <div

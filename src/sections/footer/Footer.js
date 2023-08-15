@@ -38,7 +38,7 @@ const companyInfo = (
       </p>
       <IoMail size={19} color={"var(--color-text)"} />
       <p>
-        <span>example@domain.com</span>
+        <span>omar.essoufi@gmail.com</span>
       </p>
     </div>
     <div className={styles.socialMediaWrap}>

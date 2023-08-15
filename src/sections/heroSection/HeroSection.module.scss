@@ -9,10 +9,12 @@ $minus-vertical-position: -50%;
     display: block;
     img {
       width: 100%;
+      min-height: 350px;
     }
   }
   .mobileImg {
     display: none;
+    min-height: 200px;
   }
 
   .titles {

@@ -6,10 +6,10 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 
 import logoImg from "../../assets/logo/logo-wb.png";
-import SideMenu from "../sideMenu/SideMenu";
 import MainMenu from "./mainMenu/MainMenu";
 import SearchMenu from "./searchMenu/SearchMenu";
 import { useNavigate } from "react-router-dom";
+import LoginMenu from "../header/loginMenu/LoginMenu";
 
 const HeaderMobile = () => {
   const [showMainMenu, setShowMainMenu] = useState(false);
@@ -65,12 +65,12 @@ const HeaderMobile = () => {
         title={"Search"}
       ></SearchMenu>
 
-      <SideMenu
+      <LoginMenu
         show={showLoginMenu}
-        position={"right"}
         onHide={triggerLoginMenu}
-        title={"Log In"}
-      ></SideMenu>
+        position={"right"}
+        title={"Login"}
+      />
     </>
   );
 };

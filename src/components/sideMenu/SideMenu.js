@@ -22,7 +22,7 @@ const SideMenu = ({ show, onHide, title, position, children }) => {
       >
         <div className={styles.title}>
           <p>{title}</p>
-          <div onClick={onHide}>
+          <div onClick={onHide} style={{ cursor: "pointer" }}>
             <IoMdClose size={26} />
           </div>
         </div>
