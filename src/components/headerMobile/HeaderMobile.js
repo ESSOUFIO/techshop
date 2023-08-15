@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./HeaderMobile.module.scss";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { GoSearch } from "react-icons/go";
@@ -10,11 +10,15 @@ import MainMenu from "./mainMenu/MainMenu";
 import SearchMenu from "./searchMenu/SearchMenu";
 import { useNavigate } from "react-router-dom";
 import LoginMenu from "../header/loginMenu/LoginMenu";
+import { onAuthStateChanged } from "@firebase/auth";
+import { auth } from "../../firebase/config";
+import MyAccountMenu from "../header/myAccountMenu/MyAccountMenu";
 
 const HeaderMobile = () => {
   const [showMainMenu, setShowMainMenu] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
-  const [showLoginMenu, setShowLoginMenu] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   const triggerMainMenu = () => {
@@ -25,9 +29,21 @@ const HeaderMobile = () => {
     setShowSearch(!showSearch);
   };
 
-  const triggerLoginMenu = () => {
-    setShowLoginMenu(!showLoginMenu);
+  const triggerShowUserMenu = () => {
+    setShowUserMenu(!showUserMenu);
   };
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
   return (
     <>
       <div className={styles.headerMobileMarge}></div>
@@ -41,7 +57,7 @@ const HeaderMobile = () => {
             <img src={logoImg} alt="techshop" />
           </div>
           <div className={styles.iconGroup}>
-            <FaRegUserCircle size={24} onClick={triggerLoginMenu} />
+            <FaRegUserCircle size={24} onClick={triggerShowUserMenu} />
             <div className={styles.cart} onClick={() => navigate("/cart")}>
               <HiOutlineShoppingBag size={26} />
               <div className={styles.bubble}>
@@ -66,12 +82,15 @@ const HeaderMobile = () => {
         title={"Search"}
       ></SearchMenu>
 
-      <LoginMenu
-        show={showLoginMenu}
-        onHide={triggerLoginMenu}
-        position={"right"}
-        title={"Login"}
-      />
+      {user ? (
+        <MyAccountMenu
+          show={showUserMenu}
+          onHide={triggerShowUserMenu}
+          userName={user.displayName}
+        />
+      ) : (
+        <LoginMenu show={showUserMenu} onHide={triggerShowUserMenu} />
+      )}
     </>
   );
 };
