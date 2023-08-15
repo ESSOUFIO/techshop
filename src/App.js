@@ -17,6 +17,7 @@ import { RootLayout } from "./components";
 import Cart from "./components/cart/Cart";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import OnlyAdminRoute from "./components/onlyAdmin/OnlyAdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -67,10 +68,14 @@ const router = createBrowserRouter([
         path: "/auth/reset",
         element: <ResetPassword />,
       },
-      // {
-      //   path: "/admin",
-      //   element: <Admin />,
-      // },
+      {
+        path: "/admin",
+        element: (
+          <OnlyAdminRoute>
+            <Admin />
+          </OnlyAdminRoute>
+        ),
+      },
     ],
   },
 ]);

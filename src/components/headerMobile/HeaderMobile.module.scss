@@ -60,6 +60,20 @@ $bubble-diameter: 22px;
     }
   }
 
+  .icon {
+    transition: all ease 0.5s;
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    @media screen and (max-width: 350px) {
+      transform: scale(0.8);
+      &:hover {
+        transform: scale(0.9);
+      }
+    }
+  }
+
   @media screen and (max-width: 1023px) {
     display: block;
   }
@@ -69,6 +83,10 @@ $bubble-diameter: 22px;
 
     .container {
       padding: 0 1rem 0 0.7rem;
+
+      .iconGroup {
+        gap: 20px;
+      }
 
       .logo img {
         width: 100%;
@@ -82,7 +100,7 @@ $bubble-diameter: 22px;
       padding: 0 0.8rem 0 0.5rem;
 
       .iconGroup {
-        gap: 1rem;
+        gap: 10px;
       }
     }
   }
@@ -90,7 +108,7 @@ $bubble-diameter: 22px;
   @media screen and (max-width: 300px) {
     .container {
       .iconGroup {
-        gap: 7px;
+        gap: 2px;
       }
     }
   }

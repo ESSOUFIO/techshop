@@ -4,12 +4,16 @@ import SideMenu from "../../sideMenu/SideMenu";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../firebase/config";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 const MyAccountMenu = ({ show, onHide, userName }) => {
+  const navigate = useNavigate();
+
   const logoutHandler = () => {
     signOut(auth)
       .then(() => {
         toast.success("Logout Successfully..");
+        navigate("/");
       })
       .catch((error) => {
         toast.error(error.message);

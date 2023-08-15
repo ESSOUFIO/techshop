@@ -13,6 +13,8 @@ import LoginMenu from "../header/loginMenu/LoginMenu";
 import { onAuthStateChanged } from "@firebase/auth";
 import { auth } from "../../firebase/config";
 import MyAccountMenu from "../header/myAccountMenu/MyAccountMenu";
+import OnlyAdmin from "../onlyAdmin/OnlyAdmin";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
 
 const HeaderMobile = () => {
   const [showMainMenu, setShowMainMenu] = useState(false);
@@ -50,16 +52,35 @@ const HeaderMobile = () => {
       <div className={styles.headerMobile}>
         <div className={styles.container}>
           <div className={styles.iconGroup}>
-            <RxHamburgerMenu size={26} onClick={triggerMainMenu} />
-            <GoSearch size={24} onClick={triggerSearchMenu} />
+            <RxHamburgerMenu
+              className={styles.icon}
+              size={26}
+              onClick={triggerMainMenu}
+            />
+            <GoSearch
+              size={24}
+              className={styles.icon}
+              onClick={triggerSearchMenu}
+            />
           </div>
           <div className={styles.logo} onClick={() => navigate("/")}>
             <img src={logoImg} alt="techshop" />
           </div>
           <div className={styles.iconGroup}>
-            <FaRegUserCircle size={24} onClick={triggerShowUserMenu} />
+            <OnlyAdmin>
+              <MdOutlineAdminPanelSettings
+                className={styles.icon}
+                size={28}
+                onClick={() => navigate("/admin")}
+              />
+            </OnlyAdmin>
+            <FaRegUserCircle
+              size={24}
+              className={styles.icon}
+              onClick={triggerShowUserMenu}
+            />
             <div className={styles.cart} onClick={() => navigate("/cart")}>
-              <HiOutlineShoppingBag size={26} />
+              <HiOutlineShoppingBag className={styles.icon} size={26} />
               <div className={styles.bubble}>
                 <span>5</span>
               </div>

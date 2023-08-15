@@ -8,3 +8,4 @@ export { default as Login } from "./auth/Login";
 export { default as ResetPassword } from "./auth/ResetPassword";
 export { default as ProductPage } from "./productPage/ProductPage";
 export { default as CollectionPage } from "./collectionPage/CollectionPage";
+export { default as Admin } from "./admin/Admin";

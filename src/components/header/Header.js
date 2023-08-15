@@ -18,6 +18,7 @@ import LoginMenu from "./loginMenu/LoginMenu";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import MyAccountMenu from "./myAccountMenu/MyAccountMenu";
+import OnlyAdmin from "../onlyAdmin/OnlyAdmin";
 
 const DropDownItem = ({ iconImg, text, selectedItem, onClick }) => {
   return (
@@ -84,15 +85,20 @@ const Header = () => {
               Available 24/7 at <span>(090) 123-4567</span>
             </p>
 
-            <div className={styles.headerIcon}>
-              <div className={styles.icon}>
-                <MdOutlineAdminPanelSettings
-                  size={33}
-                  color={"var(--color-primary)"}
-                />
+            <OnlyAdmin>
+              <div
+                className={styles.headerIcon}
+                onClick={() => navigate("/admin")}
+              >
+                <div className={styles.icon}>
+                  <MdOutlineAdminPanelSettings
+                    size={33}
+                    color={"var(--color-primary)"}
+                  />
+                </div>
+                <Link to="/admin">Admin</Link>
               </div>
-              <Link to="/admin">Admin</Link>
-            </div>
+            </OnlyAdmin>
 
             <div className={styles.headerIcon}>
               <div className={styles.icon}>
