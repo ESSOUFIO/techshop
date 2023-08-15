@@ -1,13 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import SideMenu from "../../sideMenu/SideMenu";
 import styles from "./LoginMenu.module.scss";
 import { useNavigate } from "react-router-dom";
 import Input from "../../input/Input";
 import ButtonPrimary from "../../buttonPrimary/ButtonPrimary";
 import ButtonSecondary from "../../buttonSecondary/ButtonSecondary";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../firebase/config";
+import { toast } from "react-toastify";
 
 const LoginMenu = ({ show, onHide }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  const loginHandler = (e) => {
+    e.preventDefault();
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        toast.success(`Hi ${user.displayName}! Login Successful..`);
+        onHide();
+        navigate("/");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
 
   const createAccountClicked = () => {
     navigate("/auth/register");
@@ -22,16 +42,26 @@ const LoginMenu = ({ show, onHide }) => {
   return (
     <SideMenu show={show} onHide={onHide} position={"right"} title={"Login"}>
       <div className={styles.loginMenu}>
-        <form>
+        <form onSubmit={loginHandler}>
           <label>
             Email Address <span style={{ color: "red" }}>*</span>
           </label>
-          <Input type={"email"} placeholder={"Email Address"} required={true} />
+          <Input
+            type={"email"}
+            placeholder={"Email Address"}
+            required={true}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
           <label>
             Password <span style={{ color: "red" }}>*</span>
           </label>
-          <Input type={"password"} placeholder={"Password"} required={true} />
+          <Input
+            type={"password"}
+            placeholder={"Password"}
+            required={true}
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <ButtonPrimary text={"Log In"} type={"submit"} />
         </form>
 

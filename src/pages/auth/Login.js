@@ -9,6 +9,8 @@ import ButtonSecondary from "../../components/buttonSecondary/ButtonSecondary";
 
 // firebase
 import { auth } from "../../firebase/config";
+import { signInWithEmailAndPassword } from "@firebase/auth";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,6 +19,15 @@ const Login = () => {
 
   const loginHandler = (e) => {
     e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        toast.success(`Hi ${user.displayName}! Login Successful..`);
+        navigate("/");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
   return (
     <>
@@ -28,8 +39,18 @@ const Login = () => {
         <div className={styles.card}>
           <h2>Login</h2>
           <form onSubmit={loginHandler}>
-            <Input type="email" placeholder="Email Address" required={true} />
-            <Input type="password" placeholder="Password" required={true} />
+            <Input
+              type="email"
+              placeholder="Email Address"
+              required={true}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input
+              type="password"
+              placeholder="Password"
+              required={true}
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <ButtonPrimary text={"Login"} type={"submit"} />
           </form>
           <Link to={"/auth/reset"}>Forgot your password?</Link>

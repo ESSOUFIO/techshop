@@ -27,7 +27,7 @@ const CreateAccount = () => {
         }).then(() => {
           // Signed in
           const user = userCredential.user;
-          toast.success(`Hi ${user.displayName}, Registration Successful..`);
+          toast.success(`Hi ${user.displayName}! Registration Successful..`);
           navigate("/");
         });
       })
