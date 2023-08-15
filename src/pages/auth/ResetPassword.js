@@ -8,13 +8,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { toast } from "react-toastify";
+import Loader from "../../components/loader/Loader";
 
 const ResetPassword = () => {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const resetHandler = (e) => {
     e.preventDefault();
+    setLoading(true);
     sendPasswordResetEmail(auth, email)
       .then(() => {
         toast.success("Password reset email sent!");
@@ -23,6 +26,9 @@ const ResetPassword = () => {
       .catch((error) => {
         toast.error("error.message");
         // ..
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
   return (
@@ -49,6 +55,7 @@ const ResetPassword = () => {
           <img src={resetImg} alt="reset" />
         </div>
       </div>
+      {loading && <Loader />}
     </>
   );
 };

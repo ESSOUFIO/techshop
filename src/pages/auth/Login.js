@@ -11,14 +11,17 @@ import ButtonSecondary from "../../components/buttonSecondary/ButtonSecondary";
 import { auth } from "../../firebase/config";
 import { signInWithEmailAndPassword } from "@firebase/auth";
 import { toast } from "react-toastify";
+import Loader from "../../components/loader/Loader";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const loginHandler = (e) => {
     e.preventDefault();
+    setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -27,6 +30,9 @@ const Login = () => {
       })
       .catch((error) => {
         toast.error(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
   return (
@@ -60,6 +66,7 @@ const Login = () => {
           />
         </div>
       </div>
+      {loading && <Loader />}
     </>
   );
 };

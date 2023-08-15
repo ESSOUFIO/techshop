@@ -10,16 +10,19 @@ import { toast } from "react-toastify";
 // firebase
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase/config";
+import Loader from "../../components/loader/Loader";
 
 const CreateAccount = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const registerHandler = (e) => {
     e.preventDefault();
+    setLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         updateProfile(auth.currentUser, {
@@ -33,6 +36,9 @@ const CreateAccount = () => {
       })
       .catch((error) => {
         toast.error(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -88,6 +94,7 @@ const CreateAccount = () => {
           </form>
         </div>
       </div>
+      {loading && <Loader />}
     </>
   );
 };

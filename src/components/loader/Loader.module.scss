@@ -1,0 +1,32 @@
+.loader {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(75, 75, 75, 0.4);
+  z-index: 999;
+
+  .img {
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    z-index: 999;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media screen and (max-width: 500px) {
+    .img {
+      width: 80px;
+      height: 80px;
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

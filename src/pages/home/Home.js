@@ -66,8 +66,8 @@ const Home = () => {
       behavior: "smooth",
     });
   }, []);
+
   return (
-    // <div></div>
     <div className={styles.home}>
       <HeroSection />
       <PoliciesBanner />

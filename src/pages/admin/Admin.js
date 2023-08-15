@@ -1,4 +1,4 @@
-import styles from "./Admin.module.scss";
+// import styles from "./Admin.module.scss";
 
 const Admin = () => {
   return (
