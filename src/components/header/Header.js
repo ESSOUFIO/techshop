@@ -13,6 +13,7 @@ import { IoMdHeartEmpty } from "react-icons/io";
 import { PiUserLight } from "react-icons/pi";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import LoginMenu from "./loginMenu/LoginMenu";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/config";
@@ -82,6 +83,16 @@ const Header = () => {
             <p>
               Available 24/7 at <span>(090) 123-4567</span>
             </p>
+
+            <div className={styles.headerIcon}>
+              <div className={styles.icon}>
+                <MdOutlineAdminPanelSettings
+                  size={33}
+                  color={"var(--color-primary)"}
+                />
+              </div>
+              <Link to="/admin">Admin</Link>
+            </div>
 
             <div className={styles.headerIcon}>
               <div className={styles.icon}>

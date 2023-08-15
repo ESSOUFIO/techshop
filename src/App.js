@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.scss";
 import {
   AboutUs,
+  Admin,
   CollectionPage,
   Collections,
   Contact,
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
         path: "/auth/reset",
         element: <ResetPassword />,
       },
+      // {
+      //   path: "/admin",
+      //   element: <Admin />,
+      // },
     ],
   },
 ]);
