@@ -1,9 +1,22 @@
 import React from "react";
 import SideMenu from "../../sideMenu/SideMenu";
 import styles from "./LoginMenu.module.scss";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Input from "../../input/Input";
 
 const LoginMenu = ({ show, onHide, position, title }) => {
+  const navigate = useNavigate();
+
+  const createAccountClicked = () => {
+    navigate("/account/register");
+    onHide();
+  };
+
+  const resetPassClicked = () => {
+    navigate("/account/reset");
+    onHide();
+  };
+
   return (
     <SideMenu show={show} onHide={onHide} position={position} title={title}>
       <div className={styles.loginMenu}>
@@ -11,31 +24,21 @@ const LoginMenu = ({ show, onHide, position, title }) => {
           <label>
             Email Address <span style={{ color: "red" }}>*</span>
           </label>
-          <div className="--rounded --light-border">
-            <input
-              className="--input-theme"
-              type="email"
-              placeholder="Email Address"
-              required
-            />
-          </div>
+          <Input type={"email"} placeholder={"Email Address"} required={true} />
+
           <label>
             Password <span style={{ color: "red" }}>*</span>
           </label>
-          <div className="--rounded --light-border">
-            <input
-              className="--input-theme"
-              type="password"
-              placeholder="Password"
-              required
-            />
-          </div>
+          <Input type={"password"} placeholder={"Password"} required={true} />
+
           <button className="--btn" type="submit">
             Log In
           </button>
         </form>
-        <Link to={"/"}>Forgot your password?</Link>
-        <button className="--btn">Create Account</button>
+        <p onClick={resetPassClicked}>Forgot your password?</p>
+        <button className="--btn" onClick={createAccountClicked}>
+          Create Account
+        </button>
       </div>
     </SideMenu>
   );

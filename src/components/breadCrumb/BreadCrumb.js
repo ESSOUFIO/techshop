@@ -10,7 +10,11 @@ const BreadCrumb = ({ page1, page2 }) => {
       <p>
         <MdNavigateNext size={18} />
       </p>
-      <Link to={`/${page1.toLowerCase()}`}>{page1}</Link>
+      {page2 ? (
+        <Link to={`/${page1.toLowerCase()}`}>{page1}</Link>
+      ) : (
+        <p>{page1}</p>
+      )}
       {page2 && (
         <>
           <p>

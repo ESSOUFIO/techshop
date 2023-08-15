@@ -5,6 +5,8 @@ import { RootLayout } from "./components";
 import ProductPage from "./pages/productPage/ProductPage";
 import CollectionPage from "./pages/collectionPage/CollectionPage";
 import Cart from "./components/cart/Cart";
+import CreateAccount from "./pages/createAccount/CreateAccount";
+import ResetPassword from "./pages/resetPassword/ResetPassword";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +44,14 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/account/register",
+        element: <CreateAccount />,
+      },
+      {
+        path: "/account/reset",
+        element: <ResetPassword />,
       },
     ],
   },
