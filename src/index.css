@@ -109,3 +109,15 @@ a {
     width: 100%;
   }
 }
+
+.accordion-item {
+  border: 1px solid lightgray;
+}
+
+.accordion-button {
+  background-color: var(--color-lightgray);
+}
+
+.accordion {
+  --bs-accordion-bg: var(--color-lightgray);
+}

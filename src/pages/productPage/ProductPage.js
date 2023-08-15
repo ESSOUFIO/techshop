@@ -52,6 +52,14 @@ const ProductPage = () => {
     setProds(array);
   }, [id]);
 
+  useEffect(() => {
+    //Scroll to top
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   return (
     <>
       <BreadCrumb page1={products[id].title} />

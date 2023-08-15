@@ -30,13 +30,14 @@ const HeaderMobile = () => {
   };
   return (
     <>
+      <div className={styles.headerMobileMarge}></div>
       <div className={styles.headerMobile}>
         <div className={styles.container}>
           <div className={styles.iconGroup}>
             <RxHamburgerMenu size={26} onClick={triggerMainMenu} />
             <GoSearch size={24} onClick={triggerSearchMenu} />
           </div>
-          <div className={styles.logo}>
+          <div className={styles.logo} onClick={() => navigate("/")}>
             <img src={logoImg} alt="techshop" />
           </div>
           <div className={styles.iconGroup}>

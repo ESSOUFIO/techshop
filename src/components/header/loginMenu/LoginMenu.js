@@ -6,7 +6,7 @@ import Input from "../../input/Input";
 import ButtonPrimary from "../../buttonPrimary/ButtonPrimary";
 import ButtonSecondary from "../../buttonSecondary/ButtonSecondary";
 
-const LoginMenu = ({ show, onHide, position, title }) => {
+const LoginMenu = ({ show, onHide }) => {
   const navigate = useNavigate();
 
   const createAccountClicked = () => {
@@ -20,7 +20,7 @@ const LoginMenu = ({ show, onHide, position, title }) => {
   };
 
   return (
-    <SideMenu show={show} onHide={onHide} position={position} title={title}>
+    <SideMenu show={show} onHide={onHide} position={"right"} title={"Login"}>
       <div className={styles.loginMenu}>
         <form>
           <label>

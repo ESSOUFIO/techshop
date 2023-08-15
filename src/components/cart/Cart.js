@@ -83,6 +83,14 @@ const Cart = () => {
     e.preventDefault();
     console.log(termCheck);
   };
+
+  useEffect(() => {
+    //Scroll to top
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
   return (
     <>
       <BreadCrumb page1={"Cart"} />

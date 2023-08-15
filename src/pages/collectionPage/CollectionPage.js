@@ -13,6 +13,14 @@ const CollectionPage = () => {
     const array = products.filter((prod) => prod.category === id);
     setProds(array);
   }, [id]);
+
+  useEffect(() => {
+    //Scroll to top
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
   return (
     <>
       <BreadCrumb page1={"Collections"} page2={id} />

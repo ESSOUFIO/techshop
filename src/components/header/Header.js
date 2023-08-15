@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logoImg from "../../assets/logo/logo.png";
 import helpIcon from "../../assets/icons/customer-service.png";
 import engIcon from "../../assets/icons/united-kingdom.png";
@@ -14,6 +14,9 @@ import { PiUserLight } from "react-icons/pi";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import LoginMenu from "./loginMenu/LoginMenu";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase/config";
+import MyAccountMenu from "./myAccountMenu/MyAccountMenu";
 
 const DropDownItem = ({ iconImg, text, selectedItem, onClick }) => {
   return (
@@ -43,7 +46,8 @@ const Header = () => {
   const [lang, setLang] = useState("EN");
   const [langIcon, setLangIcon] = useState(engIcon);
   const [curr, setCurr] = useState("USD");
-  const [showLogin, setShowLogin] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   const selectLang = (text, iconImg) => {
@@ -51,9 +55,19 @@ const Header = () => {
     setLangIcon(iconImg);
   };
 
-  const triggerLoginMenu = () => {
-    setShowLogin(!showLogin);
+  const triggerShowUserMenu = () => {
+    setShowUserMenu(!showUserMenu);
   };
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+  }, []);
 
   return (
     <>
@@ -75,11 +89,11 @@ const Header = () => {
               <Link to="">Wish Lists</Link>
             </div>
 
-            <div className={styles.headerIcon} onClick={triggerLoginMenu}>
+            <div className={styles.headerIcon} onClick={triggerShowUserMenu}>
               <div className={styles.icon}>
                 <PiUserLight size={34} color={"var(--color-primary)"} />
               </div>
-              <span>Sign In</span>
+              <span>{user ? "My Account" : "Sign In"}</span>
             </div>
 
             <div
@@ -197,12 +211,15 @@ const Header = () => {
         </div>
       </div>
 
-      <LoginMenu
-        show={showLogin}
-        onHide={triggerLoginMenu}
-        position={"right"}
-        title={"Login"}
-      />
+      {user ? (
+        <MyAccountMenu
+          show={showUserMenu}
+          onHide={triggerShowUserMenu}
+          userName={user.displayName}
+        />
+      ) : (
+        <LoginMenu show={showUserMenu} onHide={triggerShowUserMenu} />
+      )}
     </>
   );
 };

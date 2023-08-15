@@ -40,24 +40,32 @@ const TopCategories = () => {
         <div className={styles.categoriesWrap}>
           {firstRows.map((category) => {
             return (
-              <div className={styles.card} key={category.id}>
+              <Link
+                to={`/collection/${category.id}`}
+                className={styles.card}
+                key={category.id}
+              >
                 <div>
                   <img src={category.image} alt={category.title} />
                 </div>
                 <p>{category.title}</p>
-              </div>
+              </Link>
             );
           })}
 
           {showMore &&
             secondRows.map((category) => {
               return (
-                <div className={styles.card} key={category.id}>
+                <Link
+                  to={`/collection/${category.id}`}
+                  className={styles.card}
+                  key={category.id}
+                >
                   <div>
                     <img src={category.image} alt={category.title} />
                   </div>
                   <p>{category.title}</p>
-                </div>
+                </Link>
               );
             })}
         </div>

@@ -1,0 +1,21 @@
+.myAccount {
+  ul {
+    margin-left: 0;
+    padding: 8px;
+
+    li {
+      display: block;
+      padding: 10px;
+      cursor: pointer;
+
+      &:last-of-type {
+        margin-top: 10px;
+        color: rgb(223, 4, 4);
+      }
+
+      &:hover {
+        background: rgb(239, 244, 245);
+      }
+    }
+  }
+}

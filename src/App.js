@@ -14,6 +14,8 @@ import {
 } from "./pages";
 import { RootLayout } from "./components";
 import Cart from "./components/cart/Cart";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +74,7 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
+      <ToastContainer />
     </>
   );
 }

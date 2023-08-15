@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./Home.module.scss";
 import cyberMondayImg from "../../assets/images/banners/cyber-monday.jpg";
 import cyberMondayMBImg from "../../assets/images/banners/cyber-monday-mb.jpg";
@@ -60,6 +60,12 @@ const HomeApplianceBanner = () => {
 };
 
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
   return (
     // <div></div>
     <div className={styles.home}>
