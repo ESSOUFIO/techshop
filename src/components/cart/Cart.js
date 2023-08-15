@@ -7,6 +7,9 @@ import { BiSolidCheckShield } from "react-icons/bi";
 import trustImg from "../../assets/images/trust-banner.webp";
 import { useNavigate } from "react-router-dom";
 import { IoCloseOutline } from "react-icons/io5";
+import ButtonSecondary from "../buttonSecondary/ButtonSecondary";
+import ButtonPrimary from "../buttonPrimary/ButtonPrimary";
+import Input from "../input/Input";
 
 const CartItem = ({ title, photo, price, qty, brand }) => {
   const [quantity, setQuantity] = useState(Number(qty));
@@ -151,9 +154,8 @@ const Cart = () => {
                     <option>Canada</option>
                   </select>
                 </div>
-
-                <input type="text" placeholder="Postal Code" />
-                <button className={styles.button}>CALCULATE SHIPPING</button>
+                <Input placeholder={"Postal Code"} />
+                <ButtonPrimary text={"CALCULATE SHIPPING"} />
               </div>
 
               {/*Coupon code  */}
@@ -161,7 +163,7 @@ const Cart = () => {
                 <label>
                   <b>Coupon Code</b>
                 </label>
-                <input type="text" placeholder="Enter Coupon Code" />
+                <Input placeholder={"Enter Coupon Code"} />
                 <p>Coupon code will be applied on the checkout page</p>
               </div>
 
@@ -188,19 +190,15 @@ const Cart = () => {
                 <label htmlFor="acceptTerm">
                   I agree with <a href="/#">Terms & Conditions</a>
                 </label>
-                <button
-                  className={styles.button}
-                  type="submit"
+                <ButtonPrimary
+                  text={"PROCEED TO CHECKOUT"}
+                  type={"submit"}
                   disabled={!termCheck}
-                >
-                  PROCEED TO CHECKOUT
-                </button>
-                <button
-                  className={styles.whiteBtn}
+                />
+                <ButtonSecondary
+                  text={"CONTINUE SHOPPING"}
                   onClick={() => navigate("/")}
-                >
-                  CONTINUE SHOPPING
-                </button>
+                />
               </form>
             </div>
           </div>

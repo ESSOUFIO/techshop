@@ -3,6 +3,8 @@ import SideMenu from "../../sideMenu/SideMenu";
 import styles from "./LoginMenu.module.scss";
 import { useNavigate } from "react-router-dom";
 import Input from "../../input/Input";
+import ButtonPrimary from "../../buttonPrimary/ButtonPrimary";
+import ButtonSecondary from "../../buttonSecondary/ButtonSecondary";
 
 const LoginMenu = ({ show, onHide, position, title }) => {
   const navigate = useNavigate();
@@ -30,15 +32,14 @@ const LoginMenu = ({ show, onHide, position, title }) => {
             Password <span style={{ color: "red" }}>*</span>
           </label>
           <Input type={"password"} placeholder={"Password"} required={true} />
-
-          <button className="--btn" type="submit">
-            Log In
-          </button>
+          <ButtonPrimary text={"Log In"} type={"submit"} />
         </form>
+
         <p onClick={resetPassClicked}>Forgot your password?</p>
-        <button className="--btn" onClick={createAccountClicked}>
-          Create Account
-        </button>
+        <ButtonSecondary
+          text={"Create Account"}
+          onClick={createAccountClicked}
+        />
       </div>
     </SideMenu>
   );

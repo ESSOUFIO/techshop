@@ -6,13 +6,6 @@
       font-size: 14px;
       margin-top: 10px;
     }
-
-    button {
-      background: var(--color-btn-blue);
-      font-size: 16px;
-      color: white;
-      border: none;
-    }
   }
 
   p {
@@ -22,11 +15,5 @@
     margin: 10px 0;
     text-decoration: underline;
     cursor: pointer;
-  }
-
-  button {
-    border: 1px solid var(--color-light-border);
-    background: none;
-    font-size: 15px;
   }
 }

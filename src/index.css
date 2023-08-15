@@ -73,7 +73,7 @@ a {
 }
 
 .--light-border {
-  border: 1px solid var(--color-light-border);
+  border: 1px solid lightgray;
 }
 
 .--white-border {

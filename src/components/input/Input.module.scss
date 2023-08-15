@@ -1,0 +1,8 @@
+.input {
+  outline: 1px solid transparent;
+  transition: all 0.5s;
+
+  &:hover {
+    outline: 1px solid lightgray;
+  }
+}
