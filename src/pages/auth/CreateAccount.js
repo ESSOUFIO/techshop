@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./CreateAccount.module.scss";
+import styles from "./auth.module.scss";
 import BreadCrumb from "../../components/breadCrumb/BreadCrumb";
 import Input from "../../components/input/Input";
 import ButtonPrimary from "../../components/buttonPrimary/ButtonPrimary";
@@ -9,7 +9,7 @@ const CreateAccount = () => {
   return (
     <>
       <BreadCrumb page1={"Register"} />
-      <div className={styles.createAccount}>
+      <div className={styles.auth}>
         <div className={styles.img}>
           <img src={registerImg} alt="register" />
         </div>
