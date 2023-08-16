@@ -88,7 +88,7 @@ const Header = () => {
             <OnlyAdmin>
               <div
                 className={styles.headerIcon}
-                onClick={() => navigate("/admin")}
+                onClick={() => navigate("/admin/dashboard")}
               >
                 <div className={styles.icon}>
                   <MdOutlineAdminPanelSettings
@@ -96,7 +96,7 @@ const Header = () => {
                     color={"var(--color-primary)"}
                   />
                 </div>
-                <Link to="/admin">Admin</Link>
+                <Link to="/admin/dashboard">Admin</Link>
               </div>
             </OnlyAdmin>
 

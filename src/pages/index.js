@@ -9,3 +9,4 @@ export { default as ResetPassword } from "./auth/ResetPassword";
 export { default as ProductPage } from "./productPage/ProductPage";
 export { default as CollectionPage } from "./collectionPage/CollectionPage";
 export { default as Admin } from "./admin/Admin";
+export { default as Cart } from "./cart/Cart";

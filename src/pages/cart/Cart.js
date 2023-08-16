@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Cart.module.scss";
-import BreadCrumb from "../breadCrumb/BreadCrumb";
-import QuantityHandler from "../quantityHandler/QuantityHandler";
-import cartItems from "../../cartItems.json";
+
 import { BiSolidCheckShield } from "react-icons/bi";
 import trustImg from "../../assets/images/trust-banner.webp";
 import { useNavigate } from "react-router-dom";
 import { IoCloseOutline } from "react-icons/io5";
-import ButtonSecondary from "../buttonSecondary/ButtonSecondary";
-import ButtonPrimary from "../buttonPrimary/ButtonPrimary";
-import Input from "../input/Input";
+import BreadCrumb from "../../components/breadCrumb/BreadCrumb";
+import cartItems from "../../cartItems.json";
+import Input from "../../components/input/Input";
+import ButtonPrimary from "../../components/buttonPrimary/ButtonPrimary";
+import ButtonSecondary from "../../components/buttonSecondary/ButtonSecondary";
+import QuantityHandler from "../../components/quantityHandler/QuantityHandler";
 
 const CartItem = ({ title, photo, price, qty, brand }) => {
   const [quantity, setQuantity] = useState(Number(qty));

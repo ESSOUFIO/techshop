@@ -71,7 +71,7 @@ const HeaderMobile = () => {
               <MdOutlineAdminPanelSettings
                 className={styles.icon}
                 size={28}
-                onClick={() => navigate("/admin")}
+                onClick={() => navigate("/admin/dashboard")}
               />
             </OnlyAdmin>
             <FaRegUserCircle
