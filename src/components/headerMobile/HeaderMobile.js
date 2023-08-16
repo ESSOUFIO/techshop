@@ -16,7 +16,7 @@ import MyAccountMenu from "../header/myAccountMenu/MyAccountMenu";
 import OnlyAdmin from "../onlyAdmin/OnlyAdmin";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 
-const HeaderMobile = () => {
+const HeaderMobile = ({ style }) => {
   const [showMainMenu, setShowMainMenu] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
@@ -48,8 +48,8 @@ const HeaderMobile = () => {
 
   return (
     <>
-      <div className={styles.headerMobileMarge}></div>
-      <div className={styles.headerMobile}>
+      <div className={styles.headerMobileMarge} style={style}></div>
+      <div className={styles.headerMobile} style={style}>
         <div className={styles.container}>
           <div className={styles.iconGroup}>
             <RxHamburgerMenu

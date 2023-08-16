@@ -68,16 +68,15 @@ const router = createBrowserRouter([
         path: "auth/reset",
         element: <ResetPassword />,
       },
-
-      {
-        path: "admin/*",
-        element: (
-          <OnlyAdminRoute>
-            <Admin />
-          </OnlyAdminRoute>
-        ),
-      },
     ],
+  },
+  {
+    path: "/admin/*",
+    element: (
+      <OnlyAdminRoute>
+        <Admin />
+      </OnlyAdminRoute>
+    ),
   },
 ]);
 

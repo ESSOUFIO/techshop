@@ -1,12 +1,14 @@
 .admin {
   display: flex;
+  background-color: #f8f9fc;
 
   .navWrap {
     width: 100%;
-    max-width: 230px;
+    max-width: 250px;
     min-height: calc(100vh - 50px);
     background-color: #4e73df;
     padding: 15px;
+    padding-right: 0;
 
     .icon {
       color: #fff;
@@ -14,7 +16,7 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      margin: 12px 0 20px;
+      margin: 18px 0 30px;
 
       p {
         font-size: 16px;
@@ -29,11 +31,33 @@
     }
 
     .navItem {
-      color: #fff;
+      color: #ffffffb2;
       display: flex;
       gap: 10px;
-      padding: 7px 0;
+      padding: 10px 0;
       cursor: pointer;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+
+    .active {
+      color: #fff;
+      position: relative;
+      font-weight: 500;
+
+      &::before {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 4px;
+        height: 80%;
+        width: 5px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        background: #fff;
+      }
     }
   }
 
