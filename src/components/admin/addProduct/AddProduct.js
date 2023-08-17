@@ -3,6 +3,9 @@ import styles from "./AddProduct.module.scss";
 import Card from "../../card/Card";
 import Select from "react-select";
 import { IoClose } from "react-icons/io5";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../../firebase/config";
+import { toast } from "react-toastify";
 
 const ProductImage = ({ image, id, deleteImg }) => {
   return (
@@ -18,12 +21,20 @@ const ProductImage = ({ image, id, deleteImg }) => {
 };
 
 const AddProduct = () => {
-  const [title, setTitle] = useState(null);
-  const [desc, setDesc] = useState(null);
+  const [name, setName] = useState("");
+  const [desc, setDesc] = useState("");
   const [images, setImages] = useState([]);
-  const [price, setPrice] = useState(null);
-  const [brand, setBrand] = useState(null);
-  const [category, setCategory] = useState(null);
+  const [price, setPrice] = useState("");
+  const [brand, setBrand] = useState("");
+  const [category, setCategory] = useState("");
+
+  const resetForm = () => {
+    setName("");
+    setDesc("");
+    setCategory("");
+    setPrice("");
+    setBrand("");
+  };
 
   const inputFileRef = useRef();
 
@@ -49,9 +60,18 @@ const AddProduct = () => {
     setImages(array);
   };
 
-  const addProductHandler = (e) => {
+  const addProductHandler = async (e) => {
     e.preventDefault();
-    console.log(images, title, desc, price, brand, category);
+    const newProd = {
+      name,
+      price,
+      brand,
+      category,
+      desc,
+    };
+    await addDoc(collection(db, "products"), newProd);
+    resetForm();
+    toast.success("New Product added successfully.");
   };
 
   return (
@@ -63,8 +83,9 @@ const AddProduct = () => {
           <input
             type="text"
             placeholder="Product Name"
+            value={name}
             required={true}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
           />
 
           <label>Product Images</label>
@@ -88,16 +109,20 @@ const AddProduct = () => {
                 );
               })}
             </div>
-            <button onClick={() => inputFileRef.current.click()}>
-              Add minimum 2 images
+            <button type="button" onClick={() => inputFileRef.current.click()}>
+              Add image*
             </button>
           </div>
+          <p style={{ color: "gray", fontSize: "12px", marginBottom: "10px" }}>
+            * Each product must have at least 2 images
+          </p>
 
-          <label>Price</label>
+          <label>Price ($)</label>
           <input
             className={styles.price}
             type="number"
             placeholder="Price"
+            value={price}
             required={true}
             onChange={(e) => setPrice(Number(e.target.value))}
           />
@@ -106,7 +131,7 @@ const AddProduct = () => {
           <input
             type="text"
             placeholder="Brand"
-            required={true}
+            value={brand}
             onChange={(e) => setBrand(e.target.value)}
           />
 
@@ -114,6 +139,7 @@ const AddProduct = () => {
           <Select
             className={styles.select}
             defaultValue={category}
+            value={category}
             onChange={(e) => setCategory(e.value)}
             options={options}
             placeholder="Choose Category"
@@ -123,10 +149,13 @@ const AddProduct = () => {
           <textarea
             rows={5}
             placeholder="Description"
+            value={desc}
             onChange={(e) => setDesc(e.target.value)}
           />
           <div className={styles.btn}>
-            <button>Add Product</button>
+            <button type="submit" disabled={!name || !price || !images.length}>
+              Add Product
+            </button>
           </div>
         </form>
       </Card>
