@@ -1,0 +1,104 @@
+.addProduct {
+  padding: 20px;
+  width: 100%;
+
+  h2 {
+    font-size: 23px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .card {
+    width: 100%;
+    max-width: 400px;
+    padding: 15px;
+  }
+
+  form {
+    label {
+      display: block;
+      margin-bottom: 4px;
+      font-weight: 500;
+      padding-left: 3px;
+    }
+    input,
+    select,
+    textarea {
+      display: block;
+      width: 100%;
+      margin-bottom: 12px;
+      padding: 5px 7px;
+      border: 1px solid lightgray;
+      outline: 1px solid transparent;
+      border-radius: 5px;
+      transition: all 0.5s;
+
+      &:hover {
+        outline: 1px solid lightgray;
+      }
+    }
+
+    .select {
+      margin-bottom: 10px;
+    }
+    .price {
+      width: 150px;
+    }
+
+    .btn {
+      display: flex;
+      justify-content: right;
+
+      button {
+        background: var(--color-btn-blue);
+        padding: 5px 25px;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+
+        &:hover {
+          background: rgb(2, 2, 172);
+        }
+      }
+    }
+  }
+}
+
+.imagesWrap {
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  padding: 8px;
+
+  .container {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  button {
+    width: 100%;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 7px;
+
+    &:hover {
+      background: rgb(229, 229, 229);
+    }
+  }
+}
+
+.productImage {
+  position: relative;
+  display: inline-block;
+
+  .closeIcon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #00000070;
+    cursor: pointer;
+
+    &:hover {
+      color: #000000;
+    }
+  }
+}
