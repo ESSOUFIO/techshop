@@ -67,7 +67,7 @@ const AddProduct = () => {
             onChange={(e) => setTitle(e.target.value)}
           />
 
-          <label>Product Image</label>
+          <label>Product Images</label>
           <input
             type="file"
             accept="image/*"
