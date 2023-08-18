@@ -4,18 +4,24 @@ import Card from "../../card/Card";
 import Select from "react-select";
 import { IoClose } from "react-icons/io5";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../../../firebase/config";
+import { db, storage } from "../../../firebase/config";
 import { toast } from "react-toastify";
 import Loader from "../../loader/Loader";
+import {
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
 
-const ProductImage = ({ image, id, deleteImg }) => {
+const ProductImage = ({ image, id, index, deleteImg }) => {
   return (
     <div className={styles.productImage}>
       <img src={image.url} alt="" width={100} />
       <IoClose
         size={18}
         className={styles.closeIcon}
-        onClick={() => deleteImg(id)}
+        onClick={() => deleteImg(id, index)}
       />
     </div>
   );
@@ -47,20 +53,45 @@ const AddProduct = () => {
     { value: "tv", label: "TV" },
   ];
 
-  const addFile = (file) => {
-    const newFile = {
-      local: file,
-      url: URL.createObjectURL(file),
-    };
-    let array = Array.from(images);
-    array.push(newFile);
-    setImages(array);
+  const addImage = (file) => {
+    const imageId = Date.now() + file.name;
+
+    //** upload to Storage */
+    const storageRef = ref(storage, `products/${imageId}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("Upload is " + progress + "% done");
+      },
+      (error) => {
+        // Handle unsuccessful uploads
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          console.log("File available at", downloadURL);
+          let array = Array.from(images);
+          array.push({
+            id: imageId,
+            url: downloadURL,
+          });
+          setImages(array);
+        });
+      }
+    );
   };
 
-  const deleteImg = (index) => {
+  const deleteImg = (id, index) => {
     const array = Array.from(images);
     array.splice(index, 1);
     setImages(array);
+
+    //Delete from storage
+    const imageRef = ref(storage, `products/${id}`);
+    deleteObject(imageRef);
   };
 
   const addProductHandler = async (e) => {
@@ -72,6 +103,7 @@ const AddProduct = () => {
       category,
       desc,
     };
+
     setLoading(true);
     await addDoc(collection(db, "products"), newProd);
     resetForm();
@@ -80,7 +112,6 @@ const AddProduct = () => {
     setLoading(false);
   };
 
-  console.log(category);
   return (
     <>
       <div className={styles.addProduct}>
@@ -100,10 +131,11 @@ const AddProduct = () => {
             <input
               type="file"
               accept="image/*"
-              onChange={(e) => addFile(e.target.files[0])}
+              onChange={(e) => addImage(e.target.files[0])}
               ref={inputFileRef}
               style={{ display: "none" }}
             />
+
             <div className={styles.imagesWrap}>
               <div className={styles.container}>
                 {images.map((image, index) => {
@@ -111,7 +143,8 @@ const AddProduct = () => {
                     <ProductImage
                       key={index}
                       image={image}
-                      id={index}
+                      id={image.id}
+                      index={index}
                       deleteImg={deleteImg}
                     />
                   );
