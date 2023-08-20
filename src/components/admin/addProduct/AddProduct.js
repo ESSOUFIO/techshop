@@ -1,9 +1,16 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./AddProduct.module.scss";
 import Card from "../../card/Card";
 import Select from "react-select";
 import { IoClose } from "react-icons/io5";
-import { collection, addDoc, Timestamp } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  Timestamp,
+  doc,
+  getDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db, storage } from "../../../firebase/config";
 import { toast } from "react-toastify";
 import Loader from "../../loader/Loader";
@@ -14,6 +21,7 @@ import {
   deleteObject,
 } from "firebase/storage";
 import { ProgressBar } from "react-bootstrap";
+import { useParams } from "react-router";
 
 const ProductImage = ({ image, id, index, deleteImg }) => {
   return (
@@ -29,32 +37,56 @@ const ProductImage = ({ image, id, index, deleteImg }) => {
 };
 
 const AddProduct = () => {
-  const [name, setName] = useState("");
-  const [desc, setDesc] = useState("");
-  const [images, setImages] = useState([]);
-  const [price, setPrice] = useState("");
-  const [brand, setBrand] = useState("");
-  const [category, setCategory] = useState("");
+  const initState = {
+    name: "",
+    brand: "",
+    desc: "",
+    price: "",
+    images: [],
+  };
+
+  const [product, setProduct] = useState(initState);
+
   const [loading, setLoading] = useState(false);
   const [uploading, setUpLoading] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [editMode, setEditMode] = useState(false);
 
   const inputFileRef = useRef();
   const categoryRef = useRef();
 
-  const resetForm = () => {
-    setName("");
-    setDesc("");
-    setCategory(null);
-    setPrice("");
-    setBrand("");
-    setImages([]);
-  };
+  const { id } = useParams();
+
+  //Handle Page Mode: "Edit Product" or "Add New Product"
+  useEffect(() => {
+    const getProduct = async (id) => {
+      setLoading(true);
+      const docRef = doc(db, "products", id);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setProduct({ ...docSnap.data() });
+      } else {
+        toast.error("Product not found!");
+      }
+      setLoading(false);
+    };
+
+    if (id !== "new") {
+      getProduct(id);
+      setEditMode(true);
+    } else {
+      setProduct({ ...initState });
+      setEditMode(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   const options = [
-    { value: "audio", label: "Audio" },
-    { value: "home", label: "Home" },
-    { value: "tv", label: "TV" },
+    { value: "Audio", label: "Audio" },
+    { value: "Home", label: "Home" },
+    { value: "TV", label: "TV" },
+    { value: "Phone", label: "Phone" },
   ];
 
   const addImage = (file) => {
@@ -80,12 +112,12 @@ const AddProduct = () => {
       () => {
         getDownloadURL(uploadTask.snapshot.ref)
           .then((downloadURL) => {
-            let array = Array.from(images);
+            let array = Array.from(product.images);
             array.push({
               id: imageId,
               url: downloadURL,
             });
-            setImages(array);
+            setProduct({ ...product, images: array });
           })
           .finally(() => setUpLoading(false));
       }
@@ -93,13 +125,31 @@ const AddProduct = () => {
   };
 
   const deleteImg = (id, index) => {
-    const array = Array.from(images);
+    const array = Array.from(product.images);
     array.splice(index, 1);
-    setImages(array);
+    setProduct({ ...product, images: array });
 
     //Delete from storage
     const imageRef = ref(storage, `products/${id}`);
     deleteObject(imageRef);
+  };
+
+  const inputHandler = (target) => {
+    setProduct({
+      ...product,
+      [target.name]: target.value,
+    });
+  };
+
+  const editHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const prodRef = doc(db, "products", id);
+      await updateDoc(prodRef, product);
+      toast.success("Product edited successfully.");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   const addProductHandler = async (e) => {
@@ -108,18 +158,14 @@ const AddProduct = () => {
 
     try {
       const newProd = {
-        name,
-        price,
-        brand,
-        category,
-        desc,
-        images,
+        ...product,
         createdAt: Timestamp.now().toDate(),
       };
+
       await addDoc(collection(db, "products"), newProd);
-      resetForm();
       categoryRef.current.clearValue();
       toast.success("New Product added successfully.");
+      setProduct({ ...initState });
     } catch (error) {
       toast.error(error.message);
     }
@@ -131,15 +177,16 @@ const AddProduct = () => {
       <div className={styles.addProduct}>
         <h2>Add New Product</h2>
         <Card cardClass={styles.card}>
-          <form onSubmit={addProductHandler}>
+          <form onSubmit={editMode ? editHandler : addProductHandler}>
             <label>Product Name</label>
             <input
               className="form-item"
               type="text"
               placeholder="Product Name"
-              value={name}
+              name="name"
+              value={product.name}
               required={true}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => inputHandler(e.target)}
             />
 
             <label>Product Images</label>
@@ -154,7 +201,7 @@ const AddProduct = () => {
 
             <div className={styles.imagesWrap}>
               <div className={styles.container}>
-                {images.map((image, index) => {
+                {product.images.map((image, index) => {
                   return (
                     <ProductImage
                       key={index}
@@ -190,27 +237,31 @@ const AddProduct = () => {
             <input
               className={`form-item ${styles.price}`}
               type="number"
+              name="price"
               placeholder="Price"
-              value={price}
+              value={product.price}
               required={true}
-              onChange={(e) => setPrice(Number(e.target.value))}
+              onChange={(e) => inputHandler(e.target)}
             />
 
             <label>Brand</label>
             <input
               className="form-item"
               type="text"
+              name="brand"
               placeholder="Brand"
-              value={brand}
-              onChange={(e) => setBrand(e.target.value)}
+              value={product.brand}
+              onChange={(e) => inputHandler(e.target)}
             />
 
             <label>Category</label>
             <Select
               ref={categoryRef}
+              value={{ value: product.category, label: product.category }}
+              // label={product.category}
               className={styles.select}
-              defaultValue={category}
-              onChange={(e) => setCategory(e?.value)}
+              // defaultValue={product.category}
+              onChange={(e) => setProduct({ ...product, category: e?.value })}
               options={options}
               placeholder="Choose Category"
             />
@@ -219,16 +270,19 @@ const AddProduct = () => {
             <textarea
               className="form-item"
               rows={5}
+              name="desc"
               placeholder="Description"
-              value={desc}
-              onChange={(e) => setDesc(e.target.value)}
+              value={product.desc}
+              onChange={(e) => inputHandler(e.target)}
             />
             <div className={styles.btn}>
               <button
                 type="submit"
-                disabled={!name || !price || !images.length}
+                disabled={
+                  !product.name || !product.price || !product.images.length
+                }
               >
-                Add Product
+                {editMode ? "Edit Product" : "Add Product"}
               </button>
             </div>
           </form>

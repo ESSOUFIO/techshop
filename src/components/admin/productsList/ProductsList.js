@@ -10,18 +10,21 @@ import {
   orderBy,
   query,
 } from "firebase/firestore";
-import { db } from "../../../firebase/config";
+import { db, storage } from "../../../firebase/config";
 import { DELETE_PRODUCT, STORE_PRODUCTS } from "../../../redux/productSlice";
 import { selectProducts } from "../../../redux/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Loader from "../../loader/Loader";
 import Notiflix from "notiflix";
+import { useNavigate } from "react-router";
+import { deleteObject, ref } from "@firebase/storage";
 
 const ProductsList = () => {
   const [loading, setLoading] = useState(false);
   const products = useSelector(selectProducts);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const deleteProduct = (item) => {
     Notiflix.Confirm.show(
@@ -33,6 +36,12 @@ const ProductsList = () => {
         setLoading(true);
         try {
           await deleteDoc(doc(db, "products", item.id));
+          //delete images from Storage
+          item.images.forEach((image) => {
+            const imageRef = ref(storage, `products/${image.id}`);
+            deleteObject(imageRef);
+          });
+
           dispatch(DELETE_PRODUCT(item.id));
           toast.success("Product deleted successfully.");
         } catch (error) {
@@ -115,7 +124,12 @@ const ProductsList = () => {
                           color="green"
                           onClick={() => deleteProduct(prod)}
                         />
-                        <FiEdit className={styles.icon} size={20} color="red" />
+                        <FiEdit
+                          className={styles.icon}
+                          size={20}
+                          color="red"
+                          onClick={() => navigate(`/admin/product/${prod.id}`)}
+                        />
                       </td>
                     </tr>
                   );

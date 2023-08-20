@@ -52,7 +52,7 @@ const Admin = () => {
             <NavItem
               icon={<VscNewFile size={19} />}
               label={"Add Product"}
-              path={"add-product"}
+              path={"product/new"}
             />
             <hr />
             <h6>ORDERS</h6>
@@ -66,7 +66,7 @@ const Admin = () => {
         <Routes>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="products" element={<ProductsList />} />
-          <Route path="add-product" element={<AddProduct />} />
+          <Route path="product/:id" element={<AddProduct />} />
           <Route path="orders" element={<Orders />} />
         </Routes>
       </div>
