@@ -3,7 +3,7 @@ import styles from "./AddProduct.module.scss";
 import Card from "../../card/Card";
 import Select from "react-select";
 import { IoClose } from "react-icons/io5";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { db, storage } from "../../../firebase/config";
 import { toast } from "react-toastify";
 import Loader from "../../loader/Loader";
@@ -104,20 +104,25 @@ const AddProduct = () => {
 
   const addProductHandler = async (e) => {
     e.preventDefault();
-    const newProd = {
-      name,
-      price,
-      brand,
-      category,
-      desc,
-      images,
-    };
-
     setLoading(true);
-    await addDoc(collection(db, "products"), newProd);
-    resetForm();
-    categoryRef.current.clearValue();
-    toast.success("New Product added successfully.");
+
+    try {
+      const newProd = {
+        name,
+        price,
+        brand,
+        category,
+        desc,
+        images,
+        createdAt: Timestamp.now().toDate(),
+      };
+      await addDoc(collection(db, "products"), newProd);
+      resetForm();
+      categoryRef.current.clearValue();
+      toast.success("New Product added successfully.");
+    } catch (error) {
+      toast.error(error.message);
+    }
     setLoading(false);
   };
 
