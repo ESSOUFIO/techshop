@@ -89,9 +89,14 @@
     border: 1px solid lightgray;
     border-radius: 5px;
     padding: 7px;
+    background: rgb(232, 232, 232);
 
     &:hover {
-      background: rgb(229, 229, 229);
+      background: rgb(240, 240, 240);
+    }
+    &:disabled {
+      background: rgb(232, 232, 232);
+      color: #000;
     }
   }
 }
@@ -99,6 +104,7 @@
 .productImage {
   position: relative;
   display: inline-block;
+  margin-bottom: 10px;
 
   .closeIcon {
     position: absolute;

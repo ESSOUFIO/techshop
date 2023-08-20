@@ -13,6 +13,7 @@ import {
   getDownloadURL,
   deleteObject,
 } from "firebase/storage";
+import { ProgressBar } from "react-bootstrap";
 
 const ProductImage = ({ image, id, index, deleteImg }) => {
   return (
@@ -35,6 +36,8 @@ const AddProduct = () => {
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
   const [loading, setLoading] = useState(false);
+  const [uploading, setUpLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   const inputFileRef = useRef();
   const categoryRef = useRef();
@@ -45,6 +48,7 @@ const AddProduct = () => {
     setCategory(null);
     setPrice("");
     setBrand("");
+    setImages([]);
   };
 
   const options = [
@@ -54,7 +58,10 @@ const AddProduct = () => {
   ];
 
   const addImage = (file) => {
+    if (!file) return;
+
     const imageId = Date.now() + file.name;
+    setUpLoading(true);
 
     //** upload to Storage */
     const storageRef = ref(storage, `products/${imageId}`);
@@ -63,23 +70,25 @@ const AddProduct = () => {
     uploadTask.on(
       "state_changed",
       (snapshot) => {
-        const progress =
+        const progressValue =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log("Upload is " + progress + "% done");
+        setProgress(progressValue);
       },
       (error) => {
         // Handle unsuccessful uploads
       },
       () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log("File available at", downloadURL);
-          let array = Array.from(images);
-          array.push({
-            id: imageId,
-            url: downloadURL,
-          });
-          setImages(array);
-        });
+        getDownloadURL(uploadTask.snapshot.ref)
+          .then((downloadURL) => {
+            // console.log("File available at", downloadURL);
+            let array = Array.from(images);
+            array.push({
+              id: imageId,
+              url: downloadURL,
+            });
+            setImages(array);
+          })
+          .finally(() => setUpLoading(false));
       }
     );
   };
@@ -102,6 +111,7 @@ const AddProduct = () => {
       brand,
       category,
       desc,
+      images,
     };
 
     setLoading(true);
@@ -112,6 +122,7 @@ const AddProduct = () => {
     setLoading(false);
   };
 
+  console.log(progress, loading);
   return (
     <>
       <div className={styles.addProduct}>
@@ -150,11 +161,18 @@ const AddProduct = () => {
                   );
                 })}
               </div>
+              {progress !== 0 && progress !== 100 && (
+                <ProgressBar
+                  now={progress}
+                  style={{ margin: "5px 0", height: "10px" }}
+                />
+              )}
               <button
                 type="button"
                 onClick={() => inputFileRef.current.click()}
+                disabled={uploading}
               >
-                Add image*
+                {uploading ? "Uploading..." : "Add image*"}
               </button>
             </div>
             <p
