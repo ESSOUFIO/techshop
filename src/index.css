@@ -121,3 +121,18 @@ a {
 .accordion {
   --bs-accordion-bg: var(--color-lightgray);
 }
+
+.form-item {
+  display: block;
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 5px 7px;
+  border: 1px solid lightgray;
+  outline: 1px solid transparent;
+  border-radius: 5px;
+  transition: outline 0.5s;
+}
+
+.form-item:hover {
+  outline: 1px solid lightgray;
+}

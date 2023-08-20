@@ -80,7 +80,6 @@ const AddProduct = () => {
       () => {
         getDownloadURL(uploadTask.snapshot.ref)
           .then((downloadURL) => {
-            // console.log("File available at", downloadURL);
             let array = Array.from(images);
             array.push({
               id: imageId,
@@ -122,7 +121,6 @@ const AddProduct = () => {
     setLoading(false);
   };
 
-  console.log(progress, loading);
   return (
     <>
       <div className={styles.addProduct}>
@@ -131,6 +129,7 @@ const AddProduct = () => {
           <form onSubmit={addProductHandler}>
             <label>Product Name</label>
             <input
+              className="form-item"
               type="text"
               placeholder="Product Name"
               value={name}
@@ -140,6 +139,7 @@ const AddProduct = () => {
 
             <label>Product Images</label>
             <input
+              className="form-item"
               type="file"
               accept="image/*"
               onChange={(e) => addImage(e.target.files[0])}
@@ -183,7 +183,7 @@ const AddProduct = () => {
 
             <label>Price ($)</label>
             <input
-              className={styles.price}
+              className={`form-item ${styles.price}`}
               type="number"
               placeholder="Price"
               value={price}
@@ -193,6 +193,7 @@ const AddProduct = () => {
 
             <label>Brand</label>
             <input
+              className="form-item"
               type="text"
               placeholder="Brand"
               value={brand}
@@ -211,6 +212,7 @@ const AddProduct = () => {
 
             <label>Description</label>
             <textarea
+              className="form-item"
               rows={5}
               placeholder="Description"
               value={desc}
