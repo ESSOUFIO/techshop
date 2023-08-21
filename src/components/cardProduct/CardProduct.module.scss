@@ -97,6 +97,7 @@
   .priceWrap {
     margin: 5px 0;
     display: flex;
+    align-items: center;
 
     .newPrice {
       font-size: 18px;
@@ -106,6 +107,7 @@
     }
 
     .price {
+      color: rgb(136, 134, 134);
       text-decoration: line-through;
     }
   }
@@ -169,6 +171,12 @@
         background: rgb(197, 231, 239);
       }
     }
+  }
+
+  .brand {
+    color: rgb(7, 160, 231);
+    font-size: 13px;
+    font-weight: 500;
   }
 
   @media screen and (max-width: 600px) {

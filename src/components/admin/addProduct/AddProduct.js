@@ -43,8 +43,8 @@ const AddProduct = () => {
     brand: "",
     desc: "",
     price: 0,
-    newPrice: "",
-    offValue: "",
+    newPrice: 0,
+    offValue: 0,
     images: [],
     category: "",
     banner: "",
@@ -100,6 +100,7 @@ const AddProduct = () => {
     { value: "Flash Deal", label: "Flash Deal" },
     { value: "New Products", label: "New Products" },
     { value: "Top Televisions", label: "Top Televisions" },
+    { value: "Home Appliance", label: "Home Appliance" },
   ];
 
   const addImage = (file) => {

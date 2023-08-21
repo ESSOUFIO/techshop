@@ -7,3 +7,14 @@ bottom fixed bar for mobile device
 scoll to top when we open a product page
 
 add full description and Shipping & Return Policy to product page
+
+**
+
+add responsive to Product list - admin page
+achieve all banners
+categories -- firebase
+search
+brands -- firebase
+add to cart
+orders
+dashboard admin

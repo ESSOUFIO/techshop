@@ -75,11 +75,11 @@ const Home = () => {
       <FlashDeals />
       <CyberMondayBanner />
       <TopCategories />
-      {/* <NewProducts /> */}
+      <NewProducts />
       <PoliciesSection />
-      {/* <TopTelevision /> */}
+      <TopTelevision />
       <TelevisionBanner />
-      {/* <TopHomeAppliance /> */}
+      <TopHomeAppliance />
       <HomeApplianceBanner />
       <FeaturedBrands />
       <WhyShopWithUs />

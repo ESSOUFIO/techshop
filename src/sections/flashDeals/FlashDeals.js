@@ -13,11 +13,15 @@ const FlashDeals = () => {
   }, [products]);
 
   return (
-    <CardSlider
-      title={"Flash Deal"}
-      titleColor={"var(--color-red)"}
-      productList={prods}
-    />
+    <>
+      {prods.length !== 0 && (
+        <CardSlider
+          title={"Flash Deal"}
+          titleColor={"var(--color-red)"}
+          productList={prods}
+        />
+      )}
+    </>
   );
 };
 

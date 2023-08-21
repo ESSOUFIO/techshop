@@ -5,25 +5,18 @@ import QuickView from "../quickView/QuickView";
 import { useNavigate } from "react-router-dom";
 import FormatPrice from "../formatPrice/FormatPrice";
 
-const CardProduct = ({ img1, img2, title, offValue, newPrice, price, id }) => {
+const CardProduct = ({
+  img1,
+  img2,
+  title,
+  brand,
+  offValue,
+  newPrice,
+  price,
+  id,
+}) => {
   const [showQuickView, setShowQuickView] = useState(false);
   const navigate = useNavigate();
-
-  // const formatPrice = (price) => {
-  //   const originalPrice = price.toFixed(2).toString();
-  //   const decimal = originalPrice.substring(0, originalPrice.indexOf("."));
-  //   const fraction = originalPrice.substring(
-  //     originalPrice.indexOf(".") + 1,
-  //     originalPrice.length
-  //   );
-  //   return (
-  //     <p className={styles.formatPrice}>
-  //       <div className={styles.currency}>$</div>
-  //       <div className={styles.decimal}>{decimal}</div>
-  //       <div className={styles.fraction}>{fraction}</div>
-  //     </p>
-  //   );
-  // };
 
   return (
     <>
@@ -45,11 +38,11 @@ const CardProduct = ({ img1, img2, title, offValue, newPrice, price, id }) => {
 
           <button onClick={() => setShowQuickView(true)}>Quick View</button>
         </div>
-
+        <p className={styles.brand}>{brand}</p>
         <div className={styles.desc}>
           <div className={styles.title}>{title}</div>
 
-          {offValue && (
+          {offValue !== 0 && (
             <div className={styles.deal}>
               <div className={styles.off}>{offValue}% off</div>
               <span>Deal</span>
@@ -60,7 +53,9 @@ const CardProduct = ({ img1, img2, title, offValue, newPrice, price, id }) => {
             <div className={styles.newPrice}>
               <FormatPrice price={newPrice} />
             </div>
-            <div className={styles.price}>${price.toFixed(2)}</div>
+            {offValue !== 0 && (
+              <div className={styles.price}>${price.toFixed(2)}</div>
+            )}
           </div>
 
           {/* <div className={styles.choices}>
