@@ -1,21 +1,23 @@
-import { onAuthStateChanged } from "@firebase/auth";
-import { useEffect, useState } from "react";
-import { auth } from "../../firebase/config";
+import { useSelector } from "react-redux";
+import { selectIsAdmin } from "../../redux/authSlice";
+import styles from "./OnAdminRoute.module.scss";
+import BackHomeBtn from "../backHomeBtn/BackHomeBtn";
 
 const OnlyAdminRoute = ({ children }) => {
-  const [admin, setAdmin] = useState(false);
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        if (user.email === "admin@gmail.com") {
-          setAdmin(true);
-        } else setAdmin(false);
-      } else {
-        setAdmin(false);
-      }
-    });
-  }, []);
-  return <>{admin ? children : <h2>Permission Denied!!</h2>}</>;
+  const isAdmin = useSelector(selectIsAdmin);
+  return (
+    <>
+      {isAdmin ? (
+        children
+      ) : (
+        <div className={styles.permissionDenied}>
+          <h2>Permission Denied</h2>
+          <p>This page can be viewed only by admins.</p>
+          <BackHomeBtn />
+        </div>
+      )}
+    </>
+  );
 };
 
 export default OnlyAdminRoute;

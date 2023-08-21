@@ -1,21 +1,9 @@
-import { onAuthStateChanged } from "@firebase/auth";
-import { useEffect, useState } from "react";
-import { auth } from "../../firebase/config";
+import { useSelector } from "react-redux";
+import { selectIsAdmin } from "../../redux/authSlice";
 
 const OnlyAdmin = ({ children }) => {
-  const [admin, setAdmin] = useState(false);
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        if (user.email === "admin@gmail.com") {
-          setAdmin(true);
-        } else setAdmin(false);
-      } else {
-        setAdmin(false);
-      }
-    });
-  }, []);
-  return <>{admin ? children : null}</>;
+  const isAdmin = useSelector(selectIsAdmin);
+  return <>{isAdmin ? children : null}</>;
 };
 
 export default OnlyAdmin;

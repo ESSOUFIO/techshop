@@ -1,5 +1,6 @@
 import styles from "./HeaderLaptop.module.scss";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+
 import logoImg from "../../../assets/logo/logo.png";
 import helpIcon from "../../../assets/icons/customer-service.png";
 import engIcon from "../../../assets/icons/united-kingdom.png";
@@ -11,14 +12,16 @@ import { Search } from "../../index";
 import { BsCart3 } from "react-icons/bs";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { PiUserLight } from "react-icons/pi";
+
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import LoginMenu from "../loginMenu/LoginMenu";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../../firebase/config";
 import MyAccountMenu from "../myAccountMenu/MyAccountMenu";
 import OnlyAdmin from "../../onlyAdmin/OnlyAdmin";
+
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn, selectUserName } from "../../../redux/authSlice";
 
 const DropDownItem = ({ iconImg, text, selectedItem, onClick }) => {
   return (
@@ -44,12 +47,15 @@ const logo = (
 
 const activeLink = ({ isActive }) => (isActive ? styles.active : "");
 
+//**** ------  HeaderLaptop  ----------- */
 const HeaderLaptop = () => {
   const [lang, setLang] = useState("EN");
   const [langIcon, setLangIcon] = useState(engIcon);
   const [curr, setCurr] = useState("USD");
   const [showUserMenu, setShowUserMenu] = useState(false);
-  const [user, setUser] = useState(null);
+
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const userName = useSelector(selectUserName);
   const navigate = useNavigate();
 
   const selectLang = (text, iconImg) => {
@@ -60,17 +66,6 @@ const HeaderLaptop = () => {
   const triggerShowUserMenu = () => {
     setShowUserMenu(!showUserMenu);
   };
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
-      }
-    });
-    return () => unsubscribe();
-  }, []);
 
   return (
     <>
@@ -111,7 +106,7 @@ const HeaderLaptop = () => {
               <div className={styles.icon}>
                 <PiUserLight size={34} color={"var(--color-primary)"} />
               </div>
-              <span>{user ? "My Account" : "Sign In"}</span>
+              <span>{isLoggedIn ? "My Account" : "Sign In"}</span>
             </div>
 
             <div
@@ -229,11 +224,11 @@ const HeaderLaptop = () => {
         </div>
       </div>
 
-      {user ? (
+      {isLoggedIn ? (
         <MyAccountMenu
           show={showUserMenu}
           onHide={triggerShowUserMenu}
-          userName={user.displayName}
+          userName={userName}
         />
       ) : (
         <LoginMenu show={showUserMenu} onHide={triggerShowUserMenu} />

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./HeaderMobile.module.scss";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { GoSearch } from "react-icons/go";
@@ -8,20 +8,22 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 import logoImg from "../../../assets/logo/logo-wb.png";
 import { useNavigate } from "react-router-dom";
 import LoginMenu from "../../header/loginMenu/LoginMenu";
-import { onAuthStateChanged } from "@firebase/auth";
-import { auth } from "../../../firebase/config";
 import MyAccountMenu from "../../header/myAccountMenu/MyAccountMenu";
 import OnlyAdmin from "../../onlyAdmin/OnlyAdmin";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import MainMenu from "../mainMenu/MainMenu";
 import SearchMenu from "../searchMenu/SearchMenu";
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn, selectUserName } from "../../../redux/authSlice";
 
 const HeaderMobile = ({ style }) => {
   const [showMainMenu, setShowMainMenu] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
-  const [user, setUser] = useState(null);
   const navigate = useNavigate();
+
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const userName = useSelector(selectUserName);
 
   const triggerMainMenu = () => {
     setShowMainMenu(!showMainMenu);
@@ -34,17 +36,6 @@ const HeaderMobile = ({ style }) => {
   const triggerShowUserMenu = () => {
     setShowUserMenu(!showUserMenu);
   };
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
-      }
-    });
-    return () => unsubscribe();
-  }, []);
 
   return (
     <>
@@ -103,11 +94,11 @@ const HeaderMobile = ({ style }) => {
         title={"Search"}
       ></SearchMenu>
 
-      {user ? (
+      {isLoggedIn ? (
         <MyAccountMenu
           show={showUserMenu}
           onHide={triggerShowUserMenu}
-          userName={user.displayName}
+          userName={userName}
         />
       ) : (
         <LoginMenu show={showUserMenu} onHide={triggerShowUserMenu} />
