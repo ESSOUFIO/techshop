@@ -1,17 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./ProductsList.module.scss";
 import { GoTrash } from "react-icons/go";
 import { FiEdit } from "react-icons/fi";
-import {
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-  orderBy,
-  query,
-} from "firebase/firestore";
+import { deleteDoc, doc } from "firebase/firestore";
 import { db, storage } from "../../../firebase/config";
-import { DELETE_PRODUCT, STORE_PRODUCTS } from "../../../redux/productSlice";
+import { DELETE_PRODUCT } from "../../../redux/productSlice";
 import { selectProducts } from "../../../redux/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -60,23 +53,6 @@ const ProductsList = () => {
       }
     );
   };
-
-  useEffect(() => {
-    const getProducts = async () => {
-      setLoading(true);
-      const q = query(collection(db, "products"), orderBy("createdAt"));
-      const snapshot = await getDocs(q);
-      const array = [];
-      snapshot.forEach((doc) => {
-        array.push({ ...doc.data(), id: doc.id });
-      });
-
-      dispatch(STORE_PRODUCTS(array));
-      setLoading(false);
-    };
-
-    getProducts();
-  }, [dispatch]);
 
   return (
     <>
