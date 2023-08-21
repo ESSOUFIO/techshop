@@ -42,9 +42,12 @@ const AddProduct = () => {
     name: "",
     brand: "",
     desc: "",
-    price: "",
+    price: 0,
+    newPrice: "",
+    offValue: "",
     images: [],
     category: "",
+    banner: "",
   };
 
   const [product, setProduct] = useState(initState);
@@ -56,6 +59,7 @@ const AddProduct = () => {
 
   const inputFileRef = useRef();
   const categoryRef = useRef();
+  const bannerRef = useRef();
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -85,11 +89,17 @@ const AddProduct = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  const options = [
+  const categoryOptions = [
     { value: "Audio", label: "Audio" },
     { value: "Home", label: "Home" },
     { value: "TV", label: "TV" },
     { value: "Phone", label: "Phone" },
+  ];
+
+  const bannerOptions = [
+    { value: "Flash Deal", label: "Flash Deal" },
+    { value: "New Products", label: "New Products" },
+    { value: "Top Televisions", label: "Top Televisions" },
   ];
 
   const addImage = (file) => {
@@ -165,6 +175,9 @@ const AddProduct = () => {
     try {
       const newProd = {
         ...product,
+        price: Number(product.price),
+        newPrice: Number(product.newPrice),
+        offValue: Number(product.offValue),
         createdAt: Timestamp.now().toDate(),
       };
 
@@ -177,6 +190,12 @@ const AddProduct = () => {
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    const newPrice = product.price * (1 - product.offValue / 100);
+    setProduct({ ...product, newPrice });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product.price, product.offValue]);
 
   return (
     <>
@@ -239,16 +258,45 @@ const AddProduct = () => {
               * Each product must have at least 2 images
             </p>
 
-            <label>Price ($)</label>
-            <input
-              className={`form-item ${styles.price}`}
-              type="number"
-              name="price"
-              placeholder="Price"
-              value={product.price}
-              required={true}
-              onChange={(e) => inputHandler(e.target)}
-            />
+            <div className={styles.priceWrap}>
+              <div className={styles.price}>
+                <label>Price ($)</label>
+                <input
+                  className={`form-item ${styles.price}`}
+                  type="number"
+                  name="price"
+                  placeholder="Price"
+                  value={product.price}
+                  required={true}
+                  onChange={(e) => inputHandler(e.target)}
+                />
+              </div>
+
+              <div className={styles.price}>
+                <label>OFF Value (%)</label>
+                <input
+                  className={`form-item ${styles.price}`}
+                  type="number"
+                  name="offValue"
+                  placeholder="OFF Value"
+                  value={product.offValue}
+                  onChange={(e) => inputHandler(e.target)}
+                />
+              </div>
+
+              <div className={styles.price}>
+                <label>New Price ($)</label>
+                <input
+                  className={`form-item ${styles.price}`}
+                  type="number"
+                  name="newPrice"
+                  placeholder="New Price"
+                  value={product.newPrice}
+                  onChange={(e) => inputHandler(e.target)}
+                  disabled
+                />
+              </div>
+            </div>
 
             <label>Brand</label>
             <input
@@ -266,8 +314,18 @@ const AddProduct = () => {
               value={{ value: product.category, label: product.category }}
               className={styles.select}
               onChange={(e) => setProduct({ ...product, category: e?.value })}
-              options={options}
+              options={categoryOptions}
               placeholder="Choose Category"
+            />
+
+            <label>Banner</label>
+            <Select
+              ref={bannerRef}
+              value={{ value: product.banner, label: product.banner }}
+              className={styles.select}
+              onChange={(e) => setProduct({ ...product, banner: e?.value })}
+              options={bannerOptions}
+              placeholder="Choose Banner"
             />
 
             <label>Description</label>

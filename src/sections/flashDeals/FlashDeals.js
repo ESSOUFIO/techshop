@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import products from "../..//products.json";
 import CardSlider from "../../components/cardSlider/CardSlider";
+import { useSelector } from "react-redux";
+import { selectProducts } from "../../redux/productSlice";
 
 const FlashDeals = () => {
   const [prods, setProds] = useState([]);
+  const products = useSelector(selectProducts);
 
   useEffect(() => {
-    const array = products.filter((prod) => prod.flashDeal === "true");
+    const array = products.filter((prod) => prod.banner === "Flash Deal");
     setProds(array);
-  }, []);
+  }, [products]);
+
   return (
     <CardSlider
       title={"Flash Deal"}

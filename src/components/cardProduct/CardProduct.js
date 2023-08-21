@@ -3,10 +3,27 @@ import styles from "./CardProduct.module.scss";
 import { GoHeart } from "react-icons/go";
 import QuickView from "../quickView/QuickView";
 import { useNavigate } from "react-router-dom";
+import FormatPrice from "../formatPrice/FormatPrice";
 
-const CardProduct = ({ img1, img2, title, offValue, lastPrice, price, id }) => {
+const CardProduct = ({ img1, img2, title, offValue, newPrice, price, id }) => {
   const [showQuickView, setShowQuickView] = useState(false);
   const navigate = useNavigate();
+
+  // const formatPrice = (price) => {
+  //   const originalPrice = price.toFixed(2).toString();
+  //   const decimal = originalPrice.substring(0, originalPrice.indexOf("."));
+  //   const fraction = originalPrice.substring(
+  //     originalPrice.indexOf(".") + 1,
+  //     originalPrice.length
+  //   );
+  //   return (
+  //     <p className={styles.formatPrice}>
+  //       <div className={styles.currency}>$</div>
+  //       <div className={styles.decimal}>{decimal}</div>
+  //       <div className={styles.fraction}>{fraction}</div>
+  //     </p>
+  //   );
+  // };
 
   return (
     <>
@@ -34,14 +51,16 @@ const CardProduct = ({ img1, img2, title, offValue, lastPrice, price, id }) => {
 
           {offValue && (
             <div className={styles.deal}>
-              <div className={styles.off}>{offValue} off</div>
+              <div className={styles.off}>{offValue}% off</div>
               <span>Deal</span>
             </div>
           )}
 
-          <div className={styles.price}>
-            <span>${price}</span>
-            <span>${lastPrice}</span>
+          <div className={styles.priceWrap}>
+            <div className={styles.newPrice}>
+              <FormatPrice price={newPrice} />
+            </div>
+            <div className={styles.price}>${price.toFixed(2)}</div>
           </div>
 
           {/* <div className={styles.choices}>

@@ -9,7 +9,7 @@
   }
   .card {
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     padding: 15px;
   }
 
@@ -28,8 +28,13 @@
     .select {
       margin-bottom: 10px;
     }
-    .price {
-      width: 150px;
+    .priceWrap {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      .price {
+        max-width: 150px;
+      }
     }
 
     .btn {

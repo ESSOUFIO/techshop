@@ -9,7 +9,7 @@ const TopTelevision = () => {
     const array = products.filter((prod) => prod.category === "tv");
     setProds(array);
   }, []);
-  return <CardSlider title={"Top Television"} productList={prods} />;
+  return <CardSlider title={"Top Televisions"} productList={prods} />;
 };
 
 export default TopTelevision;
