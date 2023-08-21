@@ -93,9 +93,9 @@ const ProductsList = () => {
                       </td>
                       <td style={{ textAlign: "left" }}>{prod.name}</td>
                       <td>{prod.category}</td>
-                      <td>${prod.price.toFixed(2)}</td>
+                      <td>${Number(prod.price).toFixed(2)}</td>
                       <td>%{prod.offValue}</td>
-                      <td>${prod.newPrice.toFixed(2)}</td>
+                      <td>${Number(prod.newPrice).toFixed(2)}</td>
                       <td>
                         <GoTrash
                           className={styles.icon}

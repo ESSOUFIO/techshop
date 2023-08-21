@@ -54,7 +54,7 @@ const CardProduct = ({
               <FormatPrice price={newPrice} />
             </div>
             {offValue !== 0 && (
-              <div className={styles.price}>${price.toFixed(2)}</div>
+              <div className={styles.price}>${Number(price).toFixed(2)}</div>
             )}
           </div>
 

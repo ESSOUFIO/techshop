@@ -11,7 +11,7 @@ add full description and Shipping & Return Policy to product page
 **
 
 add responsive to Product list - admin page
-achieve all banners
+quick view
 categories -- firebase
 search
 brands -- firebase

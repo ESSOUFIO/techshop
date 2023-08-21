@@ -94,6 +94,8 @@ const AddProduct = () => {
     { value: "Home", label: "Home" },
     { value: "TV", label: "TV" },
     { value: "Phone", label: "Phone" },
+    { value: "Laptop", label: "Laptop" },
+    { value: "Kitchen", label: "Kitchen" },
   ];
 
   const bannerOptions = [
@@ -292,7 +294,7 @@ const AddProduct = () => {
                   type="number"
                   name="newPrice"
                   placeholder="New Price"
-                  value={product.newPrice}
+                  value={Number(product.newPrice).toFixed(2)}
                   onChange={(e) => inputHandler(e.target)}
                   disabled
                 />
@@ -309,25 +311,33 @@ const AddProduct = () => {
               onChange={(e) => inputHandler(e.target)}
             />
 
-            <label>Category</label>
-            <Select
-              ref={categoryRef}
-              value={{ value: product.category, label: product.category }}
-              className={styles.select}
-              onChange={(e) => setProduct({ ...product, category: e?.value })}
-              options={categoryOptions}
-              placeholder="Choose Category"
-            />
+            <div style={{ display: "flex", gap: "10px" }}>
+              <div style={{ width: "90%" }}>
+                <label>Category</label>
+                <Select
+                  ref={categoryRef}
+                  value={{ value: product.category, label: product.category }}
+                  className={styles.select}
+                  onChange={(e) =>
+                    setProduct({ ...product, category: e?.value })
+                  }
+                  options={categoryOptions}
+                  placeholder="Choose Category"
+                />
+              </div>
 
-            <label>Banner</label>
-            <Select
-              ref={bannerRef}
-              value={{ value: product.banner, label: product.banner }}
-              className={styles.select}
-              onChange={(e) => setProduct({ ...product, banner: e?.value })}
-              options={bannerOptions}
-              placeholder="Choose Banner"
-            />
+              <div style={{ width: "100%" }}>
+                <label>Banner</label>
+                <Select
+                  ref={bannerRef}
+                  value={{ value: product.banner, label: product.banner }}
+                  className={styles.select}
+                  onChange={(e) => setProduct({ ...product, banner: e?.value })}
+                  options={bannerOptions}
+                  placeholder="Choose Banner"
+                />
+              </div>
+            </div>
 
             <label>Description</label>
             <textarea
