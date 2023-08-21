@@ -13,17 +13,12 @@ import OnlyAdmin from "../../onlyAdmin/OnlyAdmin";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import MainMenu from "../mainMenu/MainMenu";
 import SearchMenu from "../searchMenu/SearchMenu";
-import { useSelector } from "react-redux";
-import { selectIsLoggedIn, selectUserName } from "../../../redux/authSlice";
 
-const HeaderMobile = ({ style }) => {
+const HeaderMobile = ({ isLoggedIn, userName, style }) => {
   const [showMainMenu, setShowMainMenu] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const navigate = useNavigate();
-
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  const userName = useSelector(selectUserName);
 
   const triggerMainMenu = () => {
     setShowMainMenu(!showMainMenu);

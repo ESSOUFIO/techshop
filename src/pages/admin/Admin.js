@@ -9,7 +9,6 @@ import { TbDatabaseDollar } from "react-icons/tb";
 import ProductsList from "../../components/admin/productsList/ProductsList";
 import AddProduct from "../../components/admin/addProduct/AddProduct";
 import Orders from "../../components/admin/orders/Orders";
-import HeaderMobile from "../../components/header/headerMobile/HeaderMobile";
 
 const NavItem = ({ icon, label, path }) => {
   return (
@@ -28,7 +27,6 @@ const NavItem = ({ icon, label, path }) => {
 const Admin = () => {
   return (
     <>
-      <HeaderMobile style={{ display: "block" }} />
       <div className={styles.admin}>
         <div className={styles.navWrap}>
           <div className={styles.icon}>

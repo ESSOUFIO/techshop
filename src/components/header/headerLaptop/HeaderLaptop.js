@@ -20,9 +20,6 @@ import LoginMenu from "../loginMenu/LoginMenu";
 import MyAccountMenu from "../myAccountMenu/MyAccountMenu";
 import OnlyAdmin from "../../onlyAdmin/OnlyAdmin";
 
-import { useSelector } from "react-redux";
-import { selectIsLoggedIn, selectUserName } from "../../../redux/authSlice";
-
 const DropDownItem = ({ iconImg, text, selectedItem, onClick }) => {
   return (
     <div
@@ -48,14 +45,12 @@ const logo = (
 const activeLink = ({ isActive }) => (isActive ? styles.active : "");
 
 //**** ------  HeaderLaptop  ----------- */
-const HeaderLaptop = () => {
+const HeaderLaptop = ({ isLoggedIn, userName }) => {
   const [lang, setLang] = useState("EN");
   const [langIcon, setLangIcon] = useState(engIcon);
   const [curr, setCurr] = useState("USD");
   const [showUserMenu, setShowUserMenu] = useState(false);
 
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  const userName = useSelector(selectUserName);
   const navigate = useNavigate();
 
   const selectLang = (text, iconImg) => {

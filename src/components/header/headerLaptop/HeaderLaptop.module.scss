@@ -43,15 +43,12 @@
       align-items: center;
       flex-direction: column;
       margin-left: 15px;
+      cursor: pointer;
 
       .icon {
         transition: ease 0.6s;
         display: flex;
         margin-bottom: 3px;
-        &:hover {
-          cursor: pointer;
-          transform: scale(1.2);
-        }
       }
 
       a,
@@ -79,6 +76,12 @@
         span {
           color: white;
           font-size: 12px;
+        }
+      }
+
+      &:hover {
+        .icon {
+          transform: scale(1.15);
         }
       }
     }

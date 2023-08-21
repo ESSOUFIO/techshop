@@ -2,13 +2,16 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import { Footer } from "../../sections";
 import { Header } from "..";
+import { useSelector } from "react-redux";
+import { selectIsAdmin } from "../../redux/authSlice";
 
 const RootLayout = () => {
+  const isAdmin = useSelector(selectIsAdmin);
   return (
     <>
-      <Header />
+      <Header isAdmin={isAdmin} />
       <Outlet />
-      <Footer />
+      {!isAdmin && <Footer />}
     </>
   );
 };
