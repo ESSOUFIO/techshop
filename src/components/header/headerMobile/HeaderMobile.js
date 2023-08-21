@@ -5,16 +5,16 @@ import { GoSearch } from "react-icons/go";
 import { FaRegUserCircle } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 
-import logoImg from "../../assets/logo/logo-wb.png";
-import MainMenu from "./mainMenu/MainMenu";
-import SearchMenu from "./searchMenu/SearchMenu";
+import logoImg from "../../../assets/logo/logo-wb.png";
 import { useNavigate } from "react-router-dom";
-import LoginMenu from "../header/loginMenu/LoginMenu";
+import LoginMenu from "../../header/loginMenu/LoginMenu";
 import { onAuthStateChanged } from "@firebase/auth";
-import { auth } from "../../firebase/config";
-import MyAccountMenu from "../header/myAccountMenu/MyAccountMenu";
-import OnlyAdmin from "../onlyAdmin/OnlyAdmin";
+import { auth } from "../../../firebase/config";
+import MyAccountMenu from "../../header/myAccountMenu/MyAccountMenu";
+import OnlyAdmin from "../../onlyAdmin/OnlyAdmin";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import MainMenu from "../mainMenu/MainMenu";
+import SearchMenu from "../searchMenu/SearchMenu";
 
 const HeaderMobile = ({ style }) => {
   const [showMainMenu, setShowMainMenu] = useState(false);

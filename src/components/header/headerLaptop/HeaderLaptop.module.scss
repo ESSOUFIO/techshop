@@ -1,0 +1,211 @@
+.groupHeader {
+  display: block;
+  background: var(--color-secondary);
+  height: 140px;
+
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.topHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  padding-left: 0;
+  gap: 30px;
+
+  .logo {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 170px;
+    }
+  }
+
+  .iconsWrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    & > p {
+      color: white;
+      width: 8rem;
+      font-size: 13px;
+    }
+
+    /*** Icons */
+    .headerIcon {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-left: 15px;
+
+      .icon {
+        transition: ease 0.6s;
+        display: flex;
+        margin-bottom: 3px;
+        &:hover {
+          cursor: pointer;
+          transform: scale(1.2);
+        }
+      }
+
+      a,
+      span {
+        color: var(--color-primary);
+        font-size: 14px;
+        font-weight: 400;
+        text-decoration: none;
+        cursor: pointer;
+        text-wrap: nowrap;
+      }
+
+      .bubble {
+        width: 23px;
+        height: 23px;
+        position: absolute;
+        top: -9px;
+        right: -8px;
+        background: var(--color-blue);
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        span {
+          color: white;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.mainMenu {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+
+  nav {
+    display: flex;
+    gap: 20px;
+
+    a {
+      position: relative;
+      color: white;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s ease-in-out;
+      &::before {
+        content: "";
+        background: var(--color-primary);
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: -14px;
+        height: 3px;
+        visibility: hidden;
+        transform: scale(0, 0);
+        transition: all 0.2s ease;
+      }
+      &:hover {
+        color: var(--color-primary);
+        &::before {
+          visibility: visible;
+          transform: scale(1, 1);
+        }
+      }
+      &:active {
+        color: var(--color-primary);
+      }
+    }
+  }
+
+  .iconsWrap {
+    display: flex;
+    gap: 1rem;
+    font-size: 14px;
+
+    .helpIcon {
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding-right: 1rem;
+      border-right: 1px solid var(--color-lightblue);
+      cursor: pointer;
+      transition: all 0.3s;
+      &:hover {
+        color: var(--color-primary);
+      }
+    }
+
+    .langCurrency {
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+
+      .lang {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        transition: all 0.3s;
+        &:hover {
+          color: var(--color-primary);
+        }
+      }
+    }
+
+    .currencyWrap {
+      cursor: pointer;
+      transition: all 0.3s;
+      &:hover {
+        color: var(--color-primary);
+      }
+    }
+
+    .currency {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .dropdown-menu {
+      --bs-dropdown-min-width: 6rem !important;
+    }
+  }
+  .dropDownItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .dropDownItem:hover {
+    background: lightgray;
+  }
+  .activeItem {
+    background: lightgray;
+  }
+}
+
+.active {
+  color: var(--color-primary) !important;
+  &::before {
+    visibility: visible !important;
+    transform: scale(1, 1) !important;
+  }
+}
