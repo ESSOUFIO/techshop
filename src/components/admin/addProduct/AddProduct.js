@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./AddProduct.module.scss";
 import Card from "../../card/Card";
 import Select from "react-select";
@@ -43,6 +44,7 @@ const AddProduct = () => {
     desc: "",
     price: "",
     images: [],
+    category: "",
   };
 
   const [product, setProduct] = useState(initState);
@@ -54,6 +56,7 @@ const AddProduct = () => {
 
   const inputFileRef = useRef();
   const categoryRef = useRef();
+  const navigate = useNavigate();
 
   const { id } = useParams();
 
@@ -143,13 +146,16 @@ const AddProduct = () => {
 
   const editHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const prodRef = doc(db, "products", id);
       await updateDoc(prodRef, product);
       toast.success("Product edited successfully.");
+      navigate("/admin/products");
     } catch (error) {
       toast.error(error.message);
     }
+    setLoading(false);
   };
 
   const addProductHandler = async (e) => {
@@ -163,7 +169,7 @@ const AddProduct = () => {
       };
 
       await addDoc(collection(db, "products"), newProd);
-      categoryRef.current.clearValue();
+      // categoryRef.current.clearValue();
       toast.success("New Product added successfully.");
       setProduct({ ...initState });
     } catch (error) {
@@ -258,9 +264,7 @@ const AddProduct = () => {
             <Select
               ref={categoryRef}
               value={{ value: product.category, label: product.category }}
-              // label={product.category}
               className={styles.select}
-              // defaultValue={product.category}
               onChange={(e) => setProduct({ ...product, category: e?.value })}
               options={options}
               placeholder="Choose Category"
