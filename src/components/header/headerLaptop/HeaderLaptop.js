@@ -113,7 +113,7 @@ const HeaderLaptop = ({ isLoggedIn, userName }) => {
               </div>
               <span>Cart</span>
               <div className={styles.bubble}>
-                <span>0</span>
+                <span>12</span>
               </div>
             </div>
           </div>

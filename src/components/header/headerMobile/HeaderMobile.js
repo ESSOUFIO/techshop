@@ -5,7 +5,7 @@ import { GoSearch } from "react-icons/go";
 import { FaRegUserCircle } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 
-import logoImg from "../../../assets/logo/logo-wb.png";
+import logoImg from "../../../assets/logo/logo.png";
 import { useNavigate } from "react-router-dom";
 import LoginMenu from "../../header/loginMenu/LoginMenu";
 import MyAccountMenu from "../../header/myAccountMenu/MyAccountMenu";
@@ -68,7 +68,7 @@ const HeaderMobile = ({ isLoggedIn, userName, style }) => {
             <div className={styles.cart} onClick={() => navigate("/cart")}>
               <HiOutlineShoppingBag className={styles.icon} size={26} />
               <div className={styles.bubble}>
-                <span>5</span>
+                <span>12</span>
               </div>
             </div>
           </div>
