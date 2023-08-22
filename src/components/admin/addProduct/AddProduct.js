@@ -311,8 +311,8 @@ const AddProduct = () => {
               onChange={(e) => inputHandler(e.target)}
             />
 
-            <div style={{ display: "flex", gap: "10px" }}>
-              <div style={{ width: "90%" }}>
+            <div className={styles.categoryWrap}>
+              <div style={{ width: "100%" }}>
                 <label>Category</label>
                 <Select
                   ref={categoryRef}

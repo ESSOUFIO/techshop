@@ -37,6 +37,11 @@
       }
     }
 
+    .categoryWrap {
+      display: flex;
+      gap: 10px;
+    }
+
     .btn {
       display: flex;
       justify-content: right;
@@ -60,6 +65,15 @@
             background: rgba(2, 2, 172, 0.494);
           }
         }
+      }
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    form {
+      .priceWrap,
+      .categoryWrap {
+        display: block;
       }
     }
   }
