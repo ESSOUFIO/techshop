@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ProductsList.module.scss";
 import { GoTrash } from "react-icons/go";
 import { FiEdit } from "react-icons/fi";
@@ -12,9 +12,12 @@ import Loader from "../../loader/Loader";
 import Notiflix from "notiflix";
 import { useNavigate } from "react-router";
 import { deleteObject, ref } from "@firebase/storage";
+import { IoSearch } from "react-icons/io5";
 
 const ProductsList = () => {
   const [loading, setLoading] = useState(false);
+  const [filtredProd, setFiltredProd] = useState([]);
+
   const products = useSelector(selectProducts);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -54,70 +57,97 @@ const ProductsList = () => {
     );
   };
 
+  const searchHandler = (e) => {
+    const input = e.target.value.toLowerCase();
+    const array = products.filter(
+      (item) =>
+        item.name.toLowerCase().includes(input) ||
+        item.brand.toLowerCase().includes(input)
+    );
+    setFiltredProd(array);
+  };
+
+  useEffect(() => {
+    setFiltredProd(products);
+  }, [products]);
+
   return (
     <>
       <div className={styles.productList}>
         <h2>Products List</h2>
         <p>
-          <b>{products.length}</b> Products found.
+          <b>{filtredProd.length}</b> Products found.
         </p>
-        <input className="form-item" type="text" placeholder="Search by Name" />
-        <table>
-          <thead>
-            <tr>
-              <th>s/n</th>
-              <th>Image</th>
-              <th style={{ textAlign: "left" }}>Name</th>
-              <th>Category</th>
-              <th>Price</th>
-              <th>OFF</th>
-              <th>New Price</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products === [] ? (
-              <p>No products founds.</p>
-            ) : (
-              <>
-                {products.map((prod, index) => {
-                  return (
-                    <tr key={prod.id}>
-                      <td>{index + 1}</td>
-                      <td>
-                        <img
-                          src={prod.images[0].url}
-                          alt={prod.name}
-                          width={100}
-                        />
-                      </td>
-                      <td style={{ textAlign: "left" }}>{prod.name}</td>
-                      <td>{prod.category}</td>
-                      <td>${Number(prod.price).toFixed(2)}</td>
-                      <td>%{prod.offValue}</td>
-                      <td>${Number(prod.newPrice).toFixed(2)}</td>
-                      <td>
-                        <GoTrash
-                          className={styles.icon}
-                          style={{ marginRight: "10px" }}
-                          size={20}
-                          color="green"
-                          onClick={() => deleteProduct(prod)}
-                        />
-                        <FiEdit
-                          className={styles.icon}
-                          size={20}
-                          color="red"
-                          onClick={() => navigate(`/admin/product/${prod.id}`)}
-                        />
-                      </td>
-                    </tr>
-                  );
-                })}
-              </>
-            )}
-          </tbody>
-        </table>
+        <div className={styles.search}>
+          <input
+            className="form-item"
+            type="text"
+            placeholder="Search by Name"
+            onChange={searchHandler}
+          />
+          <IoSearch size={20} className={styles.searchIcon} />
+        </div>
+
+        <div className={styles.table}>
+          <table>
+            <thead>
+              <tr>
+                <th>s/n</th>
+                <th>Image</th>
+                <th style={{ textAlign: "left", minWidth: "250px" }}>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>OFF</th>
+                <th>New Price</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {products === [] ? (
+                <p>No products founds.</p>
+              ) : (
+                <>
+                  {filtredProd.map((prod, index) => {
+                    return (
+                      <tr key={prod.id}>
+                        <td>{index + 1}</td>
+                        <td>
+                          <img
+                            src={prod.images[0].url}
+                            alt={prod.name}
+                            width={100}
+                          />
+                        </td>
+                        <td style={{ textAlign: "left" }}>{prod.name}</td>
+                        <td>{prod.category}</td>
+                        <td>${Number(prod.price).toFixed(2)}</td>
+                        <td>%{prod.offValue}</td>
+                        <td>${Number(prod.newPrice).toFixed(2)}</td>
+                        <td>
+                          <GoTrash
+                            className={styles.icon}
+                            style={{ marginRight: "10px" }}
+                            size={20}
+                            color="green"
+                            onClick={() => deleteProduct(prod)}
+                          />
+                          <FiEdit
+                            className={styles.icon}
+                            size={20}
+                            color="red"
+                            onClick={() =>
+                              navigate(`/admin/product/${prod.id}`)
+                            }
+                          />
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {loading && <Loader />}
