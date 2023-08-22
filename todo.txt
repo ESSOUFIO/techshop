@@ -9,9 +9,6 @@ scoll to top when we open a product page
 add full description and Shipping & Return Policy to product page
 
 **
-
-add responsive to Product list - admin page
-search and pagination
 quick view
 categories -- firebase
 brands -- firebase

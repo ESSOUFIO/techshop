@@ -13,9 +13,14 @@
     .icon {
       color: #fff;
       display: flex;
+      justify-content: center;
       align-items: center;
       gap: 10px;
       margin: 18px 0 30px;
+
+      .adminIcon {
+        font-size: 32px;
+      }
 
       p {
         font-size: 16px;
@@ -32,9 +37,14 @@
     .navItem {
       color: #ffffffb2;
       display: flex;
+      align-items: center;
       gap: 10px;
       padding: 13px 0;
       cursor: pointer;
+
+      .navItem-icon {
+        font-size: 19px;
+      }
 
       &:hover {
         color: #fff;
@@ -62,5 +72,56 @@
 
   hr {
     border-top: 1px solid lightgray;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .navWrap {
+      padding: 8px;
+      padding-right: 8px;
+      width: 100%;
+      max-width: 110px;
+      min-width: 110px;
+      .icon {
+        .adminIcon {
+          font-size: 38px;
+        }
+
+        p {
+          display: none;
+        }
+      }
+    }
+    h6 {
+      text-align: center;
+    }
+    .navItem {
+      flex-direction: column;
+      justify-content: center;
+      gap: 7px !important;
+
+      p {
+        font-size: 12px;
+        font-weight: 300;
+      }
+
+      .navItem-icon {
+        font-size: 24px;
+      }
+    }
+    .active {
+      p {
+        font-weight: 500 !important;
+      }
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  @media screen and (max-width: 630px) {
+    .navWrap {
+      display: none;
+    }
   }
 }

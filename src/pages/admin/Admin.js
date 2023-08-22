@@ -30,7 +30,7 @@ const Admin = () => {
       <div className={styles.admin}>
         <div className={styles.navWrap}>
           <div className={styles.icon}>
-            <MdAdminPanelSettings size={32} />
+            <MdAdminPanelSettings className={styles.adminIcon} />
             <p>TECHSHOP ADMIN</p>
           </div>
           <hr />
@@ -43,7 +43,9 @@ const Admin = () => {
             <hr />
             <h6>PRODUCTS</h6>
             <NavItem
-              icon={<HiClipboardDocumentList size={19} />}
+              icon={
+                <HiClipboardDocumentList className={styles["navItem-icon"]} />
+              }
               label={"Products List"}
               path={"products"}
             />

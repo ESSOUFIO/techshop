@@ -78,16 +78,12 @@ const ProductsList = () => {
 
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + itemsPerPage;
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
   const currentItems = filtredProd.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(filtredProd.length / itemsPerPage);
 
   // Invoke when user click to request another page.
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % filtredProd.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
     setItemOffset(newOffset);
   };
 
@@ -115,11 +111,11 @@ const ProductsList = () => {
                 <th>s/n</th>
                 <th>Image</th>
                 <th style={{ textAlign: "left", minWidth: "250px" }}>Name</th>
-                <th>Category</th>
-                <th>Price</th>
-                <th>OFF</th>
-                <th>New Price</th>
-                <th>Action</th>
+                <th className={styles.largItems}>Category</th>
+                <th className={styles.largItems}>Price</th>
+                <th className={styles.largItems}>OFF</th>
+                <th className={styles.largItems}>New Price</th>
+                <th className={styles.actions}>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -138,12 +134,48 @@ const ProductsList = () => {
                             width={100}
                           />
                         </td>
-                        <td style={{ textAlign: "left" }}>{prod.name}</td>
-                        <td>{prod.category}</td>
-                        <td>${Number(prod.price).toFixed(2)}</td>
-                        <td>%{prod.offValue}</td>
-                        <td>${Number(prod.newPrice).toFixed(2)}</td>
-                        <td>
+                        <td style={{ textAlign: "left" }}>
+                          {prod.name}
+                          <div className={styles.tabletContent}>
+                            <p>
+                              Price:{" "}
+                              <span>${Number(prod.price).toFixed(2)}</span>
+                            </p>
+                            <p>
+                              OFF Value: <span>%{prod.offValue}</span>
+                            </p>
+                            <p>
+                              New Price:{" "}
+                              <span>${Number(prod.newPrice).toFixed(2)}</span>
+                            </p>
+                          </div>
+                          <div className={styles.mobileContent}>
+                            <GoTrash
+                              className={styles.icon}
+                              style={{ marginRight: "10px" }}
+                              size={20}
+                              color="green"
+                              onClick={() => deleteProduct(prod)}
+                            />
+                            <FiEdit
+                              className={styles.icon}
+                              size={20}
+                              color="red"
+                              onClick={() =>
+                                navigate(`/admin/product/${prod.id}`)
+                              }
+                            />
+                          </div>
+                        </td>
+                        <td className={styles.largItems}>{prod.category}</td>
+                        <td className={styles.largItems}>
+                          ${Number(prod.price).toFixed(2)}
+                        </td>
+                        <td className={styles.largItems}>%{prod.offValue}</td>
+                        <td className={styles.largItems}>
+                          ${Number(prod.newPrice).toFixed(2)}
+                        </td>
+                        <td className={styles.actions}>
                           <GoTrash
                             className={styles.icon}
                             style={{ marginRight: "10px" }}
