@@ -69,4 +69,27 @@
       background-color: #fff;
     }
   }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
+    ul {
+      display: flex;
+      margin: 0 auto;
+      border-right: 1px solid lightgray;
+
+      li {
+        margin: 0;
+        padding: 6px 12px;
+        border: 1px solid lightgray;
+        border-right: none;
+
+        &:disabled {
+          color: #ff0000;
+        }
+      }
+    }
+  }
 }

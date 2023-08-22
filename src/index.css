@@ -136,3 +136,45 @@ a {
 .form-item:hover {
   outline: 1px solid lightgray;
 }
+
+/** pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination ul {
+  display: flex;
+  margin: 0 auto;
+  border-right: 1px solid lightgray;
+}
+
+.pagination li {
+  margin: 0;
+  padding: 6px 12px;
+  border: 1px solid lightgray;
+  border-right: none;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.pagination li :hover {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.pagination .selected {
+  background: var(--color-blue);
+  color: #fff;
+}
+
+.pagination .disabled {
+  opacity: 0.5;
+}
+
+.pagination .disabled :hover {
+  cursor: default;
+  text-decoration: none;
+  font-weight: 400;
+}

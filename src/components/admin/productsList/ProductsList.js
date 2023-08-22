@@ -13,6 +13,7 @@ import Notiflix from "notiflix";
 import { useNavigate } from "react-router";
 import { deleteObject, ref } from "@firebase/storage";
 import { IoSearch } from "react-icons/io5";
+import ReactPaginate from "react-paginate";
 
 const ProductsList = () => {
   const [loading, setLoading] = useState(false);
@@ -62,7 +63,8 @@ const ProductsList = () => {
     const array = products.filter(
       (item) =>
         item.name.toLowerCase().includes(input) ||
-        item.brand.toLowerCase().includes(input)
+        item.brand.toLowerCase().includes(input) ||
+        item.category.toLowerCase().includes(input)
     );
     setFiltredProd(array);
   };
@@ -70,6 +72,24 @@ const ProductsList = () => {
   useEffect(() => {
     setFiltredProd(products);
   }, [products]);
+
+  //** =======   PAGINATION   ===== */
+  const itemsPerPage = 10;
+
+  const [itemOffset, setItemOffset] = useState(0);
+  const endOffset = itemOffset + itemsPerPage;
+  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+  const currentItems = filtredProd.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(filtredProd.length / itemsPerPage);
+
+  // Invoke when user click to request another page.
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % filtredProd.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
 
   return (
     <>
@@ -107,10 +127,10 @@ const ProductsList = () => {
                 <p>No products founds.</p>
               ) : (
                 <>
-                  {filtredProd.map((prod, index) => {
+                  {currentItems.map((prod, index) => {
                     return (
                       <tr key={prod.id}>
-                        <td>{index + 1}</td>
+                        <td>{index + itemOffset + 1}</td>
                         <td>
                           <img
                             src={prod.images[0].url}
@@ -147,6 +167,18 @@ const ProductsList = () => {
               )}
             </tbody>
           </table>
+
+          <div className={`pagination`}>
+            <ReactPaginate
+              breakLabel="..."
+              nextLabel="next >"
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={5}
+              pageCount={pageCount}
+              previousLabel="< prev"
+              renderOnZeroPageCount={null}
+            />
+          </div>
         </div>
       </div>
 
