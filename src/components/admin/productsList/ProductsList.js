@@ -110,7 +110,7 @@ const ProductsList = () => {
               <tr>
                 <th>s/n</th>
                 <th>Image</th>
-                <th style={{ textAlign: "left", minWidth: "250px" }}>Name</th>
+                <th className={styles.name}>Name</th>
                 <th className={styles.largItems}>Category</th>
                 <th className={styles.largItems}>Price</th>
                 <th className={styles.largItems}>OFF</th>

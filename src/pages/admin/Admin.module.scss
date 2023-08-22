@@ -121,7 +121,31 @@
 
   @media screen and (max-width: 630px) {
     .navWrap {
+      max-width: 40px;
+      min-width: 40px;
+    }
+    h6 {
       display: none;
+    }
+    .navItem {
+      gap: 7px !important;
+
+      p {
+        display: none;
+      }
+
+      .navItem-icon {
+        font-size: 24px;
+      }
+    }
+    .active {
+      p {
+        display: none;
+      }
+
+      &::before {
+        display: none;
+      }
     }
   }
 }

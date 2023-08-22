@@ -39,6 +39,10 @@
     width: 100%;
     margin-top: 20px;
 
+    .name {
+      min-width: 250px;
+    }
+
     .mobileContent,
     .tabletContent {
       display: none;
@@ -121,6 +125,9 @@
   @media screen and (max-width: 630px) {
     padding: 20px 8px;
     table {
+      .name {
+        min-width: 100px;
+      }
       .actions {
         display: none;
       }
