@@ -58,8 +58,7 @@ const CategoriesList = () => {
     const array = categories.filter(
       (item) =>
         item.name.toLowerCase().includes(input) ||
-        item.brand.toLowerCase().includes(input) ||
-        item.category.toLowerCase().includes(input)
+        item.id.toLowerCase().includes(input)
     );
     setFiltredCateg(array);
   };
