@@ -34,6 +34,7 @@ const RootLayout = () => {
       <Header isAdmin={isAdmin} />
       <Outlet />
       {!isAdmin && <Footer />}
+
       {loading && <Loader />}
     </>
   );

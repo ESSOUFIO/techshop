@@ -19,6 +19,8 @@ import {
 } from "../../sections";
 import FeaturedBrands from "../../sections/featuredBrands/FeaturedBrands";
 import WhyShopWithUs from "../../sections/whyShopWithUs/WhyShopWithUs";
+import { useSelector } from "react-redux";
+import { selectProducts } from "../../redux/productSlice";
 
 const CyberMondayBanner = () => {
   return (
@@ -60,6 +62,8 @@ const HomeApplianceBanner = () => {
 };
 
 const Home = () => {
+  const products = useSelector(selectProducts);
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -72,14 +76,14 @@ const Home = () => {
       <HeroSection />
       <PoliciesBanner />
       <SpotLight />
-      <FlashDeals />
+      <FlashDeals products={products} />
       <CyberMondayBanner />
       <TopCategories />
-      <NewProducts />
+      <NewProducts products={products} />
       <PoliciesSection />
-      <TopTelevision />
+      <TopTelevision products={products} />
       <TelevisionBanner />
-      <TopHomeAppliance />
+      <TopHomeAppliance products={products} />
       <HomeApplianceBanner />
       <FeaturedBrands />
       <WhyShopWithUs />

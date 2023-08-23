@@ -9,11 +9,11 @@ const FormatPrice = ({ price }) => {
     originalPrice.length
   );
   return (
-    <p className={styles.formatPrice}>
+    <div className={styles.formatPrice}>
       <div className={styles.currency}>$</div>
       <div className={styles.decimal}>{decimal}</div>
       <div className={styles.fraction}>{fraction}</div>
-    </p>
+    </div>
   );
 };
 

@@ -38,7 +38,9 @@ const CardProduct = ({
 
           <button onClick={() => setShowQuickView(true)}>Quick View</button>
         </div>
+
         <p className={styles.brand}>{brand}</p>
+
         <div className={styles.desc}>
           <div className={styles.title}>{title}</div>
 
@@ -59,16 +61,16 @@ const CardProduct = ({
           </div>
 
           {/* <div className={styles.choices}>
-        <div className={styles.choice}>
-          <div style={{ background: "#000" }}></div>
-        </div>
-        <div className={styles.choice}>
-          <div style={{ background: "#708090" }}></div>
-        </div>
-        <div className={styles.choice}>
-          <div style={{ background: "#F4A460" }}></div>
-        </div>
-      </div> */}
+            <div className={styles.choice}>
+              <div style={{ background: "#000" }}></div>
+            </div>
+            <div className={styles.choice}>
+              <div style={{ background: "#708090" }}></div>
+            </div>
+            <div className={styles.choice}>
+              <div style={{ background: "#F4A460" }}></div>
+            </div>
+          </div> */}
         </div>
 
         <div className={styles.buttons}>

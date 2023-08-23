@@ -8,7 +8,6 @@
     min-height: calc(100vh - 50px);
     background-color: #4e73df;
     padding: 15px;
-    padding-right: 0;
 
     .icon {
       color: #fff;
@@ -59,7 +58,7 @@
       &::before {
         content: "";
         position: absolute;
-        right: 0;
+        right: -15px;
         top: 4px;
         height: 80%;
         width: 5px;

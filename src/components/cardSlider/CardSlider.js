@@ -62,7 +62,6 @@ const CardSlider = ({ title, titleColor, textAlign, productList }) => {
         }}
       >
         {productList?.map((prod) => {
-          console.log(prod);
           return (
             <SwiperSlide key={prod.id}>
               <CardProduct

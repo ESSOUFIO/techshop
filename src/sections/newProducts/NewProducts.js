@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from "react";
 import styles from "./NewProducts.module.scss";
 import bannerImg from "../../assets/images/banners/we-have-vr.webp";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
 import CardProduct from "../../components/cardProduct/CardProduct";
-import { useSelector } from "react-redux";
-import { selectProducts } from "../../redux/productSlice";
 
 const MarginPagination = () => {
   return <div style={{ height: "30px" }}></div>;
 };
 
-const NewProducts = () => {
+const NewProducts = ({ products }) => {
   const [prods, setProds] = useState([]);
-  const products = useSelector(selectProducts);
 
   useEffect(() => {
     const array = products.filter((prod) => prod.banner === "New Products");
