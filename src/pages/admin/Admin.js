@@ -77,7 +77,7 @@ const Admin = () => {
                 <HiClipboardDocumentList className={styles["navItem-icon"]} />
               }
               label={"Products List"}
-              path={"products"}
+              path={"products/list"}
             />
             <NavItem
               icon={<VscNewFile size={19} />}
@@ -109,8 +109,8 @@ const Admin = () => {
         </div>
         <Routes>
           <Route path="dashboard" element={<Dashboard />} />
-          <Route path="products" element={<ProductsList />} />
-          <Route path="product/:id" element={<AddProduct />} />
+          <Route path="products/:pgIndex" element={<ProductsList />} />
+          <Route path="product/:pgIndex/:id" element={<AddProduct />} />
           <Route path="categories" element={<CategoriesList />} />
           <Route path="category/:id" element={<AddCategory />} />
           <Route path="orders" element={<Orders />} />

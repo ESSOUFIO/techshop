@@ -23,6 +23,8 @@ import {
 } from "firebase/storage";
 import { ProgressBar } from "react-bootstrap";
 import { useParams } from "react-router";
+import { useSelector } from "react-redux";
+import { selectCategories } from "../../../redux/categorySlice";
 
 const ProductImage = ({ image, id, index, deleteImg }) => {
   return (
@@ -51,6 +53,7 @@ const AddProduct = () => {
   };
 
   const [product, setProduct] = useState(initState);
+  const [categOptions, setCategOptions] = useState([]);
 
   const [loading, setLoading] = useState(false);
   const [uploading, setUpLoading] = useState(false);
@@ -63,6 +66,7 @@ const AddProduct = () => {
   const navigate = useNavigate();
 
   const { id } = useParams();
+  const { pgIndex } = useParams();
 
   //Handle Page Mode: "Edit Product" or "Add New Product"
   useEffect(() => {
@@ -89,14 +93,23 @@ const AddProduct = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  const categoryOptions = [
-    { value: "Audio", label: "Audio" },
-    { value: "Home", label: "Home" },
-    { value: "TV", label: "TV" },
-    { value: "Phone", label: "Phone" },
-    { value: "Laptop", label: "Laptop" },
-    { value: "Kitchen", label: "Kitchen" },
-  ];
+  // const categoryOptions = [
+  //   { value: "Audio", label: "Audio" },
+  //   { value: "Home", label: "Home" },
+  //   { value: "TV", label: "TV" },
+  //   { value: "Phone", label: "Phone" },
+  //   { value: "Laptop", label: "Laptop" },
+  //   { value: "Kitchen", label: "Kitchen" },
+  // ];
+
+  const categories = useSelector(selectCategories);
+
+  useEffect(() => {
+    const array = categories.map((item) => {
+      return { value: item.name, label: item.name };
+    });
+    setCategOptions(array);
+  }, [categories]);
 
   const bannerOptions = [
     { value: "Flash Deal", label: "Flash Deal" },
@@ -167,7 +180,7 @@ const AddProduct = () => {
         modifiedAt: Timestamp.now().toDate(),
       });
       toast.success("Product edited successfully.");
-      navigate("/admin/products");
+      navigate(`/admin/products/${pgIndex}`);
     } catch (error) {
       toast.error(error.message);
     }
@@ -314,32 +327,28 @@ const AddProduct = () => {
               onChange={(e) => inputHandler(e.target)}
             />
 
-            <div className={styles.categoryWrap}>
-              <div style={{ width: "100%" }}>
-                <label>Category</label>
-                <Select
-                  ref={categoryRef}
-                  value={{ value: product.category, label: product.category }}
-                  className={styles.select}
-                  onChange={(e) =>
-                    setProduct({ ...product, category: e?.value })
-                  }
-                  options={categoryOptions}
-                  placeholder="Choose Category"
-                />
-              </div>
+            <div>
+              <label>Category</label>
+              <Select
+                ref={categoryRef}
+                value={{ value: product.category, label: product.category }}
+                className={styles.select}
+                onChange={(e) => setProduct({ ...product, category: e?.value })}
+                options={categOptions}
+                placeholder="Choose Category"
+              />
+            </div>
 
-              <div style={{ width: "100%" }}>
-                <label>Banner</label>
-                <Select
-                  ref={bannerRef}
-                  value={{ value: product.banner, label: product.banner }}
-                  className={styles.select}
-                  onChange={(e) => setProduct({ ...product, banner: e?.value })}
-                  options={bannerOptions}
-                  placeholder="Choose Banner"
-                />
-              </div>
+            <div>
+              <label>Banner</label>
+              <Select
+                ref={bannerRef}
+                value={{ value: product.banner, label: product.banner }}
+                className={styles.select}
+                onChange={(e) => setProduct({ ...product, banner: e?.value })}
+                options={bannerOptions}
+                placeholder="Choose Banner"
+              />
             </div>
 
             <label>Description</label>

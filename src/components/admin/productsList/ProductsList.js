@@ -13,6 +13,7 @@ import { useNavigate } from "react-router";
 import { deleteObject, ref } from "@firebase/storage";
 import { IoSearch } from "react-icons/io5";
 import ReactPaginate from "react-paginate";
+import { useParams } from "react-router-dom";
 
 const ProductsList = () => {
   const [loading, setLoading] = useState(false);
@@ -20,6 +21,8 @@ const ProductsList = () => {
 
   const products = useSelector(selectProducts);
   const navigate = useNavigate();
+
+  const { pgIndex } = useParams();
 
   const deleteProduct = (item) => {
     Notiflix.Confirm.show(
@@ -84,6 +87,12 @@ const ProductsList = () => {
     const newOffset = (event.selected * itemsPerPage) % filtredProd.length;
     setItemOffset(newOffset);
   };
+
+  useEffect(() => {
+    if (pgIndex === "list") {
+      setItemOffset(0);
+    } else setItemOffset(Number(pgIndex));
+  }, [pgIndex]);
 
   return (
     <>
@@ -186,7 +195,9 @@ const ProductsList = () => {
                             size={20}
                             color="red"
                             onClick={() =>
-                              navigate(`/admin/product/${prod.id}`)
+                              navigate(
+                                `/admin/product/${itemOffset}/${prod.id}`
+                              )
                             }
                           />
                         </td>
