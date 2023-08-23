@@ -32,11 +32,8 @@ const CategoriesList = () => {
         setLoading(true);
         try {
           await deleteDoc(doc(db, "categories", item.id));
-          //delete images from Storage
-          item.images.forEach((image) => {
-            const imageRef = ref(storage, `products/${image.id}`);
-            deleteObject(imageRef);
-          });
+          const imageRef = ref(storage, `categories/${item.image.id}`);
+          deleteObject(imageRef);
 
           toast.success("Category deleted successfully.");
         } catch (error) {
