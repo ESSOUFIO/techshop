@@ -38,11 +38,12 @@ const AddBrand = () => {
   useEffect(() => {
     const getBrand = async (id) => {
       setLoading(true);
+      console.log(id);
       const docRef = doc(db, "brands", id);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        getBrand({ ...docSnap.data() });
+        setBrand({ ...docSnap.data() });
       } else {
         toast.error("Brand not found!");
       }
@@ -144,6 +145,14 @@ const AddBrand = () => {
     setLoading(false);
   };
 
+  useEffect(() => {
+    //Scroll to top
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   return (
     <>
       <div className={styles.addBrand}>
@@ -159,6 +168,7 @@ const AddBrand = () => {
               value={brand.name}
               required={true}
               onChange={(e) => inputHandler(e.target)}
+              disabled={editMode}
             />
 
             <label>Brand Image</label>
@@ -174,7 +184,7 @@ const AddBrand = () => {
             <div className={styles.imagesWrap}>
               <div className={styles.container}>
                 {brand.image && (
-                  <div className={styles.categoryImage}>
+                  <div className={styles.brandImage}>
                     <img src={brand.image.url} alt={brand.name} width={100} />
                     <IoClose
                       size={18}

@@ -65,6 +65,14 @@ const BrandsList = () => {
     setFiltredBrands(brands);
   }, [brands]);
 
+  useEffect(() => {
+    //Scroll to top
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   return (
     <>
       <div className={styles.brandsList}>
