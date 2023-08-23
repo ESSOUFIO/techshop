@@ -8,8 +8,10 @@ scoll to top when we open a product page
 
 add full description and Shipping & Return Policy to product page
 
+display createdAt and modifiedAt
+
 **
-quick view
+
 categories -- firebase
 brands -- firebase
 add to cart

@@ -14,6 +14,7 @@ const RootLayout = () => {
   const isAdmin = useSelector(selectIsAdmin);
   const dispatch = useDispatch();
 
+  //Get Real-Time of Products List
   useEffect(() => {
     setLoading(true);
     const q = query(collection(db, "products"), orderBy("createdAt"));

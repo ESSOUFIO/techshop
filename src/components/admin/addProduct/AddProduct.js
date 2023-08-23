@@ -162,7 +162,10 @@ const AddProduct = () => {
     setLoading(true);
     try {
       const prodRef = doc(db, "products", id);
-      await updateDoc(prodRef, product);
+      await updateDoc(prodRef, {
+        ...product,
+        modifiedAt: Timestamp.now().toDate(),
+      });
       toast.success("Product edited successfully.");
       navigate("/admin/products");
     } catch (error) {
@@ -181,7 +184,7 @@ const AddProduct = () => {
         price: Number(product.price),
         newPrice: Number(product.newPrice),
         offValue: Number(product.offValue),
-        createdAt: Timestamp.now().toDate(),
+        createdAt: Timestamp.now(),
       };
 
       await addDoc(collection(db, "products"), newProd);
@@ -203,7 +206,7 @@ const AddProduct = () => {
   return (
     <>
       <div className={styles.addProduct}>
-        <h2>Add New Product</h2>
+        <h2>{editMode ? "Edit Product" : "Add New Product"}</h2>
         <Card cardClass={styles.card}>
           <form onSubmit={editMode ? editHandler : addProductHandler}>
             <label>Product Name</label>

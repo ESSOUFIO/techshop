@@ -4,9 +4,8 @@ import { GoTrash } from "react-icons/go";
 import { FiEdit } from "react-icons/fi";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db, storage } from "../../../firebase/config";
-import { DELETE_PRODUCT } from "../../../redux/productSlice";
 import { selectProducts } from "../../../redux/productSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Loader from "../../loader/Loader";
 import Notiflix from "notiflix";
@@ -20,7 +19,6 @@ const ProductsList = () => {
   const [filtredProd, setFiltredProd] = useState([]);
 
   const products = useSelector(selectProducts);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const deleteProduct = (item) => {
@@ -39,7 +37,7 @@ const ProductsList = () => {
             deleteObject(imageRef);
           });
 
-          dispatch(DELETE_PRODUCT(item.id));
+          // dispatch(DELETE_PRODUCT(item.id));
           toast.success("Product deleted successfully.");
         } catch (error) {
           toast.error(error.message);
