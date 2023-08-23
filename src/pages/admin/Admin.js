@@ -82,7 +82,7 @@ const Admin = () => {
             <NavItem
               icon={<VscNewFile size={19} />}
               label={"Add Product"}
-              path={"product/new"}
+              path={"product/0/new"}
             />
 
             <hr />

@@ -12,7 +12,6 @@ display createdAt and modifiedAt
 
 **
 
-categories -- firebase
 brands -- firebase
 add to cart
 orders
