@@ -94,12 +94,10 @@ const BrandsList = () => {
           <table>
             <thead>
               <tr>
-                <th style={{ minWidth: "70px" }}>s/n</th>
-                <th style={{ minWidth: "140px" }}>Image</th>
-                <th style={{ width: "100%" }}>Name</th>
-                <th className={styles.actions} style={{ minWidth: "100px" }}>
-                  Actions
-                </th>
+                <th className={styles.s_n}>s/n</th>
+                <th className={styles.images}>Image</th>
+                <th className={styles.name}>Name</th>
+                <th className={styles.actions}>Actions</th>
               </tr>
             </thead>
             <tbody>

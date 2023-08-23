@@ -41,8 +41,20 @@
     width: 100%;
     margin-top: 20px;
 
+    .s_n {
+      min-width: 70px;
+    }
+
+    .images {
+      min-width: 140px;
+    }
+
     .name {
       width: 100%;
+    }
+
+    .action {
+      min-width: 100px;
     }
 
     thead {
@@ -73,6 +85,15 @@
 
     tr:nth-child(even) {
       background-color: #fff;
+    }
+
+    @media screen and (max-width: 600px) {
+      .s_n,
+      .name,
+      .image,
+      .actions {
+        min-width: none;
+      }
     }
   }
 }
