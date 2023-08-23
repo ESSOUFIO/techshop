@@ -17,6 +17,7 @@ import ReviewCard from "../reviewCard/ReviewCard";
 import QuantityHandler from "../quantityHandler/QuantityHandler";
 import { useSelector } from "react-redux";
 import { selectProducts } from "../../redux/productSlice";
+import FormatPrice from "../formatPrice/FormatPrice";
 
 const MarginPagination = () => {
   return <div style={{ height: "30px" }}></div>;
@@ -31,9 +32,8 @@ const QuickView = ({ prodID, onHide }) => {
   const products = useSelector(selectProducts);
 
   useEffect(() => {
-    setSubtotal(product?.price * quantity);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [quantity]);
+    setSubtotal(product?.newPrice * quantity);
+  }, [quantity, product]);
 
   useEffect(() => {
     const prod = products.find((item) => item.id === prodID);
@@ -53,7 +53,7 @@ const QuickView = ({ prodID, onHide }) => {
             <div className={styles.topSection}>
               <div className={styles.photos}>
                 <div className={styles.img}>
-                  <img src={mainPhoto} alt={product.title} />
+                  <img src={mainPhoto} alt={product.name} />
                 </div>
                 {/* Carousel */}
                 <div className={styles.carousel}>
@@ -76,7 +76,7 @@ const QuickView = ({ prodID, onHide }) => {
                             className={styles.img}
                             onClick={() => setMainPhoto(image.url)}
                           >
-                            <img src={image.url} alt={product.title} />
+                            <img src={image.url} alt={product.name} />
                           </div>
                         </SwiperSlide>
                       );
@@ -88,7 +88,7 @@ const QuickView = ({ prodID, onHide }) => {
               </div>
 
               <div className={styles.details}>
-                <h3>{product.title}</h3>
+                <h3>{product.name}</h3>
                 <p>
                   Brand: <b>{product.brand}</b>
                 </p>
@@ -102,22 +102,17 @@ const QuickView = ({ prodID, onHide }) => {
                   </a>
                 </div>
 
-                <div className={styles.desc}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
+                <div className={styles.desc}>{product.desc}</div>
 
                 <div className={styles.priceWrap}>
                   <div className={styles.price}>
-                    ${product.price}
-                    <span>${product.lastPrice}</span>
+                    <FormatPrice price={product.newPrice} />
+                    <span>${Number(product.price).toFixed(2)}</span>
                   </div>
 
                   {product.offValue && (
                     <div className={styles.save}>
-                      <p>{product.offValue} OFF</p>
+                      <p>{product.offValue}% OFF</p>
                     </div>
                   )}
                 </div>

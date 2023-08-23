@@ -21,6 +21,7 @@ import CardSlider from "../../components/cardSlider/CardSlider";
 import BreadCrumb from "../../components/breadCrumb/BreadCrumb";
 import { useSelector } from "react-redux";
 import { selectProducts } from "../../redux/productSlice";
+import FormatPrice from "../../components/formatPrice/FormatPrice";
 
 const MarginPagination = () => {
   return <div style={{ height: "30px" }}></div>;
@@ -45,7 +46,7 @@ const ProductPage = () => {
   };
 
   useEffect(() => {
-    setSubtotal(product?.price * quantity);
+    setSubtotal(product?.newPrice * quantity);
   }, [quantity, product]);
 
   useEffect(() => {
@@ -75,7 +76,7 @@ const ProductPage = () => {
 
   return (
     <>
-      <BreadCrumb page1={product?.title} />
+      <BreadCrumb page1={product?.name} />
 
       {product && (
         <div className={styles.productPage}>
@@ -84,7 +85,7 @@ const ProductPage = () => {
               <div className={styles.topSection}>
                 <div className={styles.photos}>
                   <div className={styles.img}>
-                    <img src={mainPhoto} alt={product.title} />
+                    <img src={mainPhoto} alt={product.name} />
                   </div>
                   {/* Carousel */}
                   <div className={styles.carousel}>
@@ -107,7 +108,7 @@ const ProductPage = () => {
                               className={styles.img}
                               onClick={() => setMainPhoto(image.url)}
                             >
-                              <img src={image.url} alt={product.title} />
+                              <img src={image.url} alt={product.name} />
                             </div>
                           </SwiperSlide>
                         );
@@ -119,7 +120,7 @@ const ProductPage = () => {
                 </div>
 
                 <div className={styles.details}>
-                  <h3>{product.title}</h3>
+                  <h3>{product.name}</h3>
                   <p>
                     Brand: <b>{product.brand}</b>
                   </p>
@@ -137,13 +138,13 @@ const ProductPage = () => {
 
                   <div className={styles.priceWrap}>
                     <div className={styles.price}>
-                      ${product.price}
-                      <span>${product.lastPrice}</span>
+                      <FormatPrice price={product.newPrice} />
+                      <span>${Number(product.price).toFixed(2)}</span>
                     </div>
 
                     {product.offValue && (
                       <div className={styles.save}>
-                        <p>{product.offValue} OFF</p>
+                        <p>{product.offValue}% OFF</p>
                       </div>
                     )}
                   </div>
