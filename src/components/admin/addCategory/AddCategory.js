@@ -217,7 +217,15 @@ const AddCategory = () => {
 
             <div className={styles.btn}>
               <button
+                type="button"
+                className={styles.cancelBtn}
+                onClick={() => navigate(-1)}
+              >
+                Cancel
+              </button>
+              <button
                 type="submit"
+                className={styles.submitBtn}
                 disabled={!category.name || !category.image}
               >
                 {editMode ? "Edit Category" : "Add Category"}

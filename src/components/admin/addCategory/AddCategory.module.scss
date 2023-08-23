@@ -23,15 +23,27 @@
 
     .btn {
       display: flex;
-      justify-content: right;
+      justify-content: space-between;
+      margin-top: 25px;
 
-      button {
+      .cancelBtn {
+        background: lightgray;
+        padding: 5px 25px;
+        color: #000000;
+        border: none;
+        border-radius: 5px;
+
+        &:hover {
+          background: var(--color-lightgray);
+        }
+      }
+
+      .submitBtn {
         background: var(--color-btn-blue);
         padding: 5px 25px;
         color: #fff;
         border: none;
         border-radius: 5px;
-        margin-top: 15px;
 
         &:hover {
           background: rgb(2, 2, 172);
