@@ -1,7 +1,6 @@
 import React from "react";
-import styles from "./CategoriesList.module.scss";
+import styles from "./BrandsList.module.scss";
 import { useState } from "react";
-import { selectCategories } from "../../../redux/categorySlice";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Notiflix from "notiflix";
@@ -14,28 +13,29 @@ import { useEffect } from "react";
 import { IoSearch } from "react-icons/io5";
 import { GoTrash } from "react-icons/go";
 import { FiEdit } from "react-icons/fi";
+import { selectBrands } from "../../../redux/brandSlice";
 
-const CategoriesList = () => {
+const BrandsList = () => {
   const [loading, setLoading] = useState(false);
-  const [filtredCateg, setFiltredCateg] = useState([]);
+  const [filtredBrands, setFiltredBrands] = useState([]);
 
-  const categories = useSelector(selectCategories);
+  const brands = useSelector(selectBrands);
   const navigate = useNavigate();
 
-  const deleteCategory = (item) => {
+  const deleteBrand = (item) => {
     Notiflix.Confirm.show(
-      "Delete a Category",
+      "Delete a Brand",
       `Are you sure to delete "${item.name}"?`,
       "Delete",
       "Cancel",
       async function okCb() {
         setLoading(true);
         try {
-          await deleteDoc(doc(db, "categories", item.id));
-          const imageRef = ref(storage, `categories/${item.image.id}`);
+          await deleteDoc(doc(db, "brands", item.name));
+          const imageRef = ref(storage, `brands/${item.image.id}`);
           deleteObject(imageRef);
 
-          toast.success("Category deleted successfully.");
+          toast.success("Brand deleted successfully.");
         } catch (error) {
           toast.error(error.message);
         }
@@ -55,24 +55,22 @@ const CategoriesList = () => {
 
   const searchHandler = (e) => {
     const input = e.target.value.toLowerCase();
-    const array = categories.filter(
-      (item) =>
-        item.name.toLowerCase().includes(input) ||
-        item.id.toLowerCase().includes(input)
+    const array = brands.filter((item) =>
+      item.name.toLowerCase().includes(input)
     );
-    setFiltredCateg(array);
+    setFiltredBrands(array);
   };
 
   useEffect(() => {
-    setFiltredCateg(categories);
-  }, [categories]);
+    setFiltredBrands(brands);
+  }, [brands]);
 
   return (
     <>
-      <div className={styles.categoriesList}>
-        <h2>Categories List</h2>
+      <div className={styles.brandsList}>
+        <h2>Brands List</h2>
         <p>
-          <b>{filtredCateg.length}</b> Categories found.
+          <b>{filtredBrands.length}</b> Products found.
         </p>
         <div className={styles.search}>
           <input
@@ -88,31 +86,31 @@ const CategoriesList = () => {
           <table>
             <thead>
               <tr>
-                <th>s/n</th>
-                <th>Image</th>
-                <th style={{ textAlign: "left" }}>ID</th>
-                <th style={{ textAlign: "left" }}>Name</th>
-                <th className={styles.actions}>Actions</th>
+                <th style={{ minWidth: "70px" }}>s/n</th>
+                <th style={{ minWidth: "140px" }}>Image</th>
+                <th style={{ width: "100%" }}>Name</th>
+                <th className={styles.actions} style={{ minWidth: "100px" }}>
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody>
-              {filtredCateg === [] ? (
-                <p>No categories founds.</p>
+              {filtredBrands === [] ? (
+                <p>No brands founds.</p>
               ) : (
                 <>
-                  {filtredCateg.map((item, index) => {
+                  {filtredBrands.map((item, index) => {
                     return (
                       <tr key={index}>
                         <td>{index + 1}</td>
-                        <td>
+                        <td style={{ width: "140px" }}>
                           <img
                             src={item.image.url}
                             alt={item.name}
                             width={100}
                           />
                         </td>
-                        <td style={{ textAlign: "left" }}>{item.id}</td>
-                        <td style={{ textAlign: "left" }}>{item.name}</td>
+                        <td className={styles.name}>{item.name}</td>
 
                         <td className={styles.actions}>
                           <GoTrash
@@ -120,14 +118,14 @@ const CategoriesList = () => {
                             style={{ marginRight: "10px" }}
                             size={20}
                             color="green"
-                            onClick={() => deleteCategory(item)}
+                            onClick={() => deleteBrand(item)}
                           />
                           <FiEdit
                             className={styles.icon}
                             size={20}
                             color="red"
                             onClick={() =>
-                              navigate(`/admin/category/${item.id}`)
+                              navigate(`/admin/brand/${item.name}`)
                             }
                           />
                         </td>
@@ -146,4 +144,4 @@ const CategoriesList = () => {
   );
 };
 
-export default CategoriesList;
+export default BrandsList;

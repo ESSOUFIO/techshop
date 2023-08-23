@@ -1,0 +1,111 @@
+.addBrand {
+  padding: 20px;
+  width: 100%;
+
+  h2 {
+    font-size: 23px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .card {
+    width: 100%;
+    max-width: 500px;
+    padding: 15px;
+  }
+
+  form {
+    label {
+      display: block;
+      margin-bottom: 4px;
+      font-weight: 500;
+      padding-left: 3px;
+    }
+
+    .btn {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 25px;
+
+      .cancelBtn {
+        background: lightgray;
+        padding: 5px 25px;
+        color: #000000;
+        border: none;
+        border-radius: 5px;
+
+        &:hover {
+          background: var(--color-lightgray);
+        }
+      }
+
+      .submitBtn {
+        background: var(--color-btn-blue);
+        padding: 5px 25px;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+
+        &:hover {
+          background: rgb(2, 2, 172);
+        }
+
+        &:disabled {
+          cursor: default;
+          background: rgba(2, 2, 172, 0.494);
+
+          &:hover {
+            background: rgba(2, 2, 172, 0.494);
+          }
+        }
+      }
+    }
+  }
+}
+
+.imagesWrap {
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 2px;
+
+  .container {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  button {
+    width: 100%;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 7px;
+    background: rgb(232, 232, 232);
+    margin-top: 5px;
+
+    &:hover {
+      background: rgb(240, 240, 240);
+    }
+    &:disabled {
+      background: rgb(232, 232, 232);
+      color: #000;
+    }
+  }
+}
+
+.productImage {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 10px;
+
+  .closeIcon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #00000070;
+    cursor: pointer;
+
+    &:hover {
+      color: #000000;
+    }
+  }
+}

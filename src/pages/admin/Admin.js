@@ -7,6 +7,8 @@ import { HiClipboardDocumentList } from "react-icons/hi2";
 import { VscNewFile } from "react-icons/vsc";
 import { TbDatabaseDollar } from "react-icons/tb";
 import { BiSolidCategory } from "react-icons/bi";
+import { BsApple } from "react-icons/bs";
+import { TfiApple } from "react-icons/tfi";
 import ProductsList from "../../components/admin/productsList/ProductsList";
 import AddProduct from "../../components/admin/addProduct/AddProduct";
 import Orders from "../../components/admin/orders/Orders";
@@ -19,6 +21,9 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { STORE_CATEGORIES } from "../../redux/categorySlice";
 import Loader from "../../components/loader/Loader";
+import AddBrand from "../../components/admin/addBrand/AddBrand";
+import BrandsList from "../../components/admin/brandsList/BrandsList";
+import { STORE_BRAND } from "../../redux/brandSlice";
 
 const NavItem = ({ icon, label, path }) => {
   return (
@@ -38,7 +43,7 @@ const Admin = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
-  //Get Real-Time of Products List
+  //Get Real-Time of Categories List
   useEffect(() => {
     setLoading(true);
     const q = query(collection(db, "categories"), orderBy("name"));
@@ -49,6 +54,22 @@ const Admin = () => {
       });
 
       dispatch(STORE_CATEGORIES(array));
+      setLoading(false);
+    });
+    return () => unsub();
+  }, [dispatch]);
+
+  //Get Real-Time of Brands List
+  useEffect(() => {
+    setLoading(true);
+    const q = query(collection(db, "brands"), orderBy("name"));
+    const unsub = onSnapshot(q, (snapshot) => {
+      const array = [];
+      snapshot.forEach((doc) => {
+        array.push({ ...doc.data(), id: doc.id });
+      });
+
+      dispatch(STORE_BRAND(array));
       setLoading(false);
     });
     return () => unsub();
@@ -99,6 +120,19 @@ const Admin = () => {
             />
             <hr />
 
+            <h6>BRANDS</h6>
+            <NavItem
+              icon={<BsApple className={styles["navItem-icon"]} />}
+              label={"Brands List"}
+              path={"brands"}
+            />
+            <NavItem
+              icon={<TfiApple size={19} />}
+              label={"Add Brand"}
+              path={"brand/new"}
+            />
+            <hr />
+
             <h6>ORDERS</h6>
             <NavItem
               icon={<TbDatabaseDollar size={19} />}
@@ -113,6 +147,8 @@ const Admin = () => {
           <Route path="product/:pgIndex/:id" element={<AddProduct />} />
           <Route path="categories" element={<CategoriesList />} />
           <Route path="category/:id" element={<AddCategory />} />
+          <Route path="brand/:id" element={<AddBrand />} />
+          <Route path="brands" element={<BrandsList />} />
           <Route path="orders" element={<Orders />} />
         </Routes>
       </div>

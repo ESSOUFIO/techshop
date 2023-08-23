@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./AddCategory.module.scss";
+import styles from "./AddBrand.module.scss";
 import Card from "../../card/Card";
 import { IoClose } from "react-icons/io5";
 import { Timestamp, doc, getDoc, updateDoc, setDoc } from "firebase/firestore";
@@ -17,14 +17,13 @@ import { ProgressBar } from "react-bootstrap";
 import { useParams } from "react-router";
 
 /** =========    AddCategory    ======== */
-const AddCategory = () => {
+const AddBrand = () => {
   const initState = {
-    id: "",
     name: "",
     image: null,
   };
 
-  const [category, setCategory] = useState(initState);
+  const [brand, setBrand] = useState(initState);
   const [loading, setLoading] = useState(false);
   const [uploading, setUpLoading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -37,24 +36,24 @@ const AddCategory = () => {
 
   //Handle Page Mode: "Edit Product" or "Add New Product"
   useEffect(() => {
-    const getCategory = async (id) => {
+    const getBrand = async (id) => {
       setLoading(true);
-      const docRef = doc(db, "categories", id);
+      const docRef = doc(db, "brands", id);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        setCategory({ ...docSnap.data() });
+        getBrand({ ...docSnap.data() });
       } else {
-        toast.error("Category not found!");
+        toast.error("Brand not found!");
       }
       setLoading(false);
     };
 
     if (id !== "new") {
-      getCategory(id);
+      getBrand(id);
       setEditMode(true);
     } else {
-      setCategory({ ...initState });
+      setBrand({ ...initState });
       setEditMode(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -63,13 +62,13 @@ const AddCategory = () => {
   const addImage = (file) => {
     if (!file) return;
 
-    if (category.image !== null) deleteImg(category.image.id);
+    if (brand.image !== null) deleteImg(brand.image.id);
 
     const imageId = Date.now() + file.name;
     setUpLoading(true);
 
     //** upload to Storage */
-    const storageRef = ref(storage, `categories/${imageId}`);
+    const storageRef = ref(storage, `brands/${imageId}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
@@ -89,7 +88,7 @@ const AddCategory = () => {
               id: imageId,
               url: downloadURL,
             };
-            setCategory({ ...category, image: newImg });
+            setBrand({ ...brand, image: newImg });
           })
           .finally(() => setUpLoading(false));
       }
@@ -97,16 +96,16 @@ const AddCategory = () => {
   };
 
   const deleteImg = (id) => {
-    setCategory({ ...category, image: null });
+    setBrand({ ...brand, image: null });
 
     //Delete from storage
-    const imageRef = ref(storage, `categories/${id}`);
+    const imageRef = ref(storage, `brands/${id}`);
     deleteObject(imageRef);
   };
 
   const inputHandler = (target) => {
-    setCategory({
-      ...category,
+    setBrand({
+      ...brand,
       [target.name]: target.value,
     });
   };
@@ -115,10 +114,10 @@ const AddCategory = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const prodRef = doc(db, "categories", id);
-      await updateDoc(prodRef, category);
-      toast.success("Category edited successfully.");
-      navigate("/admin/categories");
+      const prodRef = doc(db, "brands", id);
+      await updateDoc(prodRef, brand);
+      toast.success("Brand edited successfully.");
+      navigate("/admin/brands");
     } catch (error) {
       toast.error(error.message);
     }
@@ -131,14 +130,14 @@ const AddCategory = () => {
 
     try {
       const newProd = {
-        ...category,
+        ...brand,
         createdAt: Timestamp.now().toDate(),
       };
 
-      await setDoc(doc(db, "categories", newProd.id), newProd);
+      await setDoc(doc(db, "brands", newProd.name), newProd);
       // categoryRef.current.clearValue();
-      toast.success("New Category added successfully.");
-      setCategory({ ...initState });
+      toast.success("New Brand added successfully.");
+      setBrand({ ...initState });
     } catch (error) {
       toast.error(error.message);
     }
@@ -147,33 +146,22 @@ const AddCategory = () => {
 
   return (
     <>
-      <div className={styles.addCategory}>
-        <h2>{editMode ? "Edit Category" : "Add New Category"}</h2>
+      <div className={styles.addBrand}>
+        <h2>{editMode ? "Edit Brand" : "Add New Brand"}</h2>
         <Card cardClass={styles.card}>
           <form onSubmit={editMode ? editHandler : addProductHandler}>
-            <label>Category ID</label>
+            <label>Brand Name</label>
             <input
               className="form-item"
               type="text"
-              placeholder="Category ID"
-              name="id"
-              value={category.id}
-              required={true}
-              onChange={(e) => inputHandler(e.target)}
-            />
-
-            <label>Category Name</label>
-            <input
-              className="form-item"
-              type="text"
-              placeholder="Category Name"
+              placeholder="Brand Name"
               name="name"
-              value={category.name}
+              value={brand.name}
               required={true}
               onChange={(e) => inputHandler(e.target)}
             />
 
-            <label>Category Image</label>
+            <label>Brand Image</label>
             <input
               className="form-item"
               type="file"
@@ -185,17 +173,13 @@ const AddCategory = () => {
 
             <div className={styles.imagesWrap}>
               <div className={styles.container}>
-                {category.image && (
+                {brand.image && (
                   <div className={styles.categoryImage}>
-                    <img
-                      src={category.image.url}
-                      alt={category.name}
-                      width={100}
-                    />
+                    <img src={brand.image.url} alt={brand.name} width={100} />
                     <IoClose
                       size={18}
                       className={styles.closeIcon}
-                      onClick={() => deleteImg(category.image.id)}
+                      onClick={() => deleteImg(brand.image.id)}
                     />
                   </div>
                 )}
@@ -226,9 +210,9 @@ const AddCategory = () => {
               <button
                 type="submit"
                 className={styles.submitBtn}
-                disabled={!category.name || !category.image}
+                disabled={!brand.name || !brand.image}
               >
-                {editMode ? "Edit Category" : "Add Category"}
+                {editMode ? "Edit Brand" : "Add Brand"}
               </button>
             </div>
           </form>
@@ -239,4 +223,4 @@ const AddCategory = () => {
   );
 };
 
-export default AddCategory;
+export default AddBrand;
