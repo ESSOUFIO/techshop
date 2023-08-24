@@ -1,24 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./FeaturedBrands.module.scss";
-import samsungImg from "../../assets/images/brands/Samsung_Logo.svg.webp";
-import appleImg from "../../assets/images/brands/apple.png";
-import hpImg from "../../assets/images/brands/hp.png";
-import asusImg from "../../assets/images/brands/asus.png";
-import lgImg from "../../assets/images/brands/lg.png";
-import tclImg from "../../assets/images/brands/tcl.png";
-import huaweiImg from "../../assets/images/brands/huawei2.png";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
+import { useState } from "react";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { db } from "../../firebase/config";
 
-const Brand = ({ brandImg, name, width }) => {
+const Brand = ({ brandImg, name }) => {
   return (
     <div className={styles.card}>
       <div className={styles.brand}>
-        <img src={brandImg} alt={name} style={{ width: width }} />
+        <img src={brandImg} alt={name} style={{ width: "100%" }} />
       </div>
     </div>
   );
@@ -29,6 +25,22 @@ const MarginPagination = () => {
 };
 
 const FeaturedBrands = () => {
+  const [brands, setBrands] = useState([]);
+
+  useEffect(() => {
+    const getBrands = async () => {
+      const q = query(collection(db, "brands"), orderBy("name"));
+
+      const querySnapshot = await getDocs(q);
+      let array = [];
+      querySnapshot.forEach((doc) => {
+        array.push(doc.data());
+      });
+      setBrands(array);
+    };
+    getBrands();
+  }, []);
+
   return (
     <div className={styles.featuredBrands}>
       <h2>Featured Brands</h2>
@@ -66,33 +78,14 @@ const FeaturedBrands = () => {
           },
         }}
       >
-        <SwiperSlide>
-          <Brand brandImg={samsungImg} name={"Samsung"} width={"150px"} />
-        </SwiperSlide>
+        {brands.map((brand, index) => {
+          return (
+            <SwiperSlide key={index}>
+              <Brand brandImg={brand.image.url} name={brand.name} />
+            </SwiperSlide>
+          );
+        })}
 
-        <SwiperSlide>
-          <Brand brandImg={lgImg} name={"LG"} width={"120px"} />
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <Brand brandImg={appleImg} name={"Apple"} width={"100px"} />
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <Brand brandImg={huaweiImg} name={"Huawei"} width={"130px"} />
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <Brand brandImg={asusImg} name={"ASUS"} width={"135px"} />
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <Brand brandImg={hpImg} name={"HP"} width={"100px"} />
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <Brand brandImg={tclImg} name={"TCL"} width={"130px"} />
-        </SwiperSlide>
         <MarginPagination />
       </Swiper>
     </div>
