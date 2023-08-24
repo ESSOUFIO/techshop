@@ -102,7 +102,7 @@ const AddProduct = () => {
 
   useEffect(() => {
     const array = categories.map((item) => {
-      return { value: item.name, label: item.name };
+      return { value: item.id, label: item.name };
     });
     setCategOptions(array);
   }, [categories]);

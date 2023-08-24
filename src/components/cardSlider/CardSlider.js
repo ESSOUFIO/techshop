@@ -67,7 +67,7 @@ const CardSlider = ({ title, titleColor, textAlign, productList }) => {
               <CardProduct
                 img1={prod.images[0].url}
                 img2={prod.images[1].url}
-                title={prod.name}
+                name={prod.name}
                 brand={prod.brand}
                 offValue={prod.offValue}
                 newPrice={prod.newPrice}

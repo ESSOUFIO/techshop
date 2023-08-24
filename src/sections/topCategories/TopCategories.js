@@ -1,15 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./TopCategories.module.scss";
-import categories from "../../categories.json";
 import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
+import { collection, query, getDocs, orderBy } from "firebase/firestore";
+import { db } from "../../firebase/config";
 
 const TopCategories = () => {
   const [showMore, setShowMore] = useState(false);
+  const [categories, setCategories] = useState([]);
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1023px)" });
 
   const firstRows = categories.filter((cat) => cat.index <= 5);
   const secondRows = categories.filter((cat) => cat.index >= 6);
+
+  useEffect(() => {
+    const getBrands = async () => {
+      const q = query(collection(db, "categories"), orderBy("name"));
+
+      const querySnapshot = await getDocs(q);
+      let array = [];
+      querySnapshot.forEach((doc) => {
+        array.push(doc.data());
+      });
+      setCategories(array);
+    };
+    getBrands();
+  }, []);
 
   return (
     <div className={styles.TopCategories}>
@@ -21,14 +37,14 @@ const TopCategories = () => {
           {categories.map((category) => {
             return (
               <Link
-                to={`/collection/${category.id}`}
+                to={`/categories/${category.id}`}
                 className={styles.card}
                 key={category.id}
               >
                 <div>
-                  <img src={category.image} alt={category.title} />
+                  <img src={category.image.url} alt={category.name} />
                 </div>
-                <p>{category.title}</p>
+                <p>{category.name}</p>
               </Link>
             );
           })}
@@ -41,14 +57,14 @@ const TopCategories = () => {
           {firstRows.map((category) => {
             return (
               <Link
-                to={`/collection/${category.id}`}
+                to={`/categories/${category.id}`}
                 className={styles.card}
                 key={category.id}
               >
                 <div>
-                  <img src={category.image} alt={category.title} />
+                  <img src={category.image.url} alt={category.name} />
                 </div>
-                <p>{category.title}</p>
+                <p>{category.name}</p>
               </Link>
             );
           })}
@@ -57,14 +73,14 @@ const TopCategories = () => {
             secondRows.map((category) => {
               return (
                 <Link
-                  to={`/collection/${category.id}`}
+                  to={`/categories/${category.id}`}
                   className={styles.card}
                   key={category.id}
                 >
                   <div>
-                    <img src={category.image} alt={category.title} />
+                    <img src={category.image.url} alt={category.name} />
                   </div>
-                  <p>{category.title}</p>
+                  <p>{category.name}</p>
                 </Link>
               );
             })}

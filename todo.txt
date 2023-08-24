@@ -12,7 +12,7 @@ display createdAt and modifiedAt
 
 **
 
-brands -- firebase
+
 add to cart
 orders
 dashboard admin

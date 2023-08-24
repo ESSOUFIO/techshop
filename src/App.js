@@ -18,6 +18,7 @@ import Cart from "./pages/cart/Cart";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import OnlyAdminRoute from "./components/onlyAdmin/OnlyAdminRoute";
+import CategoryPage from "./pages/categoryPage/CategoryPage";
 
 const router = createBrowserRouter([
   {
@@ -49,8 +50,8 @@ const router = createBrowserRouter([
         element: <ProductPage />,
       },
       {
-        path: "collection/:id",
-        element: <CollectionPage />,
+        path: "categories/:id",
+        element: <CategoryPage />,
       },
       {
         path: "cart",

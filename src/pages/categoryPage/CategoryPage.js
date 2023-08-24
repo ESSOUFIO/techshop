@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import products from "../../products.json";
 import CardProduct from "../../components/cardProduct/CardProduct";
-import styles from "./CollectionPage.module.scss";
+import styles from "./CategoryPage.module.scss";
 import BreadCrumb from "../../components/breadCrumb/BreadCrumb";
+import { useSelector } from "react-redux";
+import { selectProducts } from "../../redux/productSlice";
 
-const CollectionPage = () => {
+const CategoryPage = () => {
   const { id } = useParams();
   const [prods, setProds] = useState([]);
+  const products = useSelector(selectProducts);
 
   useEffect(() => {
     const array = products.filter((prod) => prod.category === id);
     setProds(array);
-  }, [id]);
+  }, [id, products]);
+
+  console.log(prods);
 
   useEffect(() => {
     //Scroll to top
@@ -21,22 +25,23 @@ const CollectionPage = () => {
       behavior: "smooth",
     });
   }, []);
+
   return (
     <>
-      <BreadCrumb page1={"Collections"} page2={id} />
+      <BreadCrumb page1={id} />
 
-      <div className={styles.collectionPage}>
+      <div className={styles.categoriesPage}>
         {prods.map((prod, index) => {
-          const { id, title, image_1, image_2, price, lastPrice, offValue } =
-            prod;
+          const { id, name, brand, images, price, newPrice, offValue } = prod;
           return (
             <CardProduct
               key={index}
-              img1={image_1}
-              img2={image_2}
-              name={title}
+              img1={images[0].url}
+              img2={images[1].url}
+              name={name}
+              brand={brand}
               offValue={offValue}
-              lastPrice={lastPrice}
+              newPrice={newPrice}
               price={price}
               id={id}
             />
@@ -47,4 +52,4 @@ const CollectionPage = () => {
   );
 };
 
-export default CollectionPage;
+export default CategoryPage;

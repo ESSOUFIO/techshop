@@ -8,7 +8,7 @@ import FormatPrice from "../formatPrice/FormatPrice";
 const CardProduct = ({
   img1,
   img2,
-  title,
+  name,
   brand,
   offValue,
   newPrice,
@@ -42,7 +42,7 @@ const CardProduct = ({
         <p className={styles.brand}>{brand}</p>
 
         <div className={styles.desc}>
-          <div className={styles.title}>{title}</div>
+          <div className={styles.title}>{name}</div>
 
           {offValue !== 0 && (
             <div className={styles.deal}>

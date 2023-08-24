@@ -75,6 +75,14 @@ const Admin = () => {
     return () => unsub();
   }, [dispatch]);
 
+  //Scroll to top
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   return (
     <>
       <div className={styles.admin}>
