@@ -25,6 +25,8 @@ import { ProgressBar } from "react-bootstrap";
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
 import { selectCategories } from "../../../redux/categorySlice";
+import { selectBrands } from "../../../redux/brandSlice";
+import { FaPlus } from "react-icons/fa";
 
 const ProductImage = ({ image, id, index, deleteImg }) => {
   return (
@@ -54,6 +56,7 @@ const AddProduct = () => {
 
   const [product, setProduct] = useState(initState);
   const [categOptions, setCategOptions] = useState([]);
+  const [brandOptions, setBrandOptions] = useState([]);
 
   const [loading, setLoading] = useState(false);
   const [uploading, setUpLoading] = useState(false);
@@ -62,6 +65,7 @@ const AddProduct = () => {
 
   const inputFileRef = useRef();
   const categoryRef = useRef();
+  const brandRef = useRef();
   const bannerRef = useRef();
   const navigate = useNavigate();
 
@@ -93,16 +97,8 @@ const AddProduct = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  // const categoryOptions = [
-  //   { value: "Audio", label: "Audio" },
-  //   { value: "Home", label: "Home" },
-  //   { value: "TV", label: "TV" },
-  //   { value: "Phone", label: "Phone" },
-  //   { value: "Laptop", label: "Laptop" },
-  //   { value: "Kitchen", label: "Kitchen" },
-  // ];
-
   const categories = useSelector(selectCategories);
+  const brands = useSelector(selectBrands);
 
   useEffect(() => {
     const array = categories.map((item) => {
@@ -110,6 +106,13 @@ const AddProduct = () => {
     });
     setCategOptions(array);
   }, [categories]);
+
+  useEffect(() => {
+    const array = brands.map((item) => {
+      return { value: item.name, label: item.name };
+    });
+    setBrandOptions(array);
+  }, [brands]);
 
   const bannerOptions = [
     { value: "Flash Deal", label: "Flash Deal" },
@@ -318,25 +321,43 @@ const AddProduct = () => {
             </div>
 
             <label>Brand</label>
-            <input
-              className="form-item"
-              type="text"
-              name="brand"
-              placeholder="Brand"
-              value={product.brand}
-              onChange={(e) => inputHandler(e.target)}
-            />
+            <div className={styles.brandWrap}>
+              <Select
+                ref={brandRef}
+                value={{ value: product.brand, label: product.brand }}
+                className={styles.select}
+                onChange={(e) => setProduct({ ...product, brand: e?.value })}
+                options={brandOptions}
+                placeholder="Choose Brand"
+              />
+              <button
+                type="button"
+                onClick={() => navigate("/admin/brand/new")}
+              >
+                <FaPlus />
+              </button>
+            </div>
 
             <div>
               <label>Category</label>
-              <Select
-                ref={categoryRef}
-                value={{ value: product.category, label: product.category }}
-                className={styles.select}
-                onChange={(e) => setProduct({ ...product, category: e?.value })}
-                options={categOptions}
-                placeholder="Choose Category"
-              />
+              <div className={styles.brandWrap}>
+                <Select
+                  ref={categoryRef}
+                  value={{ value: product.category, label: product.category }}
+                  className={styles.select}
+                  onChange={(e) =>
+                    setProduct({ ...product, category: e?.value })
+                  }
+                  options={categOptions}
+                  placeholder="Choose Category"
+                />
+                <button
+                  type="button"
+                  onClick={() => navigate("/admin/category/new")}
+                >
+                  <FaPlus />
+                </button>
+              </div>
             </div>
 
             <div>

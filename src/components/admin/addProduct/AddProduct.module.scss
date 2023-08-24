@@ -26,8 +26,32 @@
     }
 
     .select {
+      width: 100%;
       margin-bottom: 10px;
     }
+
+    .brandWrap {
+      display: flex;
+      width: 100%;
+      gap: 8px;
+
+      button {
+        padding: 5px 15px;
+        border: 1px solid #bbb;
+        border-radius: 5px;
+        color: #777;
+        background-color: #fff;
+        margin-bottom: 10px;
+        outline: 1px solid transparent;
+        transition: outline 0.5s;
+
+        &:hover {
+          color: #444;
+          outline: 1px solid #bbb;
+        }
+      }
+    }
+
     .priceWrap {
       display: flex;
       justify-content: space-between;

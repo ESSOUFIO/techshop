@@ -27,14 +27,14 @@
       margin-top: 25px;
 
       .cancelBtn {
-        background: lightgray;
+        background: #999;
         padding: 5px 25px;
-        color: #000000;
+        color: #ffffff;
         border: none;
         border-radius: 5px;
 
         &:hover {
-          background: var(--color-lightgray);
+          background: #888;
         }
       }
 

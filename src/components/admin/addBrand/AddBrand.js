@@ -145,8 +145,8 @@ const AddBrand = () => {
     setLoading(false);
   };
 
+  //Scroll to top
   useEffect(() => {
-    //Scroll to top
     window.scrollTo({
       top: 0,
       behavior: "smooth",
