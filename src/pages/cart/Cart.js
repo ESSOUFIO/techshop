@@ -13,9 +13,11 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   DECREASE_QTY,
   INCREASE_QTY,
+  REMOVE_ITEM,
   selectCartItems,
 } from "../../redux/cartSlice";
 import ContinueShopping from "../../components/continueShopping/ContinueShopping";
+import FormatPrice from "../../components/formatPrice/FormatPrice";
 
 const CartItem = ({ id, name, image, price, quantity, brand }) => {
   const [total, setTotal] = useState(2);
@@ -28,6 +30,10 @@ const CartItem = ({ id, name, image, price, quantity, brand }) => {
 
   const incrementQty = () => {
     dispatch(INCREASE_QTY(id));
+  };
+
+  const removeHandler = () => {
+    dispatch(REMOVE_ITEM(id));
   };
 
   const decrementQty = () => {
@@ -56,7 +62,10 @@ const CartItem = ({ id, name, image, price, quantity, brand }) => {
                   <button onClick={decrementQty}>-</button>
                 </div>
               </div>
-              <div className={styles["cart-list-action"]}>
+              <div
+                className={styles["cart-list-action"]}
+                onClick={removeHandler}
+              >
                 <IoCloseOutline size={22} />
               </div>
             </div>
@@ -73,7 +82,7 @@ const CartItem = ({ id, name, image, price, quantity, brand }) => {
           </div>
         </div>
         <div className={styles["cart-list-total"]}>${total.toFixed(2)}</div>
-        <div className={styles["cart-list-action"]}>
+        <div className={styles["cart-list-action"]} onClick={removeHandler}>
           <IoCloseOutline size={22} />
         </div>
       </div>
@@ -106,13 +115,14 @@ const Cart = () => {
     e.preventDefault();
   };
 
+  //Scroll to top
   useEffect(() => {
-    //Scroll to top
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   }, []);
+
   return (
     <>
       <BreadCrumb page1={"Cart"} />
@@ -138,7 +148,7 @@ const Cart = () => {
                 return (
                   <CartItem
                     key={item.id}
-                    title={item.name}
+                    name={item.name}
                     image={item.image}
                     price={item.newPrice}
                     quantity={item.quantity}
@@ -177,7 +187,9 @@ const Cart = () => {
                   <label>
                     <b>Subtotal</b>
                   </label>
-                  <p>${subTotal.toFixed(2)}</p>
+                  <p style={{ transform: "translateX(-15px)" }}>
+                    {<FormatPrice price={total} />}
+                  </p>
                 </div>
 
                 {/* Shipping estimate */}
@@ -209,7 +221,9 @@ const Cart = () => {
                   <label>
                     <b>Total</b>
                   </label>
-                  <p>${total.toFixed(2)}</p>
+                  <p style={{ transform: "translateX(-15px)" }}>
+                    {<FormatPrice price={total} />}
+                  </p>
                 </div>
                 <p>Tax included and shipping calculated at checkout</p>
               </div>

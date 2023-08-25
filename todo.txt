@@ -11,8 +11,12 @@ add full description and Shipping & Return Policy to product page
 display createdAt and modifiedAt
 
 **
-
-add to cart
+checkout
 orders
 dashboard admin
 wish
+
+
+***
+filter
+sortedby

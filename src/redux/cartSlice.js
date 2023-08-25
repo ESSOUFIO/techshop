@@ -42,11 +42,21 @@ const cartSlice = createSlice({
       );
       state.cartItems[itemIndex].quantity -= 1;
     },
+
+    REMOVE_ITEM: (state, action) => {
+      const array = state.cartItems;
+      state.cartItems = array.filter((item) => item.id !== action.payload);
+    },
   },
 });
 
-export const { ADD_TO_CART, STORE_ITEMS, INCREASE_QTY, DECREASE_QTY } =
-  cartSlice.actions;
+export const {
+  ADD_TO_CART,
+  STORE_ITEMS,
+  INCREASE_QTY,
+  DECREASE_QTY,
+  REMOVE_ITEM,
+} = cartSlice.actions;
 
 export const selectCartItems = (state) => state.cart.cartItems;
 

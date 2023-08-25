@@ -44,7 +44,6 @@ const Header = ({ isAdmin }) => {
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    console.log(cartItems);
   }, [cartItems]);
 
   return (
