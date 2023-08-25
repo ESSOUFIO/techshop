@@ -14,7 +14,7 @@ import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import MainMenu from "../mainMenu/MainMenu";
 import SearchMenu from "../searchMenu/SearchMenu";
 
-const HeaderMobile = ({ isLoggedIn, userName, style }) => {
+const HeaderMobile = ({ isLoggedIn, userName, style, nbrCartItems }) => {
   const [showMainMenu, setShowMainMenu] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
@@ -68,7 +68,7 @@ const HeaderMobile = ({ isLoggedIn, userName, style }) => {
             <div className={styles.cart} onClick={() => navigate("/cart")}>
               <HiOutlineShoppingBag className={styles.icon} size={26} />
               <div className={styles.bubble}>
-                <span>12</span>
+                <span>{nbrCartItems}</span>
               </div>
             </div>
           </div>

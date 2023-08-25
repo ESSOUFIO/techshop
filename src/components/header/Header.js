@@ -11,12 +11,16 @@ import {
   selectUserName,
 } from "../../redux/authSlice";
 import Loader from "../loader/Loader";
+import { STORE_ITEMS, selectCartItems } from "../../redux/cartSlice";
 
 const Header = ({ isAdmin }) => {
   const [loading, setLoading] = useState(false);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const userName = useSelector(selectUserName);
   const dispatch = useDispatch();
+
+  const cartItems = useSelector(selectCartItems);
+  // console.log(cartItems);
 
   useEffect(() => {
     setLoading(true);
@@ -31,12 +35,31 @@ const Header = ({ isAdmin }) => {
     return () => unsubscribe();
   }, [dispatch]);
 
+  useEffect(() => {
+    const array = localStorage.getItem("cartItems");
+    if (array?.length > 0) {
+      dispatch(STORE_ITEMS(JSON.parse(array)));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    console.log(cartItems);
+  }, [cartItems]);
+
   return (
     <>
-      {!isAdmin && <HeaderLaptop isLoggedIn={isLoggedIn} userName={userName} />}
+      {!isAdmin && (
+        <HeaderLaptop
+          isLoggedIn={isLoggedIn}
+          userName={userName}
+          nbrCartItems={cartItems.length}
+        />
+      )}
       <HeaderMobile
         isLoggedIn={isLoggedIn}
         userName={userName}
+        nbrCartItems={cartItems.length}
         style={{ display: `${isAdmin ? "block" : ""}` }}
       />
       {loading && <Loader />}

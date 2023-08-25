@@ -45,7 +45,7 @@ const logo = (
 const activeLink = ({ isActive }) => (isActive ? styles.active : "");
 
 //**** ------  HeaderLaptop  ----------- */
-const HeaderLaptop = ({ isLoggedIn, userName }) => {
+const HeaderLaptop = ({ isLoggedIn, userName, nbrCartItems }) => {
   const [lang, setLang] = useState("EN");
   const [langIcon, setLangIcon] = useState(engIcon);
   const [curr, setCurr] = useState("USD");
@@ -113,7 +113,7 @@ const HeaderLaptop = ({ isLoggedIn, userName }) => {
               </div>
               <span>Cart</span>
               <div className={styles.bubble}>
-                <span>12</span>
+                <span>{nbrCartItems}</span>
               </div>
             </div>
           </div>

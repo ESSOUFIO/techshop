@@ -4,6 +4,8 @@ import { GoHeart } from "react-icons/go";
 import QuickView from "../quickView/QuickView";
 import { useNavigate } from "react-router-dom";
 import FormatPrice from "../formatPrice/FormatPrice";
+import { useDispatch } from "react-redux";
+import { ADD_TO_CART } from "../../redux/cartSlice";
 
 const CardProduct = ({
   img1,
@@ -17,6 +19,14 @@ const CardProduct = ({
 }) => {
   const [showQuickView, setShowQuickView] = useState(false);
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const addToCard = () => {
+    console.log(id);
+    const item = { id, name, newPrice, image: img1, brand, quantity: 1 };
+    dispatch(ADD_TO_CART(item));
+  };
 
   return (
     <>
@@ -74,7 +84,9 @@ const CardProduct = ({
         </div>
 
         <div className={styles.buttons}>
-          <button className="--rounded">Add to Cart</button>
+          <button className="--rounded" onClick={addToCard}>
+            Add to Cart
+          </button>
           <div className={styles.wish}>
             <GoHeart size={24} />
           </div>

@@ -6,40 +6,55 @@ import trustImg from "../../assets/images/trust-banner.webp";
 import { useNavigate } from "react-router-dom";
 import { IoCloseOutline } from "react-icons/io5";
 import BreadCrumb from "../../components/breadCrumb/BreadCrumb";
-import cartItems from "../../cartItems.json";
 import Input from "../../components/input/Input";
 import ButtonPrimary from "../../components/buttonPrimary/ButtonPrimary";
 import ButtonSecondary from "../../components/buttonSecondary/ButtonSecondary";
-import QuantityHandler from "../../components/quantityHandler/QuantityHandler";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  DECREASE_QTY,
+  INCREASE_QTY,
+  selectCartItems,
+} from "../../redux/cartSlice";
+import ContinueShopping from "../../components/continueShopping/ContinueShopping";
 
-const CartItem = ({ title, photo, price, qty, brand }) => {
-  const [quantity, setQuantity] = useState(Number(qty));
+const CartItem = ({ id, name, image, price, quantity, brand }) => {
   const [total, setTotal] = useState(2);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setTotal(quantity * price);
   }, [quantity, price]);
 
+  const incrementQty = () => {
+    dispatch(INCREASE_QTY(id));
+  };
+
+  const decrementQty = () => {
+    if (quantity !== 1) dispatch(DECREASE_QTY(id));
+  };
+
   return (
     <div className={styles["cart-list"]}>
       <div className={styles["cart-list-info"]}>
         <div className={styles.img}>
-          <img src={photo} alt={title} />
+          <img src={image} alt={name} />
         </div>
 
         <div className={styles["product-info-wrap"]}>
           <div className={styles["product-info"]}>
-            <h6>{title}</h6>
+            <h6>{name}</h6>
             <p>{brand}</p>
           </div>
           <div className={styles["product-info-mobile"]}>
             <div className={styles["cart-list-price"]}>${price}</div>
             <div className={styles["cart-list-quantity-wrap"]}>
               <div className={styles["cart-list-quantity"]}>
-                <QuantityHandler
-                  quantity={quantity}
-                  setQuantity={setQuantity}
-                />
+                <div className={styles.quantityHandler}>
+                  <button onClick={incrementQty}>+</button>
+                  <label>{quantity}</label>
+                  <button onClick={decrementQty}>-</button>
+                </div>
               </div>
               <div className={styles["cart-list-action"]}>
                 <IoCloseOutline size={22} />
@@ -49,9 +64,13 @@ const CartItem = ({ title, photo, price, qty, brand }) => {
         </div>
       </div>
       <div className={styles["cart-list-price-wrap"]}>
-        <div className={styles["cart-list-price"]}>${price}</div>
+        <div className={styles["cart-list-price"]}>${price.toFixed(2)}</div>
         <div className={styles["cart-list-quantity"]}>
-          <QuantityHandler quantity={quantity} setQuantity={setQuantity} />
+          <div className={styles.quantityHandler}>
+            <button onClick={incrementQty}>+</button>
+            <label>{quantity}</label>
+            <button onClick={decrementQty}>-</button>
+          </div>
         </div>
         <div className={styles["cart-list-total"]}>${total.toFixed(2)}</div>
         <div className={styles["cart-list-action"]}>
@@ -67,6 +86,8 @@ const Cart = () => {
   const [total, setTotal] = useState(0);
   const [termCheck, setTermCheck] = useState(false);
   const navigate = useNavigate();
+
+  const cartItems = useSelector(selectCartItems);
 
   useEffect(() => {
     var total = 0;
@@ -97,121 +118,129 @@ const Cart = () => {
       <BreadCrumb page1={"Cart"} />
       <div className={styles.cart}>
         <h2>Your Cart</h2>
-        <div className={styles.cartWrap}>
-          <div className={styles.cartItems}>
-            <div className={styles["cart-header"]}>
-              <div className={styles["cart-header-info"]}>PRODUCT</div>
-              <div className={styles["cart-header-price"]}>PRICE</div>
-              <div className={styles["cart-header-quantity"]}>QUANTITY</div>
-              <div className={styles["cart-header-total"]}>TOTAL</div>
-              <div className={styles["cart-header-action"]}></div>
-            </div>
-
-            {cartItems.map((item) => {
-              return (
-                <CartItem
-                  key={item.id}
-                  title={item.title}
-                  photo={item.image_1}
-                  price={item.price}
-                  qty={item.quantity}
-                  brand={item.brand}
-                />
-              );
-            })}
-
-            {/* Additional comment */}
-            <div className={styles.addComment}>
-              <h6>Additional Comments</h6>
-              <textarea
-                //   cols="30"
-                rows="5"
-                placeholder="Special instruction for seller..."
-              ></textarea>
-            </div>
-
-            {/* trust banner*/}
-            <div className={styles.trust}>
-              <div className={styles.secure}>
-                <BiSolidCheckShield size={23} />
-                <p>Secure Shopping Guarantee</p>
-              </div>
-              <img src={trustImg} alt="trust" />
-            </div>
+        {cartItems?.length === 0 ? (
+          <div>
+            <p>Your Cart is currently empty.</p>
+            <ContinueShopping />
           </div>
-
-          {/* Order Summary  */}
-          <div className={styles.orderSummary}>
-            <div className={styles.orderWrap}>
-              <h6>ORDER SUMMARY</h6>
-
-              <div className={styles.subTotal}>
-                <label>
-                  <b>Subtotal</b>
-                </label>
-                <p>${subTotal.toFixed(2)}</p>
+        ) : (
+          <div className={styles.cartWrap}>
+            <div className={styles.cartItems}>
+              <div className={styles["cart-header"]}>
+                <div className={styles["cart-header-info"]}>PRODUCT</div>
+                <div className={styles["cart-header-price"]}>PRICE</div>
+                <div className={styles["cart-header-quantity"]}>QUANTITY</div>
+                <div className={styles["cart-header-total"]}>TOTAL</div>
+                <div className={styles["cart-header-action"]}></div>
               </div>
 
-              {/* Shipping estimate */}
-              <div className={styles.shippingEstimate}>
-                <label>
-                  <b>Get Shipping Estimate</b>
-                </label>
-                <div className={styles.countries}>
-                  <select>
-                    <option>United State</option>
-                    <option>Canada</option>
-                  </select>
+              {cartItems.map((item) => {
+                return (
+                  <CartItem
+                    key={item.id}
+                    title={item.name}
+                    image={item.image}
+                    price={item.newPrice}
+                    quantity={item.quantity}
+                    brand={item.brand}
+                    id={item.id}
+                  />
+                );
+              })}
+
+              {/* Additional comment */}
+              <div className={styles.addComment}>
+                <h6>Additional Comments</h6>
+                <textarea
+                  //   cols="30"
+                  rows="5"
+                  placeholder="Special instruction for seller..."
+                ></textarea>
+              </div>
+
+              {/* trust banner*/}
+              <div className={styles.trust}>
+                <div className={styles.secure}>
+                  <BiSolidCheckShield size={23} />
+                  <p>Secure Shopping Guarantee</p>
                 </div>
-                <Input placeholder={"Postal Code"} />
-                <ButtonPrimary text={"CALCULATE SHIPPING"} />
+                <img src={trustImg} alt="trust" />
               </div>
-
-              {/*Coupon code  */}
-              <div className={styles.coupon}>
-                <label>
-                  <b>Coupon Code</b>
-                </label>
-                <Input placeholder={"Enter Coupon Code"} />
-                <p>Coupon code will be applied on the checkout page</p>
-              </div>
-
-              {/* Total */}
-              <div className={styles.total}>
-                <label>
-                  <b>Total</b>
-                </label>
-                <p>${total.toFixed(2)}</p>
-              </div>
-              <p>Tax included and shipping calculated at checkout</p>
             </div>
 
-            {/** Checkout */}
-            <div className={styles.checkout}>
-              <form onSubmit={checkoutHandler}>
-                <input
-                  type="checkbox"
-                  id="acceptTerm"
-                  className="form-check-input"
-                  checked={termCheck}
-                  onChange={() => setTermCheck(!termCheck)}
-                />
-                <label htmlFor="acceptTerm">
-                  I agree with <a href="/#">Terms & Conditions</a>
-                </label>
-                <ButtonPrimary
-                  text={"PROCEED TO CHECKOUT"}
-                  type={"submit"}
-                  disabled={!termCheck}
-                />
-                <ButtonSecondary
-                  text={"CONTINUE SHOPPING"}
-                  onClick={() => navigate("/")}
-                />
-              </form>
+            {/* Order Summary  */}
+            <div className={styles.orderSummary}>
+              <div className={styles.orderWrap}>
+                <h6>ORDER SUMMARY</h6>
+
+                <div className={styles.subTotal}>
+                  <label>
+                    <b>Subtotal</b>
+                  </label>
+                  <p>${subTotal.toFixed(2)}</p>
+                </div>
+
+                {/* Shipping estimate */}
+                <div className={styles.shippingEstimate}>
+                  <label>
+                    <b>Get Shipping Estimate</b>
+                  </label>
+                  <div className={styles.countries}>
+                    <select>
+                      <option>United State</option>
+                      <option>Canada</option>
+                    </select>
+                  </div>
+                  <Input placeholder={"Postal Code"} />
+                  <ButtonPrimary text={"CALCULATE SHIPPING"} />
+                </div>
+
+                {/*Coupon code  */}
+                <div className={styles.coupon}>
+                  <label>
+                    <b>Coupon Code</b>
+                  </label>
+                  <Input placeholder={"Enter Coupon Code"} />
+                  <p>Coupon code will be applied on the checkout page</p>
+                </div>
+
+                {/* Total */}
+                <div className={styles.total}>
+                  <label>
+                    <b>Total</b>
+                  </label>
+                  <p>${total.toFixed(2)}</p>
+                </div>
+                <p>Tax included and shipping calculated at checkout</p>
+              </div>
+
+              {/** Checkout */}
+              <div className={styles.checkout}>
+                <form onSubmit={checkoutHandler}>
+                  <input
+                    type="checkbox"
+                    id="acceptTerm"
+                    className="form-check-input"
+                    checked={termCheck}
+                    onChange={() => setTermCheck(!termCheck)}
+                  />
+                  <label htmlFor="acceptTerm">
+                    I agree with <a href="/#">Terms & Conditions</a>
+                  </label>
+                  <ButtonPrimary
+                    text={"PROCEED TO CHECKOUT"}
+                    type={"submit"}
+                    disabled={!termCheck}
+                  />
+                  <ButtonSecondary
+                    text={"CONTINUE SHOPPING"}
+                    onClick={() => navigate("/")}
+                  />
+                </form>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

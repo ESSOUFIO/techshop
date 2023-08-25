@@ -3,12 +3,14 @@ import productReducer from "./productSlice";
 import authReducer from "./authSlice";
 import categoryReducer from "./categorySlice";
 import brandReducer from "./brandSlice";
+import cartReducer from "./cartSlice";
 
 const rootReducer = combineReducers({
   product: productReducer,
   auth: authReducer,
   category: categoryReducer,
   brand: brandReducer,
+  cart: cartReducer,
 });
 
 export const store = configureStore({
