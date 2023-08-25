@@ -3,7 +3,6 @@ import "./App.scss";
 import {
   AboutUs,
   Admin,
-  CollectionPage,
   Collections,
   Contact,
   CreateAccount,
@@ -19,6 +18,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import OnlyAdminRoute from "./components/onlyAdmin/OnlyAdminRoute";
 import CategoryPage from "./pages/categoryPage/CategoryPage";
+import CheckoutDetails from "./pages/checkout/CheckoutDetails";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
+      },
+      {
+        path: "checkout-details",
+        element: <CheckoutDetails />,
       },
       {
         path: "auth/login",

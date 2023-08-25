@@ -11,7 +11,12 @@ import {
   selectUserName,
 } from "../../redux/authSlice";
 import Loader from "../loader/Loader";
-import { STORE_ITEMS, selectCartItems } from "../../redux/cartSlice";
+import {
+  CALCUL_TOTAL_AMOUNT,
+  CALCUL_TOTAL_QUANTITY,
+  STORE_ITEMS,
+  selectCartItems,
+} from "../../redux/cartSlice";
 
 const Header = ({ isAdmin }) => {
   const [loading, setLoading] = useState(false);
@@ -44,7 +49,9 @@ const Header = ({ isAdmin }) => {
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems]);
+    dispatch(CALCUL_TOTAL_QUANTITY());
+    dispatch(CALCUL_TOTAL_AMOUNT());
+  }, [cartItems, dispatch]);
 
   return (
     <>

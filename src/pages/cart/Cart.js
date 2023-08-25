@@ -95,6 +95,7 @@ const Cart = () => {
   const [subTotal, setSubTotal] = useState(0);
   const [total, setTotal] = useState(0);
   const [termCheck, setTermCheck] = useState(false);
+
   const navigate = useNavigate();
 
   const cartItems = useSelector(selectCartItems);
@@ -113,7 +114,10 @@ const Cart = () => {
 
   const checkoutHandler = (e) => {
     e.preventDefault();
+    navigate("/checkout-details");
   };
+
+  useEffect(() => {}, []);
 
   //Scroll to top
   useEffect(() => {
@@ -187,9 +191,9 @@ const Cart = () => {
                   <label>
                     <b>Subtotal</b>
                   </label>
-                  <p style={{ transform: "translateX(-15px)" }}>
+                  <div style={{ transform: "translateX(-15px)" }}>
                     {<FormatPrice price={total} />}
-                  </p>
+                  </div>
                 </div>
 
                 {/* Shipping estimate */}
@@ -221,9 +225,9 @@ const Cart = () => {
                   <label>
                     <b>Total</b>
                   </label>
-                  <p style={{ transform: "translateX(-15px)" }}>
+                  <div style={{ transform: "translateX(-15px)" }}>
                     {<FormatPrice price={total} />}
-                  </p>
+                  </div>
                 </div>
                 <p>Tax included and shipping calculated at checkout</p>
               </div>
