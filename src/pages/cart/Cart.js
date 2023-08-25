@@ -81,6 +81,7 @@ const CartItem = ({ id, name, image, price, quantity, brand }) => {
   );
 };
 
+/*** ============= Cart ============= */
 const Cart = () => {
   const [subTotal, setSubTotal] = useState(0);
   const [total, setTotal] = useState(0);
@@ -90,12 +91,12 @@ const Cart = () => {
   const cartItems = useSelector(selectCartItems);
 
   useEffect(() => {
-    var total = 0;
+    let total = 0;
     cartItems?.forEach((item) => {
-      total += Number(item.quantity * item.price);
+      total += Number(item.quantity * item.newPrice);
     });
     setSubTotal(total);
-  }, []);
+  }, [cartItems]);
 
   useEffect(() => {
     setTotal(subTotal);
@@ -103,7 +104,6 @@ const Cart = () => {
 
   const checkoutHandler = (e) => {
     e.preventDefault();
-    console.log(termCheck);
   };
 
   useEffect(() => {
