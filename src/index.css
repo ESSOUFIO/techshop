@@ -32,11 +32,6 @@ p {
   align-items: center;
 }
 
-.--container {
-  width: 80%;
-  margin: 0 auto;
-}
-
 html {
   font-size: 15px;
 }
@@ -96,6 +91,11 @@ a {
   &:focus::placeholder {
     color: transparent;
   }
+}
+
+.--container {
+  width: 85%;
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 1024px) {

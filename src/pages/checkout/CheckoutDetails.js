@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import {
   selectCartItems,
@@ -83,7 +83,7 @@ const CheckoutDetails = () => {
   };
 
   return (
-    <div className={styles.checkoutDetails}>
+    <div className={`--container ${styles.checkoutDetails}`}>
       <h2>Checkout Details</h2>
       <form onSubmit={submitHandler}>
         <div className={styles.container}>
@@ -288,7 +288,6 @@ const CheckoutDetails = () => {
                 </>
               )}
             </div>
-            <ButtonPrimary type="submit" text={"Proceed To Checkout"} />
           </div>
 
           <div className={styles.summary}>
@@ -314,6 +313,7 @@ const CheckoutDetails = () => {
                 />
               ))}
             </div>
+            <ButtonPrimary type="submit" text={"Proceed To Checkout"} />
           </div>
         </div>
       </form>

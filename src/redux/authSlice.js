@@ -17,7 +17,7 @@ const authSlice = createSlice({
       state.userID = action.payload.uid;
       state.userName = action.payload.displayName;
       state.email = action.payload.email;
-      if (action.payload.email === "admin@gmail.com") {
+      if (action.payload.email === process.env.REACT_APP_ADMIN_USER) {
         state.isAdmin = true;
       } else state.isAdmin = false;
     },

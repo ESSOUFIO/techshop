@@ -23,7 +23,6 @@ const CardProduct = ({
   const dispatch = useDispatch();
 
   const addToCard = () => {
-    console.log(id);
     const item = { id, name, newPrice, image: img1, brand, quantity: 1 };
     dispatch(ADD_TO_CART(item));
   };
