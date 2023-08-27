@@ -189,8 +189,9 @@ const CheckoutDetails = () => {
                 type="checkbox"
                 onChange={handleCheckAddress}
                 checked={sameAddress}
+                id="same-address"
               />
-              <label style={{ marginBottom: "10px" }}>
+              <label style={{ marginBottom: "10px" }} htmlFor="same-address">
                 My billing address is the same as my shippign address
               </label>
               {!sameAddress && (
