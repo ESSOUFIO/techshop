@@ -19,6 +19,7 @@ import "react-toastify/dist/ReactToastify.css";
 import OnlyAdminRoute from "./components/onlyAdmin/OnlyAdminRoute";
 import CategoryPage from "./pages/categoryPage/CategoryPage";
 import CheckoutDetails from "./pages/checkout/CheckoutDetails";
+import Checkout from "./pages/checkout/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: "checkout-details",
         element: <CheckoutDetails />,
+      },
+      {
+        path: "checkout",
+        element: <Checkout />,
       },
       {
         path: "auth/login",

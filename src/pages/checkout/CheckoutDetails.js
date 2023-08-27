@@ -1,31 +1,15 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import {
-  selectCartItems,
-  selectTotalAmount,
-  selectTotalQuantity,
-} from "../../redux/cartSlice";
 import styles from "./CheckoutDetails.module.scss";
 import { CountryDropdown } from "react-country-region-selector";
 import Input from "../../components/input/Input";
 import ButtonPrimary from "../../components/buttonPrimary/ButtonPrimary";
-
-const ProductCard = ({ name, quantity, unitPrice, setPrice }) => {
-  return (
-    <div className={styles.productCard}>
-      <h5>{name.substring(0, 30)}...</h5>
-      <p>
-        Quantity: <span>{quantity}</span>
-      </p>
-      <p>
-        Unit Price: <span>${unitPrice.toFixed(2)}</span>
-      </p>
-      <p>
-        Set Price: <span>${setPrice.toFixed(2)}</span>
-      </p>
-    </div>
-  );
-};
+import { useNavigate } from "react-router-dom";
+import CheckoutSummary from "../../components/checkoutSummary/CheckoutSummary";
+import { useDispatch } from "react-redux";
+import {
+  SAVE_BILLING_ADDRESS,
+  SAVE_SHIPPING_ADDRESS,
+} from "../../redux/checkoutSlice";
 
 const shippingInit = {
   name: "",
@@ -54,9 +38,8 @@ const CheckoutDetails = () => {
   const [billingAddress, setBillingAddress] = useState(billingInit);
   const [sameAddress, setSameAddress] = useState(true);
 
-  const totalQuantity = useSelector(selectTotalQuantity);
-  const totalAmount = useSelector(selectTotalAmount);
-  const cartItems = useSelector(selectCartItems);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleShipping = (e) => {
     setShippingAddress({ ...shippingAddress, [e.target.name]: e.target.value });
@@ -68,9 +51,9 @@ const CheckoutDetails = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("submit");
-
-    console.log(shippingAddress, billingAddress);
+    dispatch(SAVE_SHIPPING_ADDRESS(shippingAddress));
+    dispatch(SAVE_BILLING_ADDRESS(billingAddress));
+    navigate("/checkout");
   };
 
   const handleCheckAddress = () => {
@@ -290,29 +273,8 @@ const CheckoutDetails = () => {
             </div>
           </div>
 
-          <div className={styles.summary}>
-            <div className={styles.card}>
-              <h4>Checkout Summary</h4>
-
-              <p>
-                Cart item (s): <b>{totalQuantity}</b>
-              </p>
-
-              <div className={styles.subtotal}>
-                <h5>Subtotal:</h5>
-                <p>${totalAmount.toFixed(2)}</p>
-              </div>
-
-              {cartItems.map((item, index) => (
-                <ProductCard
-                  key={index}
-                  name={item.name}
-                  quantity={item.quantity}
-                  unitPrice={item.newPrice}
-                  setPrice={item.newPrice * item.quantity}
-                />
-              ))}
-            </div>
+          <div style={{ width: "100%" }}>
+            <CheckoutSummary />
             <ButtonPrimary type="submit" text={"Proceed To Checkout"} />
           </div>
         </div>

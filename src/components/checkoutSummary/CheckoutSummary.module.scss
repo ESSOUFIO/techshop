@@ -1,0 +1,55 @@
+.summary {
+  width: 100%;
+
+  .card {
+    width: 100%;
+    background-color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba($color: #000000, $alpha: 0.12);
+    margin-bottom: 10px;
+  }
+
+  .card {
+    & > h5 {
+      margin: 8px 0 15px;
+    }
+
+    & > p {
+      font-size: 15px;
+      margin: 5px 0;
+    }
+
+    .subtotal {
+      display: flex;
+      justify-content: space-between;
+
+      & > p {
+        font-size: 18px;
+        font-weight: 500;
+        color: var(--color-blue);
+        margin-bottom: 8px;
+      }
+    }
+  }
+}
+
+.productCard {
+  padding: 7px;
+  border-radius: 5px;
+  border: 1px solid turquoise;
+  box-shadow: 5px 5px 8px rgba($color: #505050, $alpha: 0.1);
+  margin-bottom: 7px;
+
+  h5 {
+    font-size: 17px;
+    margin-bottom: 5px;
+  }
+  p {
+    font-size: 14px;
+    color: #6a6a6a;
+    span {
+      font-weight: 400;
+    }
+  }
+}

@@ -4,6 +4,7 @@ import authReducer from "./authSlice";
 import categoryReducer from "./categorySlice";
 import brandReducer from "./brandSlice";
 import cartReducer from "./cartSlice";
+import checkoutReducer from "./checkoutSlice";
 
 const rootReducer = combineReducers({
   product: productReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   category: categoryReducer,
   brand: brandReducer,
   cart: cartReducer,
+  checkout: checkoutReducer,
 });
 
 export const store = configureStore({
