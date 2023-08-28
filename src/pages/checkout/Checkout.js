@@ -9,8 +9,6 @@ import {
   selectBillingAddress,
   selectShippingAddress,
 } from "../../redux/checkoutSlice";
-import CheckoutSummary from "../../components/checkoutSummary/CheckoutSummary";
-import styles from "./CheckoutDetails.module.scss";
 import { toast } from "react-toastify";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
@@ -24,7 +22,7 @@ const Checkout = () => {
   const totalAmount = useSelector(selectTotalAmount);
   const shippingAddress = useSelector(selectShippingAddress);
   const billingAddress = useSelector(selectBillingAddress);
-  const description = `techsop payment: email: ${customerEmail}, Amount: ${totalAmount}`;
+  const description = `techshop payment: email: ${customerEmail}, Amount: $${totalAmount}`;
 
   useEffect(() => {
     fetch("http://localhost:4242/create-payment-intent", {
@@ -41,18 +39,15 @@ const Checkout = () => {
       .then((res) => {
         if (res.ok) {
           return res.json();
-        } else {
-          return res.json().then((json) => Promise.reject(json));
         }
+        return res.json().then((json) => Promise.reject(json));
       })
       .then((data) => setClientSecret(data.clientSecret))
       .catch((error) => {
-        setMessage(`Failed to initialize checkout: ${error.message}`);
-        toast.error("Something went wrong! ");
+        setMessage(`Failed to initialize checkout: ${error}`);
+        toast.error("Something went wrong");
       });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [cartItems, customerEmail, shippingAddress, billingAddress, description]);
 
   const appearance = {
     theme: "stripe",
@@ -63,16 +58,16 @@ const Checkout = () => {
   };
 
   return (
-    <div className={`--container ${styles.checkout}`}>
-      <CheckoutSummary />
-      <div className={styles.card}>
+    <section>
+      <div className={`--container`}>
+        {!clientSecret && <h4>{message}</h4>}
         {clientSecret && (
           <Elements options={options} stripe={stripePromise}>
             <CheckoutForm />
           </Elements>
         )}
       </div>
-    </div>
+    </section>
   );
 };
 

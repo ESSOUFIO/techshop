@@ -28,12 +28,6 @@
   }
 }
 
-.checkout {
-  padding: 30px 0;
-  display: flex;
-  gap: 15px;
-}
-
 .card {
   width: 100%;
   background-color: #fff;
@@ -42,20 +36,4 @@
   box-shadow: 0 3px 8px rgba($color: #000000, $alpha: 0.12);
   margin-bottom: 10px;
   height: 100%;
-
-  button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 20px;
-    border: none;
-    border-radius: 5px;
-    background: var(--color-blue);
-    color: #fff;
-    font-weight: 500;
-    font-size: 15px;
-
-    &:hover {
-      background: rgb(63, 63, 226);
-    }
-  }
 }
