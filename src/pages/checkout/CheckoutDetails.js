@@ -10,6 +10,7 @@ import {
   SAVE_BILLING_ADDRESS,
   SAVE_SHIPPING_ADDRESS,
 } from "../../redux/checkoutSlice";
+import { useEffect } from "react";
 
 const shippingInit = {
   name: "",
@@ -64,6 +65,14 @@ const CheckoutDetails = () => {
     }
     setSameAddress(!sameAddress);
   };
+
+  //scroll to top
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   return (
     <div className={`--container ${styles.checkoutDetails}`}>

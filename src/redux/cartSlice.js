@@ -22,18 +22,12 @@ const cartSlice = createSlice({
       if (itemIndex >= 0) {
         state.cartItems[itemIndex].quantity += 1;
         toast.success(
-          `"${action.payload.name.substring(0, 15)}..." increased by one`,
-          {
-            position: "top-left",
-          }
+          `"${action.payload.name.substring(0, 15)}..." increased by one`
         );
       } else {
         state.cartItems.push(action.payload);
         toast.success(
-          `"${action.payload.name.substring(0, 15)}..." added to the cart`,
-          {
-            position: "top-left",
-          }
+          `"${action.payload.name.substring(0, 15)}..." added to the cart`
         );
       }
     },

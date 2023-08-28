@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ProductPage.module.scss";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import reviews from "../../reviews.json";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -19,9 +19,10 @@ import trustImg from "../../assets/images/trust-banner.webp";
 import ReviewCard from "../../components/reviewCard/ReviewCard";
 import CardSlider from "../../components/cardSlider/CardSlider";
 import BreadCrumb from "../../components/breadCrumb/BreadCrumb";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectProducts } from "../../redux/productSlice";
 import FormatPrice from "../../components/formatPrice/FormatPrice";
+import { ADD_TO_CART } from "../../redux/cartSlice";
 
 const MarginPagination = () => {
   return <div style={{ height: "30px" }}></div>;
@@ -36,6 +37,8 @@ const ProductPage = () => {
   const [sameProds, setSameProds] = useState([]);
 
   const products = useSelector(selectProducts);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const incrementQty = () => {
     setQuantity(quantity + 1);
@@ -55,6 +58,23 @@ const ProductPage = () => {
     );
     setSameProds(array);
   }, [id, product, products]);
+
+  const addToCard = () => {
+    const item = {
+      id: product.id,
+      name: product.name,
+      newPrice: product.newPrice,
+      image: product.images[0].url,
+      brand: product.brand,
+      quantity: 1,
+    };
+    dispatch(ADD_TO_CART(item));
+  };
+
+  const checkoutHandler = () => {
+    addToCard();
+    navigate("/checkout-details");
+  };
 
   //Scroll to top
   useEffect(() => {
@@ -167,7 +187,9 @@ const ProductPage = () => {
                   </div>
                   {/* Add To Cart */}
                   <div className={styles.addToCart}>
-                    <button className="--rounded">Add to Cart</button>
+                    <button className="--rounded" onClick={addToCard}>
+                      Add to Cart
+                    </button>
                     <div className={styles.wish}>
                       <GoHeart size={30} />
                     </div>
@@ -175,7 +197,9 @@ const ProductPage = () => {
 
                   {/* Checkout*/}
                   <div className={styles.checkout}>
-                    <button className="--rounded">Buy it Now</button>
+                    <button className="--rounded" onClick={checkoutHandler}>
+                      Buy it Now
+                    </button>
                   </div>
 
                   {/* Free Shipping */}

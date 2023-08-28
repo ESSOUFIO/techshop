@@ -6,9 +6,19 @@ import ButtonPrimary from "../../components/buttonPrimary/ButtonPrimary";
 import successImg from "../../assets/images/Successful purchase.png";
 import Card from "../../components/card/Card";
 import ButtonSecondary from "../../components/buttonSecondary/ButtonSecondary";
+import { useEffect } from "react";
 
 const CheckoutSuccess = () => {
   const navigate = useNavigate();
+
+  //scroll to top
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   return (
     <section>
       <div className={`--container ${styles.checkoutSuccess}`}>

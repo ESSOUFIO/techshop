@@ -15,9 +15,11 @@ import { GoHeart } from "react-icons/go";
 import trustImg from "../../assets/images/trust-banner.webp";
 import ReviewCard from "../reviewCard/ReviewCard";
 import QuantityHandler from "../quantityHandler/QuantityHandler";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectProducts } from "../../redux/productSlice";
 import FormatPrice from "../formatPrice/FormatPrice";
+import { ADD_TO_CART } from "../../redux/cartSlice";
+import { useNavigate } from "react-router";
 
 const MarginPagination = () => {
   return <div style={{ height: "30px" }}></div>;
@@ -30,6 +32,25 @@ const QuickView = ({ prodID, onHide }) => {
   const [subtotal, setSubtotal] = useState(null);
 
   const products = useSelector(selectProducts);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const addToCard = () => {
+    const item = {
+      id: product.id,
+      name: product.name,
+      newPrice: product.newPrice,
+      image: product.images[0].url,
+      brand: product.brand,
+      quantity: 1,
+    };
+    dispatch(ADD_TO_CART(item));
+  };
+
+  const checkoutHandler = () => {
+    addToCard();
+    navigate("/checkout-details");
+  };
 
   useEffect(() => {
     setSubtotal(product?.newPrice * quantity);
@@ -134,7 +155,9 @@ const QuickView = ({ prodID, onHide }) => {
                 </div>
                 {/* Add To Cart */}
                 <div className={styles.addToCart}>
-                  <button className="--rounded">Add to Cart</button>
+                  <button className="--rounded" onClick={addToCard}>
+                    Add to Cart
+                  </button>
                   <div className={styles.wish}>
                     <GoHeart size={30} />
                   </div>
@@ -142,7 +165,9 @@ const QuickView = ({ prodID, onHide }) => {
 
                 {/* Checkout*/}
                 <div className={styles.checkout}>
-                  <button className="--rounded">Buy it Now</button>
+                  <button className="--rounded" onClick={checkoutHandler}>
+                    Buy it Now
+                  </button>
                 </div>
 
                 {/* Trust */}
