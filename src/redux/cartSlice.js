@@ -70,6 +70,11 @@ const cartSlice = createSlice({
       );
       state.totalAmount = totalA;
     },
+    CLEAR_CART: (state) => {
+      state.cartItems = [];
+      state.totalQuantity = 0;
+      state.totalAmount = 0;
+    },
   },
 });
 
@@ -81,6 +86,7 @@ export const {
   REMOVE_ITEM,
   CALCUL_TOTAL_QUANTITY,
   CALCUL_TOTAL_AMOUNT,
+  CLEAR_CART,
 } = cartSlice.actions;
 
 export const selectCartItems = (state) => state.cart.cartItems;

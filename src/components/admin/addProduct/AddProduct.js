@@ -215,7 +215,7 @@ const AddProduct = () => {
 
   useEffect(() => {
     const newPrice = product.price * (1 - product.offValue / 100);
-    setProduct({ ...product, newPrice });
+    setProduct({ ...product, newPrice: Math.round(newPrice * 100) / 100 });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product.price, product.offValue]);
 

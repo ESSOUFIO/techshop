@@ -8,9 +8,10 @@ import CheckoutSummary from "../checkoutSummary/CheckoutSummary";
 import styles from "./CheckoutForm.module.scss";
 import { toast } from "react-toastify";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
-import { useSelector } from "react-redux";
-import { selectTotalAmount } from "../../redux/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { CLEAR_CART, selectTotalAmount } from "../../redux/cartSlice";
 import { db } from "../../firebase/config";
+import { useNavigate } from "react-router";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
@@ -19,6 +20,8 @@ export default function CheckoutForm() {
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const totalAmount = useSelector(selectTotalAmount);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!stripe) {
@@ -43,32 +46,41 @@ export default function CheckoutForm() {
 
     setIsLoading(true);
 
-    const { error } = await stripe
+    await stripe
       .confirmPayment({
         elements,
         confirmParams: {
-          return_url: "http://localhost:3000/checkout-success",
+          return_url: "http://localhost:3000",
         },
+        redirect: "if_required",
       })
       .then((result) => {
+        // if (result.error) {
+        //   toast.error(result.error.message);
+        //   setMessage(result.error.message);
+        //   return;
+        // }
+
         if (result.paymentIntent.status === "succeeded") {
           toast.success("Payment Successful.");
           try {
             saveOrder();
+            dispatch(CLEAR_CART());
+            navigate("/checkout-success");
           } catch (error) {
-            toast.error(error.message);
+            toast.error(error);
           }
         }
       })
       .finally(() => setIsLoading(false));
 
-    if (error.type === "card_error" || error.type === "validation_error") {
-      setMessage(error.message);
-      toast.success(error.message);
-    } else {
-      setMessage("An unexpected error occurred.");
-      toast.success("An unexpected error occurred.");
-    }
+    // if (error.type === "card_error" || error.type === "validation_error") {
+    //   setMessage(error.message);
+    //   toast.success(error.message);
+    // } else {
+    //   setMessage("An unexpected error occurred.");
+    //   toast.success("An unexpected error occurred.");
+    // }
   };
 
   const paymentElementOptions = {

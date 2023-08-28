@@ -36,12 +36,7 @@ const Checkout = () => {
         description,
       }),
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return res.json().then((json) => Promise.reject(json));
-      })
+      .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret))
       .catch((error) => {
         setMessage(`Failed to initialize checkout: ${error}`);
@@ -59,7 +54,10 @@ const Checkout = () => {
 
   return (
     <section>
-      <div className={`--container`}>
+      <div
+        className={`--container`}
+        style={{ paddingTop: "30px", paddingBottom: "30px" }}
+      >
         {!clientSecret && <h4>{message}</h4>}
         {clientSecret && (
           <Elements options={options} stripe={stripePromise}>
