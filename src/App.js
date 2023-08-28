@@ -20,6 +20,7 @@ import OnlyAdminRoute from "./components/onlyAdmin/OnlyAdminRoute";
 import CategoryPage from "./pages/categoryPage/CategoryPage";
 import CheckoutDetails from "./pages/checkout/CheckoutDetails";
 import Checkout from "./pages/checkout/Checkout";
+import CheckoutSuccess from "./pages/checkoutSuccess/CheckoutSuccess";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "checkout",
         element: <Checkout />,
+      },
+      {
+        path: "checkout-success",
+        element: <CheckoutSuccess />,
       },
       {
         path: "auth/login",
