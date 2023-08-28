@@ -1,0 +1,127 @@
+.orderList {
+  padding: 20px;
+  width: 100%;
+
+  h2 {
+    font-size: 23px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .table {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    margin-top: 20px;
+
+    .name {
+      min-width: 250px;
+    }
+
+    .mobileContent,
+    .tabletContent {
+      display: none;
+    }
+
+    thead {
+      border-top: 2px solid #4e73df;
+      border-bottom: 2px solid #4e73df;
+    }
+
+    th,
+    td {
+      text-align: center;
+      padding: 8px;
+      border-left: 1px solid rgb(233, 233, 233);
+      border-right: 1px solid rgb(233, 233, 233);
+      height: 100%;
+    }
+
+    tbody tr td:last-of-type {
+      min-width: 80px;
+      .icon:hover {
+        cursor: pointer;
+        opacity: 0.6;
+      }
+    }
+
+    tr {
+      border-bottom: 1px solid #ccc;
+    }
+
+    tr:nth-child(even) {
+      background-color: #fff;
+    }
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
+    ul {
+      display: flex;
+      margin: 0 auto;
+      border-right: 1px solid lightgray;
+
+      li {
+        margin: 0;
+        padding: 6px 12px;
+        border: 1px solid lightgray;
+        border-right: none;
+
+        &:disabled {
+          color: #ff0000;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 930px) {
+    .largItems {
+      display: none;
+    }
+
+    table .tabletContent {
+      display: block;
+      margin-top: 8px;
+      p {
+        font-size: 13px;
+        color: #000;
+        margin-bottom: 3px;
+
+        span {
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 630px) {
+    padding: 20px 8px;
+    table {
+      .name {
+        min-width: 100px;
+      }
+      .actions {
+        display: none;
+      }
+      .mobileContent {
+        display: block;
+        margin-top: 5px;
+
+        .icon:hover {
+          cursor: pointer;
+          opacity: 0.6;
+        }
+      }
+    }
+  }
+}

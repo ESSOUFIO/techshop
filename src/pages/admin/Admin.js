@@ -11,7 +11,6 @@ import { BsApple } from "react-icons/bs";
 import { TfiApple } from "react-icons/tfi";
 import ProductsList from "../../components/admin/productsList/ProductsList";
 import AddProduct from "../../components/admin/addProduct/AddProduct";
-import Orders from "../../components/admin/orders/Orders";
 import CategoriesList from "../../components/admin/categoriesList/CategoriesList";
 import AddCategory from "../../components/admin/addCategory/AddCategory";
 import { useState } from "react";
@@ -24,6 +23,8 @@ import Loader from "../../components/loader/Loader";
 import AddBrand from "../../components/admin/addBrand/AddBrand";
 import BrandsList from "../../components/admin/brandsList/BrandsList";
 import { STORE_BRAND } from "../../redux/brandSlice";
+import { STORE_ORDERS } from "../../redux/orderSlice";
+import OrdersList from "../../components/admin/ordersList/OrdersList";
 
 const NavItem = ({ icon, label, path }) => {
   return (
@@ -70,6 +71,22 @@ const Admin = () => {
       });
 
       dispatch(STORE_BRAND(array));
+      setLoading(false);
+    });
+    return () => unsub();
+  }, [dispatch]);
+
+  //Get Real-Time of Brands List
+  useEffect(() => {
+    setLoading(true);
+    const q = query(collection(db, "orders"), orderBy("createdAt"));
+    const unsub = onSnapshot(q, (snapshot) => {
+      const array = [];
+      snapshot.forEach((doc) => {
+        array.push({ ...doc.data(), id: doc.id });
+      });
+
+      dispatch(STORE_ORDERS(array));
       setLoading(false);
     });
     return () => unsub();
@@ -157,7 +174,7 @@ const Admin = () => {
           <Route path="category/:id" element={<AddCategory />} />
           <Route path="brand/:id" element={<AddBrand />} />
           <Route path="brands" element={<BrandsList />} />
-          <Route path="orders" element={<Orders />} />
+          <Route path="orders" element={<OrdersList />} />
         </Routes>
       </div>
 

@@ -7,6 +7,10 @@ import {
 import CheckoutSummary from "../checkoutSummary/CheckoutSummary";
 import styles from "./CheckoutForm.module.scss";
 import { toast } from "react-toastify";
+import { Timestamp, addDoc, collection } from "firebase/firestore";
+import { useSelector } from "react-redux";
+import { selectTotalAmount } from "../../redux/cartSlice";
+import { db } from "../../firebase/config";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
@@ -14,6 +18,7 @@ export default function CheckoutForm() {
 
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const totalAmount = useSelector(selectTotalAmount);
 
   useEffect(() => {
     if (!stripe) {
@@ -48,7 +53,11 @@ export default function CheckoutForm() {
       .then((result) => {
         if (result.paymentIntent.status === "succeeded") {
           toast.success("Payment Successful.");
-          saveOrder();
+          try {
+            saveOrder();
+          } catch (error) {
+            toast.error(error.message);
+          }
         }
       })
       .finally(() => setIsLoading(false));
@@ -66,8 +75,13 @@ export default function CheckoutForm() {
     layout: "tabs",
   };
 
-  const saveOrder = () => {
-    console.log("Save Order");
+  const saveOrder = async () => {
+    const newOrder = {
+      createdAt: Timestamp.now().toDate(),
+      status: "Order Placed",
+      amount: totalAmount,
+    };
+    await addDoc(collection(db, "orders"), newOrder);
   };
 
   return (
