@@ -76,7 +76,7 @@ const Admin = () => {
     return () => unsub();
   }, [dispatch]);
 
-  //Get Real-Time of Brands List
+  //Get Real-Time of Orders List
   useEffect(() => {
     setLoading(true);
     const q = query(collection(db, "orders"), orderBy("createdAt"));
@@ -132,6 +132,14 @@ const Admin = () => {
             />
 
             <hr />
+            <h6>ORDERS</h6>
+            <NavItem
+              icon={<TbDatabaseDollar size={19} />}
+              label={"View Orders"}
+              path={"orders"}
+            />
+
+            <hr />
             <h6>CATEGORIES</h6>
             <NavItem
               icon={<BiSolidCategory className={styles["navItem-icon"]} />}
@@ -155,14 +163,6 @@ const Admin = () => {
               icon={<TfiApple size={19} />}
               label={"Add Brand"}
               path={"brand/new"}
-            />
-            <hr />
-
-            <h6>ORDERS</h6>
-            <NavItem
-              icon={<TbDatabaseDollar size={19} />}
-              label={"View Orders"}
-              path={"orders"}
             />
           </nav>
         </div>
