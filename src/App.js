@@ -22,6 +22,8 @@ import CheckoutDetails from "./pages/checkout/CheckoutDetails";
 import Checkout from "./pages/checkout/Checkout";
 import CheckoutSuccess from "./pages/checkoutSuccess/CheckoutSuccess";
 import OrderHistory from "./pages/order/OrderHistory";
+import MyOrders from "./pages/myOrders/MyOrders";
+import MyOrderDetails from "./pages/myOrderDetails/MyOrderDetails";
 
 const router = createBrowserRouter([
   {
@@ -73,8 +75,13 @@ const router = createBrowserRouter([
         element: <CheckoutSuccess />,
       },
       {
-        path: "order-history",
-        element: <OrderHistory />,
+        path: "my-orders",
+        element: <MyOrders />,
+      },
+
+      {
+        path: "my-order/details/:id",
+        element: <MyOrderDetails />,
       },
 
       {

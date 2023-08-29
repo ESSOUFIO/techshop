@@ -1,37 +1,44 @@
 import React, { useState } from "react";
-import styles from "./OrdersList.module.scss";
+import styles from "./MyOrders.module.scss";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import ReactPaginate from "react-paginate";
-import { selectOrders } from "../../../redux/orderSlice";
+import { useEffect } from "react";
+import { selectUserID } from "../../redux/authSlice";
+import { collection, getDocs, query, where } from "@firebase/firestore";
+import { db } from "../../firebase/config";
+import Loader from "../../components/loader/Loader";
 
-const OrdersList = () => {
-  const orders = useSelector(selectOrders);
+const MyOrders = () => {
+  const [myOrders, setMyOrders] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const userID = useSelector(selectUserID);
 
-  //** =======   PAGINATION   ===== */
-  const itemsPerPage = 20;
-
-  const [itemOffset, setItemOffset] = useState(0);
-  const endOffset = itemOffset + itemsPerPage;
-  const currentItems = orders.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(orders.length / itemsPerPage);
-
-  // Invoke when user click to request another page.
-  const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % orders.length;
-    setItemOffset(newOffset);
-  };
+  useEffect(() => {
+    const getMyOrders = async () => {
+      setIsLoading(true);
+      const q = query(collection(db, "orders"), where("userID", "==", userID));
+      const querySnapshot = await getDocs(q);
+      let array = [];
+      querySnapshot.forEach((doc) => {
+        array.push({ ...doc.data(), id: doc.id });
+        console.log(doc.id, " => ", doc.data());
+      });
+      setMyOrders(array);
+      setIsLoading(false);
+    };
+    getMyOrders();
+  }, [userID]);
 
   return (
     <>
-      <div className={styles.orderList}>
+      <div className={`--container ${styles.orderList}`}>
         <h2>Orders List</h2>
         <p>
           Open an order to Change <b>Order Status</b>
         </p>
 
-        {orders.length === 0 ? (
+        {myOrders.length === 0 ? (
           <p>-- No orders founds --</p>
         ) : (
           <div className={styles.table}>
@@ -47,16 +54,14 @@ const OrdersList = () => {
                 </tr>
               </thead>
               <tbody>
-                {currentItems.map((order, index) => {
+                {myOrders.map((order, index) => {
                   return (
                     <tr
                       key={order.id}
                       style={{ cursor: "pointer" }}
-                      onClick={() =>
-                        navigate(`/admin/order-details/${order.id}`)
-                      }
+                      onClick={() => navigate(`/my-order/details/${order.id}`)}
                     >
-                      <td>{index + itemOffset + 1}</td>
+                      <td>{index + 1}</td>
                       <td className={styles.largItems}>
                         {order.orderDate + " at " + order.orderTime}
                       </td>
@@ -92,23 +97,13 @@ const OrdersList = () => {
                 })}
               </tbody>
             </table>
-
-            <div className={`pagination`}>
-              <ReactPaginate
-                breakLabel="..."
-                nextLabel="next >"
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={5}
-                pageCount={pageCount}
-                previousLabel="< prev"
-                renderOnZeroPageCount={null}
-              />
-            </div>
           </div>
         )}
       </div>
+
+      {isLoading && <Loader />}
     </>
   );
 };
 
-export default OrdersList;
+export default MyOrders;

@@ -26,6 +26,11 @@ const MyAccountMenu = ({ show, onHide, userName }) => {
         onHide();
       });
   };
+
+  const myOrders = () => {
+    navigate("/my-orders");
+    onHide();
+  };
   return (
     <>
       <SideMenu
@@ -37,9 +42,9 @@ const MyAccountMenu = ({ show, onHide, userName }) => {
         <div className={styles.myAccount}>
           <ul>
             <li>My Account Informations</li>
-            <li>My Orders</li>
+            <li onClick={myOrders}>My Orders</li>
             <li>My Addresses</li>
-            <li onClick={() => logoutHandler()}>Log Out</li>
+            <li onClick={logoutHandler}>Log Out</li>
           </ul>
         </div>
       </SideMenu>
