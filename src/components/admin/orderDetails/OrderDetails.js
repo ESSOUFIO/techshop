@@ -134,7 +134,7 @@ const OrderDetails = () => {
 
             <div className={styles.card}>
               <h5>Update Status</h5>
-              <label>Select new Status: </label>
+              <label>Select the new order Status: </label>
               <Select
                 ref={statusRef}
                 value={{ value: status, label: status }}
