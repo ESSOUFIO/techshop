@@ -84,21 +84,21 @@ const CategoriesList = () => {
           <IoSearch size={20} className={styles.searchIcon} />
         </div>
 
-        <div className={styles.table}>
-          <table>
-            <thead>
-              <tr>
-                <th>s/n</th>
-                <th>Image</th>
-                <th style={{ textAlign: "left" }}>ID</th>
-                <th style={{ textAlign: "left" }}>Name</th>
-                <th className={styles.actions}>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filtredCateg === [] ? (
-                <p>No categories founds.</p>
-              ) : (
+        {filtredCateg === [] ? (
+          <p>No categories founds.</p>
+        ) : (
+          <div className={styles.table}>
+            <table>
+              <thead>
+                <tr>
+                  <th>s/n</th>
+                  <th>Image</th>
+                  <th style={{ textAlign: "left" }}>ID</th>
+                  <th style={{ textAlign: "left" }}>Name</th>
+                  <th className={styles.actions}>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
                 <>
                   {filtredCateg.map((item, index) => {
                     return (
@@ -135,10 +135,10 @@ const CategoriesList = () => {
                     );
                   })}
                 </>
-              )}
-            </tbody>
-          </table>
-        </div>
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
 
       {loading && <Loader />}

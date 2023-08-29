@@ -25,6 +25,7 @@ import BrandsList from "../../components/admin/brandsList/BrandsList";
 import { STORE_BRAND } from "../../redux/brandSlice";
 import { STORE_ORDERS } from "../../redux/orderSlice";
 import OrdersList from "../../components/admin/ordersList/OrdersList";
+import OrderDetails from "../../components/admin/orderDetails/OrderDetails";
 
 const NavItem = ({ icon, label, path }) => {
   return (
@@ -175,6 +176,7 @@ const Admin = () => {
           <Route path="brand/:id" element={<AddBrand />} />
           <Route path="brands" element={<BrandsList />} />
           <Route path="orders" element={<OrdersList />} />
+          <Route path="order-details/:id" element={<OrderDetails />} />
         </Routes>
       </div>
 

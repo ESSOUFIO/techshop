@@ -53,7 +53,13 @@ const OrdersList = () => {
               <tbody>
                 {currentItems.map((order, index) => {
                   return (
-                    <tr key={order.id}>
+                    <tr
+                      key={order.id}
+                      style={{ cursor: "pointer" }}
+                      onClick={() =>
+                        navigate(`/admin/order-details/${order.id}`)
+                      }
+                    >
                       <td>{index + itemOffset + 1}</td>
                       <td className={styles.largItems}>
                         {order.orderDate + " at " + order.orderTime}
@@ -64,15 +70,15 @@ const OrdersList = () => {
                       </td>
                       <td className={styles.mobileItems}>
                         <div>
-                          Order ID:
-                          <b> {order.id}</b>
+                          <b>Order ID: </b>
+                          {order.id}
                         </div>
                         <div>
-                          Date:{" "}
-                          <b>{order.orderDate + " at " + order.orderTime}</b>
+                          <b>Date: </b>
+                          {order.orderDate + " at " + order.orderTime}
                         </div>
                         <div>
-                          Amount: <b>${order.amount.toFixed(2)}</b>
+                          <b>Amount: </b>${order.amount.toFixed(2)}
                         </div>
                       </td>
                       <td

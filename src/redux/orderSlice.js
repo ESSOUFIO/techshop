@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   orders: [],
   myOrders: [],
+  orderDetails: "",
 };
 
 const orderSlice = createSlice({
