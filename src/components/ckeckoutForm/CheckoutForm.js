@@ -9,7 +9,11 @@ import styles from "./CheckoutForm.module.scss";
 import { toast } from "react-toastify";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
-import { CLEAR_CART, selectTotalAmount } from "../../redux/cartSlice";
+import {
+  CLEAR_CART,
+  selectCartItems,
+  selectTotalAmount,
+} from "../../redux/cartSlice";
 import { db } from "../../firebase/config";
 import { useNavigate } from "react-router";
 import { selectShippingAddress } from "../../redux/checkoutSlice";
@@ -26,6 +30,7 @@ export default function CheckoutForm() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const orderItems = useSelector(selectCartItems);
 
   useEffect(() => {
     if (!stripe) {
@@ -89,6 +94,7 @@ export default function CheckoutForm() {
       orderTime,
       status: "Order Placed",
       amount: totalAmount,
+      orderItems,
       createdAt: Timestamp.now().toDate(),
     };
     await addDoc(collection(db, "orders"), newOrder);
