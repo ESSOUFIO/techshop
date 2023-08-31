@@ -6,6 +6,7 @@ import brandReducer from "./brandSlice";
 import cartReducer from "./cartSlice";
 import checkoutReducer from "./checkoutSlice";
 import orderReducer from "./orderSlice";
+import wishReducer from "./wishSlice";
 
 const rootReducer = combineReducers({
   product: productReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   checkout: checkoutReducer,
   order: orderReducer,
+  wish: wishReducer,
 });
 
 export const store = configureStore({

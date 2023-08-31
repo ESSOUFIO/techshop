@@ -9,8 +9,9 @@ import { toast } from "react-toastify";
 
 // firebase
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "../../firebase/config";
+import { auth, db } from "../../firebase/config";
 import Loader from "../../components/loader/Loader";
+import { doc, setDoc } from "firebase/firestore";
 
 const CreateAccount = () => {
   const [firstName, setFirstName] = useState("");
@@ -20,7 +21,18 @@ const CreateAccount = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const registerHandler = (e) => {
+  const addUser = async (user) => {
+    // create user document on Firestore
+    await setDoc(doc(db, "users", user.uid), {
+      name: user.displayName,
+      email: user.email,
+      uid: user.uid,
+      wishList: [],
+      address: "",
+    });
+  };
+
+  const registerHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
@@ -30,6 +42,8 @@ const CreateAccount = () => {
         }).then(() => {
           // Signed in
           const user = userCredential.user;
+          addUser(user);
+
           toast.success(`Hi ${user.displayName}! Registration Successful..`);
           navigate("/");
         });

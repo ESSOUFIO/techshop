@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import HeaderLaptop from "./headerLaptop/HeaderLaptop";
 import HeaderMobile from "./headerMobile/HeaderMobile";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../firebase/config";
+import { auth, db } from "../../firebase/config";
 import { useDispatch, useSelector } from "react-redux";
 import {
   LOGOUT_USER,
   SET_ACTIVE_USER,
   selectIsLoggedIn,
+  selectUserID,
   selectUserName,
 } from "../../redux/authSlice";
 import Loader from "../loader/Loader";
@@ -18,6 +19,9 @@ import {
   selectCartItems,
 } from "../../redux/cartSlice";
 
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { SAVE_WISH_LIST } from "../../redux/wishSlice";
+
 const Header = ({ isAdmin }) => {
   const [loading, setLoading] = useState(false);
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -25,6 +29,7 @@ const Header = ({ isAdmin }) => {
   const dispatch = useDispatch();
 
   const cartItems = useSelector(selectCartItems);
+  const uid = useSelector(selectUserID);
   // console.log(cartItems);
 
   useEffect(() => {
@@ -52,6 +57,22 @@ const Header = ({ isAdmin }) => {
     dispatch(CALCUL_TOTAL_QUANTITY());
     dispatch(CALCUL_TOTAL_AMOUNT());
   }, [cartItems, dispatch]);
+
+  //Get Real-Time of Wish List
+  useEffect(() => {
+    setLoading(true);
+    const q = query(collection(db, "users"), where("uid", "==", uid));
+    const unsub = onSnapshot(q, (snapshot) => {
+      let array = [];
+      snapshot.forEach((doc) => {
+        array = doc.data().wishList;
+      });
+
+      dispatch(SAVE_WISH_LIST(array));
+      setLoading(false);
+    });
+    return () => unsub();
+  }, [dispatch, uid]);
 
   return (
     <>

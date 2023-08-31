@@ -21,6 +21,7 @@ import FeaturedBrands from "../../sections/featuredBrands/FeaturedBrands";
 import WhyShopWithUs from "../../sections/whyShopWithUs/WhyShopWithUs";
 import { useSelector } from "react-redux";
 import { selectProducts } from "../../redux/productSlice";
+import { BiSolidUpArrow } from "react-icons/bi";
 
 const CyberMondayBanner = () => {
   return (
@@ -64,11 +65,15 @@ const HomeApplianceBanner = () => {
 const Home = () => {
   const products = useSelector(selectProducts);
 
-  useEffect(() => {
+  const topPageHandler = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
+  };
+
+  useEffect(() => {
+    topPageHandler();
   }, []);
 
   return (
@@ -87,6 +92,10 @@ const Home = () => {
       <HomeApplianceBanner />
       <FeaturedBrands />
       <WhyShopWithUs />
+
+      <div className={styles.topPageBtn} onClick={topPageHandler}>
+        <BiSolidUpArrow color="#fff" size={20} />
+      </div>
     </div>
   );
 };

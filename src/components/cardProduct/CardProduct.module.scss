@@ -179,6 +179,13 @@
     font-weight: 500;
   }
 
+  .wishIcon {
+    transition: all 0.5s;
+    &:active {
+      transform: scale(1.1);
+    }
+  }
+
   @media screen and (max-width: 600px) {
     .title {
       font-size: 14px;

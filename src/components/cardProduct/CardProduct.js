@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./CardProduct.module.scss";
-import { GoHeart } from "react-icons/go";
+import { GoHeart, GoHeartFill } from "react-icons/go";
 import QuickView from "../quickView/QuickView";
 import { useNavigate } from "react-router-dom";
 import FormatPrice from "../formatPrice/FormatPrice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ADD_TO_CART } from "../../redux/cartSlice";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../../firebase/config";
+import { selectUserID } from "../../redux/authSlice";
+import { selectWishList } from "../../redux/wishSlice";
 
 const CardProduct = ({
   img1,
@@ -17,15 +21,52 @@ const CardProduct = ({
   price,
   id,
 }) => {
+  const [isWish, setIsWish] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [showQuickView, setShowQuickView] = useState(false);
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const uid = useSelector(selectUserID);
+  const wishList = useSelector(selectWishList);
 
   const addToCard = () => {
     const item = { id, name, newPrice, image: img1, brand, quantity: 1 };
     dispatch(ADD_TO_CART(item));
   };
+
+  const wishListHandler = async () => {
+    let newList = Array.from(wishList);
+    setIsLoading(true);
+
+    if (isWish) {
+      const array = Array.from(wishList);
+      newList = array.filter((item) => item !== id);
+    } else {
+      newList.push(id);
+    }
+
+    const userRef = doc(db, "users", uid);
+    await updateDoc(userRef, {
+      wishList: newList,
+    });
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    const array = Array.from(wishList);
+    const addedToWish = array.includes(id);
+    setIsWish(addedToWish);
+    console.log("array ", array, addedToWish);
+  }, [wishList, id]);
+
+  if (isLoading) {
+    document.body.style.cursor = "wait";
+  } else {
+    document.body.style.cursor = "default";
+  }
+
+  console.log("wish: ", wishList);
 
   return (
     <>
@@ -86,8 +127,11 @@ const CardProduct = ({
           <button className="--rounded" onClick={addToCard}>
             Add to Cart
           </button>
-          <div className={styles.wish}>
-            <GoHeart size={24} />
+          <div className={styles.wish} onClick={wishListHandler}>
+            {!isWish && <GoHeart className={styles.wishIcon} size={24} />}
+            {isWish && (
+              <GoHeartFill className={styles.wishIcon} color="red" size={24} />
+            )}
           </div>
         </div>
       </div>
