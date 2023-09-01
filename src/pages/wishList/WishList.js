@@ -7,12 +7,18 @@ import { useSelector } from "react-redux";
 import { selectProducts } from "../../redux/productSlice";
 import { selectWishList } from "../../redux/wishSlice";
 import CardProduct from "../../components/cardProduct/CardProduct";
+import BackHomeBtn from "../../components/backHomeBtn/BackHomeBtn";
+import { selectIsLoggedIn } from "../../redux/authSlice";
+import ButtonPrimary from "../../components/buttonPrimary/ButtonPrimary";
+import { useNavigate } from "react-router-dom";
 
 const WishList = () => {
   const [prods, setProds] = useState([]);
 
   const products = useSelector(selectProducts);
   const wishList = useSelector(selectWishList);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getProd = (id) => {
@@ -35,30 +41,48 @@ const WishList = () => {
       behavior: "smooth",
     });
   }, []);
+
   return (
     <section>
       <BreadCrumb page1={"Wish List"} />
       <div className={`--container ${styles.wishList}`}>
         <h2>Wish List</h2>
 
-        <div className={styles.content}>
-          {prods.map((prod, index) => {
-            const { id, name, brand, images, price, newPrice, offValue } = prod;
-            return (
-              <CardProduct
-                key={index}
-                img1={images[0].url}
-                img2={images[0].url}
-                name={name}
-                offValue={offValue}
-                newPrice={newPrice}
-                price={price}
-                brand={brand}
-                id={id}
-              />
-            );
-          })}
-        </div>
+        {!isLoggedIn ? (
+          <div style={{ margin: "30px 0" }}>
+            <p>You should log in to access your wish list.</p>
+            <ButtonPrimary
+              text={"Login Page"}
+              style={{ maxWidth: "200px", marginTop: "20px" }}
+              onClick={() => navigate("/auth/login")}
+            />
+          </div>
+        ) : prods.length === 0 ? (
+          <div style={{ margin: "30px 0" }}>
+            <p>You haven't added any products to your wishlist yet.</p>
+            <BackHomeBtn />
+          </div>
+        ) : (
+          <div className={styles.content}>
+            {prods.map((prod, index) => {
+              const { id, name, brand, images, price, newPrice, offValue } =
+                prod;
+              return (
+                <CardProduct
+                  key={index}
+                  img1={images[0].url}
+                  img2={images[0].url}
+                  name={name}
+                  offValue={offValue}
+                  newPrice={newPrice}
+                  price={price}
+                  brand={brand}
+                  id={id}
+                />
+              );
+            })}
+          </div>
+        )}
       </div>
     </section>
   );

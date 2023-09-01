@@ -16,8 +16,6 @@ const CategoryPage = () => {
     setProds(array);
   }, [id, products]);
 
-  console.log(prods);
-
   useEffect(() => {
     //Scroll to top
     window.scrollTo({

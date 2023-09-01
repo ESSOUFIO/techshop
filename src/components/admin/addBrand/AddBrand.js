@@ -38,7 +38,6 @@ const AddBrand = () => {
   useEffect(() => {
     const getBrand = async (id) => {
       setLoading(true);
-      console.log(id);
       const docRef = doc(db, "brands", id);
       const docSnap = await getDoc(docRef);
 

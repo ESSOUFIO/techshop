@@ -21,7 +21,6 @@ import CategoryPage from "./pages/categoryPage/CategoryPage";
 import CheckoutDetails from "./pages/checkout/CheckoutDetails";
 import Checkout from "./pages/checkout/Checkout";
 import CheckoutSuccess from "./pages/checkoutSuccess/CheckoutSuccess";
-import OrderHistory from "./pages/order/OrderHistory";
 import MyOrders from "./pages/myOrders/MyOrders";
 import MyOrderDetails from "./pages/myOrderDetails/MyOrderDetails";
 import WishList from "./pages/wishList/WishList";

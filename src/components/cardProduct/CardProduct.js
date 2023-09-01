@@ -6,10 +6,12 @@ import { useNavigate } from "react-router-dom";
 import FormatPrice from "../formatPrice/FormatPrice";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_TO_CART } from "../../redux/cartSlice";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
-import { selectUserID } from "../../redux/authSlice";
+import { selectIsLoggedIn, selectUserID } from "../../redux/authSlice";
 import { selectWishList } from "../../redux/wishSlice";
+import { toast } from "react-toastify";
+import LoginMenu from "../header/loginMenu/LoginMenu";
 
 const CardProduct = ({
   img1,
@@ -24,26 +26,41 @@ const CardProduct = ({
   const [isWish, setIsWish] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showQuickView, setShowQuickView] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const uid = useSelector(selectUserID);
   const wishList = useSelector(selectWishList);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const addToCard = () => {
     const item = { id, name, newPrice, image: img1, brand, quantity: 1 };
     dispatch(ADD_TO_CART(item));
   };
 
+  const triggerShowUserMenu = () => {
+    setShowUserMenu(!showUserMenu);
+  };
+
   const wishListHandler = async () => {
+    if (!isLoggedIn) {
+      triggerShowUserMenu();
+      return;
+    }
+
     let newList = Array.from(wishList);
     setIsLoading(true);
 
     if (isWish) {
       const array = Array.from(wishList);
       newList = array.filter((item) => item !== id);
+      toast.success(
+        `"${name.substring(0, 20)}..." removed from your Wish List.`
+      );
     } else {
       newList.push(id);
+      toast.success(`"${name.substring(0, 20)}..." added to your Wish List.`);
     }
 
     const userRef = doc(db, "users", uid);
@@ -57,7 +74,6 @@ const CardProduct = ({
     const array = Array.from(wishList);
     const addedToWish = array.includes(id);
     setIsWish(addedToWish);
-    console.log("array ", array, addedToWish);
   }, [wishList, id]);
 
   if (isLoading) {
@@ -65,8 +81,6 @@ const CardProduct = ({
   } else {
     document.body.style.cursor = "default";
   }
-
-  console.log("wish: ", wishList);
 
   return (
     <>
@@ -138,6 +152,8 @@ const CardProduct = ({
       {showQuickView && (
         <QuickView onHide={() => setShowQuickView(false)} prodID={id} />
       )}
+
+      <LoginMenu show={showUserMenu} onHide={triggerShowUserMenu} />
     </>
   );
 };

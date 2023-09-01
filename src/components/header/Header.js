@@ -30,7 +30,6 @@ const Header = ({ isAdmin }) => {
 
   const cartItems = useSelector(selectCartItems);
   const uid = useSelector(selectUserID);
-  // console.log(cartItems);
 
   useEffect(() => {
     setLoading(true);

@@ -22,7 +22,6 @@ const MyOrders = () => {
       let array = [];
       querySnapshot.forEach((doc) => {
         array.push({ ...doc.data(), id: doc.id });
-        console.log(doc.id, " => ", doc.data());
       });
       setMyOrders(array);
       setIsLoading(false);

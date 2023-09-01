@@ -1,9 +1,10 @@
 import React from "react";
 import styles from "./SideMenu.module.scss";
 import { IoMdClose } from "react-icons/io";
+import ReactDOM from "react-dom";
 
 const SideMenu = ({ show, onHide, title, position, children }) => {
-  return (
+  return ReactDOM.createPortal(
     <div
       className={
         show
@@ -37,7 +38,8 @@ const SideMenu = ({ show, onHide, title, position, children }) => {
         }
         onClick={onHide}
       ></div>
-    </div>
+    </div>,
+    document.getElementById("sideMenu")
   );
 };
 
