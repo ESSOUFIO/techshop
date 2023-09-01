@@ -24,6 +24,7 @@ import CheckoutSuccess from "./pages/checkoutSuccess/CheckoutSuccess";
 import OrderHistory from "./pages/order/OrderHistory";
 import MyOrders from "./pages/myOrders/MyOrders";
 import MyOrderDetails from "./pages/myOrderDetails/MyOrderDetails";
+import WishList from "./pages/wishList/WishList";
 
 const router = createBrowserRouter([
   {
@@ -103,6 +104,10 @@ const router = createBrowserRouter([
             <Admin />
           </OnlyAdminRoute>
         ),
+      },
+      {
+        path: "wish-list",
+        element: <WishList />,
       },
     ],
   },

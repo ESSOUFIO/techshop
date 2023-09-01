@@ -90,7 +90,10 @@ const HeaderLaptop = ({ isLoggedIn, userName, nbrCartItems }) => {
               </div>
             </OnlyAdmin>
 
-            <div className={styles.headerIcon}>
+            <div
+              className={styles.headerIcon}
+              onClick={() => navigate("wish-list")}
+            >
               <div className={styles.icon}>
                 <IoMdHeartEmpty size={33} color={"var(--color-primary)"} />
               </div>
