@@ -1,0 +1,50 @@
+.myAddress {
+  margin-top: 20px;
+  padding: 10px;
+
+  .content {
+    display: flex;
+    gap: 20px;
+
+    table {
+      margin-top: 5px;
+      th {
+        display: flex;
+        align-items: start;
+        min-width: 100px;
+      }
+      th,
+      td {
+        padding: 5px 0;
+      }
+    }
+
+    .btnUpdate {
+      display: flex;
+      justify-content: end;
+      margin: 25px 5px 0;
+    }
+  }
+
+  h2 {
+    margin: 15px 0 30px;
+  }
+  p {
+    margin-bottom: 10px;
+  }
+
+  .card {
+    max-width: 500px;
+    width: 100%;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 8px rgba($color: #000000, $alpha: 0.2);
+    margin-bottom: 40px;
+
+    .select {
+      width: 100%;
+      border: none;
+      padding: 7px;
+    }
+  }
+}

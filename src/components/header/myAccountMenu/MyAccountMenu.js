@@ -32,6 +32,11 @@ const MyAccountMenu = ({ show, onHide, userName }) => {
     onHide();
   };
 
+  const myAddress = () => {
+    navigate("/my-address");
+    onHide();
+  };
+
   const myWishList = () => {
     navigate("wish-list");
     onHide();
@@ -48,7 +53,7 @@ const MyAccountMenu = ({ show, onHide, userName }) => {
           <ul>
             <li>My Account Informations</li>
             <li onClick={myOrders}>My Orders</li>
-            <li>My Addresses</li>
+            <li onClick={myAddress}>My Addresses</li>
             <li onClick={myWishList}>My Wish List</li>
             <li onClick={logoutHandler}>Log Out</li>
           </ul>

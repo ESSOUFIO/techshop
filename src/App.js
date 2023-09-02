@@ -24,6 +24,7 @@ import CheckoutSuccess from "./pages/checkoutSuccess/CheckoutSuccess";
 import MyOrders from "./pages/myOrders/MyOrders";
 import MyOrderDetails from "./pages/myOrderDetails/MyOrderDetails";
 import WishList from "./pages/wishList/WishList";
+import MyAddress from "./pages/myAddress/MyAddress";
 
 const router = createBrowserRouter([
   {
@@ -77,6 +78,14 @@ const router = createBrowserRouter([
       {
         path: "my-orders",
         element: <MyOrders />,
+      },
+      {
+        path: "my-orders",
+        element: <MyOrders />,
+      },
+      {
+        path: "my-address",
+        element: <MyAddress />,
       },
 
       {

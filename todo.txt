@@ -12,13 +12,11 @@ display createdAt and modifiedAt
 
 **
 
-orders
+address
 dashboard admin
-wish
 
 
 ***
 filter
 sortedby
 shipping
-button top page
