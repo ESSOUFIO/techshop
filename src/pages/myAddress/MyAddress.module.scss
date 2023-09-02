@@ -6,6 +6,11 @@
     display: flex;
     gap: 20px;
 
+    .defaultAddress {
+      width: 100%;
+      max-width: 500px;
+    }
+
     table {
       margin-top: 5px;
       th {
@@ -34,8 +39,8 @@
   }
 
   .card {
-    max-width: 500px;
     width: 100%;
+    max-width: 500px;
     padding: 15px;
     border-radius: 5px;
     box-shadow: 0 0 8px rgba($color: #000000, $alpha: 0.2);
