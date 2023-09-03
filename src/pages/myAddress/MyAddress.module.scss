@@ -19,7 +19,7 @@
       margin-top: 5px;
       th {
         display: flex;
-        align-items: start;
+        align-items: left;
         min-width: 100px;
       }
       th,
@@ -30,7 +30,7 @@
 
     .btnUpdate {
       display: flex;
-      justify-content: end;
+      justify-content: right;
       margin: 25px 5px 0;
     }
   }

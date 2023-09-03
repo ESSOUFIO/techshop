@@ -4,15 +4,12 @@ add video to banner
 
 bottom fixed bar for mobile device
 
-scoll to top when we open a product page
-
-add full description and Shipping & Return Policy to product page
+Shipping & Return Policy to product page
 
 display createdAt and modifiedAt
 
 **
 
-address
 dashboard admin
 
 
