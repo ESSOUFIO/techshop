@@ -3,7 +3,7 @@ import styles from "./MyAddress.module.scss";
 import { useEffect } from "react";
 import { useState } from "react";
 import Input from "../../components/input/Input";
-import { CountryDropdown } from "react-country-region-selector";
+import { ReactCountryDropdown } from "react-country-dropdown";
 import ButtonPrimary from "../../components/buttonPrimary/ButtonPrimary";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserID } from "../../redux/authSlice";
@@ -121,7 +121,7 @@ const MyAddress = () => {
                     <th scope="row">
                       <b>Country</b>
                     </th>
-                    <td>{shippingAddress.country}</td>
+                    <td>{shippingAddress.country.name}</td>
                   </tr>
                   <tr>
                     <th scope="row">
@@ -211,10 +211,10 @@ const MyAddress = () => {
                   className="--rounded --light-border"
                   style={{ padding: "5px 10px", marginTop: "5px" }}
                 >
-                  <CountryDropdown
+                  {/* <CountryDropdown
                     className={styles.select}
                     valueType="short"
-                    value={shippingAddress.country}
+                    value={shippingAddress.country.name}
                     onChange={(val) =>
                       handleInput({
                         target: {
@@ -223,6 +223,17 @@ const MyAddress = () => {
                         },
                       })
                     }
+                  /> */}
+                  <ReactCountryDropdown
+                    onSelect={(val) =>
+                      handleInput({
+                        target: {
+                          name: "country",
+                          value: { name: val.name, code: val.code },
+                        },
+                      })
+                    }
+                    countryCode={shippingAddress.country.code}
                   />
                 </div>
                 <label>Phone</label>

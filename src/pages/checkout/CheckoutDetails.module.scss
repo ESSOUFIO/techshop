@@ -9,6 +9,19 @@
     margin-top: 5px;
   }
 
+  table {
+    margin-top: 5px;
+    th {
+      display: flex;
+      align-items: start;
+      min-width: 100px;
+    }
+    th,
+    td {
+      padding: 5px 0;
+    }
+  }
+
   .select {
     border: none;
     outline: none;
@@ -38,10 +51,14 @@
 .card {
   width: 100%;
   background-color: #fff;
-  padding: 12px;
+  padding: 15px;
   border-radius: 8px;
   box-shadow: 0 3px 8px rgba($color: #000000, $alpha: 0.12);
   margin-bottom: 10px;
+
+  h4 {
+    margin: 5px 0 15px;
+  }
 }
 
 .btn {

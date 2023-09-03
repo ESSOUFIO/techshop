@@ -6,6 +6,10 @@
     display: flex;
     gap: 20px;
 
+    .newAddress {
+      width: 100%;
+    }
+
     .defaultAddress {
       width: 100%;
       max-width: 500px;

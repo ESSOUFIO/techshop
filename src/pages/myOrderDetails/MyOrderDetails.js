@@ -67,7 +67,7 @@ const MyOrderDetails = () => {
                     State: <span>{order.shipping.state}</span>
                   </p>
                   <p>
-                    Country: <span>{order.shipping.country}</span>
+                    Country: <span>{order.shipping.country.name}</span>
                   </p>
                 </div>
               </div>

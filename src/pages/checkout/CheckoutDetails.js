@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 import styles from "./CheckoutDetails.module.scss";
-import { CountryDropdown } from "react-country-region-selector";
+import { ReactCountryDropdown } from "react-country-dropdown";
+import "react-country-dropdown/dist/index.css";
+
 import Input from "../../components/input/Input";
 import ButtonPrimary from "../../components/buttonPrimary/ButtonPrimary";
 import { useNavigate } from "react-router-dom";
 import CheckoutSummary from "../../components/checkoutSummary/CheckoutSummary";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   SAVE_BILLING_ADDRESS,
   SAVE_SHIPPING_ADDRESS,
 } from "../../redux/checkoutSlice";
 import { useEffect } from "react";
+import { selectUserID } from "../../redux/authSlice";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../../firebase/config";
 
 const shippingInit = {
   name: "",
@@ -19,7 +24,10 @@ const shippingInit = {
   city: "",
   state: "",
   postal_code: "",
-  country: "",
+  country: {
+    name: "",
+    code: "",
+  },
   phone: "",
 };
 
@@ -38,23 +46,43 @@ const CheckoutDetails = () => {
   const [shippingAddress, setShippingAddress] = useState(shippingInit);
   const [billingAddress, setBillingAddress] = useState(billingInit);
   const [sameAddress, setSameAddress] = useState(true);
+  const [defaultAddress, setDefaultAddress] = useState(true);
+  const [saveDefaultAddress, setSaveDefaultAddress] = useState(true);
+  const [myAddress, setMyAddress] = useState(null);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const uid = useSelector(selectUserID);
 
   const handleShipping = (e) => {
     setShippingAddress({ ...shippingAddress, [e.target.name]: e.target.value });
   };
 
+  console.log(shippingAddress.country);
+
   const handleBilling = (e) => {
     setBillingAddress({ ...billingAddress, [e.target.name]: e.target.value });
+  };
+
+  const updateUserAddress = async (shippingAddress) => {
+    const userRef = doc(db, "users", uid);
+    console.log(uid, shippingAddress);
+
+    await updateDoc(userRef, {
+      address: shippingAddress,
+    });
+
+    navigate("/checkout");
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(SAVE_SHIPPING_ADDRESS(shippingAddress));
     dispatch(SAVE_BILLING_ADDRESS(billingAddress));
-    navigate("/checkout");
+
+    if (saveDefaultAddress && !defaultAddress) {
+      updateUserAddress(shippingAddress);
+    }
   };
 
   const handleCheckAddress = () => {
@@ -65,6 +93,36 @@ const CheckoutDetails = () => {
     }
     setSameAddress(!sameAddress);
   };
+
+  const handleCheckSaveDefaultAddress = () => {
+    setSaveDefaultAddress(!saveDefaultAddress);
+  };
+
+  const handleCheckDefaultAddress = () => {
+    setDefaultAddress(!defaultAddress);
+  };
+
+  useEffect(() => {
+    if (defaultAddress && myAddress) setShippingAddress(myAddress);
+    if (!defaultAddress) setShippingAddress(shippingInit);
+  }, [defaultAddress, myAddress]);
+
+  console.log("Shipping: ", shippingAddress);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const docRef = doc(db, "users", uid);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setMyAddress(docSnap.data().address);
+      } else {
+        // docSnap.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    };
+    if (uid) getUser();
+  }, [uid]);
 
   //scroll to top
   useEffect(() => {
@@ -80,102 +138,172 @@ const CheckoutDetails = () => {
       <form onSubmit={submitHandler}>
         <div className={styles.container}>
           <div className={styles.address}>
-            <div className={styles.card}>
-              <h4>Shipping Address</h4>
-              <label>Recipient Name</label>
-              <Input
-                type="text"
-                placeholder="Recipient Name"
-                required
-                name="name"
-                value={shippingAddress.name}
-                onChange={(e) => handleShipping(e)}
-                className={styles.input}
-              />
-              <label>Address Line 1</label>
-              <Input
-                type="text"
-                placeholder="Address Line 1"
-                required
-                name="line1"
-                value={shippingAddress.line1}
-                onChange={(e) => handleShipping(e)}
-                className={styles.input}
-              />
-              <label>Address Line 2</label>
-              <Input
-                type="text"
-                placeholder="Address Line 2"
-                name="line2"
-                value={shippingAddress.line2}
-                onChange={(e) => handleShipping(e)}
-                className={styles.input}
-              />
-              <label>City</label>
-              <Input
-                type="text"
-                placeholder="City"
-                required
-                name="city"
-                value={shippingAddress.city}
-                onChange={(e) => handleShipping(e)}
-                className={styles.input}
-              />
-              <label>State</label>
-              <Input
-                type="text"
-                placeholder="State"
-                required
-                name="state"
-                value={shippingAddress.state}
-                onChange={(e) => handleShipping(e)}
-                className={styles.input}
-              />
-              <label>Postal Code</label>
-              <Input
-                type="text"
-                placeholder="Postal Code"
-                required
-                name="postal_code"
-                value={shippingAddress.postal_code}
-                className={styles.input}
-                onChange={(e) => handleShipping(e)}
-              />
-              {/* Country Input */}
-              <label>Country</label>
-              <div
-                className="--rounded --light-border"
-                style={{ padding: "5px 10px", marginTop: "5px" }}
-              >
-                <CountryDropdown
-                  className={styles.select}
-                  valueType="short"
-                  value={shippingAddress.country}
-                  onChange={(val) =>
-                    handleShipping({
-                      target: {
-                        name: "country",
-                        value: val,
-                      },
-                    })
-                  }
+            {/* My Address */}
+            {myAddress && (
+              <div className={styles.card}>
+                <h4>Shipping Address</h4>
+                <input
+                  type="checkbox"
+                  onChange={handleCheckDefaultAddress}
+                  checked={defaultAddress}
+                  id="default-address"
                 />
+                <label
+                  style={{ marginBottom: "10px" }}
+                  htmlFor="default-address"
+                >
+                  I'd choose my default Shipping Address
+                </label>
+
+                {/* <h4>Your default shipping address</h4> */}
+                <table>
+                  <tbody>
+                    <tr>
+                      <th scope="row">
+                        <b>Name</b>
+                      </th>
+                      <td>{myAddress.name}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <b>Address</b>
+                      </th>
+                      <td>
+                        {myAddress.line1 + ", " + myAddress.line2}
+
+                        <br />
+                        {myAddress.postal_code + ", " + myAddress.city}
+
+                        <br />
+                        {myAddress.state}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <b>Country</b>
+                      </th>
+                      <td>{myAddress.country.name}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <b>Phone</b>
+                      </th>
+                      <td>{myAddress.phone}</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-              <label>Phone</label>
-              <Input
-                type="text"
-                placeholder="Phone"
-                required
-                name="phone"
-                value={shippingAddress.phone}
-                onChange={(e) => handleShipping(e)}
-                className={styles.input}
-              />
-            </div>
+            )}
+
+            {!defaultAddress && (
+              <div className={styles.card}>
+                <h4>Shipping Address</h4>
+                <label>Recipient Name</label>
+                <Input
+                  type="text"
+                  placeholder="Recipient Name"
+                  required
+                  name="name"
+                  value={shippingAddress.name}
+                  onChange={(e) => handleShipping(e)}
+                  className={styles.input}
+                />
+                <label>Address Line 1</label>
+                <Input
+                  type="text"
+                  placeholder="Address Line 1"
+                  required
+                  name="line1"
+                  value={shippingAddress.line1}
+                  onChange={(e) => handleShipping(e)}
+                  className={styles.input}
+                />
+                <label>Address Line 2</label>
+                <Input
+                  type="text"
+                  placeholder="Address Line 2"
+                  name="line2"
+                  value={shippingAddress.line2}
+                  onChange={(e) => handleShipping(e)}
+                  className={styles.input}
+                />
+                <label>City</label>
+                <Input
+                  type="text"
+                  placeholder="City"
+                  required
+                  name="city"
+                  value={shippingAddress.city}
+                  onChange={(e) => handleShipping(e)}
+                  className={styles.input}
+                />
+                <label>State</label>
+                <Input
+                  type="text"
+                  placeholder="State"
+                  required
+                  name="state"
+                  value={shippingAddress.state}
+                  onChange={(e) => handleShipping(e)}
+                  className={styles.input}
+                />
+                <label>Postal Code</label>
+                <Input
+                  type="text"
+                  placeholder="Postal Code"
+                  required
+                  name="postal_code"
+                  value={shippingAddress.postal_code}
+                  className={styles.input}
+                  onChange={(e) => handleShipping(e)}
+                />
+
+                {/* Country Input */}
+                <label>Country</label>
+                <div
+                  className="--rounded --light-border"
+                  style={{ padding: "5px 10px", marginTop: "5px" }}
+                >
+                  <ReactCountryDropdown
+                    onSelect={(val) =>
+                      handleShipping({
+                        target: {
+                          name: "country",
+                          value: { name: val.name, code: val.code },
+                        },
+                      })
+                    }
+                    countryCode={shippingAddress.country.code}
+                  />
+                </div>
+                <label>Phone</label>
+                <Input
+                  type="text"
+                  placeholder="Phone"
+                  required
+                  name="phone"
+                  value={shippingAddress.phone}
+                  onChange={(e) => handleShipping(e)}
+                  className={styles.input}
+                />
+                <input
+                  type="checkbox"
+                  onChange={handleCheckSaveDefaultAddress}
+                  checked={saveDefaultAddress}
+                  id="save-default-address"
+                />
+                <label
+                  style={{ marginBottom: "10px" }}
+                  htmlFor="save-default-address"
+                >
+                  Set as my default address.
+                </label>
+              </div>
+            )}
 
             {/* Billing Address */}
             <div className={styles.card}>
-              <h3>Billing Address</h3>
+              <h4>Billing Address</h4>
 
               <input
                 type="checkbox"
@@ -253,18 +381,16 @@ const CheckoutDetails = () => {
                     className="--rounded --light-border"
                     style={{ padding: "5px 10px", marginTop: "5px" }}
                   >
-                    <CountryDropdown
-                      className={styles.select}
-                      valueType="short"
-                      value={billingAddress.country}
-                      onChange={(val) =>
+                    <ReactCountryDropdown
+                      onSelect={(val) =>
                         handleBilling({
                           target: {
                             name: "country",
-                            value: val,
+                            value: { name: val.name, code: val.code },
                           },
                         })
                       }
+                      countryCode={billingAddress.country.code}
                     />
                   </div>
                   <label>Phone</label>
