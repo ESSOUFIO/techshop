@@ -1,0 +1,16 @@
+.dashboard {
+  padding: 20px;
+  width: 100%;
+
+  .infoBoxes {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    @media screen and (max-width: 767px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}

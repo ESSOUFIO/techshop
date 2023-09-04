@@ -223,7 +223,7 @@ const ProductsList = () => {
         </div>
       </div>
 
-      {loading && <Loader />}
+      {/* {loading && <Loader />} */}
     </>
   );
 };

@@ -3,20 +3,19 @@ import { useParams } from "react-router";
 import styles from "./OrderDetails.module.scss";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useEffect } from "react";
-import { doc, getDoc, updateDoc } from "@firebase/firestore";
+
+import { doc, updateDoc } from "@firebase/firestore";
 import { db } from "../../../firebase/config";
-import Loader from "../../loader/Loader";
+
 import Select from "react-select";
 import { useRef } from "react";
 import ButtonPrimary from "../../buttonPrimary/ButtonPrimary";
 import { toast } from "react-toastify";
+import useFetchDocument from "../../../customHooks/useFetchDocument";
+import spinner from "../../../assets/images/loader/Spinner.png";
 
 const OrderDetails = () => {
-  const [order, setOrder] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState("");
-  const [refresh, setRefresh] = useState(false);
   const { id } = useParams();
   const statusRef = useRef();
 
@@ -27,31 +26,15 @@ const OrderDetails = () => {
     { value: "Delivered", label: "Delivered" },
   ];
 
-  useEffect(() => {
-    const getOrder = async () => {
-      setIsLoading(true);
-      const docRef = doc(db, "orders", id);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        setOrder({ ...docSnap.data(), id: docSnap.id });
-      } else {
-        setOrder(null);
-      }
-      setIsLoading(false);
-    };
-    getOrder();
-  }, [id, refresh]);
+  const order = useFetchDocument("orders", id);
 
   const updateHandler = async () => {
     try {
-      setIsLoading(true);
-      const orderRef = doc(db, "orders", order.id);
+      const orderRef = doc(db, "orders", id);
       await updateDoc(orderRef, {
         status,
       });
       toast.success("Order updated successfully.");
-      setRefresh(!refresh);
       window.scrollTo({
         top: 0,
         behavior: "smooth",
@@ -59,7 +42,6 @@ const OrderDetails = () => {
     } catch (error) {
       toast.error("Undefined Error occurred!");
     }
-    setIsLoading(false);
   };
 
   return (
@@ -67,38 +49,62 @@ const OrderDetails = () => {
       <div className={styles.orderDetails}>
         <h3>Order Details</h3>
         <Link to={"/admin/orders"}>&larr; Back to Orders</Link>
-        {order && (
-          <div className={styles.content}>
-            {
-              <div className={styles.orderInfo}>
-                <p>
-                  <b>Order ID: </b>
-                  {order.id}
-                </p>
-                <p>
-                  <b>Order Status: </b>
-                  {order.status}
-                </p>
-                <p>
-                  <b>Order Date: </b>
-                  {order.orderDate + " at " + order?.orderTime}
-                </p>
-                <p>
-                  <b>Amount: </b>${order.amount.toFixed(2)}
-                </p>
-                <div>
-                  <b>Shipping: </b>
-                  <p>
-                    Address: {order.shipping.line1}, {order.shipping.line2},{" "}
-                    {order.shipping.postal_code}
-                  </p>
-                  <p>State: {order.shipping.state}</p>
-                  <p>Country: {order.shipping.country}</p>
-                </div>
-              </div>
-            }
 
-            {order.orderItems === [] ? (
+        {order.isLoading ? (
+          <div>
+            <img src={spinner} alt="Loading.." width={100} />
+          </div>
+        ) : (
+          <div className={styles.content}>
+            <div className={styles.orderInfo}>
+              <table>
+                <tbody>
+                  <tr>
+                    <th scope="row">
+                      <b>Order ID</b>
+                    </th>
+                    <td>{id}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      <b>Order Status</b>
+                    </th>
+                    <td>{order.data.status}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      <b>Order Date</b>
+                    </th>
+                    <td>
+                      {order.data.orderDate + " at " + order.data.orderTime}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      <b>Amount</b>
+                    </th>
+                    <td>${order.data.amount.toFixed(2)}</td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">
+                      <b>Shipping</b>
+                    </th>
+                    <td>
+                      <p>
+                        Address: {order.data.shipping.line1},{" "}
+                        {order.data.shipping.line2},{" "}
+                        {order.data.shipping.postal_code}
+                      </p>
+                      <p>State: {order.data.shipping.state}</p>
+                      <p>Country: {order.data.shipping.country}</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            {order.data.orderItems === [] ? (
               <p>No categories founds.</p>
             ) : (
               <div className={styles.table}>
@@ -113,7 +119,7 @@ const OrderDetails = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {order.orderItems.map((item, index) => {
+                    {order.data.orderItems.map((item, index) => {
                       return (
                         <tr key={index}>
                           <td>{index + 1}</td>
@@ -154,7 +160,7 @@ const OrderDetails = () => {
         )}
       </div>
 
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />} */}
     </>
   );
 };

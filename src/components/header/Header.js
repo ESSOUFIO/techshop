@@ -88,7 +88,7 @@ const Header = ({ isAdmin }) => {
         nbrCartItems={cartItems.length}
         style={{ display: `${isAdmin ? "block" : ""}` }}
       />
-      {loading && <Loader />}
+      {/* {loading && <Loader />} */}
     </>
   );
 };

@@ -59,7 +59,7 @@ const MyAccountMenu = ({ show, onHide, userName }) => {
           </ul>
         </div>
       </SideMenu>
-      {loading && <Loader />}
+      {/* {loading && <Loader />} */}
     </>
   );
 };

@@ -36,7 +36,7 @@ const RootLayout = () => {
       <Outlet />
       {!isAdmin && <Footer />}
 
-      {loading && <Loader />}
+      {/* {loading && <Loader />} */}
     </>
   );
 };

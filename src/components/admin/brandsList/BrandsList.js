@@ -145,7 +145,7 @@ const BrandsList = () => {
         </div>
       </div>
 
-      {loading && <Loader />}
+      {/* {loading && <Loader />} */}
     </>
   );
 };

@@ -141,7 +141,7 @@ const CategoriesList = () => {
         )}
       </div>
 
-      {loading && <Loader />}
+      {/* {loading && <Loader />} */}
     </>
   );
 };
