@@ -3,10 +3,8 @@ import { useParams } from "react-router";
 import styles from "./OrderDetails.module.scss";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-
 import { doc, updateDoc } from "@firebase/firestore";
 import { db } from "../../../firebase/config";
-
 import Select from "react-select";
 import { useRef } from "react";
 import ButtonPrimary from "../../buttonPrimary/ButtonPrimary";

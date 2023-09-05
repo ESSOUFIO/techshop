@@ -14,8 +14,9 @@ import {
 } from "../../redux/checkoutSlice";
 import { useEffect } from "react";
 import { selectUserID } from "../../redux/authSlice";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
+import useFetchDocument from "../../customHooks/useFetchDocument";
 
 const shippingInit = {
   name: "",
@@ -31,20 +32,9 @@ const shippingInit = {
   phone: "",
 };
 
-const billingInit = {
-  name: "",
-  line1: "",
-  line2: "",
-  city: "",
-  state: "",
-  postal_code: "",
-  country: "",
-  phone: "",
-};
-
 const CheckoutDetails = () => {
   const [shippingAddress, setShippingAddress] = useState(shippingInit);
-  const [billingAddress, setBillingAddress] = useState(billingInit);
+  const [billingAddress, setBillingAddress] = useState(shippingInit);
   const [sameAddress, setSameAddress] = useState(true);
   const [defaultAddress, setDefaultAddress] = useState(true);
   const [saveDefaultAddress, setSaveDefaultAddress] = useState(true);
@@ -58,7 +48,7 @@ const CheckoutDetails = () => {
     setShippingAddress({ ...shippingAddress, [e.target.name]: e.target.value });
   };
 
-  console.log(shippingAddress.country);
+  const user = useFetchDocument("users", uid);
 
   const handleBilling = (e) => {
     setBillingAddress({ ...billingAddress, [e.target.name]: e.target.value });
@@ -87,7 +77,7 @@ const CheckoutDetails = () => {
 
   const handleCheckAddress = () => {
     if (sameAddress) {
-      setBillingAddress(billingInit);
+      setBillingAddress(shippingInit);
     } else {
       setBillingAddress(shippingAddress);
     }
@@ -107,22 +97,9 @@ const CheckoutDetails = () => {
     if (!defaultAddress) setShippingAddress(shippingInit);
   }, [defaultAddress, myAddress]);
 
-  console.log("Shipping: ", shippingAddress);
-
   useEffect(() => {
-    const getUser = async () => {
-      const docRef = doc(db, "users", uid);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        setMyAddress(docSnap.data().address);
-      } else {
-        // docSnap.data() will be undefined in this case
-        console.log("No such document!");
-      }
-    };
-    if (uid) getUser();
-  }, [uid]);
+    if (user.data) setMyAddress(user.data.address);
+  }, [user, uid]);
 
   //scroll to top
   useEffect(() => {
@@ -155,7 +132,6 @@ const CheckoutDetails = () => {
                   I'd choose my default Shipping Address
                 </label>
 
-                {/* <h4>Your default shipping address</h4> */}
                 <table>
                   <tbody>
                     <tr>
