@@ -9,7 +9,6 @@ import {
   addDoc,
   Timestamp,
   doc,
-  getDoc,
   updateDoc,
 } from "firebase/firestore";
 import { db, storage } from "../../../firebase/config";
@@ -27,6 +26,7 @@ import { useSelector } from "react-redux";
 import { selectCategories } from "../../../redux/categorySlice";
 import { selectBrands } from "../../../redux/brandSlice";
 import { FaPlus } from "react-icons/fa";
+import useFetchDocument from "../../../customHooks/useFetchDocument";
 
 const ProductImage = ({ image, id, index, deleteImg }) => {
   return (
@@ -41,19 +41,19 @@ const ProductImage = ({ image, id, index, deleteImg }) => {
   );
 };
 
-const AddProduct = () => {
-  const initState = {
-    name: "",
-    brand: "",
-    desc: "",
-    price: 0,
-    newPrice: 0,
-    offValue: 0,
-    images: [],
-    category: "",
-    banner: "",
-  };
+const initState = {
+  name: "",
+  brand: "",
+  desc: "",
+  price: 0,
+  newPrice: 0,
+  offValue: 0,
+  images: [],
+  category: "",
+  banner: "",
+};
 
+const AddProduct = () => {
   const [product, setProduct] = useState(initState);
   const [categOptions, setCategOptions] = useState([]);
   const [brandOptions, setBrandOptions] = useState([]);
@@ -71,31 +71,18 @@ const AddProduct = () => {
 
   const { id } = useParams();
   const { pgIndex } = useParams();
+  const productDoc = useFetchDocument("products", id);
 
   //Handle Page Mode: "Edit Product" or "Add New Product"
   useEffect(() => {
-    const getProduct = async (id) => {
-      setLoading(true);
-      const docRef = doc(db, "products", id);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        setProduct({ ...docSnap.data() });
-      } else {
-        toast.error("Product not found!");
-      }
-      setLoading(false);
-    };
-
     if (id !== "new") {
-      getProduct(id);
+      setProduct(productDoc.data);
       setEditMode(true);
     } else {
       setProduct({ ...initState });
       setEditMode(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [id, productDoc.data]);
 
   const categories = useSelector(selectCategories);
   const brands = useSelector(selectBrands);

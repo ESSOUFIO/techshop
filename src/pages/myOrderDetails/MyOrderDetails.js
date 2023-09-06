@@ -7,106 +7,126 @@ import { useEffect } from "react";
 import { doc, getDoc } from "@firebase/firestore";
 import { db } from "../../firebase/config";
 import Loader from "../../components/loader/Loader";
+import useFetchDocument from "../../customHooks/useFetchDocument";
+import spinner from "../../assets/images/loader/Spinner.png";
 
 const MyOrderDetails = () => {
-  const [order, setOrder] = useState(null);
+  // const [order, setOrder] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
+  const order = useFetchDocument("orders", id);
 
-  useEffect(() => {
-    const getOrder = async () => {
-      setIsLoading(true);
-      const docRef = doc(db, "orders", id);
-      const docSnap = await getDoc(docRef);
+  // useEffect(() => {
+  //   const getOrder = async () => {
+  //     setIsLoading(true);
+  //     const docRef = doc(db, "orders", id);
+  //     const docSnap = await getDoc(docRef);
 
-      if (docSnap.exists()) {
-        setOrder({ ...docSnap.data(), id: docSnap.id });
-      } else {
-        setOrder(null);
-      }
-      setIsLoading(false);
-    };
-    getOrder();
-  }, [id]);
+  //     if (docSnap.exists()) {
+  //       setOrder({ ...docSnap.data(), id: docSnap.id });
+  //     } else {
+  //       setOrder(null);
+  //     }
+  //     setIsLoading(false);
+  //   };
+  //   getOrder();
+  // }, [id]);
+
+  console.log(order.data);
 
   return (
     <>
       <div className={`--container ${styles.orderDetails}`}>
         <h3>Order Details</h3>
         <Link to={"/my-orders"}>&larr; Back to Orders</Link>
-        {order && (
-          <div className={styles.content}>
-            {
-              <div className={styles.orderInfo}>
-                <p>
-                  <b>Order ID: </b>
-                  <span>{order.id}</span>
-                </p>
-                <p>
-                  <b>Order Status: </b>
-                  <span>{order.status}</span>
-                </p>
-                <p>
-                  <b>Order Date: </b>
-                  <span>{order.orderDate + " at " + order?.orderTime}</span>
-                </p>
-                <p>
-                  <b>Amount: </b>
-                  <span>${order.amount.toFixed(2)}</span>
-                </p>
-                <div>
-                  <b>Shipping: </b>
+
+        {order.isLoading ? (
+          <div>
+            <img src={spinner} alt="Loading.." width={100} />
+          </div>
+        ) : (
+          order.data && (
+            <div className={styles.content}>
+              {
+                <div className={styles.orderInfo}>
                   <p>
-                    Address:{" "}
+                    <b>Order ID: </b>
+                    <span>{id}</span>
+                  </p>
+                  <p>
+                    <b>Order Status: </b>
+                    <span>{order.data.status}</span>
+                  </p>
+                  <p>
+                    <b>Order Date: </b>
                     <span>
-                      {order.shipping.line1}, {order.shipping.line2},{" "}
-                      {order.shipping.postal_code}
+                      {order.data.orderDate + " at " + order.data.orderTime}
                     </span>
                   </p>
                   <p>
-                    State: <span>{order.shipping.state}</span>
+                    <b>Amount: </b>
+                    <span>${order.data.amount.toFixed(2)}</span>
                   </p>
-                  <p>
-                    Country: <span>{order.shipping.country.name}</span>
-                  </p>
+                  <div>
+                    <b>Shipping: </b>
+                    <p>
+                      Address:{" "}
+                      <span>
+                        {order.data.shipping.line1}, {order.data.shipping.line2}
+                        , {order.data.shipping.postal_code}
+                      </span>
+                    </p>
+                    <p>
+                      State: <span>{order.data.shipping.state}</span>
+                    </p>
+                    <p>
+                      Country: <span>{order.data.shipping.country.name}</span>
+                    </p>
+                  </div>
                 </div>
-              </div>
-            }
+              }
 
-            {order.orderItems === [] ? (
-              <p>No categories founds.</p>
-            ) : (
-              <div className={styles.table}>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>s/n</th>
-                      <th>Product</th>
-                      <th>Price</th>
-                      <th>Quantity</th>
-                      <th>Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {order.orderItems.map((item, index) => {
-                      return (
-                        <tr key={index}>
-                          <td>{index + 1}</td>
-                          <td>
-                            <p>{item.name}</p>
-                            <img src={item.image} alt={item.name} width={100} />
-                          </td>
-                          <td>${item.newPrice.toFixed(2)}</td>
-                          <td>{item.quantity}</td>
-                          <td>${(item.newPrice * item.quantity).toFixed(2)}</td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
+              {order.data.orderItems === [] ? (
+                <p>No categories founds.</p>
+              ) : (
+                <div className={styles.table}>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>s/n</th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {order.data.orderItems.map((item, index) => {
+                        return (
+                          <tr key={index}>
+                            <td>{index + 1}</td>
+                            <td>
+                              <p>{item.name}</p>
+                              <img
+                                src={item.image}
+                                alt={item.name}
+                                width={100}
+                              />
+                            </td>
+                            <td>${item.newPrice.toFixed(2)}</td>
+                            <td>{item.quantity}</td>
+                            <td>
+                              ${(item.newPrice * item.quantity).toFixed(2)}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          )
         )}
       </div>
 

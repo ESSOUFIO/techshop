@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./AddBrand.module.scss";
 import Card from "../../card/Card";
 import { IoClose } from "react-icons/io5";
-import { Timestamp, doc, getDoc, updateDoc, setDoc } from "firebase/firestore";
+import { Timestamp, doc, updateDoc, setDoc } from "firebase/firestore";
 import { db, storage } from "../../../firebase/config";
 import { toast } from "react-toastify";
 import Loader from "../../loader/Loader";
@@ -15,14 +15,16 @@ import {
 } from "firebase/storage";
 import { ProgressBar } from "react-bootstrap";
 import { useParams } from "react-router";
+import useFetchDocument from "../../../customHooks/useFetchDocument";
+import spinner from "../../../assets/images/loader/Spinner.png";
+
+const initState = {
+  name: "",
+  image: null,
+};
 
 /** =========    AddCategory    ======== */
 const AddBrand = () => {
-  const initState = {
-    name: "",
-    image: null,
-  };
-
   const [brand, setBrand] = useState(initState);
   const [loading, setLoading] = useState(false);
   const [uploading, setUpLoading] = useState(false);
@@ -33,31 +35,18 @@ const AddBrand = () => {
   const navigate = useNavigate();
 
   const { id } = useParams();
+  const brandDoc = useFetchDocument("brands", id);
 
   //Handle Page Mode: "Edit Product" or "Add New Product"
   useEffect(() => {
-    const getBrand = async (id) => {
-      setLoading(true);
-      const docRef = doc(db, "brands", id);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        setBrand({ ...docSnap.data() });
-      } else {
-        toast.error("Brand not found!");
-      }
-      setLoading(false);
-    };
-
     if (id !== "new") {
-      getBrand(id);
+      setBrand(brandDoc.data);
       setEditMode(true);
     } else {
       setBrand({ ...initState });
       setEditMode(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [id, brandDoc.data]);
 
   const addImage = (file) => {
     if (!file) return;
@@ -156,76 +145,88 @@ const AddBrand = () => {
     <>
       <div className={styles.addBrand}>
         <h2>{editMode ? "Edit Brand" : "Add New Brand"}</h2>
-        <Card cardClass={styles.card}>
-          <form onSubmit={editMode ? editHandler : addProductHandler}>
-            <label>Brand Name</label>
-            <input
-              className="form-item"
-              type="text"
-              placeholder="Brand Name"
-              name="name"
-              value={brand.name}
-              required={true}
-              onChange={(e) => inputHandler(e.target)}
-              disabled={editMode}
-            />
-
-            <label>Brand Image</label>
-            <input
-              className="form-item"
-              type="file"
-              accept="image/*"
-              onChange={(e) => addImage(e.target.files[0])}
-              ref={inputFileRef}
-              style={{ display: "none" }}
-            />
-
-            <div className={styles.imagesWrap}>
-              <div className={styles.container}>
-                {brand.image && (
-                  <div className={styles.brandImage}>
-                    <img src={brand.image.url} alt={brand.name} width={100} />
-                    <IoClose
-                      size={18}
-                      className={styles.closeIcon}
-                      onClick={() => deleteImg(brand.image.id)}
-                    />
-                  </div>
-                )}
-              </div>
-              {progress !== 0 && progress !== 100 && (
-                <ProgressBar
-                  now={progress}
-                  style={{ margin: "5px 0", height: "10px" }}
+        {brandDoc.isLoading ? (
+          <div>
+            <img src={spinner} alt="Loading.." width={100} />
+          </div>
+        ) : (
+          brand && (
+            <Card cardClass={styles.card}>
+              <form onSubmit={editMode ? editHandler : addProductHandler}>
+                <label>Brand Name</label>
+                <input
+                  className="form-item"
+                  type="text"
+                  placeholder="Brand Name"
+                  name="name"
+                  value={brand.name}
+                  required={true}
+                  onChange={(e) => inputHandler(e.target)}
+                  disabled={editMode}
                 />
-              )}
-              <button
-                type="button"
-                onClick={() => inputFileRef.current.click()}
-                disabled={uploading}
-              >
-                {uploading ? "Uploading..." : "Add image"}
-              </button>
-            </div>
 
-            <div className={styles.btn}>
-              <button
-                type="button"
-                className={styles.cancelBtn}
-                onClick={() => navigate(-1)}
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className={styles.submitBtn}
-                disabled={!brand.name || !brand.image}
-              >
-                {editMode ? "Edit Brand" : "Add Brand"}
-              </button>
-            </div>
-          </form>
-        </Card>
+                <label>Brand Image</label>
+                <input
+                  className="form-item"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => addImage(e.target.files[0])}
+                  ref={inputFileRef}
+                  style={{ display: "none" }}
+                />
+
+                <div className={styles.imagesWrap}>
+                  <div className={styles.container}>
+                    {brand.image && (
+                      <div className={styles.brandImage}>
+                        <img
+                          src={brand.image.url}
+                          alt={brand.name}
+                          width={100}
+                        />
+                        <IoClose
+                          size={18}
+                          className={styles.closeIcon}
+                          onClick={() => deleteImg(brand.image.id)}
+                        />
+                      </div>
+                    )}
+                  </div>
+                  {progress !== 0 && progress !== 100 && (
+                    <ProgressBar
+                      now={progress}
+                      style={{ margin: "5px 0", height: "10px" }}
+                    />
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => inputFileRef.current.click()}
+                    disabled={uploading}
+                  >
+                    {uploading ? "Uploading..." : "Add image"}
+                  </button>
+                </div>
+
+                <div className={styles.btn}>
+                  <button
+                    type="button"
+                    className={styles.cancelBtn}
+                    onClick={() => navigate(-1)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className={styles.submitBtn}
+                    disabled={!brand.name || !brand.image}
+                  >
+                    {editMode ? "Edit Brand" : "Add Brand"}
+                  </button>
+                </div>
+              </form>
+            </Card>
+          )
+        )}
       </div>
       {loading && <Loader />}
     </>

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./AddCategory.module.scss";
 import Card from "../../card/Card";
 import { IoClose } from "react-icons/io5";
-import { Timestamp, doc, getDoc, updateDoc, setDoc } from "firebase/firestore";
+import { Timestamp, doc, updateDoc, setDoc } from "firebase/firestore";
 import { db, storage } from "../../../firebase/config";
 import { toast } from "react-toastify";
 import Loader from "../../loader/Loader";
@@ -15,15 +15,17 @@ import {
 } from "firebase/storage";
 import { ProgressBar } from "react-bootstrap";
 import { useParams } from "react-router";
+import useFetchDocument from "../../../customHooks/useFetchDocument";
+import spinner from "../../../assets/images/loader/Spinner.png";
+
+const initState = {
+  id: "",
+  name: "",
+  image: null,
+};
 
 /** =========    AddCategory    ======== */
 const AddCategory = () => {
-  const initState = {
-    id: "",
-    name: "",
-    image: null,
-  };
-
   const [category, setCategory] = useState(initState);
   const [loading, setLoading] = useState(false);
   const [uploading, setUpLoading] = useState(false);
@@ -34,31 +36,18 @@ const AddCategory = () => {
   const navigate = useNavigate();
 
   const { id } = useParams();
+  const categoryDoc = useFetchDocument("categories", id);
 
   //Handle Page Mode: "Edit Product" or "Add New Product"
   useEffect(() => {
-    const getCategory = async (id) => {
-      setLoading(true);
-      const docRef = doc(db, "categories", id);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        setCategory({ ...docSnap.data() });
-      } else {
-        toast.error("Category not found!");
-      }
-      setLoading(false);
-    };
-
     if (id !== "new") {
-      getCategory(id);
+      setCategory(categoryDoc.data);
       setEditMode(true);
     } else {
       setCategory({ ...initState });
       setEditMode(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [id, categoryDoc.data]);
 
   const addImage = (file) => {
     if (!file) return;
@@ -157,90 +146,98 @@ const AddCategory = () => {
     <>
       <div className={styles.addCategory}>
         <h2>{editMode ? "Edit Category" : "Add New Category"}</h2>
-        <Card cardClass={styles.card}>
-          <form onSubmit={editMode ? editHandler : addProductHandler}>
-            <label>Category ID</label>
-            <input
-              className="form-item"
-              type="text"
-              placeholder="Category ID"
-              name="id"
-              value={category.id}
-              required={true}
-              onChange={(e) => inputHandler(e.target)}
-            />
-
-            <label>Category Name</label>
-            <input
-              className="form-item"
-              type="text"
-              placeholder="Category Name"
-              name="name"
-              value={category.name}
-              required={true}
-              onChange={(e) => inputHandler(e.target)}
-            />
-
-            <label>Category Image</label>
-            <input
-              className="form-item"
-              type="file"
-              accept="image/*"
-              onChange={(e) => addImage(e.target.files[0])}
-              ref={inputFileRef}
-              style={{ display: "none" }}
-            />
-
-            <div className={styles.imagesWrap}>
-              <div className={styles.container}>
-                {category.image && (
-                  <div className={styles.categoryImage}>
-                    <img
-                      src={category.image.url}
-                      alt={category.name}
-                      width={100}
-                    />
-                    <IoClose
-                      size={18}
-                      className={styles.closeIcon}
-                      onClick={() => deleteImg(category.image.id)}
-                    />
-                  </div>
-                )}
-              </div>
-              {progress !== 0 && progress !== 100 && (
-                <ProgressBar
-                  now={progress}
-                  style={{ margin: "5px 0", height: "10px" }}
+        {categoryDoc.isLoading ? (
+          <div>
+            <img src={spinner} alt="Loading.." width={100} />
+          </div>
+        ) : (
+          category && (
+            <Card cardClass={styles.card}>
+              <form onSubmit={editMode ? editHandler : addProductHandler}>
+                <label>Category ID</label>
+                <input
+                  className="form-item"
+                  type="text"
+                  placeholder="Category ID"
+                  name="id"
+                  value={category.id}
+                  required={true}
+                  onChange={(e) => inputHandler(e.target)}
                 />
-              )}
-              <button
-                type="button"
-                onClick={() => inputFileRef.current.click()}
-                disabled={uploading}
-              >
-                {uploading ? "Uploading..." : "Add image"}
-              </button>
-            </div>
 
-            <div className={styles.btn}>
-              <button
-                type="button"
-                className={styles.cancelBtn}
-                onClick={() => navigate(-1)}
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className={styles.submitBtn}
-                disabled={!category.name || !category.image}
-              >
-                {editMode ? "Edit Category" : "Add Category"}
-              </button>
-            </div>
-          </form>
-        </Card>
+                <label>Category Name</label>
+                <input
+                  className="form-item"
+                  type="text"
+                  placeholder="Category Name"
+                  name="name"
+                  value={category.name}
+                  required={true}
+                  onChange={(e) => inputHandler(e.target)}
+                />
+
+                <label>Category Image</label>
+                <input
+                  className="form-item"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => addImage(e.target.files[0])}
+                  ref={inputFileRef}
+                  style={{ display: "none" }}
+                />
+
+                <div className={styles.imagesWrap}>
+                  <div className={styles.container}>
+                    {category.image && (
+                      <div className={styles.categoryImage}>
+                        <img
+                          src={category.image.url}
+                          alt={category.name}
+                          width={100}
+                        />
+                        <IoClose
+                          size={18}
+                          className={styles.closeIcon}
+                          onClick={() => deleteImg(category.image.id)}
+                        />
+                      </div>
+                    )}
+                  </div>
+                  {progress !== 0 && progress !== 100 && (
+                    <ProgressBar
+                      now={progress}
+                      style={{ margin: "5px 0", height: "10px" }}
+                    />
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => inputFileRef.current.click()}
+                    disabled={uploading}
+                  >
+                    {uploading ? "Uploading..." : "Add image"}
+                  </button>
+                </div>
+
+                <div className={styles.btn}>
+                  <button
+                    type="button"
+                    className={styles.cancelBtn}
+                    onClick={() => navigate(-1)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className={styles.submitBtn}
+                    disabled={!category.name || !category.image}
+                  >
+                    {editMode ? "Edit Category" : "Add Category"}
+                  </button>
+                </div>
+              </form>
+            </Card>
+          )
+        )}
       </div>
       {loading && <Loader />}
     </>

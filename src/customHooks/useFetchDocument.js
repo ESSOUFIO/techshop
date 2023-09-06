@@ -4,11 +4,12 @@ import { db } from "../firebase/config";
 import { toast } from "react-toastify";
 
 const useFetchDocument = (collection, docID) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [document, setDocument] = useState(null);
 
   useEffect(() => {
     const getDocument = async () => {
+      setIsLoading(true);
       const docRef = doc(db, collection, docID);
       const docSnap = await getDoc(docRef);
       setIsLoading(false);
