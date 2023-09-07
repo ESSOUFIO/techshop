@@ -2,37 +2,12 @@ import React from "react";
 import { useParams } from "react-router";
 import styles from "./MyOrderDetails.module.scss";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
-import { doc, getDoc } from "@firebase/firestore";
-import { db } from "../../firebase/config";
-import Loader from "../../components/loader/Loader";
 import useFetchDocument from "../../customHooks/useFetchDocument";
 import spinner from "../../assets/images/loader/Spinner.png";
 
 const MyOrderDetails = () => {
-  // const [order, setOrder] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
   const order = useFetchDocument("orders", id);
-
-  // useEffect(() => {
-  //   const getOrder = async () => {
-  //     setIsLoading(true);
-  //     const docRef = doc(db, "orders", id);
-  //     const docSnap = await getDoc(docRef);
-
-  //     if (docSnap.exists()) {
-  //       setOrder({ ...docSnap.data(), id: docSnap.id });
-  //     } else {
-  //       setOrder(null);
-  //     }
-  //     setIsLoading(false);
-  //   };
-  //   getOrder();
-  // }, [id]);
-
-  console.log(order.data);
 
   return (
     <>
@@ -129,8 +104,6 @@ const MyOrderDetails = () => {
           )
         )}
       </div>
-
-      {isLoading && <Loader />}
     </>
   );
 };
