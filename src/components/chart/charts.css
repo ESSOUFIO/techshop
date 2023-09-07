@@ -7,3 +7,15 @@
   max-height: 300px !important;
   height: 100% !important;
 }
+
+@media screen and (max-width: 767px) {
+  #barChart {
+    /* max-height: 450px !important; */
+    height: auto;
+  }
+
+  #doughnutChart {
+    max-height: none;
+    height: 100%;
+  }
+}

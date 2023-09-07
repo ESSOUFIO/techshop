@@ -1,5 +1,5 @@
 .chart {
-  max-width: 500px;
+  // max-width: 500px;
   width: 100%;
 
   h4 {
@@ -10,4 +10,5 @@
   background: #fff;
   padding: 15px;
   border-radius: 5px;
+  box-shadow: 2px 5px 5px rgba($color: #000000, $alpha: 0.1);
 }
