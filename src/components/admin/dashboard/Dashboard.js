@@ -17,6 +17,8 @@ import { LineChart } from "../../chart/LineChart";
 
 const Dashboard = () => {
   const [earning, setEarning] = useState(0);
+  const [bestProducts, setBestProducts] = useState([]);
+
   const orders = useSelector(selectOrders);
   const products = useSelector(selectProducts);
   const users = useFetchCollection("users", "name");
@@ -32,12 +34,51 @@ const Dashboard = () => {
   const delivered = countByStatus("Delivered");
 
   useEffect(() => {
+    const getSelledProducts = () => {
+      let prodSelled = [];
+      orders.forEach((order) => {
+        order.orderItems.forEach((item) => {
+          prodSelled.push({
+            name: item.name,
+            quantity: item.quantity,
+          });
+        });
+      });
+
+      let prodSummary = [];
+      let array = prodSelled;
+
+      prodSelled.forEach((item, i) => {
+        if (
+          !prodSummary.some((el) => {
+            return el.name === item.name;
+          })
+        ) {
+          let qty = item.quantity;
+          for (let j = i + 1; j < array.length; j++) {
+            if (item.name === array[j].name) {
+              qty += array[j].quantity;
+            }
+          }
+          prodSummary.push({ name: item.name, quantity: qty });
+        }
+      });
+      prodSummary.sort((a, b) => b.quantity - a.quantity);
+      setBestProducts(prodSummary.slice(0, 5));
+    };
+
+    if (orders) getSelledProducts();
+  }, [orders]);
+
+  //Earnings
+  useEffect(() => {
     let amount = 0;
     orders.forEach((order) => {
       amount += order.amount;
     });
     setEarning(Math.round(amount));
   }, [orders]);
+
   return (
     <div className={styles.dashboard}>
       <h5>Dashboard</h5>
@@ -72,12 +113,28 @@ const Dashboard = () => {
       </div>
       <div className={styles.revenue}>
         <h4>Sales Revenue</h4>
-        <LineChart />
+        <LineChart
+          revenue={[25, 30, 15, 56, 12, 14, 40]}
+          months={[
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+          ]}
+        />
       </div>
 
       <div className={styles.charts}>
         <BarChart orderCounts={[placed, processing, shipped, delivered]} />
-        <DoughnutChart />
+        <DoughnutChart
+          bestProds={bestProducts.map((item) => item.quantity)}
+          prodNames={bestProducts.map((item) => {
+            return item.name.substring(0, 20) + "..";
+          })}
+        />
       </div>
     </div>
   );

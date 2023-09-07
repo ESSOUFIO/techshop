@@ -41,6 +41,7 @@ export function BarChart({ orderCounts }) {
         label: "Order Count",
         data: orderCounts,
         backgroundColor: "rgba(255, 99, 132, 0.5)",
+        borderColor: "rgba(255, 99, 132, 1)",
       },
     ],
   };

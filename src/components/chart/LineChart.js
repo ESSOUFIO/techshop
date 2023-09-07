@@ -30,20 +30,18 @@ export const options = {
   },
 };
 
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
+export function LineChart({ revenue, months }) {
+  const data = {
+    labels: months,
+    datasets: [
+      {
+        label: "Income (USD)",
+        data: revenue,
+        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      },
+    ],
+  };
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "Income (USD)",
-      data: [25, 30, 15, 56, 12, 14, 40],
-      borderColor: "rgb(255, 99, 132)",
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
-    },
-  ],
-};
-
-export function LineChart() {
   return <Line options={options} data={data} />;
 }
