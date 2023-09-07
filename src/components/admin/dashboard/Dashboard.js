@@ -11,12 +11,25 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { selectProducts } from "../../../redux/productSlice";
 import useFetchCollection from "../../../customHooks/useFetchCollection";
+import { BarChart } from "../../chart/BarChart";
+import { DoughnutChart } from "../../chart/DoughnutChart";
+import { LineChart } from "../../chart/LineChart";
 
 const Dashboard = () => {
   const [earning, setEarning] = useState(0);
   const orders = useSelector(selectOrders);
   const products = useSelector(selectProducts);
   const users = useFetchCollection("users", "name");
+
+  const countByStatus = (status) => {
+    const array = orders.filter((order) => order.status === status);
+    return array ? array.length : 0;
+  };
+
+  const placed = countByStatus("Order Placed");
+  const processing = countByStatus("Processing");
+  const shipped = countByStatus("Shipped");
+  const delivered = countByStatus("Delivered");
 
   useEffect(() => {
     let amount = 0;
@@ -56,6 +69,15 @@ const Dashboard = () => {
           color={"#1F93FF"}
           icon={<HiUsers size={30} color="#1F93FF" />}
         />
+      </div>
+      <div className={styles.revenue}>
+        <h4>Sales Revenue</h4>
+        <LineChart />
+      </div>
+
+      <div className={styles.charts}>
+        <BarChart orderCounts={[placed, processing, shipped, delivered]} />
+        <DoughnutChart />
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../../firebase/config";
 import Loader from "../../components/loader/Loader";
-import { doc, setDoc } from "firebase/firestore";
+import { Timestamp, doc, setDoc } from "firebase/firestore";
 
 const CreateAccount = () => {
   const [firstName, setFirstName] = useState("");
@@ -29,6 +29,7 @@ const CreateAccount = () => {
       uid: user.uid,
       wishList: [],
       address: "",
+      createAt: Timestamp.now().toDate(),
     });
   };
 

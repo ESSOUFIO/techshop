@@ -1,5 +1,6 @@
 .dashboard {
   padding: 20px;
+  padding-bottom: 40px;
   width: 100%;
 
   .infoBoxes {
@@ -8,9 +9,35 @@
     gap: 20px;
     justify-content: space-between;
     margin-top: 20px;
+  }
 
-    @media screen and (max-width: 767px) {
+  .revenue {
+    margin-top: 25px;
+    text-align: center;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+
+    h4 {
+      margin-bottom: 25px;
+    }
+  }
+
+  .charts {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    // align-items: center;
+    gap: 20px;
+  }
+
+  @media screen and (max-width: 767px) {
+    .infoBoxes {
       grid-template-columns: 1fr 1fr;
+    }
+
+    .charts {
+      flex-direction: column;
     }
   }
 }

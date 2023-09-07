@@ -1,0 +1,9 @@
+#barChart {
+  /* max-height: 450px !important; */
+  height: 90% !important;
+}
+
+#doughnutChart {
+  max-height: 300px !important;
+  height: 100% !important;
+}

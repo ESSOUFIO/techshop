@@ -80,7 +80,7 @@ const LoginMenu = ({ show, onHide }) => {
         </div>
       </SideMenu>
 
-      {/* {loading && <Loader />} */}
+      {loading && <Loader />}
     </>
   );
 };

@@ -39,7 +39,6 @@ const OrderDetails = () => {
         status,
       });
       setOrder({ ...order, status });
-      console.log({ ...order, status });
 
       toast.success("Order updated successfully.");
       window.scrollTo({
@@ -50,8 +49,6 @@ const OrderDetails = () => {
       toast.error("Undefined Error occurred!");
     }
   };
-
-  console.log(fetchedOrder.data);
 
   return (
     <>
