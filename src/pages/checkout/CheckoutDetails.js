@@ -54,24 +54,23 @@ const CheckoutDetails = () => {
     setBillingAddress({ ...billingAddress, [e.target.name]: e.target.value });
   };
 
-  const updateUserAddress = async (shippingAddress) => {
-    const userRef = doc(db, "users", uid);
-
-    await updateDoc(userRef, {
-      address: shippingAddress,
-    });
-
-    navigate("/checkout");
-  };
-
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+
     dispatch(SAVE_SHIPPING_ADDRESS(shippingAddress));
-    dispatch(SAVE_BILLING_ADDRESS(billingAddress));
+    if (sameAddress) {
+      dispatch(SAVE_BILLING_ADDRESS(shippingAddress));
+    } else {
+      dispatch(SAVE_BILLING_ADDRESS(billingAddress));
+    }
 
     if (saveDefaultAddress && !defaultAddress) {
-      updateUserAddress(shippingAddress);
+      const userRef = doc(db, "users", uid);
+      await updateDoc(userRef, {
+        address: shippingAddress,
+      });
     }
+    navigate("/checkout");
   };
 
   const handleCheckAddress = () => {

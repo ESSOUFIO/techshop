@@ -16,7 +16,10 @@ import {
 } from "../../redux/cartSlice";
 import { db } from "../../firebase/config";
 import { useNavigate } from "react-router";
-import { selectShippingAddress } from "../../redux/checkoutSlice";
+import {
+  selectBillingAddress,
+  selectShippingAddress,
+} from "../../redux/checkoutSlice";
 import { selectUserID } from "../../redux/authSlice";
 
 export default function CheckoutForm() {
@@ -26,6 +29,7 @@ export default function CheckoutForm() {
   const [isLoading, setIsLoading] = useState(false);
   const totalAmount = useSelector(selectTotalAmount);
   const shippingAddress = useSelector(selectShippingAddress);
+  const billingAddress = useSelector(selectBillingAddress);
   const userID = useSelector(selectUserID);
 
   const dispatch = useDispatch();
@@ -90,6 +94,7 @@ export default function CheckoutForm() {
     const newOrder = {
       userID,
       shipping: shippingAddress,
+      billingAddress: billingAddress,
       orderDate,
       orderTime,
       status: "Order Placed",

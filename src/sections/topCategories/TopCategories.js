@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./TopCategories.module.scss";
 import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
-import { collection, query, getDocs, orderBy } from "firebase/firestore";
-import { db } from "../../firebase/config";
+
 import useFetchCollection from "../../customHooks/useFetchCollection";
 import spinner from "../../assets/images/loader/Spinner.png";
 
 const TopCategories = () => {
   const [showMore, setShowMore] = useState(false);
-  const [categories, setCategories] = useState([]);
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1023px)" });
 
   const fetchedCategories = useFetchCollection("categories", "name");

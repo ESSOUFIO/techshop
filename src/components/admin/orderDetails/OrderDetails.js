@@ -11,9 +11,11 @@ import ButtonPrimary from "../../buttonPrimary/ButtonPrimary";
 import { toast } from "react-toastify";
 import useFetchDocument from "../../../customHooks/useFetchDocument";
 import spinner from "../../../assets/images/loader/Spinner.png";
+import { useEffect } from "react";
 
 const OrderDetails = () => {
   const [status, setStatus] = useState("");
+  const [order, setOrder] = useState(null);
   const { id } = useParams();
   const statusRef = useRef();
 
@@ -24,7 +26,11 @@ const OrderDetails = () => {
     { value: "Delivered", label: "Delivered" },
   ];
 
-  const order = useFetchDocument("orders", id);
+  const fetchedOrder = useFetchDocument("orders", id);
+
+  useEffect(() => {
+    setOrder(fetchedOrder.data);
+  }, [fetchedOrder.data]);
 
   const updateHandler = async () => {
     try {
@@ -32,6 +38,9 @@ const OrderDetails = () => {
       await updateDoc(orderRef, {
         status,
       });
+      setOrder({ ...order, status });
+      console.log({ ...order, status });
+
       toast.success("Order updated successfully.");
       window.scrollTo({
         top: 0,
@@ -42,18 +51,20 @@ const OrderDetails = () => {
     }
   };
 
+  console.log(fetchedOrder.data);
+
   return (
     <>
       <div className={styles.orderDetails}>
         <h3>Order Details</h3>
         <Link to={"/admin/orders"}>&larr; Back to Orders</Link>
 
-        {order.isLoading ? (
+        {fetchedOrder.isLoading ? (
           <div>
             <img src={spinner} alt="Loading.." width={100} />
           </div>
         ) : (
-          order.data && (
+          order && (
             <div className={styles.content}>
               <div className={styles.orderInfo}>
                 <table>
@@ -68,21 +79,19 @@ const OrderDetails = () => {
                       <th scope="row">
                         <b>Order Status</b>
                       </th>
-                      <td>{order.data.status}</td>
+                      <td>{order.status}</td>
                     </tr>
                     <tr>
                       <th scope="row">
                         <b>Order Date</b>
                       </th>
-                      <td>
-                        {order.data.orderDate + " at " + order.data.orderTime}
-                      </td>
+                      <td>{order.orderDate + " at " + order.orderTime}</td>
                     </tr>
                     <tr>
                       <th scope="row">
                         <b>Amount</b>
                       </th>
-                      <td>${order.data.amount.toFixed(2)}</td>
+                      <td>${order.amount.toFixed(2)}</td>
                     </tr>
 
                     <tr>
@@ -91,19 +100,18 @@ const OrderDetails = () => {
                       </th>
                       <td>
                         <p>
-                          Address: {order.data.shipping.line1},{" "}
-                          {order.data.shipping.line2},{" "}
-                          {order.data.shipping.postal_code}
+                          Address: {order.shipping.line1},{" "}
+                          {order.shipping.line2}, {order.shipping.postal_code}
                         </p>
-                        <p>State: {order.data.shipping.state}</p>
-                        <p>Country: {order.data.shipping.country.name}</p>
+                        <p>State: {order.shipping.state}</p>
+                        <p>Country: {order.shipping.country.name}</p>
                       </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
 
-              {order.data.orderItems === [] ? (
+              {order.orderItems === [] ? (
                 <p>No categories founds.</p>
               ) : (
                 <div className={styles.table}>
@@ -118,7 +126,7 @@ const OrderDetails = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {order.data.orderItems.map((item, index) => {
+                      {order.orderItems.map((item, index) => {
                         return (
                           <tr key={index}>
                             <td>{index + 1}</td>

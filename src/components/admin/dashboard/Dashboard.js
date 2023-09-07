@@ -10,11 +10,13 @@ import { selectOrders } from "../../../redux/orderSlice";
 import { useEffect } from "react";
 import { useState } from "react";
 import { selectProducts } from "../../../redux/productSlice";
+import useFetchCollection from "../../../customHooks/useFetchCollection";
 
 const Dashboard = () => {
   const [earning, setEarning] = useState(0);
   const orders = useSelector(selectOrders);
   const products = useSelector(selectProducts);
+  const users = useFetchCollection("users", "name");
 
   useEffect(() => {
     let amount = 0;
@@ -50,7 +52,7 @@ const Dashboard = () => {
 
         <InfoBox
           name={"Customers"}
-          value={"250"}
+          value={users.data.length}
           color={"#1F93FF"}
           icon={<HiUsers size={30} color="#1F93FF" />}
         />
