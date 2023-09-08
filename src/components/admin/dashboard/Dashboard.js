@@ -33,6 +33,7 @@ const Dashboard = () => {
   const shipped = countByStatus("Shipped");
   const delivered = countByStatus("Delivered");
 
+  //Best Seller Products
   useEffect(() => {
     const getSelledProducts = () => {
       let prodSelled = [];
@@ -77,6 +78,57 @@ const Dashboard = () => {
       amount += order.amount;
     });
     setEarning(Math.round(amount));
+  }, [orders]);
+
+  //Revenue last 7 months
+  useEffect(() => {
+    let sortedOrders = Array.from(orders);
+    let revenue = [];
+
+    const pushOrder = (obj) => {
+      const { month, amount } = obj;
+      const index = revenue.findIndex((el) => el.month === month);
+      if (index !== -1) {
+        //found
+        const lastAmount = revenue[index].amount;
+        revenue[index] = { month: month, amount: lastAmount + amount };
+      } else revenue.push(obj);
+    };
+
+    const sortArray = () => {
+      sortedOrders.sort((a, b) => b.createdAt - a.createdAt);
+      const today = new Date();
+      let thisMonth = today.getMonth() + 1;
+
+      sortedOrders.forEach((order) => {
+        const dt = new Date(order.orderDate);
+        const orderMonth = dt.getMonth() + 1;
+
+        if (thisMonth === orderMonth) {
+          pushOrder({ month: orderMonth, amount: order.amount });
+        } else {
+          console.log(
+            order.amount,
+            "thisMonth: " + thisMonth,
+            "orderMonth: " + orderMonth
+          );
+          while (thisMonth >= orderMonth) {
+            if (thisMonth > orderMonth) {
+              pushOrder({ month: thisMonth, amount: 0 });
+            } else {
+              pushOrder({ month: orderMonth, amount: order.amount });
+              break;
+            }
+            thisMonth--;
+          }
+        }
+      });
+      console.log(sortedOrders);
+      console.log(revenue);
+    };
+    if (orders.length !== 0) {
+      sortArray();
+    }
   }, [orders]);
 
   return (

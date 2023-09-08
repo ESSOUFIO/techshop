@@ -13,11 +13,11 @@ export function DoughnutChart({ bestProds, prodNames }) {
         label: "Number of Sales",
         data: bestProds,
         backgroundColor: [
-          "rgba(255, 99, 132, 0.3)",
-          "rgba(170, 45, 237, 0.3)",
-          "rgba(54, 162, 235, 0.3)",
-          "rgba(99, 237, 45, 0.3)",
-          "rgba(231, 237, 45, 0.3)",
+          "rgba(255, 99, 132, 0.5)",
+          "rgba(170, 45, 237, 0.5)",
+          "rgba(54, 162, 235, 0.5)",
+          "rgba(99, 237, 45, 0.5)",
+          "rgba(231, 237, 45, 0.5)",
         ],
         borderColor: [
           "rgba(255, 99, 132, 1)",
