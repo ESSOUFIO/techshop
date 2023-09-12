@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Charts.module.scss";
+import "./charts.css";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,7 +11,6 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import "./charts.css";
 
 ChartJS.register(
   CategoryScale,
@@ -33,7 +33,7 @@ export const options = {
 
 const labels = ["Order Placed", "Processing", "Shipped", "Delivered"];
 
-export function BarChart({ orderCounts }) {
+const OrderStatus = ({ orderCounts }) => {
   const data = {
     labels,
     datasets: [
@@ -52,4 +52,6 @@ export function BarChart({ orderCounts }) {
       <Bar id="barChart" options={options} data={data} />
     </div>
   );
-}
+};
+
+export default OrderStatus;
