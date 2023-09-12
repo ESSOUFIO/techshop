@@ -25,6 +25,7 @@ import MyOrders from "./pages/myOrders/MyOrders";
 import MyOrderDetails from "./pages/myOrderDetails/MyOrderDetails";
 import WishList from "./pages/wishList/WishList";
 import MyAddress from "./pages/myAddress/MyAddress";
+import SearchResult from "./pages/searchResult/SearchResult";
 
 const router = createBrowserRouter([
   {
@@ -116,6 +117,10 @@ const router = createBrowserRouter([
       {
         path: "wish-list",
         element: <WishList />,
+      },
+      {
+        path: "search-result/:input",
+        element: <SearchResult />,
       },
     ],
   },
