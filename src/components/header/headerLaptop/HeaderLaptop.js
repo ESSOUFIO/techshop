@@ -1,6 +1,5 @@
 import styles from "./HeaderLaptop.module.scss";
 import React, { useState } from "react";
-
 import logoImg from "../../../assets/logo/logo.png";
 import helpIcon from "../../../assets/icons/customer-service.png";
 import engIcon from "../../../assets/icons/united-kingdom.png";
@@ -12,7 +11,7 @@ import { Search } from "../../index";
 import { BsCart3 } from "react-icons/bs";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { PiUserLight } from "react-icons/pi";
-
+import { BiSearch } from "react-icons/bi";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
@@ -68,7 +67,11 @@ const HeaderLaptop = ({ isLoggedIn, userName, nbrCartItems }) => {
         <div className={styles.topHeader}>
           {logo}
 
-          <Search />
+          <Search
+            wrapperClass={styles.search}
+            iconClass={styles.icon}
+            icon={<BiSearch size={28} color="var(--color-secondary)" />}
+          />
 
           <div className={styles.iconsWrap}>
             <p>

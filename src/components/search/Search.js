@@ -1,16 +1,16 @@
 import React, { useCallback, useEffect } from "react";
-import styles from "./Search.module.scss";
-import { BiSearch } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const Search = () => {
+const Search = ({ wrapperClass, iconClass, icon, onHide }) => {
   const [input, setInput] = useState("");
   const navigate = useNavigate();
 
   const searchHandler = useCallback(() => {
     navigate(`search-result/${input}`);
-  }, [input, navigate]);
+    console.log("onHide: ", onHide);
+    if (onHide) onHide();
+  }, [input, navigate, onHide]);
 
   /** listen Enter */
   useEffect(() => {
@@ -27,16 +27,16 @@ const Search = () => {
         document.removeEventListener("keydown", keyDownHandler);
       };
     }
-  }, [input, searchHandler]);
+  }, [input, searchHandler, onHide]);
   return (
-    <div className={styles.search}>
+    <div className={wrapperClass}>
       <input
         type="text"
         placeholder="Search the store"
         onChange={(e) => setInput(e.target.value)}
       />
-      <div className={styles.icon} onClick={searchHandler}>
-        <BiSearch size={28} color="var(--color-secondary)" />
+      <div className={iconClass} onClick={searchHandler}>
+        {icon}
       </div>
     </div>
   );
