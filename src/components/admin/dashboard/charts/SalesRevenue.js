@@ -33,22 +33,65 @@ export const options = {
 };
 
 const SalesRevenue = ({ orders }) => {
-  //   const [months, setMonths] = useState([
-  //     "January",
-  //     "February",
-  //     "March",
-  //     "April",
-  //     "May",
-  //     "June",
-  //     "July",
-  //   ]);
-  //   const [amounts, setAmounts] = useState([25, 30, 15, 56, 12, 14, 40]);
   const [revenues, setRevenues] = useState([]);
+
+  const toMonth = (date) => {
+    const dt = new Date(date);
+    let month = String(dt.getMonth() + 1);
+    month = month.length === 1 ? "0" + month : month;
+    return dt.getFullYear() + "" + month;
+  };
+
+  const toMonthLetter = (monthNumber) => {
+    switch (monthNumber) {
+      case "01":
+        return "Jan";
+      case "02":
+        return "Feb";
+      case "03":
+        return "Mar";
+      case "04":
+        return "Apr";
+      case "05":
+        return "May";
+      case "06":
+        return "Jun";
+      case "07":
+        return "Jul";
+      case "08":
+        return "Aug";
+      case "09":
+        return "Sep";
+      case "10":
+        return "Oct";
+      case "11":
+        return "Nov";
+      case "12":
+        return "Dec";
+      default:
+        return "err";
+    }
+  };
+
+  const prevMonth = (date) => {
+    let month = date.substring(4, 6);
+    let year = date.substring(0, 4);
+    month--;
+    month = month.toString();
+
+    if (month === "0") {
+      month = "12";
+      year--;
+    }
+    month = month.length === 1 ? "0" + month : month;
+    return year + "" + month;
+  };
 
   //Revenue last 7 months
   useEffect(() => {
     let sortedOrders = Array.from(orders);
     let revenue = [];
+    let nbrMonths = 12;
 
     const pushOrder = (obj) => {
       const { month, amount } = obj;
@@ -63,29 +106,22 @@ const SalesRevenue = ({ orders }) => {
     const sortArray = () => {
       sortedOrders.sort((a, b) => b.createdAt - a.createdAt);
       const today = new Date();
-      let thisMonth = today.getMonth() + 1;
-      let nbrMonths = 7;
-      const lastMonth = thisMonth - nbrMonths;
+      let thisMonth = toMonth(today);
 
       sortedOrders.every((order) => {
         const dt = new Date(order.orderDate);
-        const orderMonth = dt.getMonth() + 1;
+        const orderMonth = toMonth(dt);
 
         if (thisMonth === orderMonth) {
           pushOrder({ month: orderMonth, amount: order.amount });
         } else {
-          console.log(
-            order.amount,
-            "thisMonth: " + thisMonth,
-            "orderMonth: " + orderMonth
-          );
           while (thisMonth >= orderMonth) {
-            thisMonth--;
+            thisMonth = prevMonth(thisMonth);
             nbrMonths--;
             if (nbrMonths === 0) {
               return false;
             }
-            console.log("nbrMonths in:", nbrMonths);
+
             if (thisMonth > orderMonth) {
               pushOrder({ month: thisMonth, amount: 0 });
             } else {
@@ -99,10 +135,6 @@ const SalesRevenue = ({ orders }) => {
 
       //sort revenue
       revenue.sort((a, b) => a.month - b.month);
-
-      console.log(sortedOrders);
-      console.log(revenue);
-
       setRevenues(revenue);
     };
     if (orders.length !== 0) {
@@ -111,7 +143,7 @@ const SalesRevenue = ({ orders }) => {
   }, [orders]);
 
   const data = {
-    labels: revenues.map((item) => item.month),
+    labels: revenues.map((item) => toMonthLetter(item.month.substring(4, 6))),
     datasets: [
       {
         label: "Income (USD)",
