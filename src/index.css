@@ -63,8 +63,8 @@ a {
 .--rounded {
   width: 100%;
   border-radius: 27px;
-  padding: 13px 15px;
-  margin: 10px 0;
+  padding: 11px 15px;
+  margin: 4px 0 11px;
 }
 
 .--light-border {

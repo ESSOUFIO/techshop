@@ -8,7 +8,7 @@ import supportIcon from "../../assets/icons/customer-support.png";
 
 const AboutUs = () => {
   return (
-    <div className={styles.aboutUs}>
+    <div className={`--container ${styles.aboutUs}`}>
       <h2>Who We Are</h2>
       <div className={styles.content}>
         <div className={styles.img}>
