@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ProductPage.module.scss";
 import { useNavigate, useParams } from "react-router-dom";
-import reviews from "../../reviews.json";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
@@ -14,6 +13,7 @@ import { GoHeart } from "react-icons/go";
 import { FaShippingFast } from "react-icons/fa";
 import { IoIosHelpCircle } from "react-icons/io";
 import { GoShieldCheck } from "react-icons/go";
+import spinner from "../../assets/images/loader/Spinner.png";
 
 import trustImg from "../../assets/images/trust-banner.webp";
 import ReviewCard from "../../components/reviewCard/ReviewCard";
@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectProducts } from "../../redux/productSlice";
 import FormatPrice from "../../components/formatPrice/FormatPrice";
 import { ADD_TO_CART } from "../../redux/cartSlice";
+import useFetchCollection from "../../customHooks/useFetchCollection";
 
 const MarginPagination = () => {
   return <div style={{ height: "30px" }}></div>;
@@ -35,10 +36,13 @@ const ProductPage = () => {
   const [quantity, setQuantity] = useState(1);
   const [subtotal, setSubtotal] = useState(null);
   const [sameProds, setSameProds] = useState([]);
+  const [reviewAverage, setReviewAverage] = useState(0);
+  const [reviewNbr, setReviewNbr] = useState(0);
 
   const products = useSelector(selectProducts);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const reviews = useFetchCollection(`products/${id}/reviews`);
 
   const incrementQty = () => {
     setQuantity(quantity + 1);
@@ -51,6 +55,17 @@ const ProductPage = () => {
   useEffect(() => {
     setSubtotal(product?.newPrice * quantity);
   }, [quantity, product]);
+
+  useEffect(() => {
+    if (reviews.data !== null) {
+      setReviewNbr(reviews.data.length);
+      let averg = 0;
+      reviews.data.forEach((review) => {
+        averg += review.rating;
+      });
+      setReviewAverage(averg / reviewNbr);
+    }
+  }, [reviews.data, reviewNbr]);
 
   useEffect(() => {
     const array = products.filter(
@@ -147,10 +162,10 @@ const ProductPage = () => {
                   {/* Reviews */}
                   <div className={styles.review}>
                     <div className={styles.stars}>
-                      <StarsRating value={4.5} />
+                      <StarsRating value={reviewAverage} disabled={true} />
                     </div>
                     <a href="#reviews" className={styles.nbrReview}>
-                      10 reviews
+                      {reviewNbr} reviews
                     </a>
                   </div>
 
@@ -258,51 +273,63 @@ const ProductPage = () => {
             </div>
           </div>
 
-          <div id="reviews" className={styles.reviewsWrap}>
-            <h5>Customers Reviews</h5>
-            <Swiper
-              style={{
-                "--swiper-navigation-color": "#000",
-                "--swiper-navigation-size": "38px",
-              }}
-              modules={[Navigation, Pagination]}
-              spaceBetween={0}
-              slidesPerView={1}
-              className={styles.mySwipe}
-              pagination={{ clickable: true }}
-              breakpoints={{
-                620: {
-                  slidesPerView: 2,
-                  spaceBetween: 20,
-                },
-                860: {
-                  slidesPerView: 3,
-                  spaceBetween: 20,
-                },
-                1050: {
-                  slidesPerView: 4,
-                  spaceBetween: 20,
-                },
-              }}
-            >
-              {reviews.map((review, index) => {
-                const { userName, address, rating, title, text } = review;
-                return (
-                  <SwiperSlide key={index}>
-                    <ReviewCard
-                      userName={userName}
-                      address={address}
-                      rating={rating}
-                      title={title}
-                      text={text}
-                    />
-                  </SwiperSlide>
-                );
-              })}
+          {/* Reviews */}
+          {reviews.isLoading ? (
+            <div>
+              <img src={spinner} alt="Loading.." width={100} />
+            </div>
+          ) : (
+            <div id="reviews" className={styles.reviewsWrap}>
+              <h5>Customers Reviews</h5>
+              {reviews.data.length === 0 ? (
+                <p style={{ textAlign: "center" }}>
+                  This product doesn't have any reviews yet.
+                </p>
+              ) : (
+                <Swiper
+                  style={{
+                    "--swiper-navigation-color": "#000",
+                    "--swiper-navigation-size": "38px",
+                  }}
+                  modules={[Navigation, Pagination]}
+                  spaceBetween={0}
+                  slidesPerView={1}
+                  className={styles.mySwipe}
+                  pagination={{ clickable: true }}
+                  breakpoints={{
+                    620: {
+                      slidesPerView: 2,
+                      spaceBetween: 20,
+                    },
+                    860: {
+                      slidesPerView: 3,
+                      spaceBetween: 20,
+                    },
+                    1050: {
+                      slidesPerView: 4,
+                      spaceBetween: 20,
+                    },
+                  }}
+                >
+                  {reviews.data.map((review, index) => {
+                    const { userName, address, rating, text } = review;
+                    return (
+                      <SwiperSlide key={index}>
+                        <ReviewCard
+                          userName={userName}
+                          address={address}
+                          rating={rating}
+                          text={text}
+                        />
+                      </SwiperSlide>
+                    );
+                  })}
 
-              <MarginPagination />
-            </Swiper>
-          </div>
+                  <MarginPagination />
+                </Swiper>
+              )}
+            </div>
+          )}
 
           <CardSlider
             title={"Related Products"}
