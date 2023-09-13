@@ -19,7 +19,6 @@ import { selectProducts } from "../../redux/productSlice";
 import FormatPrice from "../formatPrice/FormatPrice";
 import { ADD_TO_CART } from "../../redux/cartSlice";
 import { useNavigate } from "react-router";
-import useFetchDocument from "../../customHooks/useFetchDocument";
 import spinner from "../../assets/images/loader/Spinner.png";
 import useFetchCollection from "../../customHooks/useFetchCollection";
 
@@ -32,6 +31,8 @@ const QuickView = ({ prodID, onHide }) => {
   const [mainPhoto, setMainPhoto] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [subtotal, setSubtotal] = useState(null);
+  const [reviewAverage, setReviewAverage] = useState(0);
+  const [reviewNbr, setReviewNbr] = useState(0);
 
   const products = useSelector(selectProducts);
   const dispatch = useDispatch();
@@ -60,6 +61,17 @@ const QuickView = ({ prodID, onHide }) => {
   }, [quantity, product]);
 
   useEffect(() => {
+    if (reviews.data !== null) {
+      setReviewNbr(reviews.data.length);
+      let averg = 0;
+      reviews.data.forEach((review) => {
+        averg += review.rating;
+      });
+      setReviewAverage(averg / reviewNbr);
+    }
+  }, [reviews.data, reviewNbr]);
+
+  useEffect(() => {
     const prod = products.find((item) => item.id === prodID);
     if (prod) {
       setProduct(prod);
@@ -68,8 +80,6 @@ const QuickView = ({ prodID, onHide }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prodID, products]);
-
-  console.log(`products/${prodID}/reviews`, reviews.data);
 
   return ReactDOM.createPortal(
     <div className={styles.quickView}>
@@ -121,10 +131,10 @@ const QuickView = ({ prodID, onHide }) => {
                 {/* Reviews */}
                 <div className={styles.review}>
                   <div className={styles.stars}>
-                    <StarsRating value={4.5} />
+                    <StarsRating value={reviewAverage} disabled={true} />
                   </div>
                   <a href="#reviews" className={styles.nbrReview}>
-                    10 reviews
+                    {reviewNbr} reviews
                   </a>
                 </div>
 
@@ -183,56 +193,58 @@ const QuickView = ({ prodID, onHide }) => {
             </div>
 
             {/* Reviews */}
-            <div id="reviews" className={styles.reviewsWrap}>
-              <h5>Customers Reviews</h5>
-              <Swiper
-                style={{
-                  "--swiper-navigation-color": "#000",
-                  "--swiper-navigation-size": "38px",
-                }}
-                modules={[Navigation, Pagination]}
-                spaceBetween={0}
-                slidesPerView={1}
-                className={styles.mySwipe}
-                pagination={{ clickable: true }}
-                breakpoints={{
-                  620: {
-                    slidesPerView: 2,
-                    spaceBetween: 20,
-                  },
-                  860: {
-                    slidesPerView: 3,
-                    spaceBetween: 20,
-                  },
-                  1050: {
-                    slidesPerView: 4,
-                    spaceBetween: 20,
-                  },
-                }}
-              >
-                {reviews.isLoading ? (
-                  <div>
-                    <img src={spinner} alt="Loading.." width={100} />
-                  </div>
-                ) : (
-                  reviews.data?.map((review, index) => {
-                    const { userName, address, rating, text } = review;
-                    return (
-                      <SwiperSlide key={index}>
-                        <ReviewCard
-                          userName={userName}
-                          address={address}
-                          rating={rating}
-                          text={text}
-                        />
-                      </SwiperSlide>
-                    );
-                  })
-                )}
+            {reviews.isLoading ? (
+              <div>
+                <img src={spinner} alt="Loading.." width={100} />
+              </div>
+            ) : (
+              reviews.data.length !== 0 && (
+                <div id="reviews" className={styles.reviewsWrap}>
+                  <h5>Customers Reviews</h5>
+                  <Swiper
+                    style={{
+                      "--swiper-navigation-color": "#000",
+                      "--swiper-navigation-size": "38px",
+                    }}
+                    modules={[Navigation, Pagination]}
+                    spaceBetween={0}
+                    slidesPerView={1}
+                    className={styles.mySwipe}
+                    pagination={{ clickable: true }}
+                    breakpoints={{
+                      620: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                      },
+                      860: {
+                        slidesPerView: 3,
+                        spaceBetween: 20,
+                      },
+                      1050: {
+                        slidesPerView: 4,
+                        spaceBetween: 20,
+                      },
+                    }}
+                  >
+                    {reviews.data.map((review, index) => {
+                      const { userName, address, rating, text } = review;
+                      return (
+                        <SwiperSlide key={index}>
+                          <ReviewCard
+                            userName={userName}
+                            address={address}
+                            rating={rating}
+                            text={text}
+                          />
+                        </SwiperSlide>
+                      );
+                    })}
 
-                <MarginPagination />
-              </Swiper>
-            </div>
+                    <MarginPagination />
+                  </Swiper>
+                </div>
+              )
+            )}
           </div>
         )}
 
