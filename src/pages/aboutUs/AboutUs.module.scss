@@ -1,0 +1,48 @@
+.aboutUs {
+  padding: 30px;
+  margin-bottom: 50px;
+  h2 {
+    font-size: 38px;
+    font-weight: 600;
+    margin: 25px 0 40px 20px;
+  }
+
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+    .img {
+      width: 90%;
+      img {
+        width: 100%;
+      }
+    }
+
+    .card {
+      width: 100%;
+
+      h4 {
+        margin-bottom: 15px;
+      }
+
+      p {
+        margin: 10px 0;
+      }
+
+      .policies {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 20px;
+        padding: 20px;
+
+        .item {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+        }
+      }
+    }
+  }
+}

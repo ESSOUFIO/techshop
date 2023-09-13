@@ -16,7 +16,7 @@ const PoliciesBanner = () => {
     <>
       <div className={styles.policiesBanner}>
         <div className={styles.container}>
-          <div className={styles["first-item"]}>
+          <div className={styles.item}>
             <div>
               <img src={shippingIcon} alt="Free Shipping" />
             </div>
