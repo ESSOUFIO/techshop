@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styles from "./QuickView.module.scss";
 import ReactDOM from "react-dom";
 import { IoClose } from "react-icons/io5";
-import reviews from "../../reviews.json";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
@@ -20,6 +19,9 @@ import { selectProducts } from "../../redux/productSlice";
 import FormatPrice from "../formatPrice/FormatPrice";
 import { ADD_TO_CART } from "../../redux/cartSlice";
 import { useNavigate } from "react-router";
+import useFetchDocument from "../../customHooks/useFetchDocument";
+import spinner from "../../assets/images/loader/Spinner.png";
+import useFetchCollection from "../../customHooks/useFetchCollection";
 
 const MarginPagination = () => {
   return <div style={{ height: "30px" }}></div>;
@@ -34,6 +36,7 @@ const QuickView = ({ prodID, onHide }) => {
   const products = useSelector(selectProducts);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const reviews = useFetchCollection(`products/${prodID}/reviews`);
 
   const addToCard = () => {
     const item = {
@@ -65,6 +68,8 @@ const QuickView = ({ prodID, onHide }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prodID, products]);
+
+  console.log(`products/${prodID}/reviews`, reviews.data);
 
   return ReactDOM.createPortal(
     <div className={styles.quickView}>
@@ -177,6 +182,7 @@ const QuickView = ({ prodID, onHide }) => {
               </div>
             </div>
 
+            {/* Reviews */}
             <div id="reviews" className={styles.reviewsWrap}>
               <h5>Customers Reviews</h5>
               <Swiper
@@ -204,20 +210,25 @@ const QuickView = ({ prodID, onHide }) => {
                   },
                 }}
               >
-                {reviews.map((review, index) => {
-                  const { userName, address, rating, title, text } = review;
-                  return (
-                    <SwiperSlide key={index}>
-                      <ReviewCard
-                        userName={userName}
-                        address={address}
-                        rating={rating}
-                        title={title}
-                        text={text}
-                      />
-                    </SwiperSlide>
-                  );
-                })}
+                {reviews.isLoading ? (
+                  <div>
+                    <img src={spinner} alt="Loading.." width={100} />
+                  </div>
+                ) : (
+                  reviews.data?.map((review, index) => {
+                    const { userName, address, rating, text } = review;
+                    return (
+                      <SwiperSlide key={index}>
+                        <ReviewCard
+                          userName={userName}
+                          address={address}
+                          rating={rating}
+                          text={text}
+                        />
+                      </SwiperSlide>
+                    );
+                  })
+                )}
 
                 <MarginPagination />
               </Swiper>

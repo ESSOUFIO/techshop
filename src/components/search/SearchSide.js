@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const Search = ({ wrapperClass, iconClass, icon, onHide }) => {
+const SearchSide = ({ wrapperClass, iconClass, icon, onHide }) => {
   const [input, setInput] = useState("");
   const navigate = useNavigate();
 
@@ -23,17 +23,17 @@ const Search = ({ wrapperClass, iconClass, icon, onHide }) => {
         }
       };
       document
-        .getElementById("searchInput")
+        .getElementById("searchSideInput")
         .addEventListener("keydown", keyDownHandler);
       return () => {
         document
-          .getElementById("searchInput")
+          .getElementById("searchSideInput")
           .removeEventListener("keydown", keyDownHandler);
       };
     }
   }, [input, searchHandler, onHide]);
   return (
-    <div className={wrapperClass} id="searchInput">
+    <div className={wrapperClass} id="searchSideInput">
       <input
         type="text"
         placeholder="Search the store"
@@ -46,4 +46,4 @@ const Search = ({ wrapperClass, iconClass, icon, onHide }) => {
   );
 };
 
-export default Search;
+export default SearchSide;

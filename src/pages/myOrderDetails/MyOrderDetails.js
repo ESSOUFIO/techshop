@@ -1,13 +1,20 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router";
 import styles from "./MyOrderDetails.module.scss";
 import { Link } from "react-router-dom";
 import useFetchDocument from "../../customHooks/useFetchDocument";
 import spinner from "../../assets/images/loader/Spinner.png";
+import ButtonPrimary from "../../components/buttonPrimary/ButtonPrimary";
 
 const MyOrderDetails = () => {
   const { id } = useParams();
   const order = useFetchDocument("orders", id);
+  const navigate = useNavigate();
+
+  const reviewHandler = (prodID) => {
+    navigate(`/review-product/${prodID}`);
+  };
 
   return (
     <>
@@ -73,6 +80,7 @@ const MyOrderDetails = () => {
                         <th>Price</th>
                         <th>Quantity</th>
                         <th>Total</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -92,6 +100,13 @@ const MyOrderDetails = () => {
                             <td>{item.quantity}</td>
                             <td>
                               ${(item.newPrice * item.quantity).toFixed(2)}
+                            </td>
+                            <td>
+                              <ButtonPrimary
+                                text={"Review Product"}
+                                className={styles.reviewBtn}
+                                onClick={() => reviewHandler(item.id)}
+                              />
                             </td>
                           </tr>
                         );

@@ -35,28 +35,34 @@ const SearchResult = () => {
     });
   }, []);
 
-  console.log(input, filtredProd);
   return (
     <div className={`--container ${styles.searchResult}`}>
       <BreadCrumb page1={"Search Results"} />
       <h2>Search Results</h2>
 
       <div className={styles.content}>
-        {filtredProd.map((prod, index) => {
-          const { id, name, images, price, newPrice, offValue } = prod;
-          return (
-            <CardProduct
-              key={index}
-              img1={images[0].url}
-              img2={images[0].url}
-              name={name}
-              offValue={offValue}
-              newPrice={newPrice}
-              price={price}
-              id={id}
-            />
-          );
-        })}
+        {filtredProd.length === 0 ? (
+          <div>
+            <h6>No results for {input}.</h6>
+            <p>Try checking your spelling or use more general terms.</p>
+          </div>
+        ) : (
+          filtredProd.map((prod, index) => {
+            const { id, name, images, price, newPrice, offValue } = prod;
+            return (
+              <CardProduct
+                key={index}
+                img1={images[0].url}
+                img2={images[0].url}
+                name={name}
+                offValue={offValue}
+                newPrice={newPrice}
+                price={price}
+                id={id}
+              />
+            );
+          })
+        )}
       </div>
     </div>
   );

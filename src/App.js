@@ -26,6 +26,7 @@ import MyOrderDetails from "./pages/myOrderDetails/MyOrderDetails";
 import WishList from "./pages/wishList/WishList";
 import MyAddress from "./pages/myAddress/MyAddress";
 import SearchResult from "./pages/searchResult/SearchResult";
+import ReviewProduct from "./pages/reviews/ReviewProduct";
 
 const router = createBrowserRouter([
   {
@@ -121,6 +122,10 @@ const router = createBrowserRouter([
       {
         path: "search-result/:input",
         element: <SearchResult />,
+      },
+      {
+        path: "review-product/:id",
+        element: <ReviewProduct />,
       },
     ],
   },

@@ -1,7 +1,7 @@
 import { doc, getDoc } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { db } from "../firebase/config";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 const useFetchDocument = (collection, docID) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -16,7 +16,7 @@ const useFetchDocument = (collection, docID) => {
 
       if (docSnap.exists()) {
         setDocument(docSnap.data());
-      } else toast.error("Document not found!");
+      } //else toast.error("Document not found!");
     };
 
     if (docID !== "new" && docID) getDocument();

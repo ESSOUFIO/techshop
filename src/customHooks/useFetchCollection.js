@@ -9,7 +9,9 @@ const useFetchCollection = (collectionName, order) => {
 
   useEffect(() => {
     const getCollection = async () => {
-      const q = query(collection(db, collectionName), orderBy(order));
+      let q = query(collection(db, collectionName));
+      if (order) q = query(collection(db, collectionName), orderBy(order));
+
       setIsLoading(true);
       const querySnapshot = await getDocs(q);
       let array = [];
