@@ -14,7 +14,6 @@ review
 
 
 ***
-filter
 sortedby
 shipping
 

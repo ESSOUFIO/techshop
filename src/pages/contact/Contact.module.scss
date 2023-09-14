@@ -1,5 +1,5 @@
 .contact {
-  padding: 30px 10px 40px;
+  padding: 30px 20px 40px;
   .wrapper {
     display: flex;
     gap: 20px;
@@ -8,20 +8,25 @@
       width: 100%;
       border-radius: 5px;
       background: #03b1fc;
-      padding: 15px;
+      padding: 20px;
       color: #fff;
-      //   font-weight: 500;
       box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.1);
       height: 100%;
 
+      h5 {
+        font-size: 26px;
+        margin: 5px 0 15px;
+      }
+
       p {
-        margin: 5px 0 10px;
+        font-size: 15px;
+        margin: 5px 0 15px;
       }
 
       .icon {
-        font-size: 13px;
+        font-size: 14px;
         font-weight: 300;
-        margin: 3px 0;
+        margin: 7px 0;
         span {
           margin-left: 10px;
         }
@@ -57,6 +62,14 @@
           outline: 1px solid lightgray;
         }
       }
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    padding: 20px 10px 30px;
+
+    .wrapper {
+      flex-direction: column;
     }
   }
 }

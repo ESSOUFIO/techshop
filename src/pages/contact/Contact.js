@@ -1,68 +1,52 @@
-import React from "react";
 import styles from "./Contact.module.scss";
-import { useState } from "react";
 import ButtonPrimary from "../../components/buttonPrimary/ButtonPrimary";
 import { FaPhone, FaLocationDot, FaTwitter } from "react-icons/fa6";
 import { IoMail } from "react-icons/io5";
 import Input from "../../components/input/Input";
-const initForm = {
-  name: "",
-  email: "",
-  subject: "",
-  message: "",
-};
+import React, { useRef } from "react";
+import emailjs from "@emailjs/browser";
+import { toast } from "react-toastify";
 
 const Contact = () => {
-  const [form, setForm] = useState(initForm);
+  const form = useRef();
 
-  const inputHandler = (e) => {
-    const { name, value } = e.target;
-    setForm({
-      ...form,
-      [name]: value,
-    });
-  };
-
-  const submitHandler = (e) => {
+  const sendEmail = (e) => {
     e.preventDefault();
+    console.log(form.current);
+
+    emailjs
+      .sendForm(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        form.current,
+        process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+      )
+      .then(
+        (result) => {
+          toast.success("Your email sent successfully.");
+        },
+        (error) => {
+          toast.error(error.message);
+        }
+      );
   };
   return (
     <div className={`--container ${styles.contact}`}>
       <h2>Contact Us</h2>
       <div className={styles.wrapper}>
         <div className={styles.card}>
-          <form onSubmit={submitHandler}>
+          <form ref={form} onSubmit={sendEmail}>
             <label>Name: </label>
-            <Input
-              type="text"
-              name="name"
-              onChange={inputHandler}
-              required={true}
-            />
+            <Input type="text" name="user_name" required={true} />
 
             <label>Email: </label>
-            <Input
-              type="email"
-              name="email"
-              onChange={inputHandler}
-              required={true}
-            />
+            <Input type="email" name="user_email" required={true} />
 
             <label>Subject: </label>
-            <Input
-              type="text"
-              name="subject"
-              onChange={inputHandler}
-              required={true}
-            />
+            <Input type="text" name="subject" required={true} />
 
             <label>Message: </label>
-            <textarea
-              rows="10"
-              name="message"
-              onChange={inputHandler}
-              required={true}
-            />
+            <textarea rows="10" name="message" required={true} />
 
             <div style={{ display: "flex", justifyContent: "right" }}>
               <ButtonPrimary
