@@ -8,7 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 5px 20px;
+  padding: 5px 25px;
   z-index: 999;
   visibility: hidden;
 
@@ -53,5 +53,9 @@
 
   @media screen and (max-width: 1023px) {
     visibility: visible;
+  }
+
+  @media screen and (max-width: 767px) {
+    padding: 5px 20px;
   }
 }

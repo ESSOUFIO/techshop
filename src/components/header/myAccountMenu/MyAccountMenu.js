@@ -11,6 +11,8 @@ import { TbReportMoney } from "react-icons/tb";
 import { IoLocationSharp } from "react-icons/io5";
 import { BiLogOutCircle } from "react-icons/bi";
 import { LuFileHeart } from "react-icons/lu";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import OnlyAdmin from "../../onlyAdmin/OnlyAdmin";
 
 const MyAccountMenu = ({ show, onHide, userName }) => {
   const navigate = useNavigate();
@@ -51,6 +53,11 @@ const MyAccountMenu = ({ show, onHide, userName }) => {
     navigate("my-account");
     onHide();
   };
+
+  const toAdminDashboard = () => {
+    navigate("/admin/dashboard");
+    onHide();
+  };
   return (
     <>
       <SideMenu
@@ -61,6 +68,15 @@ const MyAccountMenu = ({ show, onHide, userName }) => {
       >
         <div className={styles.myAccount}>
           <ul>
+            <OnlyAdmin>
+              <li onClick={toAdminDashboard}>
+                <MdOutlineAdminPanelSettings size={25} />
+                <span>
+                  <b>ADMIN DASHBOARD</b>
+                </span>
+              </li>
+            </OnlyAdmin>
+
             <li onClick={myAccount}>
               <FaHouseUser size={20} />
               <span>My Account Informations</span>

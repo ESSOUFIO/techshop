@@ -55,11 +55,14 @@ const HeaderMobile = ({ isLoggedIn, userName, style, nbrCartItems }) => {
           </div>
           <div className={styles.iconGroup}>
             <OnlyAdmin>
-              <MdOutlineAdminPanelSettings
-                className={styles.icon}
-                size={28}
-                onClick={() => navigate("/admin/dashboard")}
-              />
+              <div className={styles.adminIcon}>
+                ADMIN
+                <MdOutlineAdminPanelSettings
+                  className={styles.icon}
+                  size={28}
+                  onClick={() => navigate("/admin/dashboard")}
+                />
+              </div>
             </OnlyAdmin>
             <FaRegUserCircle
               size={24}
