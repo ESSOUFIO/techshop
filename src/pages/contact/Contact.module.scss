@@ -1,5 +1,9 @@
 .contact {
   padding: 30px 20px 40px;
+
+  h2 {
+    margin-bottom: 20px;
+  }
   .wrapper {
     display: flex;
     gap: 20px;
@@ -69,7 +73,7 @@
     padding: 20px 10px 30px;
 
     .wrapper {
-      flex-direction: column;
+      flex-direction: column-reverse;
     }
   }
 }
