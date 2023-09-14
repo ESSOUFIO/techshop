@@ -1,13 +1,13 @@
 import React from "react";
 import styles from "./ContinueShopping.module.scss";
 import { Link } from "react-router-dom";
-import { IoPlayBack } from "react-icons/io5";
+import { IoIosArrowBack } from "react-icons/io";
 
 const ContinueShopping = () => {
   return (
     <div className={styles.continueShopping}>
       <Link to={"/"}>
-        <IoPlayBack size={17} />
+        <IoIosArrowBack size={17} />
         <span>Continue Shopping</span>
       </Link>
     </div>

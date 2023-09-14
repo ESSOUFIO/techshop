@@ -1,0 +1,57 @@
+.bottomBar {
+  background: #ffffff;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 20px;
+  z-index: 999;
+  visibility: hidden;
+
+  .cart {
+    position: relative;
+    cursor: pointer;
+
+    .bubble {
+      position: absolute;
+      top: -7px;
+      right: -3px;
+      background: #0c0c0c;
+      height: 21px;
+      width: 21px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      span {
+        color: white;
+        font-size: 13px;
+        padding-top: 1px;
+      }
+    }
+  }
+
+  .icon {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    align-items: center;
+    font-size: 13px;
+    cursor: pointer;
+    color: #000000c8;
+
+    &:hover {
+      color: #000;
+      font-size: 13px;
+    }
+  }
+
+  @media screen and (max-width: 1023px) {
+    visibility: visible;
+  }
+}

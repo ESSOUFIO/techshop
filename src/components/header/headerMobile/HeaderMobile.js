@@ -13,6 +13,7 @@ import OnlyAdmin from "../../onlyAdmin/OnlyAdmin";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import MainMenu from "../mainMenu/MainMenu";
 import SearchMenu from "../searchMenu/SearchMenu";
+import BottomBar from "../../bottomBar/BottomBar";
 
 const HeaderMobile = ({ isLoggedIn, userName, style, nbrCartItems }) => {
   const [showMainMenu, setShowMainMenu] = useState(false);
@@ -74,6 +75,12 @@ const HeaderMobile = ({ isLoggedIn, userName, style, nbrCartItems }) => {
           </div>
         </div>
       </div>
+
+      <BottomBar
+        triggerSearchMenu={triggerSearchMenu}
+        triggerShowUserMenu={triggerShowUserMenu}
+        nbrCartItems={nbrCartItems}
+      />
 
       <MainMenu
         show={showMainMenu}

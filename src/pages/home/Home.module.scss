@@ -19,8 +19,8 @@
     align-items: center;
     right: 20px;
     bottom: 45px;
-    height: 45px;
-    width: 45px;
+    height: 42px;
+    width: 42px;
     background: rgba($color: #51c2ff, $alpha: 0.6);
     border-radius: 50%;
     border: 2px solid #fff;
@@ -30,8 +30,12 @@
     transition: all 0.5s;
 
     &:hover {
-      background: rgba($color: #51c2ff, $alpha: 1);
-      transform: scale(1.1);
+      background: rgba($color: #34a1dc, $alpha: 1);
+      transform: scale(1.05);
+    }
+
+    @media screen and (max-width: 1023px) {
+      visibility: hidden;
     }
   }
   @media screen and (max-width: 767px) {
