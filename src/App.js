@@ -83,10 +83,6 @@ const router = createBrowserRouter([
         element: <MyOrders />,
       },
       {
-        path: "my-orders",
-        element: <MyOrders />,
-      },
-      {
         path: "my-address",
         element: <MyAddress />,
       },

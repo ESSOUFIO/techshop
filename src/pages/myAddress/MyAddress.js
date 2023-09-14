@@ -12,7 +12,9 @@ import { toast } from "react-toastify";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import useFetchDocument from "../../customHooks/useFetchDocument";
-import spinner from "../../assets/images/loader/Spinner.png";
+import addressImg from "../../assets/images/Directions-rafiki.png";
+import ButtonSecondary from "../../components/buttonSecondary/ButtonSecondary";
+import Loader from "../../components/loader/Loader";
 
 const shippingInit = {
   name: "",
@@ -30,6 +32,7 @@ const shippingInit = {
 
 const MyAddress = () => {
   const [shippingAddress, setShippingAddress] = useState(shippingInit);
+  const [myAddress, setMyAddress] = useState(shippingInit);
   const [showForm, setShowForm] = useState(false);
   const [showAddress, setShowAddress] = useState(false);
   const uid = useSelector(selectUserID);
@@ -39,6 +42,7 @@ const MyAddress = () => {
   useEffect(() => {
     if (user.data) {
       if (user.data.address !== "") {
+        setMyAddress(user.data.address);
         setShippingAddress(user.data.address);
         setShowAddress(true);
         setShowForm(false);
@@ -65,7 +69,19 @@ const MyAddress = () => {
     });
     setShowForm(false);
     setShowAddress(true);
+    setMyAddress(shippingAddress);
     toast.success("Your Address is saved successfully.");
+
+    //scroll to top
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const cancelHandler = () => {
+    setShowForm(false);
+    setShippingAddress(myAddress);
 
     //scroll to top
     window.scrollTo({
@@ -91,13 +107,10 @@ const MyAddress = () => {
   }, []);
 
   return (
-    <div className={`--container ${styles.myAddress}`}>
-      <h2>My Shipping Address</h2>
-      {user.isLoading ? (
-        <div>
-          <img src={spinner} alt="Loading.." width={100} />
-        </div>
-      ) : (
+    <>
+      <div className={`--container ${styles.myAddress}`}>
+        <h2>My Shipping Address</h2>
+
         <div className={styles.content}>
           {showAddress && (
             <div className={styles.defaultAddress}>
@@ -109,48 +122,56 @@ const MyAddress = () => {
                       <th scope="row">
                         <b>Name</b>
                       </th>
-                      <td>{shippingAddress.name}</td>
+                      <td>{myAddress.name}</td>
                     </tr>
                     <tr>
                       <th scope="row">
                         <b>Address</b>
                       </th>
                       <td>
-                        {shippingAddress.line1 + ", " + shippingAddress.line2}
+                        {myAddress.line1 + ", " + myAddress.line2}
 
                         <br />
-                        {shippingAddress.postal_code +
-                          ", " +
-                          shippingAddress.city}
+                        {myAddress.postal_code + ", " + myAddress.city}
 
                         <br />
-                        {shippingAddress.state}
+                        {myAddress.state}
                       </td>
                     </tr>
                     <tr>
                       <th scope="row">
                         <b>Country</b>
                       </th>
-                      <td>{shippingAddress.country.name}</td>
+                      <td>{myAddress.country.name}</td>
                     </tr>
                     <tr>
                       <th scope="row">
                         <b>Phone</b>
                       </th>
-                      <td>{shippingAddress.phone}</td>
+                      <td>{myAddress.phone}</td>
                     </tr>
                   </tbody>
                 </table>
-                <div className={styles.btnUpdate}>
-                  <ButtonPrimary
-                    text={"Update Address"}
-                    onClick={updateHandler}
-                    style={{ maxWidth: "180px", padding: "7px" }}
-                  />
-                </div>
+
+                {!showForm && (
+                  <div className={styles.btnUpdate}>
+                    <ButtonPrimary
+                      text={"Update Address"}
+                      onClick={updateHandler}
+                      style={{ maxWidth: "180px", padding: "7px" }}
+                    />
+                  </div>
+                )}
               </div>
             </div>
           )}
+
+          {!showForm && !user.isLoading && (
+            <div className={styles.img}>
+              <img src={addressImg} alt="My Address" />
+            </div>
+          )}
+
           {showForm && (
             <div className={styles.newAddress}>
               <p>Save your default shipping address:</p>
@@ -221,19 +242,6 @@ const MyAddress = () => {
                     className="--rounded --light-border"
                     style={{ padding: "5px 10px", marginTop: "5px" }}
                   >
-                    {/* <CountryDropdown
-                    className={styles.select}
-                    valueType="short"
-                    value={shippingAddress.country.name}
-                    onChange={(val) =>
-                      handleInput({
-                        target: {
-                          name: "country",
-                          value: val,
-                        },
-                      })
-                    }
-                  /> */}
                     <ReactCountryDropdown
                       onSelect={(val) =>
                         handleInput({
@@ -256,14 +264,27 @@ const MyAddress = () => {
                     onChange={(e) => handleInput(e)}
                     className={styles.input}
                   />
-                  <ButtonPrimary text={"Save Address"} />
+                  <div className={styles.buttons}>
+                    <ButtonSecondary
+                      type={"button"}
+                      text={"Cancel"}
+                      onClick={cancelHandler}
+                      className={styles.btnClass}
+                    />
+                    <ButtonPrimary
+                      type={"submit"}
+                      text={"Save Address"}
+                      className={styles.btnClass}
+                    />
+                  </div>
                 </div>
               </form>
             </div>
           )}
         </div>
-      )}
-    </div>
+      </div>
+      {user.isLoading && <Loader />}
+    </>
   );
 };
 

@@ -69,6 +69,7 @@
       gap: 30px;
       margin-top: 25px;
 
+      a,
       button {
         min-width: 200px;
         padding: 7px 20px;
@@ -78,10 +79,15 @@
         background: #3aaade;
         border-radius: 5px;
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        cursor: pointer;
 
         &:hover {
           background: #3094c2;
         }
+      }
+      button {
+        background: #ef4296;
       }
     }
   }

@@ -6,20 +6,38 @@
     display: flex;
     gap: 20px;
 
+    .img {
+      width: 80%;
+      max-width: 500px;
+      img {
+        width: 100%;
+      }
+    }
+
     .newAddress {
       width: 100%;
     }
 
     .defaultAddress {
       width: 100%;
-      max-width: 500px;
+      // max-width: 500px;
     }
 
     table {
       margin-top: 5px;
+      width: 100%;
+      margin-bottom: 20px;
+
+      tr {
+        background: #f1f1f1;
+        border-bottom: 1px solid lightgray;
+      }
+
+      tr:nth-child(even) {
+        background: #fff;
+      }
       th {
         display: flex;
-        align-items: left;
         min-width: 100px;
       }
       th,
@@ -31,7 +49,7 @@
     .btnUpdate {
       display: flex;
       justify-content: right;
-      margin: 25px 5px 0;
+      margin: 5px 5px 0;
     }
   }
 
@@ -44,7 +62,7 @@
 
   .card {
     width: 100%;
-    max-width: 500px;
+    // max-width: 500px;
     padding: 15px;
     border-radius: 5px;
     box-shadow: 0 0 8px rgba($color: #000000, $alpha: 0.2);
@@ -54,6 +72,25 @@
       width: 100%;
       border: none;
       padding: 7px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+
+    .btnClass {
+      max-width: 180px;
+    }
+  }
+
+  @media screen and (max-width: "767px") {
+    margin: 15px;
+    .content {
+      flex-direction: column;
+      align-items: center;
     }
   }
 }
