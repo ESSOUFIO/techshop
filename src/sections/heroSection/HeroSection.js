@@ -3,7 +3,11 @@ import styles from "./HeroSection.module.scss";
 import backLargeImg from "../../assets/images/banners/hero-section.jpg";
 import backMobileImg from "../../assets/images/banners/hero-section-mb.jpg";
 import affirmImg from "../../assets/icons/affirm.png";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+
 const HeroSection = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className={styles.hero}>
@@ -19,7 +23,10 @@ const HeroSection = () => {
             <span>Huge Saving</span> on UHD Televisions
           </h1>
           <p>Sale up to 70% off on selected items*</p>
-          <button className="--btn">Shop Now</button>
+
+          <a href="/#televisions" style={{ color: "#fff" }}>
+            Shop Now
+          </a>
         </div>
       </div>
 

@@ -1,7 +1,15 @@
+.categories {
+  padding-bottom: 40px;
+}
+
 .categoriesPage {
   display: flex;
   justify-content: space-evenly;
   gap: 20px;
   flex-wrap: wrap;
   margin: 15px 0 35px 0;
+}
+
+h2 {
+  margin-bottom: 30px;
 }

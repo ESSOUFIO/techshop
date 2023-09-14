@@ -133,8 +133,8 @@ const HeaderLaptop = ({ isLoggedIn, userName, nbrCartItems }) => {
             <NavLink to="/hot-deal" className={activeLink}>
               Hot deal
             </NavLink>
-            <NavLink to="/collections" className={activeLink}>
-              Collections
+            <NavLink to="/categories" className={activeLink}>
+              Categories
             </NavLink>
             <NavLink to="/about-us" className={activeLink}>
               About Us

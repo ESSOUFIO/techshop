@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./Collections.module.scss";
 import BreadCrumb from "../../components/breadCrumb/BreadCrumb";
 import TopCategories from "../../sections/topCategories/TopCategories";
 import { useEffect } from "react";
@@ -12,7 +11,7 @@ const Collections = () => {
     });
   }, []);
   return (
-    <div className={styles.collections}>
+    <div>
       <BreadCrumb page1={"Collections"} />
       <TopCategories />
     </div>

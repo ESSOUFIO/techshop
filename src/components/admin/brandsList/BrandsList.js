@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import Notiflix from "notiflix";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db, storage } from "../../../firebase/config";
-import Loader from "../../loader/Loader";
 import { ref, deleteObject } from "firebase/storage";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
@@ -14,6 +13,7 @@ import { IoSearch } from "react-icons/io5";
 import { GoTrash } from "react-icons/go";
 import { FiEdit } from "react-icons/fi";
 import { selectBrands } from "../../../redux/brandSlice";
+import Loader from "../../loader/Loader";
 
 const BrandsList = () => {
   const [loading, setLoading] = useState(false);
@@ -101,7 +101,7 @@ const BrandsList = () => {
               </tr>
             </thead>
             <tbody>
-              {filtredBrands === [] ? (
+              {filtredBrands.length === 0 ? (
                 <p>No brands founds.</p>
               ) : (
                 <>
@@ -110,11 +110,13 @@ const BrandsList = () => {
                       <tr key={index}>
                         <td>{index + 1}</td>
                         <td style={{ width: "140px" }}>
-                          <img
-                            src={item.image.url}
-                            alt={item.name}
-                            width={100}
-                          />
+                          {item.image && (
+                            <img
+                              src={item.image.url}
+                              alt={item.name}
+                              width={100}
+                            />
+                          )}
                         </td>
                         <td className={styles.name}>{item.name}</td>
 
@@ -145,7 +147,7 @@ const BrandsList = () => {
         </div>
       </div>
 
-      {/* {loading && <Loader />} */}
+      {loading && <Loader />}
     </>
   );
 };

@@ -218,7 +218,7 @@ const AddBrand = () => {
                   <button
                     type="submit"
                     className={styles.submitBtn}
-                    disabled={!brand.name || !brand.image}
+                    disabled={!brand.name}
                   >
                     {editMode ? "Edit Brand" : "Add Brand"}
                   </button>

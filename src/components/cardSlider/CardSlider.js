@@ -29,9 +29,9 @@ const MarginPagination = () => {
   return <div style={{ height: "30px" }}></div>;
 };
 
-const CardSlider = ({ title, titleColor, textAlign, productList }) => {
+const CardSlider = ({ title, titleColor, textAlign, productList, id }) => {
   return (
-    <div className={styles.cardSlider}>
+    <div className={styles.cardSlider} id={id}>
       <h1 style={{ color: `${titleColor}`, textAlign: `${textAlign}` }}>
         {title}
       </h1>

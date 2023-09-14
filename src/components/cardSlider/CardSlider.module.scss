@@ -1,5 +1,5 @@
 .cardSlider {
-  padding: 20px 15px;
+  padding: 20px 25px;
 
   h1 {
     margin-top: 20px;
@@ -16,7 +16,7 @@
   .navPrev {
     opacity: 0.6;
     position: absolute;
-    top: 50%;
+    top: 40%;
     transform: translateY(-50%);
     z-index: 99;
     //
@@ -41,9 +41,9 @@
   }
 
   .navNext {
-    right: 10px;
+    right: 0px;
   }
   .navPrev {
-    left: 10px;
+    left: 0px;
   }
 }

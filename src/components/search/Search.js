@@ -7,9 +7,12 @@ const Search = ({ wrapperClass, iconClass, icon, onHide }) => {
   const navigate = useNavigate();
 
   const searchHandler = useCallback(() => {
-    navigate(`search-result/${input}`);
-    console.log("onHide: ", onHide);
-    if (onHide) onHide();
+    if (input === "") {
+      navigate("/");
+    } else {
+      navigate(`search-result/${input}`);
+      if (onHide) onHide();
+    }
   }, [input, navigate, onHide]);
 
   /** listen Enter */

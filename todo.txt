@@ -1,16 +1,14 @@
-add reviews to Product Card
-
 add video to banner 
-
-bottom fixed bar for mobile device
 
 Shipping & Return Policy to product page
 
 display createdAt and modifiedAt
 
-**
+***
 
-review
+minimize product card in collection page
+
+
 
 
 ***

@@ -23,8 +23,8 @@ const MainMenu = ({ show, onHide, position, title }) => {
     onHide();
   };
 
-  const toCollections = () => {
-    navigate("/collections");
+  const toCategories = () => {
+    navigate("/categories");
     onHide();
   };
 
@@ -54,11 +54,11 @@ const MainMenu = ({ show, onHide, position, title }) => {
           <span>Hot Deal</span>
         </li>
 
-        <li onClick={toCollections}>
+        <li onClick={toCategories}>
           <span>
             <MdOutlineCollectionsBookmark size={24} />
           </span>
-          <span>Collection</span>
+          <span>Categories</span>
         </li>
 
         <li onClick={toAboutUs}>

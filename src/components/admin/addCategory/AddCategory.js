@@ -163,6 +163,7 @@ const AddCategory = () => {
                   value={category.id}
                   required={true}
                   onChange={(e) => inputHandler(e.target)}
+                  disabled={editMode}
                 />
 
                 <label>Category Name</label>

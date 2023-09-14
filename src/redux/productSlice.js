@@ -9,7 +9,7 @@ export const productSlice = createSlice({
   initialState,
   reducers: {
     STORE_PRODUCTS: (state, action) => {
-      state.products = action.payload;
+      state.products = action.payload.sort((a, b) => b.createdAt - a.createdAt);
     },
     // DELETE_PRODUCT: (state, action) => {
     //   const array = Array.from(state.products);

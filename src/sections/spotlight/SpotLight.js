@@ -5,21 +5,22 @@ import soundBarImg from "../../assets/images/soundbars_430x.jpg";
 import massageImg from "../../assets/images/msssages_chairs_430x.jpg";
 import ephoneImg from "../../assets/images/ephone_665x.jpg";
 import laptopImg from "../../assets/images/laptop_665x.jpg";
+import { Link } from "react-router-dom";
 
 const SpotLight = () => {
   return (
     <>
       <div className={styles.spotlight}>
         <div className={styles.firstRow}>
-          <div className={styles.img}>
+          <Link to={"/categories/gaming"} className={styles.img}>
             <img src={consoleImg} alt="Console" />
-          </div>
-          <div className={styles.img}>
+          </Link>
+          <Link to={"/categories/audio_video"} className={styles.img}>
             <img src={soundBarImg} alt="Sound Bars" />
-          </div>
-          <div className={styles.img}>
+          </Link>
+          <Link to={"/categories/massage_chairs"} className={styles.img}>
             <img src={massageImg} alt="Massage Chair" />
-          </div>
+          </Link>
         </div>
 
         <div className={styles.secondRow}>

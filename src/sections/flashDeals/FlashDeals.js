@@ -10,7 +10,7 @@ const FlashDeals = ({ products }) => {
   }, [products]);
 
   return (
-    <>
+    <div>
       {prods.length !== 0 && (
         <CardSlider
           title={"Flash Deal"}
@@ -18,7 +18,7 @@ const FlashDeals = ({ products }) => {
           productList={prods}
         />
       )}
-    </>
+    </div>
   );
 };
 

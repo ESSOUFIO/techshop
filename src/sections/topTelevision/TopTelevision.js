@@ -11,7 +11,11 @@ const TopTelevision = ({ products }) => {
   return (
     <>
       {prods.length !== 0 && (
-        <CardSlider title={"Top Televisions"} productList={prods} />
+        <CardSlider
+          title={"Top Televisions"}
+          productList={prods}
+          id={"televisions"}
+        />
       )}
     </>
   );

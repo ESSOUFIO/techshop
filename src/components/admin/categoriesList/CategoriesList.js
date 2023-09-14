@@ -84,7 +84,7 @@ const CategoriesList = () => {
           <IoSearch size={20} className={styles.searchIcon} />
         </div>
 
-        {filtredCateg === [] ? (
+        {filtredCateg.lenght === 0 ? (
           <p>No categories founds.</p>
         ) : (
           <div className={styles.table}>
@@ -141,7 +141,7 @@ const CategoriesList = () => {
         )}
       </div>
 
-      {/* {loading && <Loader />} */}
+      {loading && <Loader />}
     </>
   );
 };

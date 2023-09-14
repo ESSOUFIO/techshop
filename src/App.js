@@ -3,7 +3,6 @@ import "./App.scss";
 import {
   AboutUs,
   Admin,
-  Collections,
   Contact,
   CreateAccount,
   Home,
@@ -29,6 +28,7 @@ import SearchResult from "./pages/searchResult/SearchResult";
 import ReviewProduct from "./pages/reviews/ReviewProduct";
 import MyAccount from "./pages/myAccount/MyAccount";
 import NotFound from "./pages/notFound/NotFound";
+import Categories from "./pages/categories/Categories";
 
 const router = createBrowserRouter([
   {
@@ -44,8 +44,8 @@ const router = createBrowserRouter([
         element: <HotDeal />,
       },
       {
-        path: "collections",
-        element: <Collections />,
+        path: "categories",
+        element: <Categories />,
       },
       {
         path: "about-us",
