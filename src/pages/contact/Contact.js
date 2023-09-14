@@ -25,7 +25,7 @@ const Contact = () => {
       )
       .then(
         (result) => {
-          toast.success("Your email sent successfully.");
+          toast.success("Your email was sent successfully.");
           form.current.reset();
         },
         (error) => {
