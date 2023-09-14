@@ -1,0 +1,16 @@
+.notFound {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  margin: 40px 0 30px;
+
+  .img {
+    max-width: 450px;
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
+}

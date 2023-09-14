@@ -28,6 +28,7 @@ import MyAddress from "./pages/myAddress/MyAddress";
 import SearchResult from "./pages/searchResult/SearchResult";
 import ReviewProduct from "./pages/reviews/ReviewProduct";
 import MyAccount from "./pages/myAccount/MyAccount";
+import NotFound from "./pages/notFound/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -128,6 +129,10 @@ const router = createBrowserRouter([
       {
         path: "my-account",
         element: <MyAccount />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },
