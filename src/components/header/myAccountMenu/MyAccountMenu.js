@@ -6,6 +6,11 @@ import { auth } from "../../../firebase/config";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import Loader from "../../loader/Loader";
+import { FaHouseUser } from "react-icons/fa6";
+import { TbReportMoney } from "react-icons/tb";
+import { IoLocationSharp } from "react-icons/io5";
+import { BiLogOutCircle } from "react-icons/bi";
+import { LuFileHeart } from "react-icons/lu";
 
 const MyAccountMenu = ({ show, onHide, userName }) => {
   const navigate = useNavigate();
@@ -56,11 +61,25 @@ const MyAccountMenu = ({ show, onHide, userName }) => {
       >
         <div className={styles.myAccount}>
           <ul>
-            <li onClick={myAccount}>My Account Informations</li>
-            <li onClick={myOrders}>My Orders</li>
-            <li onClick={myAddress}>My Addresses</li>
-            <li onClick={myWishList}>My Wish List</li>
-            <li onClick={logoutHandler}>Log Out</li>
+            <li onClick={myAccount}>
+              <FaHouseUser size={20} />
+              <span>My Account Informations</span>
+            </li>
+            <li onClick={myOrders}>
+              <TbReportMoney size={20} />
+              <span>My Orders</span>
+            </li>
+            <li onClick={myAddress}>
+              <IoLocationSharp size={20} /> <span>My Addresses</span>
+            </li>
+            <li onClick={myWishList}>
+              <LuFileHeart size={20} />
+              <span>My Wish List</span>
+            </li>
+            <li onClick={logoutHandler}>
+              <BiLogOutCircle size={20} />
+              <span>Log Out</span>
+            </li>
           </ul>
         </div>
       </SideMenu>
