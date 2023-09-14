@@ -41,6 +41,11 @@ const MyAccountMenu = ({ show, onHide, userName }) => {
     navigate("wish-list");
     onHide();
   };
+
+  const myAccount = () => {
+    navigate("my-account");
+    onHide();
+  };
   return (
     <>
       <SideMenu
@@ -51,7 +56,7 @@ const MyAccountMenu = ({ show, onHide, userName }) => {
       >
         <div className={styles.myAccount}>
           <ul>
-            <li>My Account Informations</li>
+            <li onClick={myAccount}>My Account Informations</li>
             <li onClick={myOrders}>My Orders</li>
             <li onClick={myAddress}>My Addresses</li>
             <li onClick={myWishList}>My Wish List</li>
@@ -59,7 +64,7 @@ const MyAccountMenu = ({ show, onHide, userName }) => {
           </ul>
         </div>
       </SideMenu>
-      {/* {loading && <Loader />} */}
+      {loading && <Loader />}
     </>
   );
 };

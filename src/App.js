@@ -27,6 +27,7 @@ import WishList from "./pages/wishList/WishList";
 import MyAddress from "./pages/myAddress/MyAddress";
 import SearchResult from "./pages/searchResult/SearchResult";
 import ReviewProduct from "./pages/reviews/ReviewProduct";
+import MyAccount from "./pages/myAccount/MyAccount";
 
 const router = createBrowserRouter([
   {
@@ -126,6 +127,11 @@ const router = createBrowserRouter([
       {
         path: "review-product/:id",
         element: <ReviewProduct />,
+      },
+
+      {
+        path: "my-account",
+        element: <MyAccount />,
       },
     ],
   },

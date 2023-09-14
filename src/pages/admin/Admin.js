@@ -180,7 +180,7 @@ const Admin = () => {
         </Routes>
       </div>
 
-      {/* {loading && <Loader />} */}
+      {loading && <Loader />}
     </>
   );
 };
