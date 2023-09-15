@@ -1,0 +1,76 @@
+.bannersList {
+  padding: 20px;
+  width: 100%;
+
+  h2 {
+    font-size: 23px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .search {
+    position: relative;
+
+    input {
+      padding: 9px 7px;
+      padding-left: 30px;
+      max-width: 300px;
+      border: 1px solid #444;
+    }
+
+    .searchIcon {
+      position: absolute;
+      top: 50%;
+      left: 7px;
+      transform: translateY(-50%);
+    }
+  }
+
+  .table {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    margin-top: 20px;
+
+    .name {
+      min-width: 250px;
+    }
+
+    thead {
+      border-top: 2px solid #4e73df;
+      border-bottom: 2px solid #4e73df;
+    }
+
+    th,
+    td {
+      text-align: center;
+      padding: 8px;
+      border-left: 1px solid rgb(233, 233, 233);
+      border-right: 1px solid rgb(233, 233, 233);
+      height: 100%;
+    }
+
+    tbody tr td:last-of-type {
+      min-width: 80px;
+      .icon:hover {
+        cursor: pointer;
+        opacity: 0.6;
+      }
+    }
+
+    tr {
+      border-bottom: 1px solid #ccc;
+    }
+
+    tr:nth-child(even) {
+      background-color: #fff;
+    }
+  }
+}

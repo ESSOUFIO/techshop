@@ -31,6 +31,8 @@ import {
   OrdersList,
   ProductsList,
 } from "../../components";
+import BannersList from "../../components/admin/bannersList/BannersList";
+import AddBanner from "../../components/admin/addBanner/AddBanner";
 
 const NavItem = ({ icon, label, path }) => {
   return (
@@ -199,6 +201,8 @@ const Admin = () => {
           <Route path="brands" element={<BrandsList />} />
           <Route path="orders" element={<OrdersList />} />
           <Route path="order-details/:id" element={<OrderDetails />} />
+          <Route path="banners" element={<BannersList />} />
+          <Route path="banner/:id" element={<AddBanner />} />
         </Routes>
       </div>
 

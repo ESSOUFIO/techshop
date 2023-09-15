@@ -1,0 +1,63 @@
+.addBanner {
+  padding: 20px;
+  width: 100%;
+
+  h2 {
+    font-size: 23px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .card {
+    width: 100%;
+    max-width: 500px;
+    padding: 15px;
+  }
+
+  form {
+    label {
+      display: block;
+      margin-bottom: 4px;
+      font-weight: 500;
+      padding-left: 3px;
+    }
+
+    .btn {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 25px;
+
+      .cancelBtn {
+        background: #999;
+        padding: 5px 25px;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+
+        &:hover {
+          background: #888;
+        }
+      }
+
+      .submitBtn {
+        background: var(--color-btn-blue);
+        padding: 5px 25px;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+
+        &:hover {
+          background: rgb(2, 2, 172);
+        }
+
+        &:disabled {
+          cursor: default;
+          background: rgba(2, 2, 172, 0.494);
+
+          &:hover {
+            background: rgba(2, 2, 172, 0.494);
+          }
+        }
+      }
+    }
+  }
+}
