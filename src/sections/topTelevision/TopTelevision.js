@@ -5,7 +5,7 @@ const TopTelevision = ({ products }) => {
   const [prods, setProds] = useState([]);
 
   useEffect(() => {
-    const array = products.filter((prod) => prod.banner === "Top Televisions");
+    const array = products.filter((prod) => prod.banner === "top_televisions");
     setProds(array);
   }, [products]);
   return (
@@ -15,6 +15,7 @@ const TopTelevision = ({ products }) => {
           title={"Top Televisions"}
           productList={prods}
           id={"televisions"}
+          banner={"top_televisions"}
         />
       )}
     </>

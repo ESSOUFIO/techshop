@@ -12,7 +12,7 @@ const Categories = () => {
     });
   }, []);
   return (
-    <div className={styles.collections}>
+    <div className={styles.categories}>
       <BreadCrumb page1={"Categories"} />
       <TopCategories />
     </div>

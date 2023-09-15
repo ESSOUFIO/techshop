@@ -3,6 +3,7 @@ import "./App.scss";
 import {
   AboutUs,
   Admin,
+  CollectionPage,
   Contact,
   CreateAccount,
   Home,
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "categories/:id",
         element: <CategoryPage />,
+      },
+      {
+        path: "collections/:id",
+        element: <CollectionPage />,
       },
       {
         path: "cart",

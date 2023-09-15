@@ -69,11 +69,13 @@ const FeaturedBrands = () => {
         >
           {brands.data.map((brand, index) => {
             return (
-              <SwiperSlide key={index}>
+              <>
                 {brand.image && (
-                  <Brand brandImg={brand.image.url} name={brand.name} />
+                  <SwiperSlide key={index}>
+                    <Brand brandImg={brand.image.url} name={brand.name} />
+                  </SwiperSlide>
                 )}
-              </SwiperSlide>
+              </>
             );
           })}
 

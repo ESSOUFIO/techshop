@@ -5,7 +5,7 @@ const FlashDeals = ({ products }) => {
   const [prods, setProds] = useState([]);
 
   useEffect(() => {
-    const array = products.filter((prod) => prod.banner === "Flash Deal");
+    const array = products.filter((prod) => prod.banner === "flash_deal");
     setProds(array);
   }, [products]);
 
@@ -16,6 +16,7 @@ const FlashDeals = ({ products }) => {
           title={"Flash Deal"}
           titleColor={"var(--color-red)"}
           productList={prods}
+          banner={"flash_deal"}
         />
       )}
     </div>

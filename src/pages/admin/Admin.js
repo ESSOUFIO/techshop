@@ -1,31 +1,36 @@
+import { useEffect, useState } from "react";
 import styles from "./Admin.module.scss";
 import { NavLink, Route, Routes } from "react-router-dom";
-import Dashboard from "../../components/admin/dashboard/Dashboard";
+
+import { useDispatch } from "react-redux";
+import { STORE_BRAND } from "../../redux/brandSlice";
+import { STORE_ORDERS } from "../../redux/orderSlice";
+import { STORE_CATEGORIES } from "../../redux/categorySlice";
+
 import { MdAdminPanelSettings } from "react-icons/md";
 import { AiFillDashboard, AiOutlineAppstoreAdd } from "react-icons/ai";
 import { HiClipboardDocumentList } from "react-icons/hi2";
 import { VscNewFile } from "react-icons/vsc";
-import { TbDatabaseDollar } from "react-icons/tb";
+import { TbDatabaseDollar, TbLayoutAlignLeft } from "react-icons/tb";
 import { BiSolidCategory } from "react-icons/bi";
 import { BsApple } from "react-icons/bs";
-import { TfiApple } from "react-icons/tfi";
-import ProductsList from "../../components/admin/productsList/ProductsList";
-import AddProduct from "../../components/admin/addProduct/AddProduct";
-import CategoriesList from "../../components/admin/categoriesList/CategoriesList";
-import AddCategory from "../../components/admin/addCategory/AddCategory";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { TfiLayoutAccordionSeparated, TfiApple } from "react-icons/tfi";
+
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../../firebase/config";
-import { STORE_CATEGORIES } from "../../redux/categorySlice";
-import Loader from "../../components/loader/Loader";
-import AddBrand from "../../components/admin/addBrand/AddBrand";
-import BrandsList from "../../components/admin/brandsList/BrandsList";
-import { STORE_BRAND } from "../../redux/brandSlice";
-import { STORE_ORDERS } from "../../redux/orderSlice";
-import OrdersList from "../../components/admin/ordersList/OrdersList";
-import OrderDetails from "../../components/admin/orderDetails/OrderDetails";
+
+import {
+  AddBrand,
+  AddCategory,
+  AddProduct,
+  BrandsList,
+  CategoriesList,
+  Dashboard,
+  Loader,
+  OrderDetails,
+  OrdersList,
+  ProductsList,
+} from "../../components";
 
 const NavItem = ({ icon, label, path }) => {
   return (
@@ -164,6 +169,23 @@ const Admin = () => {
               icon={<TfiApple size={19} />}
               label={"Add Brand"}
               path={"brand/new"}
+            />
+            <hr />
+
+            <h6>Home Banners</h6>
+            <NavItem
+              icon={
+                <TfiLayoutAccordionSeparated
+                  className={styles["navItem-icon"]}
+                />
+              }
+              label={"Banners List"}
+              path={"banners"}
+            />
+            <NavItem
+              icon={<TbLayoutAlignLeft size={19} />}
+              label={"Add Banner"}
+              path={"banner/new"}
             />
           </nav>
         </div>

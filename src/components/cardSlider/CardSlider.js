@@ -10,6 +10,7 @@ import "swiper/scss/pagination";
 
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import CardProduct from "../cardProduct/CardProduct";
+import { Link } from "react-router-dom";
 
 const NavigationButtons = () => {
   const swiper = useSwiper();
@@ -29,12 +30,22 @@ const MarginPagination = () => {
   return <div style={{ height: "30px" }}></div>;
 };
 
-const CardSlider = ({ title, titleColor, textAlign, productList, id }) => {
+const CardSlider = ({
+  title,
+  titleColor,
+  banner,
+  textAlign,
+  productList,
+  id,
+}) => {
   return (
     <div className={styles.cardSlider} id={id}>
       <h1 style={{ color: `${titleColor}`, textAlign: `${textAlign}` }}>
         {title}
       </h1>
+      <Link to={`/collections/${banner}`} className={styles.seeAll}>
+        See All
+      </Link>
 
       <Swiper
         modules={[Autoplay, Navigation, Pagination]}

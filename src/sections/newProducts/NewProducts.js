@@ -7,6 +7,7 @@ import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
 import CardProduct from "../../components/cardProduct/CardProduct";
+import { Link } from "react-router-dom";
 
 const MarginPagination = () => {
   return <div style={{ height: "30px" }}></div>;
@@ -16,7 +17,7 @@ const NewProducts = ({ products }) => {
   const [prods, setProds] = useState([]);
 
   useEffect(() => {
-    const array = products.filter((prod) => prod.banner === "New Products");
+    const array = products.filter((prod) => prod.banner === "new_products");
     setProds(array);
   }, [products]);
   return (
@@ -24,6 +25,9 @@ const NewProducts = ({ products }) => {
       {prods.length && (
         <div className={styles.newProducts}>
           <h2>New Products</h2>
+          <Link to={`/collections/new_products`} className={styles.seeAll}>
+            See All
+          </Link>
           <div className={styles.container}>
             <div className={styles.carousel}>
               <Swiper

@@ -24,12 +24,12 @@ const SpotLight = () => {
         </div>
 
         <div className={styles.secondRow}>
-          <div className={styles.img}>
+          <Link to={"categories/phone"} className={styles.img}>
             <img src={ephoneImg} alt="ePhone" />
-          </div>
-          <div className={styles.img}>
+          </Link>
+          <Link to={"categories/laptop_tablet"} className={styles.img}>
             <img src={laptopImg} alt="Laptopo" />
-          </div>
+          </Link>
         </div>
       </div>
     </>

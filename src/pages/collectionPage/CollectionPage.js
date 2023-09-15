@@ -4,14 +4,15 @@ import CardProduct from "../../components/cardProduct/CardProduct";
 import styles from "./CollectionPage.module.scss";
 import BreadCrumb from "../../components/breadCrumb/BreadCrumb";
 import { useSelector } from "react-redux";
+import { selectProducts } from "../../redux/productSlice";
 
 const CollectionPage = () => {
   const { id } = useParams();
   const [prods, setProds] = useState([]);
-  const products = useSelector();
+  const products = useSelector(selectProducts);
 
   useEffect(() => {
-    const array = products.filter((prod) => prod.category === id);
+    const array = products.filter((prod) => prod.banner === id);
     setProds(array);
   }, [id, products]);
 

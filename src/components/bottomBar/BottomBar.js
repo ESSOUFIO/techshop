@@ -40,9 +40,9 @@ const BottomBar = ({
         Search
       </div>
 
-      <Link to={"/collections"} className={styles.icon}>
+      <Link to={"/categories"} className={styles.icon}>
         <LuLayoutGrid size={22} />
-        Collections
+        Categories
       </Link>
 
       <div className={styles.icon} onClick={triggerShowUserMenu}>
