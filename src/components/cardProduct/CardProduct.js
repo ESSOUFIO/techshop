@@ -22,6 +22,8 @@ const CardProduct = ({
   newPrice,
   price,
   id,
+  listView,
+  desc,
 }) => {
   const [isWish, setIsWish] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -84,47 +86,48 @@ const CardProduct = ({
 
   return (
     <>
-      <div className={styles.card}>
-        <div className={styles.images}>
-          <div
-            className={styles.img1}
-            onClick={() => navigate(`/product/${id}`)}
-          >
-            <img src={img1} alt="product" />
+      {!listView && (
+        <div className={styles.card}>
+          <div className={styles.images}>
+            <div
+              className={styles.img1}
+              onClick={() => navigate(`/product/${id}`)}
+            >
+              <img src={img1} alt="product" />
+            </div>
+
+            <div
+              className={styles.img2}
+              onClick={() => navigate(`/product/${id}`)}
+            >
+              <img src={img2} alt="product" />
+            </div>
+
+            <button onClick={() => setShowQuickView(true)}>Quick View</button>
           </div>
 
-          <div
-            className={styles.img2}
-            onClick={() => navigate(`/product/${id}`)}
-          >
-            <img src={img2} alt="product" />
-          </div>
+          <p className={styles.brand}>{brand}</p>
 
-          <button onClick={() => setShowQuickView(true)}>Quick View</button>
-        </div>
+          <div className={styles.desc}>
+            <div className={styles.title}>{name}</div>
 
-        <p className={styles.brand}>{brand}</p>
-
-        <div className={styles.desc}>
-          <div className={styles.title}>{name}</div>
-
-          {offValue !== 0 && (
-            <div className={styles.deal}>
-              <div className={styles.off}>{offValue}% off</div>
-              <span>Deal</span>
-            </div>
-          )}
-
-          <div className={styles.priceWrap}>
-            <div className={styles.newPrice}>
-              <FormatPrice price={newPrice} />
-            </div>
             {offValue !== 0 && (
-              <div className={styles.price}>${Number(price).toFixed(2)}</div>
+              <div className={styles.deal}>
+                <div className={styles.off}>{offValue}% off</div>
+                <span>Deal</span>
+              </div>
             )}
-          </div>
 
-          {/* <div className={styles.choices}>
+            <div className={styles.priceWrap}>
+              <div className={styles.newPrice}>
+                <FormatPrice price={newPrice} />
+              </div>
+              {offValue !== 0 && (
+                <div className={styles.price}>${Number(price).toFixed(2)}</div>
+              )}
+            </div>
+
+            {/* <div className={styles.choices}>
             <div className={styles.choice}>
               <div style={{ background: "#000" }}></div>
             </div>
@@ -135,20 +138,94 @@ const CardProduct = ({
               <div style={{ background: "#F4A460" }}></div>
             </div>
           </div> */}
-        </div>
+          </div>
 
-        <div className={styles.buttons}>
-          <button className="--rounded" onClick={addToCard}>
-            Add to Cart
-          </button>
-          <div className={styles.wish} onClick={wishListHandler}>
-            {!isWish && <GoHeart className={styles.wishIcon} size={24} />}
-            {isWish && (
-              <GoHeartFill className={styles.wishIcon} color="red" size={24} />
-            )}
+          <div className={styles.buttons}>
+            <button className="--rounded" onClick={addToCard}>
+              Add to Cart
+            </button>
+            <div className={styles.wish} onClick={wishListHandler}>
+              {!isWish && <GoHeart className={styles.wishIcon} size={24} />}
+              {isWish && (
+                <GoHeartFill
+                  className={styles.wishIcon}
+                  color="red"
+                  size={24}
+                />
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
+
+      {listView && (
+        <div className={styles.list}>
+          <div className={styles.listContent}>
+            <div className={styles.images}>
+              <div
+                className={styles.img1}
+                onClick={() => navigate(`/product/${id}`)}
+              >
+                <img src={img1} alt="product" />
+              </div>
+
+              <div
+                className={styles.img2}
+                onClick={() => navigate(`/product/${id}`)}
+              >
+                <img src={img2} alt="product" />
+              </div>
+
+              <button onClick={() => setShowQuickView(true)}>Quick View</button>
+            </div>
+            <div className={styles.details}>
+              <p className={styles.brand}>{brand}</p>
+
+              <div className={styles.desc}>
+                <div className={styles.title}>{name}</div>
+                <p className={styles.description}>
+                  {desc.substring(0, 150)}...
+                </p>
+
+                {offValue !== 0 && (
+                  <div className={styles.deal}>
+                    <div className={styles.off}>{offValue}% off</div>
+                    <span>Deal</span>
+                  </div>
+                )}
+
+                <div className={styles.priceWrap}>
+                  <div className={styles.newPrice}>
+                    <FormatPrice price={newPrice} />
+                  </div>
+                  {offValue !== 0 && (
+                    <div className={styles.price}>
+                      ${Number(price).toFixed(2)}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className={styles.buttons}>
+                <button className="--rounded" onClick={addToCard}>
+                  Add to Cart
+                </button>
+                <div className={styles.wish} onClick={wishListHandler}>
+                  {!isWish && <GoHeart className={styles.wishIcon} size={24} />}
+                  {isWish && (
+                    <GoHeartFill
+                      className={styles.wishIcon}
+                      color="red"
+                      size={24}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {showQuickView && (
         <QuickView onHide={() => setShowQuickView(false)} prodID={id} />
       )}

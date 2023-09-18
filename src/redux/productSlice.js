@@ -13,14 +13,28 @@ export const productSlice = createSlice({
       state.products = action.payload.sort((a, b) => b.createdAt - a.createdAt);
     },
     FILTER_PRODUCTS: (state, action) => {
-      const array = state.products.filter((item) => {
-        return (
-          item.name
-            .toUpperCase()
-            .includes(action.payload.search.toUpperCase()) &&
-          item.category === action.payload.category
-        );
-      });
+      let array = [];
+
+      //Category Page
+      if (action.payload.category !== null) {
+        array = state.products.filter((item) => {
+          return (
+            item.name
+              .toUpperCase()
+              .includes(action.payload.search.toUpperCase()) &&
+            item.category === action.payload.category
+          );
+        });
+      } else if (action.payload.banner !== null) {
+        array = state.products.filter((item) => {
+          return (
+            item.name
+              .toUpperCase()
+              .includes(action.payload.search.toUpperCase()) &&
+            item.banner === action.payload.banner
+          );
+        });
+      }
 
       switch (action.payload.sortedBy) {
         case "Latest":

@@ -1,35 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import CardProduct from "../../components/cardProduct/CardProduct";
-import styles from "./CategoryPage.module.scss";
 import BreadCrumb from "../../components/breadCrumb/BreadCrumb";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  FILTER_PRODUCTS,
-  selectFiltredProducts,
-} from "../../redux/productSlice";
-import useFetchDocument from "../../customHooks/useFetchDocument";
-import BackHomeBtn from "../../components/backHomeBtn/BackHomeBtn";
-import Input from "../../components/input/Input";
-import spinner from "../../assets/images/loader/Spinner.png";
+import CollectionComponent from "../../components/collectionComponent/CollectionComponent";
 
 const CategoryPage = () => {
   const { id } = useParams();
-  const [search, setSearch] = useState("");
-  const [sort, setSort] = useState("");
-  const filtredProds = useSelector(selectFiltredProducts);
-  const category = useFetchDocument("categories", id);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(
-      FILTER_PRODUCTS({
-        category: category.data?.id,
-        search,
-        sortedBy: sort,
-      })
-    );
-  }, [dispatch, search, category.data, sort]);
 
   //Scroll to top
   useEffect(() => {
@@ -42,68 +17,7 @@ const CategoryPage = () => {
   return (
     <>
       <BreadCrumb page1={id} />
-      <div className={styles.categories}>
-        <h2>{category.data?.name}</h2>
-        <div className={styles.content}>
-          <p>
-            <b>{filtredProds.length}</b> products founds.
-          </p>
-          <div className={styles.filterWrap}>
-            <Input
-              type={"text"}
-              placeholder={"Search Product"}
-              onChange={(e) => setSearch(e.target.value)}
-              className={styles.search}
-            />
-            <div className={styles.select}>
-              <label>Sort By: </label>
-              <select onChange={(e) => setSort(e.target.value)}>
-                <option value={"Latest"}>Latest</option>
-                <option value={"Lowest Price"}>Lowest Price</option>
-                <option value={"Highest Price"}>Highest Price</option>
-                <option value={"A - Z"}>A - Z</option>
-                <option value={"Z - A"}>Z - A</option>
-              </select>
-            </div>
-          </div>
-
-          {filtredProds.length === 0 ? (
-            <div>
-              <p>No products founds in "{category.data?.name}" category.</p>
-
-              {category.isLoading && (
-                <div>
-                  <img src={spinner} alt="Loading..." width={100} />
-                </div>
-              )}
-
-              <BackHomeBtn />
-            </div>
-          ) : (
-            <div className={styles.categoriesPage}>
-              {filtredProds.map((prod, index) => {
-                const { id, name, brand, images, price, newPrice, offValue } =
-                  prod;
-                return (
-                  <CardProduct
-                    key={index}
-                    img1={images[0].url}
-                    img2={
-                      prod.images[1] ? prod.images[1].url : prod.images[0].url
-                    }
-                    name={name}
-                    brand={brand}
-                    offValue={offValue}
-                    newPrice={newPrice}
-                    price={price}
-                    id={id}
-                  />
-                );
-              })}
-            </div>
-          )}
-        </div>
-      </div>
+      <CollectionComponent collectionID={id} collectionName={"categories"} />
     </>
   );
 };
