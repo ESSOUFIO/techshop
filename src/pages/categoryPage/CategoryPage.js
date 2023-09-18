@@ -31,8 +31,6 @@ const CategoryPage = () => {
     );
   }, [dispatch, search, category.data, sort]);
 
-  console.log(sort);
-
   //Scroll to top
   useEffect(() => {
     window.scrollTo({
@@ -90,7 +88,9 @@ const CategoryPage = () => {
                   <CardProduct
                     key={index}
                     img1={images[0].url}
-                    img2={images[1].url}
+                    img2={
+                      prod.images[1] ? prod.images[1].url : prod.images[0].url
+                    }
                     name={name}
                     brand={brand}
                     offValue={offValue}

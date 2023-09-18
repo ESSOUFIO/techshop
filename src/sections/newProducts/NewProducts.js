@@ -60,7 +60,11 @@ const NewProducts = ({ products }) => {
                     <SwiperSlide key={prod.id}>
                       <CardProduct
                         img1={prod.images[0].url}
-                        img2={prod.images[1].url}
+                        img2={
+                          prod.images[1]
+                            ? prod.images[1].url
+                            : prod.images[0].url
+                        }
                         name={prod.name}
                         brand={prod.brand}
                         offValue={prod.offValue}

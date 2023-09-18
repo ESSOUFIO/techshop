@@ -26,7 +26,6 @@ const CollectionPage = () => {
     });
   }, []);
 
-  console.log(banner, id);
   return (
     <>
       <BreadCrumb page1={id} />

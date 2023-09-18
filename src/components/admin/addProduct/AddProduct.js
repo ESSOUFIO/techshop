@@ -27,6 +27,7 @@ import { selectCategories } from "../../../redux/categorySlice";
 import { selectBrands } from "../../../redux/brandSlice";
 import { FaPlus } from "react-icons/fa";
 import useFetchDocument from "../../../customHooks/useFetchDocument";
+import useFetchCollection from "../../../customHooks/useFetchCollection";
 
 const ProductImage = ({ image, id, index, deleteImg }) => {
   return (
@@ -62,6 +63,9 @@ const AddProduct = () => {
   const [uploading, setUpLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [editMode, setEditMode] = useState(false);
+  const [bannerOptions, setBannerOptions] = useState([
+    { value: "", label: "" },
+  ]);
 
   const inputFileRef = useRef();
   const categoryRef = useRef();
@@ -72,6 +76,7 @@ const AddProduct = () => {
   const { id } = useParams();
   const { pgIndex } = useParams();
   const productDoc = useFetchDocument("products", id);
+  const banners = useFetchCollection("banners");
 
   //Handle Page Mode: "Edit Product" or "Add New Product"
   useEffect(() => {
@@ -101,12 +106,12 @@ const AddProduct = () => {
     setBrandOptions(array);
   }, [brands]);
 
-  const bannerOptions = [
-    { value: "Flash Deal", label: "Flash Deal" },
-    { value: "New Products", label: "New Products" },
-    { value: "Top Televisions", label: "Top Televisions" },
-    { value: "Home Appliance", label: "Home Appliance" },
-  ];
+  useEffect(() => {
+    const array = banners.data?.map((banner) => {
+      return { value: banner.id, label: banner.name };
+    });
+    setBannerOptions(array);
+  }, [banners.data]);
 
   const addImage = (file) => {
     if (!file) return;

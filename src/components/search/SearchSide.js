@@ -8,7 +8,6 @@ const SearchSide = ({ wrapperClass, iconClass, icon, onHide }) => {
 
   const searchHandler = useCallback(() => {
     navigate(`search-result/${input}`);
-    console.log("onHide: ", onHide);
     if (onHide) onHide();
   }, [input, navigate, onHide]);
 
