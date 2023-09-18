@@ -7,6 +7,7 @@ import "swiper/scss/pagination";
 
 import useFetchCollection from "../../customHooks/useFetchCollection";
 import spinner from "../../assets/images/loader/Spinner.png";
+import { useEffect, useState } from "react";
 
 const Brand = ({ brandImg, name }) => {
   return (
@@ -23,7 +24,13 @@ const MarginPagination = () => {
 };
 
 const FeaturedBrands = () => {
+  const [dispBrands, setDispBrands] = useState([]);
   const brands = useFetchCollection("brands", "name");
+
+  useEffect(() => {
+    const array = brands.data.filter((brand) => brand.image !== null);
+    setDispBrands(array);
+  }, [brands.data]);
 
   return (
     <div className={styles.featuredBrands}>
@@ -67,15 +74,11 @@ const FeaturedBrands = () => {
             },
           }}
         >
-          {brands.data.map((brand, index) => {
+          {dispBrands.map((brand) => {
             return (
-              <>
-                {brand.image && (
-                  <SwiperSlide key={index}>
-                    <Brand brandImg={brand.image.url} name={brand.name} />
-                  </SwiperSlide>
-                )}
-              </>
+              <SwiperSlide key={brand.name}>
+                <Brand brandImg={brand.image.url} name={brand.name} />
+              </SwiperSlide>
             );
           })}
 

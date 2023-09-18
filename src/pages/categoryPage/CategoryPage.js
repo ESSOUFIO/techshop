@@ -7,16 +7,16 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   FILTER_PRODUCTS,
   selectFiltredProducts,
-  selectProducts,
 } from "../../redux/productSlice";
 import useFetchDocument from "../../customHooks/useFetchDocument";
 import BackHomeBtn from "../../components/backHomeBtn/BackHomeBtn";
 import Input from "../../components/input/Input";
+import spinner from "../../assets/images/loader/Spinner.png";
 
 const CategoryPage = () => {
   const { id } = useParams();
   const [search, setSearch] = useState("");
-  // const [filtredProds, setFiltredProds] = useState([]);
+  const [sort, setSort] = useState("");
   const filtredProds = useSelector(selectFiltredProducts);
   const category = useFetchDocument("categories", id);
   const dispatch = useDispatch();
@@ -26,9 +26,12 @@ const CategoryPage = () => {
       FILTER_PRODUCTS({
         category: category.data?.id,
         search,
+        sortedBy: sort,
       })
     );
-  }, [dispatch, search, category.data]);
+  }, [dispatch, search, category.data, sort]);
+
+  console.log(sort);
 
   //Scroll to top
   useEffect(() => {
@@ -47,15 +50,35 @@ const CategoryPage = () => {
           <p>
             <b>{filtredProds.length}</b> products founds.
           </p>
-          <Input
-            type={"text"}
-            placeholder={"Search Product"}
-            onChange={(e) => setSearch(e.target.value)}
-            className={styles.search}
-          />
+          <div className={styles.filterWrap}>
+            <Input
+              type={"text"}
+              placeholder={"Search Product"}
+              onChange={(e) => setSearch(e.target.value)}
+              className={styles.search}
+            />
+            <div className={styles.select}>
+              <label>Sort By: </label>
+              <select onChange={(e) => setSort(e.target.value)}>
+                <option value={"Latest"}>Latest</option>
+                <option value={"Lowest Price"}>Lowest Price</option>
+                <option value={"Highest Price"}>Highest Price</option>
+                <option value={"A - Z"}>A - Z</option>
+                <option value={"Z - A"}>Z - A</option>
+              </select>
+            </div>
+          </div>
+
           {filtredProds.length === 0 ? (
             <div>
               <p>No products founds in "{category.data?.name}" category.</p>
+
+              {category.isLoading && (
+                <div>
+                  <img src={spinner} alt="Loading..." width={100} />
+                </div>
+              )}
+
               <BackHomeBtn />
             </div>
           ) : (

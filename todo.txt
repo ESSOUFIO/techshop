@@ -10,6 +10,8 @@ minimize product card in collection page
 
 sortedby
 
+add second Image automatically
+
 
 ***
 

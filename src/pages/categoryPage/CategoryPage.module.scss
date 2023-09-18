@@ -10,10 +10,35 @@
   margin: 15px 0 35px 0;
 }
 
+.filterWrap {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.select {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  label {
+    width: 55px;
+  }
+
+  select {
+    padding: 5px 10px;
+    border: 1px solid lightgray;
+    outline: none;
+    border-radius: 5px;
+  }
+}
+
 h2 {
   margin-bottom: 30px;
 }
 
 .search {
   padding: 9px 12px;
+  max-width: 350px;
 }

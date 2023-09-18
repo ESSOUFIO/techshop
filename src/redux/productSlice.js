@@ -21,6 +21,42 @@ export const productSlice = createSlice({
           item.category === action.payload.category
         );
       });
+
+      switch (action.payload.sortedBy) {
+        case "Latest":
+          array.sort((a, b) =>
+            a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0
+          );
+          break;
+
+        case "Lowest Price":
+          array.sort((a, b) =>
+            a.newPrice > b.newPrice ? 1 : a.newPrice < b.newPrice ? -1 : 0
+          );
+          break;
+
+        case "Highest Price":
+          array.sort((a, b) =>
+            b.newPrice > a.newPrice ? 1 : b.newPrice < a.newPrice ? -1 : 0
+          );
+          break;
+
+        case "A - Z":
+          array.sort((a, b) =>
+            a.name > b.name ? 1 : a.name < b.name ? -1 : 0
+          );
+          break;
+
+        case "Z - A":
+          array.sort((a, b) =>
+            b.name > a.name ? 1 : b.name < a.name ? -1 : 0
+          );
+          break;
+
+        default:
+          break;
+      }
+
       state.filtredProducts = array;
     },
   },
