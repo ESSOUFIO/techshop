@@ -20,6 +20,10 @@ const CollectionComponent = ({ collectionID, collectionName }) => {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
   const [listView, setListView] = useState(true);
+  const [price, setPrice] = useState(+Infinity);
+  const [maxPrice, setMaxPrice] = useState(null);
+  const [calc, setCalc] = useState(true);
+
   const filtredProds = useSelector(selectFiltredProducts);
   const collection = useFetchDocument(collectionName, collectionID);
   const categories = useFetchCollection("categories");
@@ -30,11 +34,18 @@ const CollectionComponent = ({ collectionID, collectionName }) => {
   };
 
   useEffect(() => {
+    setCalc(true);
+    setPrice(+Infinity);
+    setMaxPrice(null);
+  }, [collection.data]);
+
+  useEffect(() => {
     if (collectionName === "categories") {
       dispatch(
         FILTER_PRODUCTS({
           category: collection.data?.id,
           banner: null,
+          price,
           search,
           sortedBy: sort,
         })
@@ -45,20 +56,31 @@ const CollectionComponent = ({ collectionID, collectionName }) => {
           category: null,
           banner: collection.data?.id,
           search,
+          price,
           sortedBy: sort,
         })
       );
     }
-  }, [dispatch, search, collectionName, collection.data, sort]);
+  }, [dispatch, search, collectionName, price, collection.data, sort]);
+
+  useEffect(() => {
+    console.log(calc, maxPrice, filtredProds.length);
+    if (calc && filtredProds.length !== 0) {
+      const prices = filtredProds.map((item) => item.newPrice);
+      const max = Math.max(...prices);
+      setMaxPrice(Math.round(max));
+      setPrice(Math.round(max));
+      setCalc(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filtredProds, calc]);
 
   const activeLink = ({ isActive }) => (isActive ? styles.active : "");
 
   return (
     <div className={styles.collectionWrapper}>
       <h2>{collection.data?.name}</h2>
-      <p className={styles.prodFound}>
-        <b>{filtredProds.length}</b> products found.
-      </p>
+
       <div className={styles.contentWrapper}>
         <div className={styles.filterSide}>
           <h5 className={styles.categoriesTitle}>Categories</h5>
@@ -73,6 +95,18 @@ const CollectionComponent = ({ collectionID, collectionName }) => {
               </NavLink>
             );
           })}
+          <br />
+          <div className={styles.price}>
+            <h5>Price</h5>
+            <p>${price}</p>
+            <input
+              type="range"
+              min={0}
+              max={maxPrice}
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
         </div>
 
         <div className={styles.content}>
@@ -109,6 +143,10 @@ const CollectionComponent = ({ collectionID, collectionName }) => {
               </select>
             </div>
           </div>
+
+          <p className={styles.prodFound}>
+            <b>{filtredProds.length}</b> products found.
+          </p>
 
           {filtredProds.length === 0 ? (
             <div>

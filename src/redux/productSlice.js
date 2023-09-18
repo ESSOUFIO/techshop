@@ -28,16 +28,24 @@ export const productSlice = createSlice({
               item.category
                 .toUpperCase()
                 .includes(action.payload.search.toUpperCase())) &&
-            item.category === action.payload.category
+            item.category === action.payload.category &&
+            item.newPrice <= action.payload.price
           );
         });
       } else if (action.payload.banner !== null) {
         array = state.products.filter((item) => {
           return (
-            item.name
+            (item.name
               .toUpperCase()
-              .includes(action.payload.search.toUpperCase()) &&
-            item.banner === action.payload.banner
+              .includes(action.payload.search.toUpperCase()) ||
+              item.brand
+                .toUpperCase()
+                .includes(action.payload.search.toUpperCase()) ||
+              item.category
+                .toUpperCase()
+                .includes(action.payload.search.toUpperCase())) &&
+            item.banner === action.payload.banner &&
+            item.newPrice <= action.payload.price
           );
         });
       }

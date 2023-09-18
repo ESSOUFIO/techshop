@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import BreadCrumb from "../../components/breadCrumb/BreadCrumb";
 import CollectionComponent from "../../components/collectionComponent/CollectionComponent";
+import styles from "./CollectionPage.module.scss";
 
 const CollectionPage = () => {
   const { id } = useParams();
@@ -15,10 +16,10 @@ const CollectionPage = () => {
   }, []);
 
   return (
-    <>
+    <div className={styles.collections}>
       <BreadCrumb page1={id} />
       <CollectionComponent collectionID={id} collectionName={"banners"} />
-    </>
+    </div>
   );
 };
 
