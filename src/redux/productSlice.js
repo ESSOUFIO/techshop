@@ -19,9 +19,15 @@ export const productSlice = createSlice({
       if (action.payload.category !== null) {
         array = state.products.filter((item) => {
           return (
-            item.name
+            (item.name
               .toUpperCase()
-              .includes(action.payload.search.toUpperCase()) &&
+              .includes(action.payload.search.toUpperCase()) ||
+              item.brand
+                .toUpperCase()
+                .includes(action.payload.search.toUpperCase()) ||
+              item.category
+                .toUpperCase()
+                .includes(action.payload.search.toUpperCase())) &&
             item.category === action.payload.category
           );
         });

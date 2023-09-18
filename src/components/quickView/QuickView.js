@@ -143,10 +143,12 @@ const QuickView = ({ prodID, onHide }) => {
                 <div className={styles.priceWrap}>
                   <div className={styles.price}>
                     <FormatPrice price={product.newPrice} />
-                    <span>${Number(product.price).toFixed(2)}</span>
+                    {product.offValue !== 0 && (
+                      <span>${Number(product.price).toFixed(2)}</span>
+                    )}
                   </div>
 
-                  {product.offValue && (
+                  {product.offValue !== 0 && (
                     <div className={styles.save}>
                       <p>{product.offValue}% OFF</p>
                     </div>
