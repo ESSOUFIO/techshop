@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { GoTrash } from "react-icons/go";
 import { FiEdit } from "react-icons/fi";
 import useFetchCollection from "../../../customHooks/useFetchCollection";
+import { useEffect } from "react";
 
 const BannersList = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -44,6 +45,13 @@ const BannersList = () => {
       }
     );
   };
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   return (
     <>
