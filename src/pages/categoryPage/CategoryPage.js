@@ -3,8 +3,12 @@ import { useParams } from "react-router-dom";
 import CardProduct from "../../components/cardProduct/CardProduct";
 import styles from "./CategoryPage.module.scss";
 import BreadCrumb from "../../components/breadCrumb/BreadCrumb";
-import { useSelector } from "react-redux";
-import { selectProducts } from "../../redux/productSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  FILTER_PRODUCTS,
+  selectFiltredProducts,
+  selectProducts,
+} from "../../redux/productSlice";
 import useFetchDocument from "../../customHooks/useFetchDocument";
 import BackHomeBtn from "../../components/backHomeBtn/BackHomeBtn";
 import Input from "../../components/input/Input";
@@ -12,30 +16,22 @@ import Input from "../../components/input/Input";
 const CategoryPage = () => {
   const { id } = useParams();
   const [search, setSearch] = useState("");
-  const [prods, setProds] = useState([]);
-  const [filtredProds, setFiltredProds] = useState([]);
-  const products = useSelector(selectProducts);
+  // const [filtredProds, setFiltredProds] = useState([]);
+  const filtredProds = useSelector(selectFiltredProducts);
   const category = useFetchDocument("categories", id);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const array = products.filter((prod) => prod.category === id);
-    setProds(array);
-    setFiltredProds(array);
-  }, [id, products]);
+    dispatch(
+      FILTER_PRODUCTS({
+        category: category.data?.id,
+        search,
+      })
+    );
+  }, [dispatch, search, category.data]);
 
+  //Scroll to top
   useEffect(() => {
-    const array = prods.filter((item) => {
-      return item.name.toUpperCase().includes(search.toUpperCase());
-    });
-    setFiltredProds(array);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search]);
-
-  console.log(filtredProds);
-
-  useEffect(() => {
-    //Scroll to top
     window.scrollTo({
       top: 0,
       behavior: "smooth",

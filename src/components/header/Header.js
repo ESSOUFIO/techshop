@@ -23,7 +23,6 @@ import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { SAVE_WISH_LIST } from "../../redux/wishSlice";
 
 const Header = ({ isAdmin }) => {
-  const [loading, setLoading] = useState(false);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const userName = useSelector(selectUserName);
   const dispatch = useDispatch();
@@ -31,19 +30,19 @@ const Header = ({ isAdmin }) => {
   const cartItems = useSelector(selectCartItems);
   const uid = useSelector(selectUserID);
 
+  //RealTime User
   useEffect(() => {
-    setLoading(true);
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(SET_ACTIVE_USER(user));
       } else {
         dispatch(LOGOUT_USER());
       }
-      setLoading(false);
     });
     return () => unsubscribe();
   }, [dispatch]);
 
+  //Get RealTime CartItems
   useEffect(() => {
     const array = localStorage.getItem("cartItems");
     if (array?.length > 0) {
@@ -59,7 +58,6 @@ const Header = ({ isAdmin }) => {
 
   //Get Real-Time of Wish List
   useEffect(() => {
-    setLoading(true);
     const q = query(collection(db, "users"), where("uid", "==", uid));
     const unsub = onSnapshot(q, (snapshot) => {
       let array = [];
@@ -68,7 +66,6 @@ const Header = ({ isAdmin }) => {
       });
 
       dispatch(SAVE_WISH_LIST(array));
-      setLoading(false);
     });
     return () => unsub();
   }, [dispatch, uid]);
