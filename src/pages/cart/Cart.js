@@ -22,6 +22,8 @@ import FormatPrice from "../../components/formatPrice/FormatPrice";
 const CartItem = ({ id, name, image, price, quantity, brand }) => {
   const [total, setTotal] = useState(2);
 
+  console.log(typeof price);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -94,7 +96,7 @@ const CartItem = ({ id, name, image, price, quantity, brand }) => {
 const Cart = () => {
   const [subTotal, setSubTotal] = useState(0);
   const [total, setTotal] = useState(0);
-  const [termCheck, setTermCheck] = useState(false);
+  // const [termCheck, setTermCheck] = useState(false);
 
   const navigate = useNavigate();
 
@@ -197,7 +199,7 @@ const Cart = () => {
                 </div>
 
                 {/* Shipping estimate */}
-                <div className={styles.shippingEstimate}>
+                {/* <div className={styles.shippingEstimate}>
                   <label>
                     <b>Get Shipping Estimate</b>
                   </label>
@@ -209,7 +211,7 @@ const Cart = () => {
                   </div>
                   <Input placeholder={"Postal Code"} />
                   <ButtonPrimary text={"CALCULATE SHIPPING"} />
-                </div>
+                </div> */}
 
                 {/*Coupon code  */}
                 <div className={styles.coupon}>
@@ -235,7 +237,7 @@ const Cart = () => {
               {/** Checkout */}
               <div className={styles.checkout}>
                 <form onSubmit={checkoutHandler}>
-                  <input
+                  {/* <input
                     type="checkbox"
                     id="acceptTerm"
                     className="form-check-input"
@@ -244,12 +246,8 @@ const Cart = () => {
                   />
                   <label htmlFor="acceptTerm">
                     I agree with <a href="/#">Terms & Conditions</a>
-                  </label>
-                  <ButtonPrimary
-                    text={"PROCEED TO CHECKOUT"}
-                    type={"submit"}
-                    disabled={!termCheck}
-                  />
+                  </label> */}
+                  <ButtonPrimary text={"PROCEED TO CHECKOUT"} type={"submit"} />
                   <ButtonSecondary
                     text={"CONTINUE SHOPPING"}
                     onClick={() => navigate("/")}

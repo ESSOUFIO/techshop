@@ -172,6 +172,9 @@ const AddProduct = () => {
       const prodRef = doc(db, "products", id);
       await updateDoc(prodRef, {
         ...product,
+        price: Number(product.price),
+        newPrice: Number(product.newPrice),
+        offValue: Number(product.offValue),
         modifiedAt: Timestamp.now().toDate(),
       });
       toast.success("Product edited successfully.");

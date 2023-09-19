@@ -10,6 +10,8 @@ test app with more orders and customers
 
 add animations
 
+firebase rules
+
 
 ***
 
