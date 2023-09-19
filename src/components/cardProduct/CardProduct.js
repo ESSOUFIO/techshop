@@ -12,6 +12,7 @@ import { selectIsLoggedIn, selectUserID } from "../../redux/authSlice";
 import { selectWishList } from "../../redux/wishSlice";
 import { toast } from "react-toastify";
 import LoginMenu from "../header/loginMenu/LoginMenu";
+import StarsRating from "react-star-rate";
 
 const CardProduct = ({
   img1,
@@ -23,6 +24,8 @@ const CardProduct = ({
   price,
   id,
   listView,
+  reviewsRate,
+  reviewsNbr,
   desc,
 }) => {
   const [isWish, setIsWish] = useState(false);
@@ -110,6 +113,14 @@ const CardProduct = ({
 
           <div className={styles.desc}>
             <div className={styles.title}>{name}</div>
+
+            {/* Reviews */}
+            <div className={styles.reviewsWrap}>
+              <div className={styles.reviews}>
+                <StarsRating value={reviewsRate} disabled={true} />
+              </div>
+              {reviewsNbr !== 0 && <span>{reviewsNbr}</span>}
+            </div>
 
             {offValue !== 0 && (
               <div className={styles.deal}>

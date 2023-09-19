@@ -7,7 +7,7 @@ import BreadCrumb from "../../components/breadCrumb/BreadCrumb";
 import StarsRating from "react-star-rate";
 import { useState } from "react";
 import ButtonPrimary from "../../components/buttonPrimary/ButtonPrimary";
-import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { Timestamp, doc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { useSelector } from "react-redux";
 import { selectUserID } from "../../redux/authSlice";
@@ -29,7 +29,8 @@ const ReviewProduct = () => {
 
   const navigate = useNavigate();
 
-  const submitHandler = async () => {
+  const addReview = async () => {
+    //Add review to reviews collection
     const docRef = doc(db, "products", id, "reviews", uid);
     setIsLoading(true);
     try {
@@ -39,6 +40,20 @@ const ReviewProduct = () => {
           user.data.address.state + ", " + user.data.address.country.name,
         rating: rateValue,
         text,
+        createdAt: Timestamp.now().toDate(),
+      });
+
+      //Increment reviewsRate in product doc
+      const oldReviewsRate = product.data.reviewsRate;
+      const oldReviewsNbr = product.data.reviewsNbr;
+      const newReviewsNbr = oldReviewsNbr + 1;
+      const newReviewsRate = Math.ceil(
+        (oldReviewsRate * oldReviewsNbr + rateValue) / newReviewsNbr
+      );
+      const prodRef = doc(db, "products", id);
+      await updateDoc(prodRef, {
+        reviewsRate: newReviewsRate,
+        reviewsNbr: newReviewsNbr,
       });
       toast.success("Review submited successfully.");
       navigate(-1);
@@ -119,7 +134,7 @@ const ReviewProduct = () => {
                 <div style={{ display: "flex", justifyContent: "right" }}>
                   <ButtonPrimary
                     text={editMode ? "Edit Review " : "Submit Review"}
-                    onClick={editMode ? editHandler : submitHandler}
+                    onClick={editMode ? editHandler : addReview}
                     className={styles.btnSubmit}
                     disabled={!rateValue || isLoading}
                   />

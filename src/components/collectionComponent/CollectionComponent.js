@@ -209,14 +209,14 @@ const CollectionComponent = ({ collectionID, collectionName }) => {
                     newPrice,
                     offValue,
                     desc,
+                    reviewsNbr,
+                    reviewsRate,
                   } = prod;
                   return (
                     <CardProduct
                       key={index}
                       img1={images[0].url}
-                      img2={
-                        prod.images[1] ? prod.images[1].url : prod.images[0].url
-                      }
+                      img2={images[1] ? images[1].url : images[0].url}
                       name={name}
                       brand={brand}
                       offValue={offValue}
@@ -225,6 +225,8 @@ const CollectionComponent = ({ collectionID, collectionName }) => {
                       id={id}
                       desc={desc}
                       listView={listView}
+                      reviewsNbr={reviewsNbr}
+                      reviewsRate={reviewsRate}
                     />
                   );
                 })}

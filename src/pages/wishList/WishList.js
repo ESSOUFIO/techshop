@@ -74,14 +74,14 @@ const WishList = () => {
                 newPrice,
                 desc,
                 offValue,
+                reviewsNbr,
+                reviewsRate,
               } = prod;
               return (
                 <CardProduct
                   key={index}
                   img1={images[0].url}
-                  img2={
-                    prod.images[1] ? prod.images[1].url : prod.images[0].url
-                  }
+                  img2={images[1] ? images[1].url : images[0].url}
                   name={name}
                   offValue={offValue}
                   newPrice={newPrice}
@@ -90,6 +90,8 @@ const WishList = () => {
                   id={id}
                   desc={desc}
                   listView={true}
+                  reviewsNbr={reviewsNbr}
+                  reviewsRate={reviewsRate}
                 />
               );
             })}

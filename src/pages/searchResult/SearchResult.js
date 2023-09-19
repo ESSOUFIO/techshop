@@ -48,7 +48,17 @@ const SearchResult = () => {
           </div>
         ) : (
           filtredProd.map((prod, index) => {
-            const { id, name, images, price, newPrice, offValue } = prod;
+            const {
+              id,
+              name,
+              images,
+              price,
+              newPrice,
+              offValue,
+              desc,
+              reviewsNbr,
+              reviewsRate,
+            } = prod;
             return (
               <CardProduct
                 key={index}
@@ -59,6 +69,9 @@ const SearchResult = () => {
                 newPrice={newPrice}
                 price={price}
                 id={id}
+                desc={desc}
+                reviewsNbr={reviewsNbr}
+                reviewsRate={reviewsRate}
               />
             );
           })

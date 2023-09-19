@@ -69,9 +69,26 @@
     }
   }
 
+  .reviewsWrap {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 5px;
+
+    .reviews {
+      zoom: 0.4;
+    }
+
+    span {
+      padding-top: 4px;
+      color: gray;
+      font-size: 13px;
+      font-weight: 300;
+    }
+  }
+
   .title {
     font-size: 15px;
-    margin-bottom: 10px;
     max-height: 50px;
     overflow-y: hidden;
   }

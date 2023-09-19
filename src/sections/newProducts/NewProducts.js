@@ -20,6 +20,7 @@ const NewProducts = ({ products }) => {
     const array = products.filter((prod) => prod.banner === "new_products");
     setProds(array);
   }, [products]);
+
   return (
     <>
       {prods.length && (
@@ -36,10 +37,6 @@ const NewProducts = ({ products }) => {
                 slidesPerView={1}
                 className={styles.mySwipe}
                 pagination={{ clickable: true }}
-                // autoplay={{
-                //   delay: 2500,
-                //   disableOnInteraction: true,
-                // }}
                 breakpoints={{
                   400: {
                     slidesPerView: 1,
@@ -56,21 +53,32 @@ const NewProducts = ({ products }) => {
                 }}
               >
                 {prods.map((prod) => {
+                  const {
+                    id,
+                    name,
+                    brand,
+                    images,
+                    price,
+                    newPrice,
+                    desc,
+                    offValue,
+                    reviewsNbr,
+                    reviewsRate,
+                  } = prod;
                   return (
                     <SwiperSlide key={prod.id}>
                       <CardProduct
-                        img1={prod.images[0].url}
-                        img2={
-                          prod.images[1]
-                            ? prod.images[1].url
-                            : prod.images[0].url
-                        }
-                        name={prod.name}
-                        brand={prod.brand}
-                        offValue={prod.offValue}
-                        newPrice={prod.newPrice}
-                        price={prod.price}
-                        id={prod.id}
+                        img1={images[0].url}
+                        img2={images[1] ? images[1].url : images[0].url}
+                        name={name}
+                        brand={brand}
+                        offValue={offValue}
+                        newPrice={newPrice}
+                        price={price}
+                        id={id}
+                        reviewsNbr={reviewsNbr}
+                        reviewsRate={reviewsRate}
+                        desc={desc}
                       />
                     </SwiperSlide>
                   );

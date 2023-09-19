@@ -73,17 +73,32 @@ const CardSlider = ({
         }}
       >
         {productList?.map((prod) => {
+          const {
+            id,
+            name,
+            brand,
+            images,
+            price,
+            newPrice,
+            offValue,
+            desc,
+            reviewsNbr,
+            reviewsRate,
+          } = prod;
           return (
             <SwiperSlide key={prod.id}>
               <CardProduct
-                img1={prod.images[0].url}
-                img2={prod.images[1] ? prod.images[1].url : prod.images[0].url}
-                name={prod.name}
-                brand={prod.brand}
-                offValue={prod.offValue}
-                newPrice={prod.newPrice}
-                price={prod.price}
-                id={prod.id}
+                img1={images[0].url}
+                img2={images[1] ? images[1].url : images[0].url}
+                name={name}
+                brand={brand}
+                offValue={offValue}
+                newPrice={newPrice}
+                price={price}
+                id={id}
+                desc={desc}
+                reviewsNbr={reviewsNbr}
+                reviewsRate={reviewsRate}
               />
             </SwiperSlide>
           );
