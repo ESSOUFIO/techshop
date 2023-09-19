@@ -130,8 +130,8 @@ const HeaderLaptop = ({ isLoggedIn, userName, nbrCartItems }) => {
             <NavLink to="/" className={activeLink}>
               Home
             </NavLink>
-            <NavLink to="/hot-deal" className={activeLink}>
-              Hot deal
+            <NavLink to="/flash-deal" className={activeLink}>
+              Flash Deal
             </NavLink>
             <NavLink to="/categories" className={activeLink}>
               Categories

@@ -18,8 +18,8 @@ const MainMenu = ({ show, onHide, position, title }) => {
     onHide();
   };
 
-  const toHotDeal = () => {
-    navigate("/hot-deal");
+  const toFlashDeal = () => {
+    navigate("/flash-deal");
     onHide();
   };
 
@@ -47,11 +47,11 @@ const MainMenu = ({ show, onHide, position, title }) => {
           <span>Home</span>
         </li>
 
-        <li onClick={toHotDeal}>
+        <li onClick={toFlashDeal}>
           <span>
             <RiFlashlightLine size={24} />
           </span>
-          <span>Hot Deal</span>
+          <span>Flash Deal</span>
         </li>
 
         <li onClick={toCategories}>

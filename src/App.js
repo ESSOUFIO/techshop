@@ -7,7 +7,6 @@ import {
   Contact,
   CreateAccount,
   Home,
-  HotDeal,
   Login,
   ProductPage,
   ResetPassword,
@@ -30,6 +29,7 @@ import ReviewProduct from "./pages/reviews/ReviewProduct";
 import MyAccount from "./pages/myAccount/MyAccount";
 import NotFound from "./pages/notFound/NotFound";
 import Categories from "./pages/categories/Categories";
+import FlashDeal from "./pages/flashDeal/FlashDeal";
 
 const router = createBrowserRouter([
   {
@@ -41,8 +41,8 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "hot-deal",
-        element: <HotDeal />,
+        path: "flash-deal",
+        element: <FlashDeal />,
       },
       {
         path: "categories",
