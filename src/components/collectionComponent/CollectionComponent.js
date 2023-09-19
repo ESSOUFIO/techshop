@@ -68,8 +68,8 @@ const CollectionComponent = ({ collectionID, collectionName }) => {
     if (calc && filtredProds.length !== 0) {
       const prices = filtredProds.map((item) => item.newPrice);
       const max = Math.max(...prices);
-      setMaxPrice(Math.round(max));
-      setPrice(Math.round(max));
+      setMaxPrice(Math.ceil(max));
+      setPrice(Math.ceil(max));
       setCalc(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
