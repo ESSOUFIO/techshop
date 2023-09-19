@@ -1,0 +1,43 @@
+.filterSide {
+  margin-top: 15px;
+  max-width: 220px;
+  width: 100%;
+  flex-shrink: 0;
+  padding-left: 20px;
+
+  .categoriesTitle {
+    background: rgb(1, 101, 195);
+    color: #fff;
+    font-weight: 500;
+    padding: 7px 15px;
+    font-size: 17px;
+    border-radius: 10px;
+  }
+
+  a {
+    display: block;
+    padding: 4px 10px;
+    border: 1px solid rgb(167, 226, 243);
+    border-radius: 7px;
+    margin-bottom: 3px;
+    font-size: 12px;
+  }
+
+  .active {
+    background: rgba(143, 223, 245, 0.486);
+    font-weight: 500;
+  }
+
+  .price {
+    width: 100%;
+    input {
+      width: 100%;
+    }
+    h5 {
+      font-weight: 600;
+    }
+    p {
+      font-size: 15px;
+    }
+  }
+}
