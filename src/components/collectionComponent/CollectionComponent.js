@@ -121,6 +121,16 @@ const CollectionComponent = ({ collectionID, collectionName }) => {
                 />
               </div>
             )}
+            <br />
+            {collection.data?.image && (
+              <div className={styles.catImage}>
+                <img
+                  src={collection.data.image.url}
+                  alt={collection.data.name}
+                />
+                <p>{collection.data.name}</p>
+              </div>
+            )}
           </div>
 
           <div className={styles.content}>
