@@ -198,6 +198,14 @@ const CardProduct = ({
                   {desc.substring(0, 150)}...
                 </p>
 
+                {/* Reviews */}
+                <div className={styles.reviewsWrap}>
+                  <div className={styles.reviews}>
+                    <StarsRating value={reviewsRate} disabled={true} />
+                  </div>
+                  {reviewsNbr !== 0 && <span>{reviewsNbr}</span>}
+                </div>
+
                 {offValue !== 0 && (
                   <div className={styles.deal}>
                     <div className={styles.off}>{offValue}% off</div>

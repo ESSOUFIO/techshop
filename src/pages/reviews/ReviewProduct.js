@@ -82,6 +82,18 @@ const ReviewProduct = () => {
         rating: rateValue,
         text,
       });
+
+      //edit reviewsRate in product doc
+      const oldReviewsRate = product.data.reviewsRate;
+      const reviewsNbr = product.data.reviewsNbr;
+      const reviewRateDiff = rateValue - review.data.rating;
+      const newReviewsRate = Math.ceil(
+        (oldReviewsRate * reviewsNbr + reviewRateDiff) / reviewsNbr
+      );
+      const prodRef = doc(db, "products", id);
+      await updateDoc(prodRef, {
+        reviewsRate: newReviewsRate,
+      });
       toast.success("Review updated successfully.");
       navigate(-1);
     } catch (error) {
