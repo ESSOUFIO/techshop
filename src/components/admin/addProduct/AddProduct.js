@@ -195,6 +195,8 @@ const AddProduct = () => {
         price: Number(product.price),
         newPrice: Number(product.newPrice),
         offValue: Number(product.offValue),
+        reviewsNbr: 0,
+        reviewsRate: 0,
         createdAt: Timestamp.now(),
       };
 

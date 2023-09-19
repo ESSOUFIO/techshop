@@ -16,25 +16,25 @@ const Search = ({ wrapperClass, iconClass, icon, onHide }) => {
   }, [input, navigate, onHide]);
 
   /** listen Enter */
-  useEffect(() => {
-    if (input !== "") {
-      const keyDownHandler = (event) => {
-        // console.log("User pressed: ", event.key);
-        if (event.key === "Enter") {
-          event.preventDefault();
-          searchHandler();
-        }
-      };
-      document
-        .getElementById("searchInput")
-        .addEventListener("keydown", keyDownHandler);
-      return () => {
-        document
-          .getElementById("searchInput")
-          .removeEventListener("keydown", keyDownHandler);
-      };
-    }
-  }, [input, searchHandler, onHide]);
+  // useEffect(() => {
+  //   if (input !== "") {
+  //     const keyDownHandler = (event) => {
+  //       // console.log("User pressed: ", event.key);
+  //       if (event.key === "Enter") {
+  //         event.preventDefault();
+  //         searchHandler();
+  //       }
+  //     };
+  //     document
+  //       .getElementById("searchInput")
+  //       .addEventListener("keydown", keyDownHandler);
+  //     return () => {
+  //       document
+  //         .getElementById("searchInput")
+  //         .removeEventListener("keydown", keyDownHandler);
+  //     };
+  //   }
+  // }, [input, searchHandler, onHide]);
   return (
     <div className={wrapperClass} id="searchInput">
       <input

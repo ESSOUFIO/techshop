@@ -4,7 +4,13 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import { selectUserID } from "../../redux/authSlice";
-import { collection, getDocs, query, where } from "@firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  orderBy,
+} from "@firebase/firestore";
 import { db } from "../../firebase/config";
 import Loader from "../../components/loader/Loader";
 
@@ -23,6 +29,9 @@ const MyOrders = () => {
       querySnapshot.forEach((doc) => {
         array.push({ ...doc.data(), id: doc.id });
       });
+      array.sort((a, b) =>
+        b.createdAt > a.createdAt ? 1 : b.createdAt < a.createdAt ? -1 : 0
+      );
       setMyOrders(array);
       setIsLoading(false);
     };

@@ -15,7 +15,8 @@ app.get("/", (req, res) => {
 const calculateOrderAmount = (items) => {
   let totalQ = 0;
   items.forEach((item) => (totalQ += item.quantity * item.newPrice));
-  return totalQ * 100;
+  totalQ = Math.round(totalQ * 100);
+  return totalQ;
 };
 
 app.post("/create-payment-intent", async (req, res) => {

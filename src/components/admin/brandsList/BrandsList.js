@@ -32,8 +32,10 @@ const BrandsList = () => {
         setLoading(true);
         try {
           await deleteDoc(doc(db, "brands", item.name));
-          const imageRef = ref(storage, `brands/${item.image.id}`);
-          deleteObject(imageRef);
+          if (item.image !== null) {
+            const imageRef = ref(storage, `brands/${item.image.id}`);
+            deleteObject(imageRef);
+          }
 
           toast.success("Brand deleted successfully.");
         } catch (error) {

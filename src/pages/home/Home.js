@@ -22,6 +22,7 @@ import WhyShopWithUs from "../../sections/whyShopWithUs/WhyShopWithUs";
 import { useSelector } from "react-redux";
 import { selectProducts } from "../../redux/productSlice";
 import { BiSolidUpArrow } from "react-icons/bi";
+import Gaming from "../../sections/gaming/Gaming";
 
 const CyberMondayBanner = () => {
   return (
@@ -90,6 +91,7 @@ const Home = () => {
       <TelevisionBanner />
       <TopHomeAppliance products={products} />
       <HomeApplianceBanner />
+      <Gaming products={products} />
       <FeaturedBrands />
       <WhyShopWithUs />
 

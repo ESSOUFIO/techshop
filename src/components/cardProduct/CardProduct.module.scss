@@ -8,13 +8,10 @@
     position: relative;
     overflow: hidden;
 
-    .img1 img,
-    .img2 img {
-      width: 100%;
-      cursor: pointer;
-    }
-
     .img1 {
+      width: 100%;
+      max-width: 250px;
+      max-height: 250px;
       opacity: 1;
       transition: all 1s;
     }
@@ -30,6 +27,12 @@
 
     img:active {
       cursor: grabbing;
+    }
+
+    .img1 img,
+    .img2 img {
+      width: 100%;
+      cursor: pointer;
     }
 
     button {
