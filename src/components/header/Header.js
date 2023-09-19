@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import HeaderLaptop from "./headerLaptop/HeaderLaptop";
 import HeaderMobile from "./headerMobile/HeaderMobile";
 import { onAuthStateChanged } from "firebase/auth";
@@ -11,7 +11,6 @@ import {
   selectUserID,
   selectUserName,
 } from "../../redux/authSlice";
-import Loader from "../loader/Loader";
 import {
   CALCUL_TOTAL_AMOUNT,
   CALCUL_TOTAL_QUANTITY,

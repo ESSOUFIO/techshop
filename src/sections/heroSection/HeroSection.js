@@ -3,11 +3,8 @@ import styles from "./HeroSection.module.scss";
 import backLargeImg from "../../assets/images/banners/hero-section.jpg";
 import backMobileImg from "../../assets/images/banners/hero-section-mb.jpg";
 import affirmImg from "../../assets/icons/affirm.png";
-import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
 
 const HeroSection = () => {
-  const navigate = useNavigate();
   return (
     <>
       <div className={styles.hero}>

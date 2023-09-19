@@ -11,5 +11,5 @@ export { default as AddCategory } from "./admin/addCategory/AddCategory";
 export { default as Loader } from "./loader/Loader";
 export { default as AddBrand } from "./admin/addBrand/AddBrand";
 export { default as BrandsList } from "./admin/brandsList/BrandsList";
-export { default as OrdersList } from "./admin/orderDetails/OrderDetails";
+export { default as OrdersList } from "./admin/ordersList/OrdersList";
 export { default as OrderDetails } from "./admin/orderDetails/OrderDetails";

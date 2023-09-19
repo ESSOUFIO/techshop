@@ -7,13 +7,13 @@ import { db, storage } from "../../../firebase/config";
 import { selectProducts } from "../../../redux/productSlice";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import Loader from "../../loader/Loader";
 import Notiflix from "notiflix";
 import { useNavigate } from "react-router";
 import { deleteObject, ref } from "@firebase/storage";
 import { IoSearch } from "react-icons/io5";
 import ReactPaginate from "react-paginate";
 import { useParams } from "react-router-dom";
+import Loader from "../../loader/Loader";
 
 const ProductsList = () => {
   const [loading, setLoading] = useState(false);
@@ -126,7 +126,7 @@ const ProductsList = () => {
               </tr>
             </thead>
             <tbody>
-              {products === [] ? (
+              {products.lenght === 0 ? (
                 <p>No products founds.</p>
               ) : (
                 <>
@@ -223,7 +223,7 @@ const ProductsList = () => {
         </div>
       </div>
 
-      {/* {loading && <Loader />} */}
+      {loading && <Loader />}
     </>
   );
 };

@@ -63,18 +63,20 @@ const MyAccount = () => {
 
                       <tr>
                         <th scope="row">Address</th>
-                        <td>
-                          <p>{user.data.address.line1}</p>
-                          <p>
-                            {user.data.address.line2},{" "}
-                            {user.data.address.postal_code},{" "}
-                            {user.data.address.city}
-                          </p>
-                          <p>
-                            {user.data.address.state},{" "}
-                            {user.data.address.country.name}
-                          </p>
-                        </td>
+                        {user.data.address !== "" && (
+                          <td>
+                            <p>{user.data.address.line1}</p>
+                            <p>
+                              {user.data.address.line2},{" "}
+                              {user.data.address.postal_code},{" "}
+                              {user.data.address.city}
+                            </p>
+                            <p>
+                              {user.data.address.state},{" "}
+                              {user.data.address.country.name}
+                            </p>
+                          </td>
+                        )}
                       </tr>
                     </tbody>
                   </table>

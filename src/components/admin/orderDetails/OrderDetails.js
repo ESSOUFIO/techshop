@@ -108,7 +108,7 @@ const OrderDetails = () => {
                 </table>
               </div>
 
-              {order.orderItems === [] ? (
+              {order.orderItems.length === 0 ? (
                 <p>No categories founds.</p>
               ) : (
                 <div className={styles.table}>
