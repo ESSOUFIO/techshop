@@ -53,7 +53,7 @@ const SearchResult = () => {
               <CardProduct
                 key={index}
                 img1={images[0].url}
-                img2={images[0].url}
+                img2={prod.images[1] ? prod.images[1].url : prod.images[0].url}
                 name={name}
                 offValue={offValue}
                 newPrice={newPrice}

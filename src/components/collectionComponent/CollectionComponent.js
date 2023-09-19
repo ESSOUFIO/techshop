@@ -67,7 +67,6 @@ const CollectionComponent = ({ collectionID, collectionName }) => {
   }, [dispatch, search, collectionName, price, collection.data, sort]);
 
   useEffect(() => {
-    console.log(calc, maxPrice, filtredProds.length);
     if (calc && filtredProds.length !== 0) {
       const prices = filtredProds.map((item) => item.newPrice);
       const max = Math.max(...prices);
