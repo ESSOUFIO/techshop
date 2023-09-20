@@ -87,22 +87,24 @@ const CardProduct = ({
     document.body.style.cursor = "default";
   }
 
+  const clickImageHandler = () => {
+    navigate(`/product/${id}`);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <>
       {!listView && (
         <div className={styles.card}>
           <div className={styles.images}>
-            <div
-              className={styles.img1}
-              onClick={() => navigate(`/product/${id}`)}
-            >
+            <div className={styles.img1} onClick={clickImageHandler}>
               <img src={img1} alt="product" />
             </div>
 
-            <div
-              className={styles.img2}
-              onClick={() => navigate(`/product/${id}`)}
-            >
+            <div className={styles.img2} onClick={clickImageHandler}>
               <img src={img2} alt="product" />
             </div>
 
