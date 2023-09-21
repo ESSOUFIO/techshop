@@ -12,6 +12,9 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../../firebase/config";
 import Loader from "../../components/loader/Loader";
 import { Timestamp, doc, setDoc } from "firebase/firestore";
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../../redux/authSlice";
+import { useEffect } from "react";
 
 const CreateAccount = () => {
   const [firstName, setFirstName] = useState("");
@@ -20,6 +23,13 @@ const CreateAccount = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
+  //protect router
+  useEffect(() => {
+    if (isLoggedIn) navigate("/");
+  }, [isLoggedIn, navigate]);
 
   const addUser = async (user) => {
     // create user document on Firestore

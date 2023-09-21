@@ -4,12 +4,13 @@ import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "../../components/ckeckoutForm/CheckoutForm";
 import { useSelector } from "react-redux";
 import { selectCartItems, selectTotalAmount } from "../../redux/cartSlice";
-import { selectEmail } from "../../redux/authSlice";
+import { selectEmail, selectIsLoggedIn } from "../../redux/authSlice";
 import {
   selectBillingAddress,
   selectShippingAddress,
 } from "../../redux/checkoutSlice";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
 
@@ -23,6 +24,13 @@ const Checkout = () => {
   const shippingAddress = useSelector(selectShippingAddress);
   const billingAddress = useSelector(selectBillingAddress);
   const description = `techshop payment: email: ${customerEmail}, Amount: $${totalAmount}`;
+
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn) navigate("/auth/login");
+  }, [isLoggedIn, navigate]);
 
   useEffect(() => {
     fetch("http://localhost:4242/create-payment-intent", {
@@ -56,7 +64,7 @@ const Checkout = () => {
     <section>
       <div
         className={`--container`}
-        style={{ paddingTop: "30px", paddingBottom: "30px" }}
+        style={{ paddingTop: "5px", paddingBottom: "30px" }}
       >
         {!clientSecret && <h4>{message}</h4>}
         {clientSecret && (

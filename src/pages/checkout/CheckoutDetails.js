@@ -12,7 +12,7 @@ import {
   SAVE_SHIPPING_ADDRESS,
 } from "../../redux/checkoutSlice";
 import { useEffect } from "react";
-import { selectUserID } from "../../redux/authSlice";
+import { selectIsLoggedIn, selectUserID } from "../../redux/authSlice";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import useFetchDocument from "../../customHooks/useFetchDocument";
@@ -39,6 +39,8 @@ const CheckoutDetails = () => {
   const [defaultAddress, setDefaultAddress] = useState(true);
   const [saveDefaultAddress, setSaveDefaultAddress] = useState(true);
   const [myAddress, setMyAddress] = useState(null);
+
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -99,6 +101,10 @@ const CheckoutDetails = () => {
   useEffect(() => {
     if (user.data) setMyAddress(user.data.address);
   }, [user, uid]);
+
+  useEffect(() => {
+    if (!isLoggedIn) navigate("/auth/login");
+  }, [isLoggedIn, navigate]);
 
   //scroll to top
   useEffect(() => {

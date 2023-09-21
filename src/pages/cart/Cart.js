@@ -75,7 +75,9 @@ const CartItem = ({ id, name, image, price, quantity, brand }) => {
         </div>
       </div>
       <div className={styles["cart-list-price-wrap"]}>
-        <div className={styles["cart-list-price"]}>${price.toFixed(2)}</div>
+        <div className={styles["cart-list-price"]}>
+          ${Number(price).toFixed(2)}
+        </div>
         <div className={styles["cart-list-quantity"]}>
           <div className={styles.quantityHandler}>
             <button onClick={incrementQty}>+</button>
@@ -83,7 +85,9 @@ const CartItem = ({ id, name, image, price, quantity, brand }) => {
             <button onClick={decrementQty}>-</button>
           </div>
         </div>
-        <div className={styles["cart-list-total"]}>${total.toFixed(2)}</div>
+        <div className={styles["cart-list-total"]}>
+          ${Number(total).toFixed(2)}
+        </div>
         <div className={styles["cart-list-action"]} onClick={removeHandler}>
           <IoCloseOutline size={22} />
         </div>

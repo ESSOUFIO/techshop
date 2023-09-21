@@ -12,12 +12,21 @@ import { auth } from "../../firebase/config";
 import { signInWithEmailAndPassword } from "@firebase/auth";
 import { toast } from "react-toastify";
 import Loader from "../../components/loader/Loader";
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../../redux/authSlice";
+import { useEffect } from "react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
+  useEffect(() => {
+    if (isLoggedIn) navigate("/");
+  }, [isLoggedIn, navigate]);
 
   const loginHandler = (e) => {
     e.preventDefault();
